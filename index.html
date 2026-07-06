@@ -58,7 +58,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(35,43,46,.72)
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;background:
   radial-gradient(ellipse 700px 480px at 72% 30%, var(--glow-soft), transparent 65%),
   linear-gradient(180deg,var(--inkwell) 0%,var(--inkwell-deep) 100%)}
-.hero::after{content:"";position:absolute;inset:0;background:url('https://drive.google.com/thumbnail?id=1n6qtucrt1JXj3z7YBxyLLnMbWcNIalxm&sz=w1920') center/cover;opacity:.14;mix-blend-mode:luminosity;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;/* FOTO DE FONDO DEL HERO: la elige Guille — reemplazar el id de abajo */background:url('https://drive.google.com/thumbnail?id=1n6qtucrt1JXj3z7YBxyLLnMbWcNIalxm&sz=w1920') center/cover;opacity:.14;mix-blend-mode:luminosity;pointer-events:none}
 .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
 .hero h1{font-size:clamp(44px,7vw,86px);font-weight:900;color:var(--aulait);margin:18px 0 22px}
 .hero h1 em{font-style:italic;color:var(--glow);text-shadow:0 0 30px rgba(255,138,61,.5)}
@@ -81,6 +81,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(35,43,46,.72)
 .heatwave.h3{animation-delay:2.1s}
 @keyframes heat{0%{opacity:0;transform:translateY(14px)}25%{opacity:.75}60%{opacity:.35}100%{opacity:0;transform:translateY(-22px)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.8}}
+.dish-rot{opacity:0;animation:dishcycle 12s ease-in-out infinite}
+.dish-rot.d2{animation-delay:4s}
+.dish-rot.d3{animation-delay:8s}
+@keyframes dishcycle{0%{opacity:0}5%{opacity:1}29%{opacity:1}34%{opacity:0}100%{opacity:0}}
 @media(max-width:900px){.hero-in{grid-template-columns:1fr}.lamp{display:none}}
 
 /* ══════════════ LOCALES — bento con profundidad ══════════════ */
@@ -214,7 +218,7 @@ body.modal-open{overflow:hidden}
     <div>
       <span class="eyebrow">Paseo Mendoza · Ingeniero Maschwitz</span>
       <h1>Cinco cocinas.<br>Un solo <em>paseo</em>.</h1>
-      <p>Parrilla y birra artesanal, bistró de patio, focaccias que son un escándalo, pizza de maestro pizzero y pastelería artesanal. Todo a metros de distancia, en el corazón de Maschwitz.</p>
+      <p>Cervezas artesanales e importadas, ribs, hamburguesas, pastas y pescados. Sumale bistró de patio, focaccias que son un escándalo, pizza de maestro pizzero y pastelería artesanal. Todo a metros de distancia, en el corazón de Maschwitz.</p>
       <div class="hero-ctas">
         <a href="#locales" class="btn btn-fill">Conocé los locales</a>
         <a href="#viandas" class="btn btn-ghost">Viandas para tu empresa</a>
@@ -238,11 +242,9 @@ body.modal-open{overflow:hidden}
           <line class="neon" x1="160" y1="0" x2="160" y2="58"/>
           <!-- portalámpara metálico -->
           <rect class="metal" x="146" y="58" width="28" height="26" rx="5"/>
-          <!-- campana de la lámpara de calor (cono gastro) -->
-          <path class="neon" d="M160 84 L160 96 M104 158 Q160 74 216 158"/>
-          <path class="neon" d="M104 158 Q160 178 216 158"/>
-          <!-- bombita infrarroja adentro -->
-          <circle class="neon-soft" cx="160" cy="146" r="11"/>
+          <!-- campana cónica de lámpara de calor (lados rectos) -->
+          <path class="neon" d="M140 88 H180 L214 156 H106 Z"/>
+          <path class="neon-soft" d="M114 164 Q160 173 206 164" opacity=".6"/>
         </g>
 
         <!-- ondas de calor bajando de la lámpara -->
@@ -250,20 +252,39 @@ body.modal-open{overflow:hidden}
         <path class="heatwave h2" d="M160 226 q6 -9 0 -18 q-6 -9 0 -18"/>
         <path class="heatwave h3" d="M194 218 q6 -9 0 -18 q-6 -9 0 -18"/>
 
-        <!-- hamburguesa en contorno -->
-        <g class="neon-soft">
-          <!-- pan de arriba con semillas -->
+        <!-- PLATO 1: hamburguesa -->
+        <g class="neon-soft dish-rot">
           <path d="M96 316 Q96 268 160 268 Q224 268 224 316 Z"/>
           <line x1="138" y1="288" x2="144" y2="292"/>
           <line x1="166" y1="282" x2="172" y2="286"/>
           <line x1="190" y1="296" x2="196" y2="300"/>
           <line x1="118" y1="300" x2="124" y2="304"/>
-          <!-- queso derretido -->
           <path d="M96 326 L110 338 L126 326 L142 338 L158 326 L174 338 L190 326 L206 338 L224 326"/>
-          <!-- medallón -->
           <rect x="92" y="344" width="136" height="18" rx="9"/>
-          <!-- pan de abajo -->
           <path d="M100 370 h120 q8 0 8 9 q0 9 -8 9 h-120 q-8 0 -8 -9 q0 -9 8 -9"/>
+        </g>
+
+        <!-- PLATO 2: fideos -->
+        <g class="neon-soft dish-rot d2">
+          <!-- montaña de pasta -->
+          <path d="M104 372 Q108 316 160 312 Q212 316 216 372"/>
+          <path d="M116 358 q14 -8 28 0 q14 8 28 0 q14 -8 28 0"/>
+          <path d="M124 340 q12 -8 24 0 q12 8 24 0 q12 -8 24 0"/>
+          <path d="M138 324 q10 -7 22 0 q10 7 22 0"/>
+          <!-- tenedor levantando fideos -->
+          <line x1="216" y1="240" x2="200" y2="292"/>
+          <path d="M210 244 v14 M216 242 v16 M222 244 v14"/>
+          <path d="M200 292 q-6 20 4 34 M194 296 q-8 22 0 40"/>
+        </g>
+
+        <!-- PLATO 3: carne (bife con marcas de grill) -->
+        <g class="neon-soft dish-rot d3">
+          <path d="M104 372 Q96 330 128 318 Q150 308 178 314 Q216 320 218 348 Q220 370 196 376 Q150 384 118 378 Q106 376 104 372 Z"/>
+          <line x1="126" y1="366" x2="150" y2="330"/>
+          <line x1="150" y1="370" x2="174" y2="332"/>
+          <line x1="174" y1="368" x2="196" y2="336"/>
+          <!-- ramita -->
+          <path d="M204 330 q10 -14 22 -16 M212 324 l6 6 M218 316 l5 5"/>
         </g>
 
         <!-- plato -->
@@ -287,12 +308,12 @@ body.modal-open{overflow:hidden}
       <div class="card big" onclick="openModal('chiringuito')">
         <div class="card-img">
           <span class="card-tag">MENDOZA 1578</span>
-          <img src="https://drive.google.com/thumbnail?id=1AvKONQebtdbaRMkQtTPpJSFEaLH5D2EL&sz=w900" alt="El Chiringuito — cervecería y parrilla en Maschwitz" loading="lazy">
+          <img src="https://drive.google.com/thumbnail?id=1Xgqgc7H45-ztfE34Sm1vdAN-MB559eXJ&sz=w900" alt="El Chiringuito — cervecería y parrilla en Maschwitz" loading="lazy">
         </div>
         <div class="card-body">
           <h3>El Chiringuito</h3>
           <div class="card-rating">★★★★☆ 4.3 <span>(3.500+ reseñas)</span></div>
-          <p>El clásico del paseo: hamburguesas, milanesas, parrilla y cerveza artesanal tirada. Con La Terraza en el primer piso para las noches largas.</p>
+          <p>El clásico del paseo: restaurante, cervecería y drinks. Cervezas artesanales e importadas, ribs, hamburguesas, pastas y pescados. Con La Terraza en el primer piso para las noches largas.</p>
           <span class="card-open">Ver platos y promos →</span>
         </div>
       </div>
@@ -300,7 +321,7 @@ body.modal-open{overflow:hidden}
       <div class="card big" onclick="openModal('lounge')">
         <div class="card-img">
           <span class="card-tag">MENDOZA 1731</span>
-          <img src="https://drive.google.com/thumbnail?id=1GfFsTK4Wf9lTuwhT__IMZZdgAt8_xQhk&sz=w900" alt="Chiringuito Lounge — bistró en Paseo Mendoza" loading="lazy">
+          <img src="https://drive.google.com/thumbnail?id=1efe74lSb_D8dYqAJN2AB-cCf55gyH3P6&sz=w900" alt="Chiringuito Lounge — bistró en Paseo Mendoza" loading="lazy">
         </div>
         <div class="card-body">
           <h3>Chiringuito Lounge</h3>
@@ -313,7 +334,7 @@ body.modal-open{overflow:hidden}
       <div class="card" onclick="openModal('focacceria')">
         <div class="card-img">
           <span class="card-tag">MENDOZA 1578</span>
-          <img src="https://drive.google.com/thumbnail?id=1RQjJbmfIZ4CsNZrJ2qeVXMGI59wZDNpM&sz=w900" alt="La Focacceria — focaccias artesanales en Maschwitz" loading="lazy">
+          <img src="https://drive.google.com/thumbnail?id=1Jn2DA33BrfdJ4H9GxKl7fdVdWewpXEjF&sz=w900" alt="La Focacceria — focaccias artesanales en Maschwitz" loading="lazy">
         </div>
         <div class="card-body">
           <h3>La Focacceria</h3>
@@ -326,7 +347,7 @@ body.modal-open{overflow:hidden}
       <div class="card" onclick="openModal('unapizza')">
         <div class="card-img">
           <span class="card-tag">MENDOZA 1578</span>
-          <img src="https://drive.google.com/thumbnail?id=1QcFKkBa450tmhjLJ7P8KGS079e2PhvG9&sz=w900" alt="Una Pizza — pizzería en Maschwitz" loading="lazy">
+          <img src="https://drive.google.com/thumbnail?id=1HaLNCKgIMhYyUjWzyirdCQaSBCwUuv-U&sz=w900" alt="Una Pizza — pizzería en Maschwitz" loading="lazy">
         </div>
         <div class="card-body">
           <h3>Una Pizza</h3>
@@ -340,7 +361,7 @@ body.modal-open{overflow:hidden}
         <div class="card-img">
           <span class="card-tag">MENDOZA 1578 · LOCAL 15</span>
           <!-- FOTO CARD: ChirinBakery — vidriera o torta insignia (reemplazar src cuando esté la foto en Drive) -->
-          <img src="https://drive.google.com/thumbnail?id=1md0eSYc9vykOtSyb17AOjNe3OpzN7uUk&sz=w900" alt="ChirinBakery — pastelería artesanal en Maschwitz" loading="lazy">
+          <img src="https://drive.google.com/thumbnail?id=1tDflZsB2aTdz7dUXmos08ACMinkEWdKZ&sz=w900" alt="ChirinBakery — pastelería artesanal en Maschwitz" loading="lazy">
         </div>
         <div class="card-body">
           <h3>ChirinBakery</h3>
@@ -357,7 +378,7 @@ body.modal-open{overflow:hidden}
 <!-- ══════════ MODALES ══════════
   CÓMO CARGAR LAS FOTOS DESPUÉS:
   Cada placeholder .ph tiene escrito adentro EXACTAMENTE qué foto va ahí.
-  Para reemplazar: cambiar el <div class="ph">…</div> por
+  Para reemplazar: cambiar el por
   <img src="https://drive.google.com/thumbnail?id=ID_DE_DRIVE&sz=w700" alt="..." style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
   VIDEO IG: reemplazar el <div class="m-video"> por el <blockquote> de embed que da Instagram (Post → ⋯ → Insertar).
   PRECIOS: buscar "$ —" y completar.
@@ -368,24 +389,34 @@ body.modal-open{overflow:hidden}
   <div class="modal">
     <button class="modal-close" onclick="closeModal('chiringuito')">✕</button>
     <div class="modal-in">
-      <span class="eyebrow">Mendoza 1578 · Parrilla &amp; Cervecería</span>
+      <span class="eyebrow">Mendoza 1578 · Restaurante · Cervecería &amp; Drinks</span>
       <h3>El Chiringuito</h3>
       <div class="m-rating">★★★★☆ 4.3 <span>(3.500+ reseñas en Google)</span></div>
 
       <div class="m-gal">
-        <div class="ph">FOTO 1<br>Hamburguesa insignia<br>(close-up, jugo visible)</div>
-        <div class="ph">FOTO 2<br>Parrilla en acción<br>(fuego / brasas)</div>
-        <div class="ph">FOTO 3<br>Pinta de birra tirada<br>(condensación)</div>
-        <div class="ph">FOTO 4<br>La Terraza de noche<br>(ambiente, luz cálida)</div>
+        <img src="https://drive.google.com/thumbnail?id=1Xgqgc7H45-ztfE34Sm1vdAN-MB559eXJ&sz=w700" alt="Hamburguesa Chiringuera" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1vhYGjjyaXF01B1FKwC0o3YKGctni34pJ&sz=w700" alt="Ribs BBQ" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=184y3N4eSncDFwULIYdNZabyBxwkNgvx0&sz=w700" alt="Cerveza tirada" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1vqGALkd8hlrHV86K7aOqETOcJFaphI3K&sz=w700" alt="La Terraza" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1ftZsoX-bGIj_uJRx895EZUwTz9NjeznS&sz=w700" alt="Tragos" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1m-AN0LmhH_TLuZZFOcOpiqCzq5VJcnPX&sz=w700" alt="Tragos" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1o4kxNAtbcD8SkUpfd2cEaXu3zqXCfftw&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1W7M8Wcb9tdaOw2PIk9PooEuhdhVD-iP8&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1gaG1T5w_matJcuQbgp4Y6G9ogpxN-UJq&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1iitna7pDTRGUw1Dbpei5gR-5wB3Ov4FX&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1Xj_tMNPOwYSr0lXlEXuA2bKtGeOemzYq&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1QdXMYVB3b6o6f3FiP7qCkucvCgpQo68Y&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1_uhxQSlu7mxieIn6sGfBKER1y-GLczvZ&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1COtdI_tvEgoFE5TS0mZDNyYVz9F05VsO&sz=w700" alt="El Chiringuito" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
       </div>
 
       <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de @elchiringuitok (el más viral del local)</div>
 
       <div class="dishes">
         <p class="m-sub"><small>Los que más salen</small>Platos destacados</p>
-        <div class="dish"><div><b>[Plato top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Plato top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Plato top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Hamburguesa Chiringuera</b><small>Doble medallón, bacon, cheddar, salsa barbacoa, lechuga y cebolla</small></div><span class="price">$ 17.500</span></div>
+        <div class="dish"><div><b>BBQ Ribs</b><small>Costillas de cerdo a la barbacoa con fritas y coleslaw</small></div><span class="price">$ 27.900</span></div>
+        <div class="dish"><div><b>Trucha a la plancha a las finas hierbas</b><small>Con papines, ensalada de rúcula, quinoa y tomates confitados</small></div><span class="price">$ 26.900</span></div>
       </div>
 
       <div class="m-promo">🔥 <b>Promo vigente:</b> [completar — ej. Miércoles de Hamburguesa Libre, condiciones y horario]</div>
@@ -413,19 +444,19 @@ body.modal-open{overflow:hidden}
       <div class="m-rating">★★★★☆ 4.4 <span>(82 reseñas en Google)</span></div>
 
       <div class="m-gal">
-        <div class="ph">FOTO 1<br>Patio del Lounge<br>(luz de día)</div>
-        <div class="ph">FOTO 2<br>Merienda / brunch<br>(mesa servida)</div>
-        <div class="ph">FOTO 3<br>Bife o pasta insignia<br>(close-up)</div>
-        <div class="ph">FOTO 4<br>Picada + copas<br>(atardecer)</div>
+        <img src="https://drive.google.com/thumbnail?id=1efe74lSb_D8dYqAJN2AB-cCf55gyH3P6&sz=w700" alt="Patio de día" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1O41awImgfJkGy2ECxhpVezp9SvlCcVAR&sz=w700" alt="Salón" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1r7dTYL-n_SgZTDa4hxynyiul984i637E&sz=w700" alt="Rabas" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1bB-dZep3W49BNaiT959J4r9p7pFbqxJW&sz=w700" alt="Trucha" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
       </div>
 
       <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel del Lounge (ambiente de patio)</div>
 
       <div class="dishes">
         <p class="m-sub"><small>Los que más salen</small>Platos destacados</p>
-        <div class="dish"><div><b>[Plato top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Plato top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Plato top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Tremenda Napolitana</b><small>Milanesa de bife de chorizo con fetuccini, para compartir</small></div><span class="price">$ 34.900</span></div>
+        <div class="dish"><div><b>Entraña y espinacas a la crema</b><small>Entraña grillada con espinacas a la crema</small></div><span class="price">$ 29.400</span></div>
+        <div class="dish"><div><b>Risotto de osobuco</b><small>Cremoso risotto con osobuco braseado al malbec</small></div><span class="price">$ 22.400</span></div>
       </div>
 
       <div class="m-promo">🔥 <b>Promo vigente:</b> [completar]</div>
@@ -453,19 +484,25 @@ body.modal-open{overflow:hidden}
       <div class="m-rating">★★★★★ 4.8 <span>(278 reseñas en Google)</span></div>
 
       <div class="m-gal">
-        <div class="ph">FOTO 1<br>Focaccia abierta<br>(relleno visible, close-up)</div>
-        <div class="ph">FOTO 2<br>Masa / horneado<br>(proceso)</div>
-        <div class="ph">FOTO 3<br>Mostrador con variedad<br>(plano general)</div>
-        <div class="ph">FOTO 4<br>Focaccia recién salida<br>(vapor si se puede)</div>
+        <img src="https://drive.google.com/thumbnail?id=1Jn2DA33BrfdJ4H9GxKl7fdVdWewpXEjF&sz=w700" alt="Focaccia" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1ZigtcE8eH-p0BLssYi0NxGn7rvk0cqA3&sz=w700" alt="Focaccia y birra" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1X168kG9bzq8NO84VFjmtymXCPLkef1RN&sz=w700" alt="Picada" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=11lQEH1FTn0XjuMUr_BzvJx69ka-XxPyZ&sz=w700" alt="Focaccia en mano" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1Ac-qMbIvgNkTMyD-_rvA_88V0BTBHMXB&sz=w700" alt="Merienda" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1jMZmJGTsYVsUtQ79Z0-8y6OB_KT2Oe3V&sz=w700" alt="Focaccia de morrones" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1FSJ6W129DjRsOSooYl8kJur22HAjcpKL&sz=w700" alt="La Focacceria" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1ofOp5ilSZJgbqjvq6SIu9_-GVbM1WjZU&sz=w700" alt="La Focacceria" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1tGcV98eAaDb-DQJ_oMK99NwazyU2PHs4&sz=w700" alt="Dulce" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1k7YNmby0qZpbwWTzCepRzUvKpNzjAlsV&sz=w700" alt="La Focacceria" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
       </div>
 
       <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de La Focacceria (corte de focaccia)</div>
 
       <div class="dishes">
         <p class="m-sub"><small>Las que más salen</small>Focaccias destacadas</p>
-        <div class="dish"><div><b>[Focaccia top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Focaccia top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Focaccia top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Focaccia Calentita</b><small>Colchón de albóndigas con salsa de tomate, muzza gratinada, tomates confitados y rúcula</small></div><span class="price">$ 19.500</span></div>
+        <div class="dish"><div><b>Focaccia Jamón Crudo</b><small>Jamón crudo, suave stracciatella, higos y queso crema</small></div><span class="price">$ 18.600</span></div>
+        <div class="dish"><div><b>Focaccia Mortadela</b><small>Mortadela con nuez, queso brie y ajos confitados</small></div><span class="price">$ Consultar</span></div>
       </div>
 
       <div class="m-promo">🔥 <b>Promo vigente:</b> [completar]</div>
@@ -493,19 +530,22 @@ body.modal-open{overflow:hidden}
       <div class="m-rating">★★★★★ 4.5 <span>(28 reseñas en Google)</span></div>
 
       <div class="m-gal">
-        <div class="ph">FOTO 1<br>Pizza entera<br>(muzza estirándose)</div>
-        <div class="ph">FOTO 2<br>Maestro pizzero<br>(manos + masa)</div>
-        <div class="ph">FOTO 3<br>Empanadas + fainá<br>(bandeja)</div>
-        <div class="ph">FOTO 4<br>Horno / salida de pizza<br>(acción)</div>
+        <img src="https://drive.google.com/thumbnail?id=1HaLNCKgIMhYyUjWzyirdCQaSBCwUuv-U&sz=w700" alt="Pizza entera" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1Omx8j-lgN5as1fjuirdrLVwhN61iiB1M&sz=w700" alt="Empanadas" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1kVGDZ2UayepLKNdVi3Qt0BP5kY8bPz5o&sz=w700" alt="Empanada abierta" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1k64Dq-UmarQlHwEDRW4LDUWLoGatcaAG&sz=w700" alt="Una Pizza" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1-EUqfs-zEg4AtT6jhFzBdARbvSYNaF7y&sz=w700" alt="Maestro pizzero" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1vZ5jctJbqOhXZ9e-wVxfxK-23bO_H2Kw&sz=w700" alt="Una Pizza" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1qr42VKASZgfpHDB1XOPYHKToqpeiCjaD&sz=w700" alt="Una Pizza" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
       </div>
 
       <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de Una Pizza (corte con queso estirándose)</div>
 
       <div class="dishes">
         <p class="m-sub"><small>Las que más salen</small>Pizzas destacadas</p>
-        <div class="dish"><div><b>[Pizza top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Pizza top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>[Pizza top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Fugazzeta rellena</b><small>Pizza rellena de muzzarella y cebolla</small></div><span class="price">$ 25.000</span></div>
+        <div class="dish"><div><b>Empanadas de carne cortada a cuchillo</b><small>Carne braseada al horno de barro</small></div><span class="price">$ 2.500 c/u</span></div>
+        <div class="dish"><div><b>Muzza a la piedra</b><small>Clásica muzza al horno a leña</small></div><span class="price">$ 21.000</span></div>
       </div>
 
       <div class="m-promo">🔥 <b>Promo vigente:</b> [completar]</div>
@@ -533,19 +573,20 @@ body.modal-open{overflow:hidden}
       <div class="m-rating">★ Nuevo <span>· por Vanesa Schual, egresada de El Gato Dumas</span></div>
 
       <div class="m-gal">
-        <div class="ph">FOTO 1<br>Torta insignia<br>(close-up del corte)</div>
-        <div class="ph">FOTO 2<br>Mesa dulce armada<br>(evento)</div>
-        <div class="ph">FOTO 3<br>Tartas / postres<br>(vidriera)</div>
-        <div class="ph">FOTO 4<br>Vanesa trabajando<br>(manos + manga/decorado)</div>
+        <img src="https://drive.google.com/thumbnail?id=1tDflZsB2aTdz7dUXmos08ACMinkEWdKZ&sz=w700" alt="ChirinBakery" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1H-ntlYPaOMeSDKTIIpNcuPPZ1NDdunAT&sz=w700" alt="ChirinBakery" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1iiHt6W0zE0S4fgXiUwHritiqjtgcwJU9&sz=w700" alt="ChirinBakery" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=10zkJdGdnaiPY-njrOV01s23cQvsd3SZZ&sz=w700" alt="ChirinBakery" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+        <img src="https://drive.google.com/thumbnail?id=1HVpuxT4uThkIKS55H7FNC29dAo3vttKE&sz=w700" alt="ChirinBakery" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
       </div>
 
       <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de @chirinbakery (decorado de torta o corte)</div>
 
       <div class="dishes">
         <p class="m-sub"><small>Lo que más piden</small>Especialidades</p>
-        <div class="dish"><div><b>Tortas para eventos</b><small>Personalizadas por encargo — [precio desde, a completar]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>Mesas dulces</b><small>[descripción corta — a completar]</small></div><span class="price">$ —</span></div>
-        <div class="dish"><div><b>Tartas y postres del día</b><small>[descripción corta — a completar]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Desayunos</b><small>Regalá un desayuno mix salado y dulce</small></div><span class="price">$ 55.000</span></div>
+        <div class="dish"><div><b>Torta Buttercream</b><small>Diseños personalizados</small></div><span class="price">A convenir</span></div>
+        <div class="dish"><div><b>Lunch &amp; Brunch</b><small>Únicos para eventos</small></div><span class="price">Pedí tu presupuesto</span></div>
       </div>
 
       <div class="m-promo">🔥 <b>Promo vigente:</b> [completar — ej. box de temporada]</div>
