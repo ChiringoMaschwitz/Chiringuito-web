@@ -1,512 +1,597 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grupo El Chiringuito — Gastronomía en Maschwitz | Viandas Empresariales Escobar</title>
-<meta name="description" content="Cuatro cocinas en el Paseo Mendoza de Ingeniero Maschwitz: El Chiringuito, Chiringuito Lounge, La Focacceria y Una Pizza. Viandas empresariales y catering para empresas de Escobar, Garín y zona norte.">
-<meta name="keywords" content="restaurante Maschwitz, viandas empresariales Escobar, catering Garín, Paseo Mendoza, focaccia, pizzería Maschwitz, cervecería artesanal">
+<meta name="description" content="Cinco cocinas en el Paseo Mendoza de Ingeniero Maschwitz: El Chiringuito, Chiringuito Lounge, La Focacceria, Una Pizza y ChirinBakery. Viandas empresariales y catering para Escobar, Garín y zona norte.">
 <meta property="og:title" content="Grupo El Chiringuito — Paseo Mendoza, Maschwitz">
-<meta property="og:description" content="Cuatro cocinas, un solo paseo. Y viandas para tu empresa en toda la zona de Escobar.">
+<meta property="og:description" content="Cinco cocinas, un solo paseo. Y viandas para tu empresa en toda la zona de Escobar.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-[
- {"@context":"https://schema.org","@type":"BarOrPub","name":"El Chiringuito","address":{"@type":"PostalAddress","streetAddress":"Mendoza 1578","addressLocality":"Ingeniero Maschwitz","addressRegion":"Buenos Aires","postalCode":"B1623","addressCountry":"AR"},"telephone":"+541140857072","geo":{"@type":"GeoCoordinates","latitude":-34.3817871,"longitude":-58.7471319},"servesCuisine":"Parrilla, hamburguesas, cervecería artesanal","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.3","reviewCount":"3524"}},
- {"@context":"https://schema.org","@type":"Restaurant","name":"Chiringuito Lounge","address":{"@type":"PostalAddress","streetAddress":"Mendoza 1731","addressLocality":"Ingeniero Maschwitz","addressRegion":"Buenos Aires","postalCode":"B1623","addressCountry":"AR"},"telephone":"+5491124635464","geo":{"@type":"GeoCoordinates","latitude":-34.3823853,"longitude":-58.7483754},"servesCuisine":"Bistró, desayunos, carnes, pastas","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.4","reviewCount":"82"}},
- {"@context":"https://schema.org","@type":"Restaurant","name":"La Focacceria","address":{"@type":"PostalAddress","streetAddress":"Mendoza 1578","addressLocality":"Ingeniero Maschwitz","addressRegion":"Buenos Aires","postalCode":"B1623","addressCountry":"AR"},"telephone":"+541140857072","geo":{"@type":"GeoCoordinates","latitude":-34.3815486,"longitude":-58.7471325},"servesCuisine":"Focaccias artesanales, cocina italiana","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"278"}},
- {"@context":"https://schema.org","@type":"Restaurant","name":"Una Pizza","address":{"@type":"PostalAddress","streetAddress":"Mendoza 1578","addressLocality":"Ingeniero Maschwitz","addressRegion":"Buenos Aires","postalCode":"B1623","addressCountry":"AR"},"telephone":"+5491126091109","geo":{"@type":"GeoCoordinates","latitude":-34.3816734,"longitude":-58.7469746},"servesCuisine":"Pizza, empanadas, fainá","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.5","reviewCount":"28"}},
- {"@context":"https://schema.org","@type":"FoodService","name":"Viandas Empresariales — Grupo El Chiringuito","areaServed":["Ingeniero Maschwitz","Belén de Escobar","Garín","Zona Norte GBA"],"provider":{"@type":"Organization","name":"Grupo El Chiringuito","email":"elchiringuitomaschwitz@gmail.com","telephone":"+5491122721108"}}
-]
+{"@context":"https://schema.org","@type":"Restaurant","name":"Grupo El Chiringuito","address":{"@type":"PostalAddress","streetAddress":"Mendoza 1578 y 1731","addressLocality":"Ingeniero Maschwitz","addressRegion":"Buenos Aires","postalCode":"B1623","addressCountry":"AR"},"telephone":"+541122721108","email":"elchiringuitomaschwitz@gmail.com","servesCuisine":["Parrilla","Pizza","Focaccia","Pastelería","Bistró"],"url":"https://chiringuito-web-dusky.vercel.app"}
 </script>
-
 <style>
+/* ══════════════ TOKENS — paleta de referencia Guille ══════════════ */
 :root{
-  --bg:#0B0A08;
-  --card:#141210;
-  --card2:#1B1815;
-  --cream:#F2EAD9;
-  --cream-dim:rgba(242,234,217,.62);
-  --fire:#FF6B1A;
-  --amber:#E8A13C;
-  --line:rgba(242,234,217,.12);
-  --radius:14px;
+  --inkwell:#2C3639;        /* base oscura */
+  --inkwell-deep:#232B2E;   /* fondo más profundo */
+  --lunar:#3F4E4F;          /* superficies elevadas */
+  --lunar-soft:#46585A;     /* hover de superficies */
+  --brulee:#A27B5B;         /* acento cálido / CTA */
+  --brulee-hi:#C29A77;      /* acento hover */
+  --aulait:#DCD7C9;         /* texto principal */
+  --aulait-dim:#A8A399;     /* texto secundario */
+  --glow:#FF8A3D;           /* filamento tungsteno */
+  --glow-soft:rgba(255,138,61,.14);
+  --shadow-1:0 2px 6px rgba(0,0,0,.35);
+  --shadow-2:0 12px 30px rgba(0,0,0,.45);
+  --shadow-3:0 24px 60px rgba(0,0,0,.55);
+  --r:18px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-body{
-  background:var(--bg);
-  color:var(--cream);
-  font-family:'Archivo',system-ui,sans-serif;
-  font-size:16px;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+body{font-family:'Archivo',sans-serif;background:var(--inkwell-deep);color:var(--aulait);line-height:1.55;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'Fraunces',serif;line-height:1.08}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brulee);font-weight:600}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* ---------- Tipografía ---------- */
-.display{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px;text-transform:uppercase;line-height:1.02}
-.mono{font-family:'Space Mono',monospace}
-.eyebrow{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--fire)}
+/* ══════════════ NAV — glass ══════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(35,43,46,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(220,215,201,.08)}
+.nav-in{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Fraunces',serif;font-weight:900;font-size:19px;color:var(--aulait)}
+.logo span{color:var(--glow)}
+.nav-links{display:flex;gap:26px;font-size:14px;font-weight:500;color:var(--aulait-dim)}
+.nav-links a:hover{color:var(--glow)}
+.nav-cta{background:var(--brulee);color:var(--inkwell-deep);padding:9px 18px;border-radius:999px;font-weight:700;font-size:13px;transition:.2s;box-shadow:0 4px 14px rgba(162,123,91,.35)}
+.nav-cta:hover{background:var(--brulee-hi);transform:translateY(-1px)}
+@media(max-width:820px){.nav-links{display:none}}
 
-/* ---------- Nav ---------- */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(11,10,8,.86);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--line);
-}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase}
-.logo span{color:var(--fire)}
-.nav-links{display:flex;gap:26px;align-items:center}
-.nav-links a{font-size:.85rem;font-weight:500;color:var(--cream-dim);transition:color .2s}
-.nav-links a:hover,.nav-links a:focus-visible{color:var(--cream)}
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--fire);color:#0B0A08;
-  font-weight:700;font-size:.88rem;
-  padding:11px 20px;border-radius:999px;border:none;cursor:pointer;
-  transition:transform .15s, box-shadow .2s;
-}
-.btn:hover,.btn:focus-visible{transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,107,26,.35)}
-.btn.ghost{background:transparent;color:var(--cream);border:1px solid rgba(242,234,217,.35)}
-.btn.ghost:hover{border-color:var(--cream);box-shadow:none}
-.btn.small{padding:8px 15px;font-size:.8rem}
-.nav-cta{display:inline-flex}
-@media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
-
-/* ---------- Hero ---------- */
-header{
-  position:relative;min-height:92vh;
-  display:flex;align-items:flex-end;
-  padding:120px 0 70px;
-  isolation:isolate;
-}
-.hero-bg{position:absolute;inset:0;z-index:-2;background:var(--card)}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55}
-.hero-veil{position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(11,10,8,.55) 0%,rgba(11,10,8,.25) 40%,rgba(11,10,8,.92) 92%)}
-.hero-content{max-width:820px}
-.hero-content h1{font-size:clamp(2.7rem,7.2vw,5.4rem);margin:14px 0 20px}
-.hero-content h1 em{font-style:normal;color:var(--fire)}
-.hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--cream-dim);max-width:560px;margin-bottom:32px}
+/* ══════════════ HERO — filamento tungsteno (firma) ══════════════ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;background:
+  radial-gradient(ellipse 700px 480px at 72% 30%, var(--glow-soft), transparent 65%),
+  linear-gradient(180deg,var(--inkwell) 0%,var(--inkwell-deep) 100%)}
+.hero::after{content:"";position:absolute;inset:0;background:url('https://drive.google.com/thumbnail?id=1n6qtucrt1JXj3z7YBxyLLnMbWcNIalxm&sz=w1920') center/cover;opacity:.14;mix-blend-mode:luminosity;pointer-events:none}
+.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
+.hero h1{font-size:clamp(44px,7vw,86px);font-weight:900;color:var(--aulait);margin:18px 0 22px}
+.hero h1 em{font-style:italic;color:var(--glow);text-shadow:0 0 30px rgba(255,138,61,.5)}
+.hero p{font-size:17px;color:var(--aulait-dim);max-width:520px;margin-bottom:34px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
-.hero-strip{
-  margin-top:52px;display:flex;gap:0;flex-wrap:wrap;
-  border-top:1px solid var(--line);
-}
-.hero-strip a{
-  flex:1 1 160px;padding:16px 18px 0 0;margin-top:-1px;
-  border-top:2px solid transparent;
-  transition:border-color .2s;
-}
-.hero-strip a:hover,.hero-strip a:focus-visible{border-top-color:var(--fire)}
-.hero-strip .mono{font-size:.68rem;color:var(--cream-dim);letter-spacing:.12em}
-.hero-strip strong{display:block;font-size:.95rem;font-weight:600;margin-top:2px}
+.btn{display:inline-block;padding:15px 30px;border-radius:999px;font-weight:700;font-size:15px;transition:.22s;cursor:pointer;border:none}
+.btn-fill{background:var(--brulee);color:var(--inkwell-deep);box-shadow:0 8px 24px rgba(162,123,91,.35)}
+.btn-fill:hover{background:var(--brulee-hi);transform:translateY(-2px);box-shadow:0 14px 34px rgba(162,123,91,.45)}
+.btn-ghost{background:transparent;color:var(--aulait);border:1.5px solid rgba(220,215,201,.28)}
+.btn-ghost:hover{border-color:var(--glow);color:var(--glow)}
+/* la lámpara */
+.lamp{position:relative;display:flex;justify-content:center;align-items:flex-start;height:420px}
+.lamp .cord{width:3px;height:150px;background:linear-gradient(180deg,transparent,var(--glow));box-shadow:0 0 12px var(--glow)}
+.lamp .socket{width:44px;height:52px;background:linear-gradient(180deg,#1b2224,#0f1415);border-radius:6px 6px 10px 10px;position:absolute;top:148px;left:50%;transform:translateX(-50%)}
+.lamp .bulb{position:absolute;top:196px;left:50%;transform:translateX(-50%);width:150px;height:190px;border:3px solid var(--glow);border-radius:50% 50% 46% 46%/62% 62% 40% 40%;box-shadow:0 0 26px var(--glow),0 0 90px rgba(255,138,61,.4),inset 0 0 26px rgba(255,138,61,.35);animation:pulse 4.5s ease-in-out infinite}
+.lamp .halo{position:absolute;top:170px;left:50%;transform:translateX(-50%);width:380px;height:380px;background:radial-gradient(circle,rgba(255,138,61,.22),transparent 62%);border-radius:50%;pointer-events:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.82}}
+@media(max-width:900px){.hero-in{grid-template-columns:1fr}.lamp{display:none}}
 
-/* ---------- Secciones ---------- */
-section{padding:96px 0}
-.sec-head{margin-bottom:52px;max-width:640px}
-.sec-head h2{font-size:clamp(2rem,4.5vw,3.2rem);margin:12px 0 14px}
-.sec-head p{color:var(--cream-dim)}
+/* ══════════════ LOCALES — bento con profundidad ══════════════ */
+.section{padding:96px 0}
+.sec-head{margin-bottom:48px;max-width:640px}
+.sec-head h2{font-size:clamp(32px,4.5vw,52px);font-weight:900;margin:14px 0 16px}
+.sec-head p{color:var(--aulait-dim);font-size:16px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;perspective:1400px}
+.card{grid-column:span 2;background:linear-gradient(160deg,var(--lunar) 0%,var(--inkwell) 100%);border:1px solid rgba(220,215,201,.09);border-radius:var(--r);overflow:hidden;cursor:pointer;position:relative;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;box-shadow:var(--shadow-1);transform-style:preserve-3d}
+.card:hover{transform:translateY(-8px) rotateX(2.5deg) rotateY(-2deg);box-shadow:var(--shadow-3),0 0 0 1px rgba(255,138,61,.3),0 0 40px rgba(255,138,61,.12)}
+.card.big{grid-column:span 3}
+.card-img{height:220px;overflow:hidden;position:relative}
+.card.big .card-img{height:260px}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:saturate(.92) contrast(1.05)}
+.card:hover .card-img img{transform:scale(1.07)}
+.card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(44,54,57,.92) 100%)}
+.card-tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(35,43,46,.78);backdrop-filter:blur(6px);padding:5px 12px;border-radius:999px;font-size:11px;letter-spacing:.14em;font-weight:600;color:var(--brulee-hi);border:1px solid rgba(162,123,91,.35)}
+.card-body{padding:22px 24px 26px}
+.card-body h3{font-size:25px;font-weight:700;margin-bottom:6px}
+.card-rating{font-size:13px;color:var(--glow);margin-bottom:10px}
+.card-rating span{color:var(--aulait-dim)}
+.card-body p{font-size:14px;color:var(--aulait-dim);margin-bottom:16px}
+.card-open{font-size:13px;font-weight:700;color:var(--brulee-hi);display:inline-flex;align-items:center;gap:6px}
+.card:hover .card-open{color:var(--glow)}
+@media(max-width:980px){.card,.card.big{grid-column:span 3}}
+@media(max-width:640px){.bento{grid-template-columns:1fr}.card,.card.big{grid-column:span 1}}
 
-/* ---------- Paseo / Locales ---------- */
-#locales{background:linear-gradient(180deg,var(--bg),#0E0C0A)}
-.paseo{position:relative;display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
-.venue{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:transform .2s, border-color .2s;
-}
-.venue:hover{transform:translateY(-4px);border-color:rgba(255,107,26,.45)}
-.venue-photo{aspect-ratio:4/3;background:var(--card2);position:relative;overflow:hidden}
-.venue-photo img{width:100%;height:100%;object-fit:cover}
-.plaque{
-  position:absolute;top:12px;left:12px;
-  background:rgba(11,10,8,.82);backdrop-filter:blur(6px);
-  border:1px solid rgba(242,234,217,.25);
-  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;
-  padding:5px 10px;border-radius:6px;color:var(--cream);
-}
-.venue-body{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
-.venue-body h3{font-family:'Anton',sans-serif;font-size:1.35rem;letter-spacing:.04em;text-transform:uppercase}
-.rating{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--amber)}
-.rating .mono{color:var(--cream-dim);font-size:.72rem}
-.venue-desc{font-size:.9rem;color:var(--cream-dim);flex:1}
-.hours{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--cream-dim);line-height:1.7;border-top:1px dashed var(--line);padding-top:12px}
-.hours b{color:var(--cream);font-weight:700}
-.venue-actions{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
-.chip{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.76rem;font-weight:600;
-  padding:8px 13px;border-radius:999px;
-  border:1px solid rgba(242,234,217,.25);color:var(--cream);
-  transition:all .18s;
-}
-.chip:hover,.chip:focus-visible{border-color:var(--fire);color:var(--fire)}
-.chip.wa{border-color:rgba(37,211,102,.4)}
-.chip.wa:hover{border-color:#25D366;color:#25D366}
+/* ══════════════ MODAL — panel por local ══════════════ */
+.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(20,26,28,.7);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex;animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:linear-gradient(180deg,var(--lunar) 0%,var(--inkwell) 30%);width:100%;max-width:880px;max-height:92svh;overflow-y:auto;border-radius:26px 26px 0 0;border:1px solid rgba(220,215,201,.12);border-bottom:none;box-shadow:var(--shadow-3);animation:slideUp .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media(min-width:900px){.modal-bg{align-items:center;padding:30px}.modal{border-radius:26px;border-bottom:1px solid rgba(220,215,201,.12)}}
+.modal-close{position:sticky;top:14px;margin:14px 18px 0 auto;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(35,43,46,.85);border:1px solid rgba(220,215,201,.15);color:var(--aulait);font-size:20px;cursor:pointer;z-index:5}
+.modal-close:hover{border-color:var(--glow);color:var(--glow)}
+.modal-in{padding:0 30px 40px}
+.modal-in .eyebrow{display:block;margin-top:4px}
+.modal-in h3{font-size:clamp(30px,5vw,42px);font-weight:900;margin:8px 0 4px}
+.m-rating{color:var(--glow);font-size:14px;margin-bottom:20px}
+.m-rating span{color:var(--aulait-dim)}
+/* galería del modal */
+.m-gal{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 30px}
+.ph{aspect-ratio:1;border-radius:12px;background:repeating-linear-gradient(45deg,var(--inkwell),var(--inkwell) 12px,var(--lunar) 12px,var(--lunar) 24px);border:1px dashed rgba(162,123,91,.4);display:flex;align-items:center;justify-content:center;text-align:center;font-size:10.5px;line-height:1.35;padding:8px;color:var(--brulee-hi);font-weight:600;letter-spacing:.03em}
+@media(max-width:640px){.m-gal{grid-template-columns:repeat(2,1fr)}}
+/* video */
+.m-video{border-radius:14px;background:var(--inkwell-deep);border:1px dashed rgba(162,123,91,.4);padding:34px 20px;text-align:center;color:var(--brulee-hi);font-size:13px;font-weight:600;margin-bottom:30px}
+/* platos */
+.m-sub{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin:0 0 14px;color:var(--aulait)}
+.m-sub small{font-family:'Archivo';font-size:11px;color:var(--brulee);letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:4px}
+.dish{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid rgba(220,215,201,.08)}
+.dish b{font-size:15px;font-weight:600}
+.dish small{display:block;font-size:12.5px;color:var(--aulait-dim);font-weight:400;margin-top:2px}
+.dish .price{font-family:'Fraunces',serif;font-weight:700;color:var(--brulee-hi);white-space:nowrap}
+.dishes{margin-bottom:30px}
+/* promo */
+.m-promo{background:linear-gradient(135deg,rgba(255,138,61,.12),rgba(162,123,91,.1));border:1px solid rgba(255,138,61,.3);border-radius:14px;padding:18px 20px;margin-bottom:30px;font-size:14px;color:var(--aulait)}
+.m-promo b{color:var(--glow)}
+/* info */
+.m-info{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px;font-size:13.5px}
+.m-info>div{background:rgba(35,43,46,.6);border:1px solid rgba(220,215,201,.08);border-radius:12px;padding:14px 16px}
+.m-info .lbl{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brulee);font-weight:700;margin-bottom:5px}
+@media(max-width:560px){.m-info{grid-template-columns:1fr}}
+.m-ctas{display:flex;gap:12px;flex-wrap:wrap}
 
-/* ---------- Viandas ---------- */
-#viandas{
-  background:
-    radial-gradient(1200px 500px at 85% 0%, rgba(255,107,26,.10), transparent 60%),
-    #0E0C0A;
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-}
-.viandas-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
-@media(max-width:900px){.viandas-grid{grid-template-columns:1fr}}
-.props{display:grid;gap:16px;margin:34px 0}
-.prop{display:flex;gap:16px;align-items:flex-start}
-.prop-ico{
-  flex:0 0 44px;height:44px;border-radius:12px;
-  background:rgba(255,107,26,.12);border:1px solid rgba(255,107,26,.3);
-  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
-}
-.prop h4{font-size:.98rem;font-weight:700;margin-bottom:2px}
-.prop p{font-size:.87rem;color:var(--cream-dim)}
-.zona{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--cream-dim);letter-spacing:.06em;line-height:2}
-.zona b{color:var(--amber)}
+/* ══════════════ VIANDAS ══════════════ */
+.viandas{background:linear-gradient(180deg,var(--inkwell) 0%,var(--inkwell-deep) 100%);position:relative}
+.viandas::before{content:"";position:absolute;top:-1px;left:0;right:0;height:280px;background:radial-gradient(ellipse 600px 260px at 20% 0%,var(--glow-soft),transparent 70%);pointer-events:none}
+.v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:40px 0}
+.v-item{background:rgba(63,78,79,.4);border:1px solid rgba(220,215,201,.08);border-radius:16px;padding:24px;transition:.25s;box-shadow:var(--shadow-1)}
+.v-item:hover{transform:translateY(-4px);border-color:rgba(162,123,91,.4);box-shadow:var(--shadow-2)}
+.v-item .ico{font-size:26px;margin-bottom:12px}
+.v-item h4{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--aulait)}
+.v-item p{font-size:13.5px;color:var(--aulait-dim)}
+@media(max-width:820px){.v-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.v-grid{grid-template-columns:1fr}}
+.v-zona{font-size:13px;color:var(--aulait-dim);margin-bottom:44px}
+.v-zona b{color:var(--brulee-hi);letter-spacing:.12em}
+/* form */
+.form-card{background:linear-gradient(160deg,var(--lunar),var(--inkwell));border:1px solid rgba(220,215,201,.1);border-radius:22px;padding:36px;max-width:640px;box-shadow:var(--shadow-2)}
+.form-card h3{font-size:26px;font-weight:700;margin-bottom:22px}
+.f-field{margin-bottom:16px}
+.f-field label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brulee);font-weight:700;margin-bottom:7px}
+.f-field input,.f-field select,.f-field textarea{width:100%;padding:13px 15px;border-radius:11px;border:1.5px solid rgba(220,215,201,.14);background:rgba(35,43,46,.7);color:var(--aulait);font-size:15px;font-family:'Archivo';outline:none;transition:border-color .2s}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--glow)}
+.f-note{font-size:13px;color:var(--aulait-dim);margin-top:14px}
+.f-note a{color:var(--brulee-hi);text-decoration:underline}
 
-.form-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:30px;
-  position:sticky;top:90px;
-}
-.form-card h3{font-family:'Anton',sans-serif;font-size:1.45rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
-.form-card>p{font-size:.86rem;color:var(--cream-dim);margin-bottom:22px}
-.field{margin-bottom:16px}
-.field label{display:block;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim);margin-bottom:7px}
-.field input,.field select,.field textarea{
-  width:100%;background:var(--card2);
-  border:1px solid var(--line);border-radius:10px;
-  color:var(--cream);font-family:'Archivo',sans-serif;font-size:.92rem;
-  padding:12px 14px;outline:none;transition:border-color .2s;
-}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--fire)}
-.field textarea{resize:vertical;min-height:74px}
-.form-note{font-size:.74rem;color:var(--cream-dim);margin-top:12px;text-align:center}
-.form-note a{color:var(--amber);text-decoration:underline}
-#btnViandas{width:100%;justify-content:center;font-size:.95rem;padding:14px}
+/* ══════════════ GALERÍA ══════════════ */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gal a{border-radius:14px;overflow:hidden;box-shadow:var(--shadow-1);transition:.3s;position:relative}
+.gal a:hover{transform:translateY(-5px) scale(1.02);box-shadow:var(--shadow-2),0 0 24px rgba(255,138,61,.12)}
+.gal img{width:100%;aspect-ratio:1;object-fit:cover;filter:saturate(.95)}
+@media(max-width:720px){.gal{grid-template-columns:1fr 1fr}}
 
-/* ---------- Galería ---------- */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.gallery a{border-radius:10px;overflow:hidden;aspect-ratio:1/1;background:var(--card2)}
-.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.gallery a:hover img{transform:scale(1.05)}
-@media(max-width:760px){.gallery{grid-template-columns:repeat(2,1fr)}}
+/* ══════════════ MAPA + FOOTER ══════════════ */
+.map-frame{border-radius:20px;overflow:hidden;border:1px solid rgba(220,215,201,.1);box-shadow:var(--shadow-2);filter:grayscale(.35) contrast(1.05)}
+.map-frame iframe{width:100%;height:380px;border:0;display:block}
+footer{background:var(--inkwell-deep);border-top:1px solid rgba(220,215,201,.08);padding:60px 0 30px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.f-grid h5{font-family:'Fraunces',serif;font-size:17px;margin-bottom:14px;color:var(--aulait)}
+.f-grid p,.f-grid a{font-size:13.5px;color:var(--aulait-dim);display:block;margin-bottom:8px}
+.f-grid a:hover{color:var(--glow)}
+.f-bottom{text-align:center;font-size:11px;letter-spacing:.18em;color:var(--aulait-dim);text-transform:uppercase;padding-top:24px;border-top:1px solid rgba(220,215,201,.06)}
+@media(max-width:720px){.f-grid{grid-template-columns:1fr}}
 
-/* ---------- Mapa ---------- */
-.map-frame{
-  border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--line);
-  filter:grayscale(.35) contrast(1.05);
-}
-.map-frame iframe{display:block;width:100%;height:440px;border:0}
-
-/* ---------- Footer ---------- */
-footer{border-top:1px solid var(--line);padding:60px 0 40px;background:#080706}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px}
-@media(max-width:760px){.foot-grid{grid-template-columns:1fr}}
-.foot-grid h5{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fire);margin-bottom:14px}
-.foot-grid p,.foot-grid a{font-size:.88rem;color:var(--cream-dim);display:block;margin-bottom:8px}
-.foot-grid a:hover{color:var(--cream)}
-.copy{border-top:1px solid var(--line);padding-top:22px;font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(242,234,217,.4);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-
-/* ---------- Reveal ---------- */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-.reveal.on{opacity:1;transform:none}
-
-/* ---------- WhatsApp flotante ---------- */
-.wa-float{
-  position:fixed;bottom:22px;right:22px;z-index:90;
-  width:56px;height:56px;border-radius:50%;
-  background:#25D366;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 26px rgba(0,0,0,.45);
-  transition:transform .15s;
-}
+/* WhatsApp flotante */
+.wa-float{position:fixed;bottom:22px;right:22px;z-index:80;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);transition:.25s;font-size:28px}
 .wa-float:hover{transform:scale(1.08)}
-.wa-float svg{width:30px;height:30px;fill:#0B0A08}
+body.modal-open{overflow:hidden}
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-  FOTOS: todas se cargan directo desde tu Google Drive.
-  Para cambiar una foto: reemplazá el ID (lo que va después de /d/
-  en el link de Drive). El Drive tiene que estar compartido como
-  "Cualquiera con el enlace puede ver".
-============================================================ -->
-
 <nav>
-  <div class="wrap nav-in">
+  <div class="nav-in">
     <a href="#" class="logo">Grupo <span>El Chiringuito</span></a>
     <div class="nav-links">
       <a href="#locales">Locales</a>
       <a href="#viandas">Viandas empresariales</a>
       <a href="#galeria">Galería</a>
       <a href="#ubicacion">Ubicación</a>
-      <a href="#viandas" class="btn small nav-cta">Cotizar viandas</a>
     </div>
+    <a href="#viandas" class="nav-cta">Cotizar viandas</a>
   </div>
 </nav>
 
-<header>
-  <div class="hero-bg"><img src="https://drive.google.com/thumbnail?id=1n6qtucrt1JXj3z7YBxyLLnMbWcNIalxm&sz=w1920" alt="Grupo El Chiringuito — Paseo Mendoza, Maschwitz" onerror="this.style.display='none'"></div>
-  <div class="hero-veil"></div>
-  <div class="wrap hero-content">
-    <div class="eyebrow">Paseo Mendoza · Ingeniero Maschwitz</div>
-    <h1 class="display">Cuatro cocinas.<br>Un solo <em>paseo</em>.</h1>
-    <p class="hero-sub">Parrilla y birra artesanal, bistró de patio, focaccias que son un escándalo y pizza de maestro pizzero. Todo a metros de distancia, en el corazón de Maschwitz.</p>
-    <div class="hero-ctas">
-      <a href="#locales" class="btn">Conocé los locales</a>
-      <a href="#viandas" class="btn ghost">Viandas para tu empresa</a>
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow">Paseo Mendoza · Ingeniero Maschwitz</span>
+      <h1>Cinco cocinas.<br>Un solo <em>paseo</em>.</h1>
+      <p>Parrilla y birra artesanal, bistró de patio, focaccias que son un escándalo, pizza de maestro pizzero y pastelería artesanal. Todo a metros de distancia, en el corazón de Maschwitz.</p>
+      <div class="hero-ctas">
+        <a href="#locales" class="btn btn-fill">Conocé los locales</a>
+        <a href="#viandas" class="btn btn-ghost">Viandas para tu empresa</a>
+      </div>
     </div>
-    <div class="hero-strip">
-      <a href="#chiringuito"><span class="mono">MENDOZA 1578</span><strong>El Chiringuito</strong></a>
-      <a href="#lounge"><span class="mono">MENDOZA 1731</span><strong>Chiringuito Lounge</strong></a>
-      <a href="#focacceria"><span class="mono">MENDOZA 1578</span><strong>La Focacceria</strong></a>
-      <a href="#unapizza"><span class="mono">MENDOZA 1578</span><strong>Una Pizza</strong></a>
+    <div class="lamp" aria-hidden="true">
+      <div class="cord"></div>
+      <div class="socket"></div>
+      <div class="halo"></div>
+      <div class="bulb"></div>
     </div>
   </div>
 </header>
 
-<!-- ==================== LOCALES ==================== -->
-<section id="locales">
+<!-- ══════════ LOCALES ══════════ -->
+<section class="section" id="locales">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Los locales</div>
-      <h2 class="display">El Paseo Mendoza es nuestra casa</h2>
-      <p>Cuatro propuestas distintas, una misma cocina de barrio hecha con oficio. Elegí la tuya según el plan del día.</p>
+    <div class="sec-head">
+      <span class="eyebrow">Los locales</span>
+      <h2>El Paseo Mendoza es nuestra casa</h2>
+      <p>Cinco propuestas distintas, una misma cocina de barrio hecha con oficio. Tocá cada local para ver platos, promos y fotos.</p>
     </div>
+    <div class="bento">
 
-    <div class="paseo">
-
-      <!-- EL CHIRINGUITO -->
-      <article class="venue reveal" id="chiringuito">
-        <div class="venue-photo">
-          <img src="https://drive.google.com/thumbnail?id=1AvKONQebtdbaRMkQtTPpJSFEaLH5D2EL&sz=w900" alt="El Chiringuito — cervecería y parrilla en Maschwitz" loading="lazy" onerror="this.style.display='none'">
-          <span class="plaque">MENDOZA 1578</span>
+      <div class="card big" onclick="openModal('chiringuito')">
+        <div class="card-img">
+          <span class="card-tag">MENDOZA 1578</span>
+          <img src="https://drive.google.com/thumbnail?id=1AvKONQebtdbaRMkQtTPpJSFEaLH5D2EL&sz=w900" alt="El Chiringuito — cervecería y parrilla en Maschwitz" loading="lazy">
         </div>
-        <div class="venue-body">
+        <div class="card-body">
           <h3>El Chiringuito</h3>
-          <div class="rating">★★★★☆ 4.3 <span class="mono">(3.500+ reseñas)</span></div>
-          <p class="venue-desc">El clásico del paseo: hamburguesas, milanesas, parrilla y cerveza artesanal tirada. Con La Terraza en el primer piso para las noches largas.</p>
-          <div class="hours">
-            <b>Mar–Jue</b> 17 a 02 · <b>Vie</b> 17 a 03<br>
-            <b>Sáb</b> 11 a 03 · <b>Dom</b> 11 a 24
-          </div>
-          <div class="venue-actions">
-            <a class="chip" href="tel:+541140857072">📞 Llamar</a>
-            <a class="chip" href="https://www.google.com/maps/search/?api=1&query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">📍 Cómo llegar</a>
-          </div>
+          <div class="card-rating">★★★★☆ 4.3 <span>(3.500+ reseñas)</span></div>
+          <p>El clásico del paseo: hamburguesas, milanesas, parrilla y cerveza artesanal tirada. Con La Terraza en el primer piso para las noches largas.</p>
+          <span class="card-open">Ver platos y promos →</span>
         </div>
-      </article>
+      </div>
 
-      <!-- LOUNGE -->
-      <article class="venue reveal" id="lounge">
-        <div class="venue-photo">
-          <img src="https://drive.google.com/thumbnail?id=1GfFsTK4Wf9lTuwhT__IMZZdgAt8_xQhk&sz=w900" alt="Chiringuito Lounge — bistró en Paseo Mendoza" loading="lazy" onerror="this.style.display='none'">
-          <span class="plaque">MENDOZA 1731</span>
+      <div class="card big" onclick="openModal('lounge')">
+        <div class="card-img">
+          <span class="card-tag">MENDOZA 1731</span>
+          <img src="https://drive.google.com/thumbnail?id=1GfFsTK4Wf9lTuwhT__IMZZdgAt8_xQhk&sz=w900" alt="Chiringuito Lounge — bistró en Paseo Mendoza" loading="lazy">
         </div>
-        <div class="venue-body">
+        <div class="card-body">
           <h3>Chiringuito Lounge</h3>
-          <div class="rating">★★★★☆ 4.4 <span class="mono">(82 reseñas)</span></div>
-          <p class="venue-desc">Bistró de día y de noche: desayunos y meriendas, bifes, pastas y picadas en un patio que invita a quedarse. El plan tranquilo del paseo.</p>
-          <div class="hours">
-            <b>Mar–Dom</b> 9 a 01<br>
-            <b>Lunes</b> cerrado
-          </div>
-          <div class="venue-actions">
-            <a class="chip wa" href="https://wa.me/5491124635464" target="_blank" rel="noopener">💬 WhatsApp</a>
-            <a class="chip" href="https://www.google.com/maps/search/?api=1&query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">📍 Cómo llegar</a>
-          </div>
+          <div class="card-rating">★★★★☆ 4.4 <span>(82 reseñas)</span></div>
+          <p>Bistró de día y de noche: desayunos, meriendas, bifes, pastas y picadas en un patio que invita a quedarse.</p>
+          <span class="card-open">Ver platos y promos →</span>
         </div>
-      </article>
+      </div>
 
-      <!-- FOCACCERIA -->
-      <article class="venue reveal" id="focacceria">
-        <div class="venue-photo">
-          <img src="https://drive.google.com/thumbnail?id=1RQjJbmfIZ4CsNZrJ2qeVXMGI59wZDNpM&sz=w900" alt="La Focacceria — focaccias artesanales en Maschwitz" loading="lazy" onerror="this.style.display='none'">
-          <span class="plaque">MENDOZA 1578</span>
+      <div class="card" onclick="openModal('focacceria')">
+        <div class="card-img">
+          <span class="card-tag">MENDOZA 1578</span>
+          <img src="https://drive.google.com/thumbnail?id=1RQjJbmfIZ4CsNZrJ2qeVXMGI59wZDNpM&sz=w900" alt="La Focacceria — focaccias artesanales en Maschwitz" loading="lazy">
         </div>
-        <div class="venue-body">
+        <div class="card-body">
           <h3>La Focacceria</h3>
-          <div class="rating">★★★★★ 4.8 <span class="mono">(278 reseñas)</span></div>
-          <p class="venue-desc">Focaccias enormes de masa propia con fiambres frescos y rellenos que se hicieron fama en la zona. La mejor puntuada del grupo — y con razón.</p>
-          <div class="hours">
-            <b>Mié–Jue</b> 17 a 01 · <b>Vie–Sáb</b> 10 a 01<br>
-            <b>Dom</b> 10 a 00:30 · <b>Lun–Mar</b> cerrado
-          </div>
-          <div class="venue-actions">
-            <a class="chip" href="tel:+541140857072">📞 Llamar</a>
-            <a class="chip" href="https://www.google.com/maps/search/?api=1&query=Focacceria+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJQX_VsSifvJUR7WaILC2fUBY" target="_blank" rel="noopener">📍 Cómo llegar</a>
-          </div>
+          <div class="card-rating">★★★★★ 4.8 <span>(278 reseñas)</span></div>
+          <p>Focaccias enormes de masa propia con fiambres frescos. La mejor puntuada del grupo — y con razón.</p>
+          <span class="card-open">Ver más →</span>
         </div>
-      </article>
+      </div>
 
-      <!-- UNA PIZZA -->
-      <article class="venue reveal" id="unapizza">
-        <div class="venue-photo">
-          <img src="https://drive.google.com/thumbnail?id=1QcFKkBa450tmhjLJ7P8KGS079e2PhvG9&sz=w900" alt="Una Pizza — pizzería en Maschwitz" loading="lazy" onerror="this.style.display='none'">
-          <span class="plaque">MENDOZA 1578</span>
+      <div class="card" onclick="openModal('unapizza')">
+        <div class="card-img">
+          <span class="card-tag">MENDOZA 1578</span>
+          <img src="https://drive.google.com/thumbnail?id=1QcFKkBa450tmhjLJ7P8KGS079e2PhvG9&sz=w900" alt="Una Pizza — pizzería en Maschwitz" loading="lazy">
         </div>
-        <div class="venue-body">
+        <div class="card-body">
           <h3>Una Pizza</h3>
-          <div class="rating">★★★★★ 4.5 <span class="mono">(28 reseñas)</span></div>
-          <p class="venue-desc">Pizza con el toque de un maestro pizzero: masa trabajada, ingredientes de primera, empanadas y fainá. En el local o para llevar a casa.</p>
-          <div class="hours">
-            <b>Mié–Jue y Dom</b> 19 a 24<br>
-            <b>Vie–Sáb</b> 19 a 01 · <b>Lun–Mar</b> cerrado
-          </div>
-          <div class="venue-actions">
-            <a class="chip wa" href="https://wa.me/5491126091109" target="_blank" rel="noopener">💬 Pedir</a>
-            <a class="chip" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">📍 Cómo llegar</a>
-          </div>
+          <div class="card-rating">★★★★★ 4.5 <span>(28 reseñas)</span></div>
+          <p>Pizza con el toque de un maestro pizzero: masa trabajada, empanadas y fainá. En el local o para llevar.</p>
+          <span class="card-open">Ver más →</span>
         </div>
-      </article>
+      </div>
+
+      <div class="card" onclick="openModal('bakery')">
+        <div class="card-img">
+          <span class="card-tag">MENDOZA 1578 · LOCAL 15</span>
+          <!-- FOTO CARD: ChirinBakery — vidriera o torta insignia (reemplazar src cuando esté la foto en Drive) -->
+          <img src="https://drive.google.com/thumbnail?id=1md0eSYc9vykOtSyb17AOjNe3OpzN7uUk&sz=w900" alt="ChirinBakery — pastelería artesanal en Maschwitz" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>ChirinBakery</h3>
+          <div class="card-rating">★ Nuevo <span>en el paseo</span></div>
+          <p>Pastelería artesanal de Vanesa Schual (El Gato Dumas): tortas para eventos, mesas dulces, tartas y postres.</p>
+          <span class="card-open">Ver más →</span>
+        </div>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- ==================== VIANDAS ==================== -->
-<section id="viandas">
-  <div class="wrap">
-    <div class="viandas-grid">
-      <div>
-        <div class="sec-head reveal" style="margin-bottom:0">
-          <div class="eyebrow">Para empresas</div>
-          <h2 class="display">Viandas empresariales que tu equipo va a esperar</h2>
-          <p>La misma cocina que llena el Paseo Mendoza todos los fines de semana, ahora al servicio de tu empresa. Comida real, hecha el mismo día, entregada en tu planta u oficina.</p>
-        </div>
+<!-- ══════════ MODALES ══════════
+  CÓMO CARGAR LAS FOTOS DESPUÉS:
+  Cada placeholder .ph tiene escrito adentro EXACTAMENTE qué foto va ahí.
+  Para reemplazar: cambiar el <div class="ph">…</div> por
+  <img src="https://drive.google.com/thumbnail?id=ID_DE_DRIVE&sz=w700" alt="..." style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+  VIDEO IG: reemplazar el <div class="m-video"> por el <blockquote> de embed que da Instagram (Post → ⋯ → Insertar).
+  PRECIOS: buscar "$ —" y completar.
+-->
 
-        <div class="props reveal">
-          <div class="prop">
-            <div class="prop-ico">🍳</div>
-            <div><h4>Cocina propia, cuatro cocinas</h4><p>Producción centralizada con la capacidad de nuestros cuatro locales. Volumen sin perder calidad casera.</p></div>
-          </div>
-          <div class="prop">
-            <div class="prop-ico">📅</div>
-            <div><h4>Menú rotativo semanal</h4><p>Milanesas, pastas, guisos, ensaladas, tartas y opciones vegetarianas. Planificado para que nadie se aburra.</p></div>
-          </div>
-          <div class="prop">
-            <div class="prop-ico">🚚</div>
-            <div><h4>Entrega puntual en tu puerta</h4><p>Logística propia con horarios acordados. Viandas individuales rotuladas o servicio en bandejas para comedor.</p></div>
-          </div>
-          <div class="prop">
-            <div class="prop-ico">🧾</div>
-            <div><h4>Facturación para empresas</h4><p>Presupuesto por volumen y frecuencia, con facturación mensual ordenada para tu administración.</p></div>
-          </div>
-          <div class="prop">
-            <div class="prop-ico">🥂</div>
-            <div><h4>Catering de eventos y desayunos</h4><p>Reuniones, capacitaciones, fin de año: armamos picadas, focaccias, pizzas y desayunos corporativos.</p></div>
-          </div>
-        </div>
+<!-- MODAL: EL CHIRINGUITO -->
+<div class="modal-bg" id="m-chiringuito" onclick="bgClose(event,this)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('chiringuito')">✕</button>
+    <div class="modal-in">
+      <span class="eyebrow">Mendoza 1578 · Parrilla &amp; Cervecería</span>
+      <h3>El Chiringuito</h3>
+      <div class="m-rating">★★★★☆ 4.3 <span>(3.500+ reseñas en Google)</span></div>
 
-        <p class="zona reveal"><b>ZONA DE ENTREGA →</b> Ing. Maschwitz · Belén de Escobar · Garín y parques industriales · Matheu · Loma Verde · Zona norte GBA (consultar)</p>
+      <div class="m-gal">
+        <div class="ph">FOTO 1<br>Hamburguesa insignia<br>(close-up, jugo visible)</div>
+        <div class="ph">FOTO 2<br>Parrilla en acción<br>(fuego / brasas)</div>
+        <div class="ph">FOTO 3<br>Pinta de birra tirada<br>(condensación)</div>
+        <div class="ph">FOTO 4<br>La Terraza de noche<br>(ambiente, luz cálida)</div>
       </div>
 
-      <div class="form-card reveal">
-        <h3>Pedí tu cotización</h3>
-        <p>Completá los datos y te contestamos por WhatsApp en el día, con menú de ejemplo y precios por volumen.</p>
-        <div class="field">
-          <label for="f-nombre">Tu nombre</label>
-          <input id="f-nombre" type="text" placeholder="Ej: Laura Gómez" autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="f-empresa">Empresa</label>
-          <input id="f-empresa" type="text" placeholder="Ej: Logística del Norte SA" autocomplete="organization">
-        </div>
-        <div class="field">
-          <label for="f-cant">Cantidad de viandas por día</label>
-          <select id="f-cant">
-            <option>5 a 15</option>
-            <option>15 a 30</option>
-            <option>30 a 60</option>
-            <option>Más de 60</option>
-            <option>Evento puntual / catering</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="f-frec">Frecuencia</label>
-          <select id="f-frec">
-            <option>Todos los días (Lun a Vie)</option>
-            <option>Algunos días por semana</option>
-            <option>Evento único</option>
-            <option>Todavía no lo sé</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="f-msg">Comentarios (opcional)</label>
-          <textarea id="f-msg" placeholder="Zona de entrega, horarios, restricciones alimentarias…"></textarea>
-        </div>
-        <button class="btn" id="btnViandas" onclick="enviarViandas()">💬 Cotizar por WhatsApp</button>
-        <p class="form-note">O escribinos a <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a></p>
+      <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de @elchiringuitok (el más viral del local)</div>
+
+      <div class="dishes">
+        <p class="m-sub"><small>Los que más salen</small>Platos destacados</p>
+        <div class="dish"><div><b>[Plato top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Plato top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Plato top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+      </div>
+
+      <div class="m-promo">🔥 <b>Promo vigente:</b> [completar — ej. Miércoles de Hamburguesa Libre, condiciones y horario]</div>
+
+      <div class="m-info">
+        <div><div class="lbl">Horarios</div>Mar–Jue 17 a 02 · Vie 17 a 03<br>Sáb 11 a 03 · Dom 11 a 24</div>
+        <div><div class="lbl">Dirección</div>Mendoza 1578, Paseo Mendoza<br>Ing. Maschwitz</div>
+      </div>
+      <div class="m-ctas">
+        <a class="btn btn-fill" href="tel:+541140857072">📞 Llamar</a>
+        <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">📍 Cómo llegar</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/elchiringuitok" target="_blank" rel="noopener">📸 Instagram</a>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ==================== GALERÍA ==================== -->
-<section id="galeria">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Galería</div>
-      <h2 class="display">Así se come en el paseo</h2>
+<!-- MODAL: LOUNGE -->
+<div class="modal-bg" id="m-lounge" onclick="bgClose(event,this)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('lounge')">✕</button>
+    <div class="modal-in">
+      <span class="eyebrow">Mendoza 1731 · Bistró</span>
+      <h3>Chiringuito Lounge</h3>
+      <div class="m-rating">★★★★☆ 4.4 <span>(82 reseñas en Google)</span></div>
+
+      <div class="m-gal">
+        <div class="ph">FOTO 1<br>Patio del Lounge<br>(luz de día)</div>
+        <div class="ph">FOTO 2<br>Merienda / brunch<br>(mesa servida)</div>
+        <div class="ph">FOTO 3<br>Bife o pasta insignia<br>(close-up)</div>
+        <div class="ph">FOTO 4<br>Picada + copas<br>(atardecer)</div>
+      </div>
+
+      <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel del Lounge (ambiente de patio)</div>
+
+      <div class="dishes">
+        <p class="m-sub"><small>Los que más salen</small>Platos destacados</p>
+        <div class="dish"><div><b>[Plato top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Plato top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Plato top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+      </div>
+
+      <div class="m-promo">🔥 <b>Promo vigente:</b> [completar]</div>
+
+      <div class="m-info">
+        <div><div class="lbl">Horarios</div>Mar–Dom 9 a 01<br>Lunes cerrado</div>
+        <div><div class="lbl">Dirección</div>Mendoza 1731, Paseo Mendoza<br>Ing. Maschwitz</div>
+      </div>
+      <div class="m-ctas">
+        <a class="btn btn-fill" href="https://wa.me/5491124635464" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">📍 Cómo llegar</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">📸 Instagram <!-- completar handle --></a>
+      </div>
     </div>
-    <div class="gallery reveal">
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1md0eSYc9vykOtSyb17AOjNe3OpzN7uUk&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1p-h5wordsuEFf1MwLti9B-krrgl65Brj&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1RvmuhFkcYNE7rjXLh0Naa_baSIKt93Ax&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1hHuJlCjP_PdphD78BJPqOWo5Z5JC4FvT&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1cDsFj3rbD06oCfYML4TIr6VmBN-eaGkv&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1JSddVGa771BLgOrW_MSkb-_tUIymptiq&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1QkCWKDTe91rkb7GBFR6pgxCJ9WwEJpCa&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
-      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1dB_FBiNDyEku3jK52_tCkCO1X3K_u500&sz=w700" alt="Grupo El Chiringuito" loading="lazy" onerror="this.parentElement.style.display='none'"></a>
+  </div>
+</div>
+
+<!-- MODAL: FOCACCERIA -->
+<div class="modal-bg" id="m-focacceria" onclick="bgClose(event,this)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('focacceria')">✕</button>
+    <div class="modal-in">
+      <span class="eyebrow">Mendoza 1578 · Focaccias artesanales</span>
+      <h3>La Focacceria</h3>
+      <div class="m-rating">★★★★★ 4.8 <span>(278 reseñas en Google)</span></div>
+
+      <div class="m-gal">
+        <div class="ph">FOTO 1<br>Focaccia abierta<br>(relleno visible, close-up)</div>
+        <div class="ph">FOTO 2<br>Masa / horneado<br>(proceso)</div>
+        <div class="ph">FOTO 3<br>Mostrador con variedad<br>(plano general)</div>
+        <div class="ph">FOTO 4<br>Focaccia recién salida<br>(vapor si se puede)</div>
+      </div>
+
+      <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de La Focacceria (corte de focaccia)</div>
+
+      <div class="dishes">
+        <p class="m-sub"><small>Las que más salen</small>Focaccias destacadas</p>
+        <div class="dish"><div><b>[Focaccia top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Focaccia top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Focaccia top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+      </div>
+
+      <div class="m-promo">🔥 <b>Promo vigente:</b> [completar]</div>
+
+      <div class="m-info">
+        <div><div class="lbl">Horarios</div>Mié–Jue 17 a 01 · Vie–Sáb 10 a 01<br>Dom 10 a 00:30 · Lun–Mar cerrado</div>
+        <div><div class="lbl">Dirección</div>Mendoza 1578, Paseo Mendoza<br>Ing. Maschwitz</div>
+      </div>
+      <div class="m-ctas">
+        <a class="btn btn-fill" href="tel:+541140857072">📞 Llamar</a>
+        <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Focacceria+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJQX_VsSifvJUR7WaILC2fUBY" target="_blank" rel="noopener">📍 Cómo llegar</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">📸 Instagram <!-- completar handle --></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: UNA PIZZA -->
+<div class="modal-bg" id="m-unapizza" onclick="bgClose(event,this)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('unapizza')">✕</button>
+    <div class="modal-in">
+      <span class="eyebrow">Mendoza 1578 · Pizzería</span>
+      <h3>Una Pizza</h3>
+      <div class="m-rating">★★★★★ 4.5 <span>(28 reseñas en Google)</span></div>
+
+      <div class="m-gal">
+        <div class="ph">FOTO 1<br>Pizza entera<br>(muzza estirándose)</div>
+        <div class="ph">FOTO 2<br>Maestro pizzero<br>(manos + masa)</div>
+        <div class="ph">FOTO 3<br>Empanadas + fainá<br>(bandeja)</div>
+        <div class="ph">FOTO 4<br>Horno / salida de pizza<br>(acción)</div>
+      </div>
+
+      <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de Una Pizza (corte con queso estirándose)</div>
+
+      <div class="dishes">
+        <p class="m-sub"><small>Las que más salen</small>Pizzas destacadas</p>
+        <div class="dish"><div><b>[Pizza top 1 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Pizza top 2 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>[Pizza top 3 — a completar]</b><small>[descripción corta]</small></div><span class="price">$ —</span></div>
+      </div>
+
+      <div class="m-promo">🔥 <b>Promo vigente:</b> [completar]</div>
+
+      <div class="m-info">
+        <div><div class="lbl">Horarios</div>Mié–Jue y Dom 19 a 24<br>Vie–Sáb 19 a 01 · Lun–Mar cerrado</div>
+        <div><div class="lbl">Dirección</div>Mendoza 1578, Paseo Mendoza<br>Ing. Maschwitz</div>
+      </div>
+      <div class="m-ctas">
+        <a class="btn btn-fill" href="https://wa.me/5491126091109" target="_blank" rel="noopener">💬 Pedir por WhatsApp</a>
+        <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">📍 Cómo llegar</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">📸 Instagram <!-- completar handle --></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CHIRINBAKERY -->
+<div class="modal-bg" id="m-bakery" onclick="bgClose(event,this)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('bakery')">✕</button>
+    <div class="modal-in">
+      <span class="eyebrow">Mendoza 1578, Local 15 · Pastelería artesanal</span>
+      <h3>ChirinBakery</h3>
+      <div class="m-rating">★ Nuevo <span>· por Vanesa Schual, egresada de El Gato Dumas</span></div>
+
+      <div class="m-gal">
+        <div class="ph">FOTO 1<br>Torta insignia<br>(close-up del corte)</div>
+        <div class="ph">FOTO 2<br>Mesa dulce armada<br>(evento)</div>
+        <div class="ph">FOTO 3<br>Tartas / postres<br>(vidriera)</div>
+        <div class="ph">FOTO 4<br>Vanesa trabajando<br>(manos + manga/decorado)</div>
+      </div>
+
+      <div class="m-video">🎥 VIDEO IG — pegar acá el embed de un reel de @chirinbakery (decorado de torta o corte)</div>
+
+      <div class="dishes">
+        <p class="m-sub"><small>Lo que más piden</small>Especialidades</p>
+        <div class="dish"><div><b>Tortas para eventos</b><small>Personalizadas por encargo — [precio desde, a completar]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Mesas dulces</b><small>[descripción corta — a completar]</small></div><span class="price">$ —</span></div>
+        <div class="dish"><div><b>Tartas y postres del día</b><small>[descripción corta — a completar]</small></div><span class="price">$ —</span></div>
+      </div>
+
+      <div class="m-promo">🔥 <b>Promo vigente:</b> [completar — ej. box de temporada]</div>
+
+      <div class="m-info">
+        <div><div class="lbl">Horarios</div>Mar–Dom 10 a 21</div>
+        <div><div class="lbl">Dirección</div>Mendoza 1578, Local 15<br>Paseo Mendoza, Ing. Maschwitz</div>
+      </div>
+      <div class="m-ctas">
+        <a class="btn btn-fill" href="https://wa.me/5491144002737" target="_blank" rel="noopener">💬 Encargar por WhatsApp</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">📸 Instagram</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VIANDAS ══════════ -->
+<section class="section viandas" id="viandas">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Para empresas</span>
+      <h2>Viandas empresariales que tu equipo va a esperar</h2>
+      <p>La misma cocina que llena el Paseo Mendoza todos los fines de semana, ahora al servicio de tu empresa. Comida real, hecha el mismo día, entregada en tu planta u oficina.</p>
+    </div>
+    <div class="v-grid">
+      <div class="v-item"><div class="ico">🍳</div><h4>Cocina propia, cinco cocinas</h4><p>Producción centralizada con la capacidad de nuestros cinco locales. Volumen sin perder calidad casera.</p></div>
+      <div class="v-item"><div class="ico">📅</div><h4>Menú rotativo semanal</h4><p>Milanesas, pastas, guisos, ensaladas, tartas y opciones vegetarianas. Planificado para que nadie se aburra.</p></div>
+      <div class="v-item"><div class="ico">🚚</div><h4>Entrega puntual en tu puerta</h4><p>Logística propia con horarios acordados. Viandas individuales rotuladas o servicio en bandejas.</p></div>
+      <div class="v-item"><div class="ico">🧾</div><h4>Facturación para empresas</h4><p>Presupuesto por volumen y frecuencia, con facturación mensual ordenada para tu administración.</p></div>
+      <div class="v-item"><div class="ico">🥂</div><h4>Catering de eventos y desayunos</h4><p>Reuniones, capacitaciones, fin de año: picadas, focaccias, pizzas, mesas dulces y desayunos corporativos.</p></div>
+      <div class="v-item"><div class="ico">🎂</div><h4>Pastelería para tu empresa</h4><p>Tortas de cumpleaños del equipo, mesas dulces y desayunos con la pastelería de ChirinBakery.</p></div>
+    </div>
+    <p class="v-zona"><b>ZONA DE ENTREGA →</b> Ing. Maschwitz · Belén de Escobar · Garín y parques industriales · Matheu · Loma Verde · Zona norte GBA (consultar)</p>
+
+    <div class="form-card">
+      <h3>Pedí tu cotización</h3>
+      <div class="f-field"><label>Tu nombre</label><input type="text" id="f-nombre" placeholder="Nombre y apellido"></div>
+      <div class="f-field"><label>Empresa</label><input type="text" id="f-empresa" placeholder="Nombre de la empresa"></div>
+      <div class="f-field"><label>Cantidad de viandas por día</label>
+        <select id="f-cant"><option>5 a 15</option><option>15 a 30</option><option>30 a 60</option><option>Más de 60</option><option>Evento puntual / catering</option></select>
+      </div>
+      <div class="f-field"><label>Frecuencia</label>
+        <select id="f-frec"><option>Todos los días (Lun a Vie)</option><option>Algunos días por semana</option><option>Evento único</option><option>Todavía no lo sé</option></select>
+      </div>
+      <div class="f-field"><label>Comentarios (opcional)</label><textarea id="f-com" rows="3" placeholder="Contanos lo que necesitás"></textarea></div>
+      <button class="btn btn-fill" style="width:100%" onclick="sendWA()">💬 Cotizar por WhatsApp</button>
+      <p class="f-note">O escribinos a <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a> — te contestamos en el día con menú de ejemplo y precios por volumen.</p>
     </div>
   </div>
 </section>
 
-<!-- ==================== MAPA ==================== -->
-<section id="ubicacion" style="padding-top:0">
+<!-- ══════════ GALERÍA ══════════ -->
+<section class="section" id="galeria">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Ubicación</div>
-      <h2 class="display">Paseo Mendoza, Maschwitz</h2>
+    <div class="sec-head">
+      <span class="eyebrow">Galería</span>
+      <h2>Así se come en el paseo</h2>
+    </div>
+    <div class="gal">
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1md0eSYc9vykOtSyb17AOjNe3OpzN7uUk&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1p-h5wordsuEFf1MwLti9B-krrgl65Brj&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1RvmuhFkcYNE7rjXLh0Naa_baSIKt93Ax&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1hHuJlCjP_PdphD78BJPqOWo5Z5JC4FvT&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1cDsFj3rbD06oCfYML4TIr6VmBN-eaGkv&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1JSddVGa771BLgOrW_MSkb-_tUIymptiq&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1QkCWKDTe91rkb7GBFR6pgxCJ9WwEJpCa&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+      <a href="#locales"><img src="https://drive.google.com/thumbnail?id=1dB_FBiNDyEku3jK52_tCkCO1X3K_u500&sz=w700" alt="Grupo El Chiringuito" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ UBICACIÓN ══════════ -->
+<section class="section" id="ubicacion" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Ubicación</span>
+      <h2>Paseo Mendoza, Maschwitz</h2>
       <p>Mendoza 1578 y 1731, Ingeniero Maschwitz — a minutos de Panamericana ramal Escobar, salida Maschwitz.</p>
     </div>
-    <div class="map-frame reveal">
-      <iframe title="Mapa Paseo Mendoza Maschwitz" src="https://maps.google.com/maps?q=Mendoza%201578%2C%20Ingeniero%20Maschwitz%2C%20Buenos%20Aires&z=17&output=embed" loading="lazy" allowfullscreen></iframe>
+    <div class="map-frame">
+      <iframe src="https://maps.google.com/maps?q=Mendoza%201578%2C%20Ingeniero%20Maschwitz%2C%20Buenos%20Aires&z=17&output=embed" loading="lazy" title="Mapa Paseo Mendoza"></iframe>
     </div>
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="wrap">
-    <div class="foot-grid">
+    <div class="f-grid">
       <div>
         <h5>Grupo El Chiringuito</h5>
-        <p>Cuatro cocinas en el Paseo Mendoza de Ingeniero Maschwitz. Gastronomía de barrio hecha con oficio, y viandas empresariales para toda la zona de Escobar.</p>
+        <p>Cinco cocinas en el Paseo Mendoza de Ingeniero Maschwitz. Gastronomía de barrio hecha con oficio, y viandas empresariales para toda la zona de Escobar.</p>
       </div>
       <div>
         <h5>Contacto</h5>
-        <a href="https://wa.me/5491122721108" target="_blank" rel="noopener">WhatsApp: 11 2272-1108</a>
+        <a href="https://wa.me/5491122721108">WhatsApp: 11 2272-1108</a>
         <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a>
         <a href="tel:+541140857072">Tel. locales: 11 4085-7072</a>
       </div>
@@ -515,48 +600,26 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:#080706}
         <p>Mendoza 1578 y 1731<br>Ingeniero Maschwitz (B1623)<br>Escobar, Buenos Aires</p>
       </div>
     </div>
-    <div class="copy">
-      <span>© <span id="year"></span> GRUPO EL CHIRINGUITO — MASCHWITZ</span>
-      <span>PASEO MENDOZA · DESDE EL CORAZÓN DE MASCHWITZ</span>
-    </div>
+    <div class="f-bottom">© Grupo El Chiringuito — Maschwitz Paseo Mendoza · Desde el corazón de Maschwitz</div>
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/5491122721108?text=Hola!%20Vi%20la%20p%C3%A1gina%20del%20Grupo%20El%20Chiringuito%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.4 2 11.9c0 2.1.6 4 1.7 5.7L2 22l4.5-1.6c1.6 1 3.5 1.5 5.5 1.5 5.5 0 10-4.4 10-9.9S17.5 2 12 2zm0 18.1c-1.8 0-3.4-.5-4.8-1.4l-.3-.2-2.7 1 1-2.6-.2-.4c-1-1.5-1.5-3.2-1.5-4.9 0-4.6 3.8-8.3 8.5-8.3s8.5 3.7 8.5 8.3-3.8 8.5-8.5 8.5zm4.7-6.2c-.3-.1-1.5-.7-1.8-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.6-1.4-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.6-.4z"/></svg>
-</a>
+<a class="wa-float" href="https://wa.me/5491122721108?text=Hola!%20Vi%20la%20p%C3%A1gina%20del%20Grupo%20El%20Chiringuito%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
 
 <script>
-// ===== WhatsApp de viandas empresariales =====
-const WA_VIANDAS = "5491122721108";
-
-function enviarViandas(){
-  const nombre  = document.getElementById('f-nombre').value.trim();
-  const empresa = document.getElementById('f-empresa').value.trim();
-  const cant    = document.getElementById('f-cant').value;
-  const frec    = document.getElementById('f-frec').value;
-  const msg     = document.getElementById('f-msg').value.trim();
-
-  if(!nombre){ document.getElementById('f-nombre').focus(); return; }
-
-  let texto = `Hola! Quiero cotizar viandas empresariales.\n`;
-  texto += `👤 Nombre: ${nombre}\n`;
-  if(empresa) texto += `🏢 Empresa: ${empresa}\n`;
-  texto += `🍱 Viandas por día: ${cant}\n`;
-  texto += `📅 Frecuencia: ${frec}`;
-  if(msg) texto += `\n📝 ${msg}`;
-
-  window.open(`https://wa.me/${WA_VIANDAS}?text=${encodeURIComponent(texto)}`, '_blank');
+function openModal(id){document.getElementById('m-'+id).classList.add('open');document.body.classList.add('modal-open')}
+function closeModal(id){document.getElementById('m-'+id).classList.remove('open');document.body.classList.remove('modal-open')}
+function bgClose(e,el){if(e.target===el){el.classList.remove('open');document.body.classList.remove('modal-open')}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-bg.open').forEach(m=>m.classList.remove('open'));document.body.classList.remove('modal-open')}});
+function sendWA(){
+  const n=document.getElementById('f-nombre').value||'-',
+        e=document.getElementById('f-empresa').value||'-',
+        c=document.getElementById('f-cant').value,
+        f=document.getElementById('f-frec').value,
+        com=document.getElementById('f-com').value||'-';
+  const msg=`Hola! Quiero cotizar viandas empresariales.%0A%0A👤 Nombre: ${encodeURIComponent(n)}%0A🏢 Empresa: ${encodeURIComponent(e)}%0A🍱 Cantidad: ${encodeURIComponent(c)}%0A📅 Frecuencia: ${encodeURIComponent(f)}%0A💬 Comentarios: ${encodeURIComponent(com)}`;
+  window.open('https://wa.me/5491122721108?text='+msg,'_blank');
 }
-
-// ===== Año en footer =====
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// ===== Reveal on scroll =====
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
