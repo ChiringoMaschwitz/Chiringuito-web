@@ -185,6 +185,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(35,43,46,.72)
 .map-frame{border-radius:20px;overflow:hidden;border:1px solid rgba(220,215,201,.1);box-shadow:var(--shadow-2);filter:grayscale(.35) contrast(1.05)}
 .map-frame iframe{width:100%;height:380px;border:0;display:block}
 footer{background:var(--inkwell-deep);border-top:1px solid rgba(220,215,201,.08);padding:60px 0 30px}
+.logo-strip{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:48px}
+.logo-strip a{background:linear-gradient(160deg,var(--lunar),var(--inkwell));border:1px solid rgba(220,215,201,.1);border-radius:16px;padding:14px 18px;transition:.25s;box-shadow:var(--shadow-1)}
+.logo-strip a:hover{transform:translateY(-4px);border-color:rgba(255,138,61,.4);box-shadow:var(--shadow-2),0 0 20px rgba(255,138,61,.12)}
+.logo-strip img{height:54px;width:auto;display:block;border-radius:8px}
 .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px}
 .f-grid h5{font-family:'Fraunces',serif;font-size:17px;margin-bottom:14px;color:var(--aulait)}
 .f-grid p,.f-grid a{font-size:13.5px;color:var(--aulait-dim);display:block;margin-bottom:8px}
@@ -678,6 +682,13 @@ body.modal-open{overflow:hidden}
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="wrap">
+    <div class="logo-strip">
+      <a onclick="openModal('chiringuito')" style="cursor:pointer"><img src="https://drive.google.com/thumbnail?id=1Q1ncH09ZDaiwkCRizY6pV9EMHhk7oH69&sz=w300" alt="El Chiringuito" loading="lazy"></a>
+      <a onclick="openModal('lounge')" style="cursor:pointer"><img src="https://drive.google.com/thumbnail?id=1pbLumuk8-DGDDi--hklD0gPkPpLaAjUy&sz=w300" alt="Chiringuito Lounge" loading="lazy"></a>
+      <a onclick="openModal('focacceria')" style="cursor:pointer"><img src="https://drive.google.com/thumbnail?id=1aRPKAqI8-dMjsNQBG2Mu8pimwryoyc-d&sz=w300" alt="La Focacceria" loading="lazy"></a>
+      <a onclick="openModal('unapizza')" style="cursor:pointer"><img src="https://drive.google.com/thumbnail?id=1Utv_JCtr1k6WvBbTmII4pmQnwCit4n6c&sz=w300" alt="Una Pizza" loading="lazy"></a>
+      <a onclick="openModal('bakery')" style="cursor:pointer"><img src="https://drive.google.com/thumbnail?id=1H_bX1GjPmWcOgMuixrKc0V0SGH4XXeM2&sz=w300" alt="ChirinBakery" loading="lazy"></a>
+    </div>
     <div class="f-grid">
       <div>
         <h5>Grupo El Chiringuito</h5>
