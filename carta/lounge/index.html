@@ -5,100 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Carta — Chiringuito Lounge</title>
 <meta name="description" content="La carta de Chiringuito Lounge, Paseo Mendoza, Ingeniero Maschwitz.">
-<meta name="theme-color" content="#16130F">
+<meta name="theme-color" content="#171310">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --carbon:#16130F;        /* fondo base, negro carbón cálido */
-    --carbon-2:#211D17;      /* paneles */
-    --hueso:#F2EBDD;         /* texto principal */
-    --hueso-dim:#B8AE9C;     /* texto secundario */
-    --ambar:#D99C3B;         /* acento primario */
-    --botella:#3E5C48;       /* acento secundario */
-    --linea:rgba(242,235,221,.12);
+    --carbon:#171310;          /* fondo: madera oscura de noche */
+    --carbon-2:#221C16;        /* paneles */
+    --hueso:#F4EEE3;           /* texto principal */
+    --hueso-dim:#B9AF9E;       /* texto secundario */
+    --ambar:#E0A33E;           /* precios y acentos calientes */
+    --botella:#2F4A3A;         /* verde botella (cintas, activos) */
+    --botella-claro:#456A54;
+    --linea:rgba(244,238,227,.12);
+    --display:'Oswald',sans-serif;
+    --texto:'Jost',sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:smooth}
   body{
-    background:var(--carbon);
+    background:
+      radial-gradient(130% 70% at 50% -10%, rgba(224,163,62,.10), transparent 55%),
+      var(--carbon);
     color:var(--hueso);
-    font-family:'Jost',sans-serif;
-    font-weight:300;
-    letter-spacing:.01em;
+    font-family:var(--texto);font-weight:300;letter-spacing:.01em;
     min-height:100dvh;
   }
 
-  /* ---------- HEADER ---------- */
+  /* ---------- HEADER (estética placa) ---------- */
   header{
-    padding:calc(env(safe-area-inset-top) + 28px) 20px 18px;
-    text-align:center;
-    background:
-      radial-gradient(120% 90% at 50% -20%, rgba(217,156,59,.16), transparent 60%),
-      var(--carbon);
+    padding:calc(env(safe-area-inset-top) + 30px) 20px 24px;
+    text-align:center;position:relative;overflow:hidden;
     border-bottom:1px solid var(--linea);
   }
-  .marca{
-    font-size:11px;letter-spacing:.42em;text-transform:uppercase;
-    color:var(--ambar);font-weight:500;
+  .cinta{
+    display:inline-block;transform:rotate(-3deg);
+    background:linear-gradient(160deg, var(--botella-claro), var(--botella));
+    color:var(--hueso);
+    font-family:var(--texto);font-weight:500;font-size:11px;
+    letter-spacing:.34em;text-transform:uppercase;
+    padding:7px 18px;border-radius:3px;
+    box-shadow:0 6px 18px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14);
   }
   h1{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;font-weight:600;
-    font-size:clamp(42px,11vw,64px);
-    line-height:1.02;margin-top:6px;
+    font-family:var(--display);font-weight:700;
+    text-transform:uppercase;
+    font-size:clamp(46px,12.5vw,84px);
+    line-height:.98;letter-spacing:.015em;
+    margin-top:16px;
+    text-shadow:0 4px 22px rgba(0,0,0,.55);
   }
-  .sub{margin-top:6px;font-size:12.5px;color:var(--hueso-dim);letter-spacing:.14em;text-transform:uppercase}
+  h1 span{display:block;font-size:.52em;font-weight:600;letter-spacing:.12em;color:var(--ambar)}
+  .sub{
+    margin-top:10px;font-size:12px;color:var(--hueso-dim);
+    letter-spacing:.22em;text-transform:uppercase;font-weight:400;
+  }
 
-  /* ---------- TABS DE SECCIONES ---------- */
+  /* ---------- TABS ---------- */
   nav{
     position:sticky;top:0;z-index:40;
-    background:rgba(22,19,15,.88);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:linear-gradient(rgba(23,19,16,.94), rgba(23,19,16,.82));
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
     border-bottom:1px solid var(--linea);
   }
   .tabs{
-    display:flex;gap:6px;overflow-x:auto;
-    padding:12px 16px;
-    scrollbar-width:none;
+    display:flex;gap:8px;overflow-x:auto;
+    padding:13px 16px;scrollbar-width:none;
   }
   .tabs::-webkit-scrollbar{display:none}
   .tab{
-    flex:0 0 auto;
-    font-family:'Jost',sans-serif;font-weight:400;font-size:13.5px;
+    flex:0 0 auto;cursor:pointer;white-space:nowrap;
+    font-family:var(--display);font-weight:500;font-size:14px;
+    letter-spacing:.08em;text-transform:uppercase;
     color:var(--hueso-dim);
-    padding:8px 14px;border-radius:999px;
-    border:1px solid transparent;
-    background:none;cursor:pointer;white-space:nowrap;
-    transition:color .2s,border-color .2s,background .2s;
+    padding:9px 16px;border-radius:999px;
+    background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+    border:1px solid rgba(244,238,227,.14);
+    box-shadow:0 2px 10px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+    transition:color .2s, background .2s, transform .15s, box-shadow .2s;
   }
+  .tab:active{transform:scale(.96)}
   .tab.activa{
-    color:var(--carbon);
-    background:var(--ambar);
-    font-weight:500;
+    color:var(--hueso);
+    background:linear-gradient(160deg, var(--botella-claro), var(--botella));
+    border-color:rgba(244,238,227,.22);
+    box-shadow:0 6px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.16);
   }
 
-  /* ---------- SECCIONES + GRILLA IG ---------- */
+  /* ---------- SECCIONES + GRILLA ---------- */
   main{padding-bottom:90px}
-  section{padding-top:8px}
+  section{padding-top:6px}
   .titulo-seccion{
-    display:flex;align-items:baseline;gap:12px;
-    padding:26px 20px 14px;
+    display:flex;align-items:center;gap:14px;
+    padding:30px 20px 14px;
   }
   .titulo-seccion h2{
-    font-family:'Cormorant Garamond',serif;font-weight:600;
-    font-size:30px;line-height:1;
+    font-family:var(--display);font-weight:600;text-transform:uppercase;
+    font-size:27px;line-height:1;letter-spacing:.04em;
   }
   .titulo-seccion .cuenta{
-    font-size:11px;color:var(--hueso-dim);letter-spacing:.18em;
+    font-family:var(--texto);font-size:10.5px;font-weight:500;
+    color:var(--hueso-dim);letter-spacing:.2em;
+    border:1px solid var(--linea);border-radius:999px;padding:4px 10px;
   }
-  .titulo-seccion .filete{
-    flex:1;height:1px;background:var(--linea);
-  }
-  .grilla{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
-  }
+  .titulo-seccion .filete{flex:1;height:1px;background:var(--linea)}
+  .grilla{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
   @media(min-width:720px){
     .grilla{grid-template-columns:repeat(4,1fr);gap:3px}
     main{max-width:960px;margin:0 auto}
@@ -111,35 +123,43 @@
     width:100%;height:100%;object-fit:cover;display:block;
     transition:transform .35s ease-out;
   }
-  .tile:active img{transform:scale(1.04)}
-  .tile .velo{
-    position:absolute;inset:auto 0 0 0;height:62%;
-    background:linear-gradient(to top,rgba(10,8,5,.85),transparent);
+  .tile:active img{transform:scale(1.05)}
+
+  /* chip flotante estilo LaCarta: no tapa el plato */
+  .tile .chip{
+    position:absolute;left:6px;bottom:6px;max-width:calc(100% - 12px);
+    display:flex;flex-direction:column;align-items:flex-start;gap:2px;
     pointer-events:none;
   }
-  .tile .info{
-    position:absolute;left:8px;right:8px;bottom:7px;text-align:left;
+  .tile .chip .nombre{
+    font-family:var(--texto);font-weight:500;font-size:11px;line-height:1.2;
+    color:var(--hueso);
+    background:rgba(15,12,9,.62);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:7px;padding:4px 8px;
+    max-width:100%;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
-  .tile .nombre{
-    font-size:11.5px;font-weight:400;color:var(--hueso);
-    line-height:1.25;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  }
-  .tile .precio{
-    font-size:11.5px;font-weight:600;color:var(--ambar);margin-top:2px;
+  .tile .chip .precio{
+    font-family:var(--display);font-weight:600;font-size:11.5px;letter-spacing:.05em;
+    color:var(--ambar);
+    background:rgba(15,12,9,.62);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(224,163,62,.22);
+    border-radius:7px;padding:3px 8px;
   }
   .tile.sin-foto .fondo{
     width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:44px;
-    color:rgba(242,235,221,.18);
-    background:radial-gradient(80% 80% at 50% 30%, #2A251D, var(--carbon-2));
+    font-family:var(--display);font-weight:700;font-size:46px;
+    color:rgba(244,238,227,.16);
+    background:radial-gradient(80% 80% at 50% 30%, #2B241C, var(--carbon-2));
   }
 
-  /* ---------- VISOR VERTICAL (gesto TikTok) ---------- */
+  /* ---------- VISOR VERTICAL ---------- */
   #visor{
     position:fixed;inset:0;z-index:100;background:var(--carbon);
-    overflow-y:auto;scroll-snap-type:y mandatory;
-    overscroll-behavior:contain;
+    overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;
     opacity:0;pointer-events:none;transition:opacity .22s ease;
   }
   #visor.abierto{opacity:1;pointer-events:auto}
@@ -147,39 +167,42 @@
     height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
     display:flex;flex-direction:column;position:relative;
   }
-  .slide .media{
-    flex:1 1 0;min-height:0;position:relative;background:var(--carbon-2);
-  }
+  .slide .media{flex:1 1 0;min-height:0;position:relative;background:var(--carbon-2)}
   .slide .media img,.slide .media video{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   }
   .slide .media::after{
-    content:"";position:absolute;inset:auto 0 0 0;height:34%;
+    content:"";position:absolute;inset:auto 0 0 0;height:36%;
     background:linear-gradient(to top,var(--carbon),transparent);
   }
   .slide .media .sin{
     position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:120px;
-    color:rgba(242,235,221,.12);
+    font-family:var(--display);font-weight:700;font-size:130px;color:rgba(244,238,227,.10);
   }
   .slide .ficha{
     flex:0 0 auto;
-    padding:6px 22px calc(env(safe-area-inset-bottom) + 30px);
+    padding:4px 22px calc(env(safe-area-inset-bottom) + 30px);
   }
   .slide .etiqueta{
-    font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;
-    color:var(--ambar);font-weight:500;
+    display:inline-block;transform:rotate(-2deg);
+    background:linear-gradient(160deg, var(--botella-claro), var(--botella));
+    color:var(--hueso);font-family:var(--texto);font-weight:500;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    padding:5px 12px;border-radius:3px;
+    box-shadow:0 4px 14px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.12);
   }
   .slide h3{
-    font-family:'Cormorant Garamond',serif;font-weight:600;
-    font-size:clamp(30px,8vw,42px);line-height:1.05;margin-top:6px;
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(30px,8.5vw,46px);line-height:1.02;letter-spacing:.015em;
+    margin-top:12px;text-shadow:0 3px 16px rgba(0,0,0,.5);
   }
   .slide .desc{
-    margin-top:10px;font-size:15px;line-height:1.5;color:var(--hueso-dim);
-    max-width:520px;
+    margin-top:10px;font-size:15px;line-height:1.55;color:var(--hueso-dim);max-width:520px;
   }
   .slide .valor{
-    margin-top:14px;font-size:24px;font-weight:500;color:var(--ambar);
+    margin-top:14px;
+    font-family:var(--display);font-weight:600;font-size:27px;letter-spacing:.04em;
+    color:var(--ambar);
   }
   .slide .pista{
     position:absolute;right:18px;bottom:calc(env(safe-area-inset-bottom) + 22px);
@@ -190,10 +213,11 @@
   @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   #cerrar{
     position:fixed;top:calc(env(safe-area-inset-top) + 14px);right:14px;z-index:110;
-    width:42px;height:42px;border-radius:50%;
-    background:rgba(22,19,15,.6);backdrop-filter:blur(8px);
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(23,19,16,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     border:1px solid var(--linea);color:var(--hueso);
     font-size:20px;line-height:1;cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
     display:none;align-items:center;justify-content:center;
   }
   #visor.abierto ~ #cerrar{display:flex}
@@ -209,21 +233,26 @@
   }
   @keyframes brasa{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
   #cargando p,#error p{color:var(--hueso-dim);font-size:14px;letter-spacing:.1em}
-  #error button{
-    font-family:'Jost',sans-serif;font-size:14px;font-weight:500;
-    color:var(--carbon);background:var(--ambar);
-    border:none;border-radius:999px;padding:12px 28px;cursor:pointer;
-  }
   #error{display:none}
+  #error button{
+    font-family:var(--display);font-weight:600;font-size:14px;
+    letter-spacing:.1em;text-transform:uppercase;
+    color:var(--hueso);
+    background:linear-gradient(160deg, var(--botella-claro), var(--botella));
+    border:1px solid rgba(244,238,227,.2);
+    border-radius:999px;padding:13px 30px;cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.14);
+  }
 
   footer{
-    padding:34px 20px calc(env(safe-area-inset-bottom) + 40px);
+    padding:36px 20px calc(env(safe-area-inset-bottom) + 42px);
     text-align:center;border-top:1px solid var(--linea);
   }
   footer .f-marca{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:20px;
+    font-family:var(--display);font-weight:600;text-transform:uppercase;
+    font-size:19px;letter-spacing:.06em;
   }
-  footer p{margin-top:6px;font-size:12px;color:var(--hueso-dim);letter-spacing:.08em}
+  footer p{margin-top:6px;font-size:12px;color:var(--hueso-dim);letter-spacing:.1em}
   @media (prefers-reduced-motion: reduce){
     *{animation:none!important;transition:none!important}
     html{scroll-behavior:auto}
@@ -233,8 +262,8 @@
 <body>
 
 <header>
-  <div class="marca">Grupo El Chiringuito</div>
-  <h1>Chiringuito Lounge</h1>
+  <div class="cinta">Grupo El Chiringuito</div>
+  <h1>Chiringuito<span>Lounge</span></h1>
   <div class="sub">La carta · Paseo Mendoza, Maschwitz</div>
 </header>
 
@@ -264,7 +293,7 @@ var FOTOS_BASE = '/carta/lounge/fotos/';
 /* =========================================== */
 
 var DATA = null;
-var PLANOS = [];   // lista plana de productos para el visor
+var PLANOS = [];
 var observadorTabs = null;
 
 function fmtPrecio(p){
@@ -299,17 +328,15 @@ function render(){
   DATA.secciones.forEach(function(sec, si){
     var id = 'sec-' + si;
 
-    // tab
     var b = document.createElement('button');
     b.className = 'tab'; b.textContent = sec.seccion; b.dataset.destino = id;
     b.onclick = function(){
       var el = document.getElementById(id);
-      var y = el.getBoundingClientRect().top + window.scrollY - 58;
+      var y = el.getBoundingClientRect().top + window.scrollY - 60;
       window.scrollTo({top:y, behavior:'smooth'});
     };
     tabs.appendChild(b);
 
-    // seccion
     var s = document.createElement('section');
     s.id = id;
     s.innerHTML =
@@ -337,10 +364,12 @@ function render(){
         t.classList.add('sin-foto');
         media = '<div class="fondo">' + inicial(p.producto) + '</div>';
       }
+      var precio = fmtPrecio(p.precio);
       t.innerHTML = media +
-        '<div class="velo"></div>' +
-        '<div class="info"><div class="nombre">' + esc(p.producto) + '</div>' +
-        '<div class="precio">' + fmtPrecio(p.precio) + '</div></div>';
+        '<div class="chip">' +
+          '<span class="nombre">' + esc(p.producto) + '</span>' +
+          (precio ? '<span class="precio">' + precio + '</span>' : '') +
+        '</div>';
       t.onclick = function(){ abrirVisor(idxGlobal); };
       g.appendChild(t);
     });
@@ -366,7 +395,7 @@ function activarSpyTabs(){
         if (activa) activa.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
       }
     });
-  }, {rootMargin:'-58px 0px -75% 0px', threshold:0});
+  }, {rootMargin:'-60px 0px -75% 0px', threshold:0});
   document.querySelectorAll('main section').forEach(function(s){ observadorTabs.observe(s); });
 }
 
