@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Carta — Chiringuito Lounge</title>
+<meta name="description" content="La carta de Chiringuito Lounge, Paseo Mendoza, Ingeniero Maschwitz.">
+<meta name="theme-color" content="#16130F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#16130F;        /* fondo base, negro carbón cálido */
+    --carbon-2:#211D17;      /* paneles */
+    --hueso:#F2EBDD;         /* texto principal */
+    --hueso-dim:#B8AE9C;     /* texto secundario */
+    --ambar:#D99C3B;         /* acento primario */
+    --botella:#3E5C48;       /* acento secundario */
+    --linea:rgba(242,235,221,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--carbon);
+    color:var(--hueso);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    letter-spacing:.01em;
+    min-height:100dvh;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    padding:calc(env(safe-area-inset-top) + 28px) 20px 18px;
+    text-align:center;
+    background:
+      radial-gradient(120% 90% at 50% -20%, rgba(217,156,59,.16), transparent 60%),
+      var(--carbon);
+    border-bottom:1px solid var(--linea);
+  }
+  .marca{
+    font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--ambar);font-weight:500;
+  }
+  h1{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-weight:600;
+    font-size:clamp(42px,11vw,64px);
+    line-height:1.02;margin-top:6px;
+  }
+  .sub{margin-top:6px;font-size:12.5px;color:var(--hueso-dim);letter-spacing:.14em;text-transform:uppercase}
+
+  /* ---------- TABS DE SECCIONES ---------- */
+  nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(22,19,15,.88);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--linea);
+  }
+  .tabs{
+    display:flex;gap:6px;overflow-x:auto;
+    padding:12px 16px;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto;
+    font-family:'Jost',sans-serif;font-weight:400;font-size:13.5px;
+    color:var(--hueso-dim);
+    padding:8px 14px;border-radius:999px;
+    border:1px solid transparent;
+    background:none;cursor:pointer;white-space:nowrap;
+    transition:color .2s,border-color .2s,background .2s;
+  }
+  .tab.activa{
+    color:var(--carbon);
+    background:var(--ambar);
+    font-weight:500;
+  }
+
+  /* ---------- SECCIONES + GRILLA IG ---------- */
+  main{padding-bottom:90px}
+  section{padding-top:8px}
+  .titulo-seccion{
+    display:flex;align-items:baseline;gap:12px;
+    padding:26px 20px 14px;
+  }
+  .titulo-seccion h2{
+    font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:30px;line-height:1;
+  }
+  .titulo-seccion .cuenta{
+    font-size:11px;color:var(--hueso-dim);letter-spacing:.18em;
+  }
+  .titulo-seccion .filete{
+    flex:1;height:1px;background:var(--linea);
+  }
+  .grilla{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  }
+  @media(min-width:720px){
+    .grilla{grid-template-columns:repeat(4,1fr);gap:3px}
+    main{max-width:960px;margin:0 auto}
+  }
+  .tile{
+    position:relative;aspect-ratio:1;overflow:hidden;
+    background:var(--carbon-2);cursor:pointer;border:none;padding:0;
+  }
+  .tile img,.tile video{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .35s ease-out;
+  }
+  .tile:active img{transform:scale(1.04)}
+  .tile .velo{
+    position:absolute;inset:auto 0 0 0;height:62%;
+    background:linear-gradient(to top,rgba(10,8,5,.85),transparent);
+    pointer-events:none;
+  }
+  .tile .info{
+    position:absolute;left:8px;right:8px;bottom:7px;text-align:left;
+  }
+  .tile .nombre{
+    font-size:11.5px;font-weight:400;color:var(--hueso);
+    line-height:1.25;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .tile .precio{
+    font-size:11.5px;font-weight:600;color:var(--ambar);margin-top:2px;
+  }
+  .tile.sin-foto .fondo{
+    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:44px;
+    color:rgba(242,235,221,.18);
+    background:radial-gradient(80% 80% at 50% 30%, #2A251D, var(--carbon-2));
+  }
+
+  /* ---------- VISOR VERTICAL (gesto TikTok) ---------- */
+  #visor{
+    position:fixed;inset:0;z-index:100;background:var(--carbon);
+    overflow-y:auto;scroll-snap-type:y mandatory;
+    overscroll-behavior:contain;
+    opacity:0;pointer-events:none;transition:opacity .22s ease;
+  }
+  #visor.abierto{opacity:1;pointer-events:auto}
+  .slide{
+    height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;flex-direction:column;position:relative;
+  }
+  .slide .media{
+    flex:1 1 0;min-height:0;position:relative;background:var(--carbon-2);
+  }
+  .slide .media img,.slide .media video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
+  .slide .media::after{
+    content:"";position:absolute;inset:auto 0 0 0;height:34%;
+    background:linear-gradient(to top,var(--carbon),transparent);
+  }
+  .slide .media .sin{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:120px;
+    color:rgba(242,235,221,.12);
+  }
+  .slide .ficha{
+    flex:0 0 auto;
+    padding:6px 22px calc(env(safe-area-inset-bottom) + 30px);
+  }
+  .slide .etiqueta{
+    font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--ambar);font-weight:500;
+  }
+  .slide h3{
+    font-family:'Cormorant Garamond',serif;font-weight:600;
+    font-size:clamp(30px,8vw,42px);line-height:1.05;margin-top:6px;
+  }
+  .slide .desc{
+    margin-top:10px;font-size:15px;line-height:1.5;color:var(--hueso-dim);
+    max-width:520px;
+  }
+  .slide .valor{
+    margin-top:14px;font-size:24px;font-weight:500;color:var(--ambar);
+  }
+  .slide .pista{
+    position:absolute;right:18px;bottom:calc(env(safe-area-inset-bottom) + 22px);
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    color:var(--hueso-dim);font-size:10px;letter-spacing:.2em;
+    animation:flotar 2.2s ease-in-out infinite;
+  }
+  @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  #cerrar{
+    position:fixed;top:calc(env(safe-area-inset-top) + 14px);right:14px;z-index:110;
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(22,19,15,.6);backdrop-filter:blur(8px);
+    border:1px solid var(--linea);color:var(--hueso);
+    font-size:20px;line-height:1;cursor:pointer;
+    display:none;align-items:center;justify-content:center;
+  }
+  #visor.abierto ~ #cerrar{display:flex}
+
+  /* ---------- ESTADOS ---------- */
+  #cargando,#error{
+    min-height:55dvh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:16px;padding:30px;text-align:center;
+  }
+  .brasa{
+    width:10px;height:10px;border-radius:50%;background:var(--ambar);
+    animation:brasa 1.1s ease-in-out infinite;
+  }
+  @keyframes brasa{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+  #cargando p,#error p{color:var(--hueso-dim);font-size:14px;letter-spacing:.1em}
+  #error button{
+    font-family:'Jost',sans-serif;font-size:14px;font-weight:500;
+    color:var(--carbon);background:var(--ambar);
+    border:none;border-radius:999px;padding:12px 28px;cursor:pointer;
+  }
+  #error{display:none}
+
+  footer{
+    padding:34px 20px calc(env(safe-area-inset-bottom) + 40px);
+    text-align:center;border-top:1px solid var(--linea);
+  }
+  footer .f-marca{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:20px;
+  }
+  footer p{margin-top:6px;font-size:12px;color:var(--hueso-dim);letter-spacing:.08em}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="marca">Grupo El Chiringuito</div>
+  <h1>Chiringuito Lounge</h1>
+  <div class="sub">La carta · Paseo Mendoza, Maschwitz</div>
+</header>
+
+<nav id="nav" hidden><div class="tabs" id="tabs"></div></nav>
+
+<div id="cargando"><div class="brasa"></div><p>Encendiendo la carta…</p></div>
+
+<div id="error">
+  <p>No pudimos cargar la carta.<br>Fijate la señal y probá de nuevo.</p>
+  <button onclick="cargar()">Reintentar</button>
+</div>
+
+<main id="carta"></main>
+
+<footer hidden id="pie">
+  <div class="f-marca">Chiringuito Lounge</div>
+  <p>Paseo Mendoza · Ingeniero Maschwitz</p>
+</footer>
+
+<div id="visor" aria-modal="true" role="dialog"></div>
+<button id="cerrar" aria-label="Cerrar">✕</button>
+
+<script>
+/* ================= CONFIG ================= */
+var API_URL = 'https://script.google.com/macros/s/AKfycbzOW8QgMiXCM8auujV9DFwGhgvB-yTPk4ukog-SOc4GZTgtfvwraSMmZhMR1fQTJPbX/exec';
+var FOTOS_BASE = '/carta/lounge/fotos/';
+/* =========================================== */
+
+var DATA = null;
+var PLANOS = [];   // lista plana de productos para el visor
+var observadorTabs = null;
+
+function fmtPrecio(p){
+  if (p === null || isNaN(p)) return '';
+  return '$' + Number(p).toLocaleString('es-AR');
+}
+function srcFoto(nombre){
+  if(!nombre) return null;
+  return FOTOS_BASE + encodeURIComponent(nombre);
+}
+function esVideo(prod){
+  return prod.tipo === 'video' || /\.(mp4|webm|mov)$/i.test(prod.foto || '');
+}
+
+function cargar(){
+  document.getElementById('error').style.display = 'none';
+  document.getElementById('cargando').style.display = 'flex';
+  fetch(API_URL)
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(json){ DATA = json; render(); })
+    .catch(function(){
+      document.getElementById('cargando').style.display = 'none';
+      document.getElementById('error').style.display = 'flex';
+    });
+}
+
+function render(){
+  var main = document.getElementById('carta');
+  var tabs = document.getElementById('tabs');
+  main.innerHTML = ''; tabs.innerHTML = ''; PLANOS = [];
+
+  DATA.secciones.forEach(function(sec, si){
+    var id = 'sec-' + si;
+
+    // tab
+    var b = document.createElement('button');
+    b.className = 'tab'; b.textContent = sec.seccion; b.dataset.destino = id;
+    b.onclick = function(){
+      var el = document.getElementById(id);
+      var y = el.getBoundingClientRect().top + window.scrollY - 58;
+      window.scrollTo({top:y, behavior:'smooth'});
+    };
+    tabs.appendChild(b);
+
+    // seccion
+    var s = document.createElement('section');
+    s.id = id;
+    s.innerHTML =
+      '<div class="titulo-seccion"><h2>' + esc(sec.seccion) + '</h2>' +
+      '<div class="filete"></div>' +
+      '<span class="cuenta">' + sec.productos.length + '</span></div>';
+
+    var g = document.createElement('div');
+    g.className = 'grilla';
+
+    sec.productos.forEach(function(p){
+      var idxGlobal = PLANOS.length;
+      PLANOS.push(p);
+
+      var t = document.createElement('button');
+      t.className = 'tile';
+      var media;
+      if (p.foto){
+        if (esVideo(p)){
+          media = '<video src="' + srcFoto(p.foto) + '" muted playsinline preload="metadata"></video>';
+        } else {
+          media = '<img loading="lazy" decoding="async" src="' + srcFoto(p.foto) + '" alt="' + esc(p.producto) + '" onerror="this.closest(\'.tile\').classList.add(\'sin-foto\');this.outerHTML=\'<div class=fondo>' + inicial(p.producto) + '</div>\'">';
+        }
+      } else {
+        t.classList.add('sin-foto');
+        media = '<div class="fondo">' + inicial(p.producto) + '</div>';
+      }
+      t.innerHTML = media +
+        '<div class="velo"></div>' +
+        '<div class="info"><div class="nombre">' + esc(p.producto) + '</div>' +
+        '<div class="precio">' + fmtPrecio(p.precio) + '</div></div>';
+      t.onclick = function(){ abrirVisor(idxGlobal); };
+      g.appendChild(t);
+    });
+
+    s.appendChild(g);
+    main.appendChild(s);
+  });
+
+  document.getElementById('cargando').style.display = 'none';
+  document.getElementById('nav').hidden = false;
+  document.getElementById('pie').hidden = false;
+  activarSpyTabs();
+}
+
+function activarSpyTabs(){
+  if (observadorTabs) observadorTabs.disconnect();
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  observadorTabs = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if (e.isIntersecting){
+        tabs.forEach(function(t){ t.classList.toggle('activa', t.dataset.destino === e.target.id); });
+        var activa = document.querySelector('.tab.activa');
+        if (activa) activa.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+      }
+    });
+  }, {rootMargin:'-58px 0px -75% 0px', threshold:0});
+  document.querySelectorAll('main section').forEach(function(s){ observadorTabs.observe(s); });
+}
+
+/* ---------- VISOR ---------- */
+function abrirVisor(idx){
+  var v = document.getElementById('visor');
+  v.innerHTML = '';
+  PLANOS.forEach(function(p, i){
+    var d = document.createElement('div');
+    d.className = 'slide';
+    var media;
+    if (p.foto){
+      if (esVideo(p)){
+        media = '<video src="' + srcFoto(p.foto) + '" muted loop playsinline autoplay preload="none"></video>';
+      } else {
+        media = '<img loading="lazy" decoding="async" src="' + srcFoto(p.foto) + '" alt="">';
+      }
+    } else {
+      media = '<div class="sin">' + inicial(p.producto) + '</div>';
+    }
+    d.innerHTML =
+      '<div class="media">' + media + '</div>' +
+      '<div class="ficha">' +
+        '<div class="etiqueta">' + esc(p.seccion) + '</div>' +
+        '<h3>' + esc(p.producto) + '</h3>' +
+        (p.descripcion ? '<div class="desc">' + esc(p.descripcion) + '</div>' : '') +
+        '<div class="valor">' + fmtPrecio(p.precio) + '</div>' +
+      '</div>' +
+      (i < PLANOS.length - 1 ? '<div class="pista">▲<span>deslizá</span></div>' : '');
+    v.appendChild(d);
+  });
+  v.classList.add('abierto');
+  document.body.style.overflow = 'hidden';
+  v.children[idx].scrollIntoView();
+  history.pushState({visor:true}, '');
+}
+function cerrarVisor(desdePop){
+  var v = document.getElementById('visor');
+  if (!v.classList.contains('abierto')) return;
+  v.classList.remove('abierto');
+  document.body.style.overflow = '';
+  setTimeout(function(){ v.innerHTML = ''; }, 250);
+  if (!desdePop && history.state && history.state.visor) history.back();
+}
+document.getElementById('cerrar').onclick = function(){ cerrarVisor(false); };
+window.addEventListener('popstate', function(){ cerrarVisor(true); });
+
+/* ---------- utiles ---------- */
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function inicial(s){ return esc((s || '?').trim().charAt(0).toUpperCase()); }
+
+cargar();
+</script>
+</body>
+</html>
