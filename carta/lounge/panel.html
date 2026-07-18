@@ -84,6 +84,10 @@
     letter-spacing:.08em;text-transform:uppercase;color:var(--hueso);
     background:linear-gradient(160deg,var(--rojo-claro),var(--rojo));border:none;border-radius:999px;padding:14px;
   }
+  .btn-eliminar{
+    width:100%;margin-top:8px;cursor:pointer;font-family:'Jost',sans-serif;font-weight:500;font-size:13px;
+    color:#E0857D;background:rgba(224,133,125,.08);border:1px solid rgba(224,133,125,.3);border-radius:999px;padding:11px;
+  }
   .btn-cancelar{width:100%;margin-top:8px;cursor:pointer;background:none;border:none;color:var(--hueso-dim);font-size:13px;padding:8px}
   .aviso-foto{font-size:11px;color:var(--hueso-dim);margin-top:6px;line-height:1.4}
   .estado-foto{font-size:12px;margin-top:8px;display:none}
@@ -231,9 +235,36 @@ function abrirEditar(id){
     '<div class="campo"><label>Descripción</label><textarea id="e-desc">'+esc(p.descripcion||'')+'</textarea></div>'+
     '<div class="campo"><label>Precio</label><input id="e-precio" type="number" value="'+(p.precio!=null?p.precio:'')+'"></div>'+
     '<button class="btn-guardar" onclick="guardarEdicion('+id+')">Guardar cambios</button>'+
+    '<button class="btn-eliminar" id="btn-elim-'+id+'" onclick="confirmarEliminar('+id+')">Eliminar producto</button>'+
     '<button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>';
   document.getElementById('modal').classList.add('abierto');
 }
+
+function confirmarEliminar(id){
+  var btn = document.getElementById('btn-elim-'+id);
+  if (btn.dataset.confirmar !== '1'){
+    btn.dataset.confirmar = '1';
+    btn.textContent = '¿Seguro? Tocá de nuevo para eliminar';
+    setTimeout(function(){
+      if (btn && btn.dataset.confirmar === '1'){
+        btn.dataset.confirmar = '0';
+        btn.textContent = 'Eliminar producto';
+      }
+    }, 3500);
+    return;
+  }
+  btn.textContent = 'Eliminando...'; btn.disabled = true;
+  llamar('admin_eliminar', {id:id}).then(function(res){
+    if (res.ok){
+      PRODUCTOS = PRODUCTOS.filter(function(p){ return p.id !== id; });
+      cerrarModal(); render();
+    } else {
+      alert('No se pudo eliminar: ' + (res.error||''));
+      btn.textContent = 'Eliminar producto'; btn.disabled = false; btn.dataset.confirmar = '0';
+    }
+  });
+}
+
 function guardarEdicion(id){
   var p = PRODUCTOS.find(function(x){ return x.id===id; });
   var nombre = document.getElementById('e-nombre').value.trim();
