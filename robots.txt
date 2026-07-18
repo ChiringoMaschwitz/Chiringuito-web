@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://grupochiringuito.com.ar/sitemap.xml
