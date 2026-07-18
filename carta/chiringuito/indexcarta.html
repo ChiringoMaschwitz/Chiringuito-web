@@ -174,6 +174,37 @@
     background:radial-gradient(80% 80% at 50% 30%, #2B241C, var(--carbon-2));
   }
 
+  /* ---------- ADICIONALES / OPCIONES (sin foto) ---------- */
+  .adicionales{
+    margin:14px 16px 4px;
+    padding:15px 16px;
+    border:1px solid var(--linea-osc);
+    border-radius:14px;
+    background:rgba(255,255,255,.025);
+  }
+  .adicionales .ad-titulo{
+    font-family:var(--texto);font-weight:600;font-size:10px;
+    letter-spacing:.3em;text-transform:uppercase;
+    color:var(--ambar-claro);
+    margin-bottom:11px;
+  }
+  .adicionales .ad-chips{
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .adicionales .ad-chip{
+    font-family:var(--texto);font-weight:400;font-size:13px;
+    color:var(--hueso);
+    border:1px solid rgba(244,238,227,.22);
+    border-radius:999px;padding:7px 14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  }
+  .adicionales .ad-chip .ad-precio{
+    color:var(--ambar-claro);font-weight:600;margin-left:4px;
+  }
+  @media(min-width:720px){
+    .adicionales{margin-left:0;margin-right:0}
+  }
+
   /* ---------- VISOR VERTICAL ---------- */
   #visor{
     position:fixed;inset:0;z-index:100;background:var(--carbon);
@@ -330,6 +361,10 @@ function srcFoto(nombre){
 function esVideo(prod){
   return prod.tipo === 'video' || /\.(mp4|webm|mov)$/i.test(prod.foto || '');
 }
+function esAdicional(prod){
+  var t = String(prod.tipo || '').trim().toLowerCase();
+  return t === 'adicional' || t === 'opcion' || t === 'opción';
+}
 
 function cargar(){
   document.getElementById('error').style.display = 'none';
@@ -351,6 +386,9 @@ function render(){
   DATA.secciones.forEach(function(sec, si){
     var id = 'sec-' + si;
 
+    var platos = sec.productos.filter(function(p){ return !esAdicional(p); });
+    var adicionales = sec.productos.filter(esAdicional);
+
     var b = document.createElement('button');
     b.className = 'tab'; b.textContent = sec.seccion; b.dataset.destino = id;
     b.onclick = function(){
@@ -365,12 +403,12 @@ function render(){
     s.innerHTML =
       '<div class="titulo-seccion"><h2>' + esc(sec.seccion) + '</h2>' +
       '<div class="filete"></div>' +
-      '<span class="cuenta">' + sec.productos.length + '</span></div>';
+      '<span class="cuenta">' + platos.length + '</span></div>';
 
     var g = document.createElement('div');
     g.className = 'grilla';
 
-    sec.productos.forEach(function(p){
+    platos.forEach(function(p){
       var idxGlobal = PLANOS.length;
       PLANOS.push(p);
 
@@ -398,6 +436,22 @@ function render(){
     });
 
     s.appendChild(g);
+
+    if (adicionales.length){
+      var conPrecio = adicionales.some(function(p){ return p.precio !== null && !isNaN(p.precio) && Number(p.precio) > 1; });
+      var titulo = conPrecio ? 'Adicionales' : 'Opciones a elección';
+      var chips = adicionales.map(function(p){
+        var pr = (p.precio !== null && !isNaN(p.precio) && Number(p.precio) > 1)
+          ? '<span class="ad-precio">+' + fmtPrecio(p.precio) + '</span>' : '';
+        return '<span class="ad-chip">' + esc(p.producto) + pr + '</span>';
+      }).join('');
+      var bloque = document.createElement('div');
+      bloque.className = 'adicionales';
+      bloque.innerHTML = '<div class="ad-titulo">' + titulo + '</div>' +
+        '<div class="ad-chips">' + chips + '</div>';
+      s.appendChild(bloque);
+    }
+
     main.appendChild(s);
   });
 
