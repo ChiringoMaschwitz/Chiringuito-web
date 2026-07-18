@@ -138,6 +138,9 @@
   }
   #btn-comparar svg{width:16px;height:16px}
   body.modo-comparar #btn-comparar{background:linear-gradient(160deg,#3a332a,#26211a);color:var(--hueso-dim)}
+  #btn-comparar .icono-x{display:none;width:16px;height:16px}
+  body.modo-comparar #btn-comparar .icono-vs{display:none}
+  body.modo-comparar #btn-comparar .icono-x{display:block}
   #contador-sel{
     display:none;align-items:center;justify-content:center;
     min-width:18px;height:18px;padding:0 4px;border-radius:999px;
@@ -153,7 +156,14 @@
   .comp-panel{
     width:100%;max-width:960px;max-height:88dvh;overflow-y:auto;
     background:var(--carbon);border-radius:20px 20px 0 0;
-    padding:18px 16px calc(env(safe-area-inset-bottom) + 24px);
+    padding:14px 16px calc(env(safe-area-inset-bottom) + 24px);
+  }
+  .comp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .comp-cerrar-x{
+    width:36px;height:36px;border-radius:50%;cursor:pointer;
+    background:rgba(255,255,255,.06);border:1px solid var(--linea);
+    color:var(--hueso);font-size:18px;line-height:1;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
   }
   .comp-cerrar{width:38px;height:5px;border-radius:99px;background:var(--linea);margin:0 auto 16px}
   .comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -270,16 +280,19 @@
 
 <div id="barra-comparar" hidden>
   <button id="btn-comparar" onclick="toggleModoComparar()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18M16 3v18M3 8h5M16 8h5M3 16h5M16 16h5"/></svg>
+    <svg class="icono-vs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18M16 3v18M3 8h5M16 8h5M3 16h5M16 16h5"/></svg>
+    <svg class="icono-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     <span id="txt-comparar">Comparar</span>
     <span id="contador-sel">0</span>
   </button>
 </div>
 
-<div id="comparador">
+<div id="comparador" onclick="if(event.target.id==='comparador') cerrarComparador()">
   <div class="comp-panel">
-    <div class="comp-cerrar" onclick="cerrarComparador()"></div>
-    <div class="comp-vs">FRENTE A FRENTE</div>
+    <div class="comp-header">
+      <div class="comp-vs" style="margin:0">FRENTE A FRENTE</div>
+      <button class="comp-cerrar-x" onclick="cerrarComparador()" aria-label="Cerrar comparador">✕</button>
+    </div>
     <div class="comp-grid" id="comp-grid"></div>
   </div>
 </div>
@@ -408,7 +421,7 @@ function toggleModoComparar(){
   comparando = !comparando;
   seleccion = [];
   document.body.classList.toggle('modo-comparar', comparando);
-  document.getElementById('txt-comparar').textContent = comparando ? 'Elegí 2 platos' : 'Comparar';
+  document.getElementById('txt-comparar').textContent = comparando ? 'Salir de comparar' : 'Comparar';
   document.getElementById('contador-sel').textContent = '0';
   document.querySelectorAll('.tile.seleccionado').forEach(function(t){ t.classList.remove('seleccionado'); });
 }
