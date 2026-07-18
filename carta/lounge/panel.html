@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Panel — Chiringuito Lounge</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --carbon:#171310;--carbon-2:#221C16;--hueso:#F4EEE3;--hueso-dim:#B9AF9E;
+    --ambar:#E0A33E;--rojo:#A8231D;--rojo-claro:#C63A30;--linea:rgba(244,238,227,.12);
+    --verde:#3B7A4E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:var(--carbon);color:var(--hueso);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;padding-bottom:60px}
+  .caja{max-width:720px;margin:0 auto;padding:24px 16px}
+  .cinta{display:inline-block;transform:rotate(-3deg);background:linear-gradient(160deg,var(--rojo-claro),var(--rojo));font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;padding:6px 14px;border-radius:3px}
+  h1{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;margin:12px 0 20px;letter-spacing:.02em}
+
+  #login{max-width:320px;margin:80px auto;text-align:center;padding:0 16px}
+  #login p{color:var(--hueso-dim);font-size:13px;margin-bottom:16px}
+  #pin{
+    width:100%;text-align:center;font-size:22px;letter-spacing:.3em;
+    background:var(--carbon-2);border:1px solid var(--linea);border-radius:12px;
+    color:var(--hueso);padding:14px;font-family:'Oswald',sans-serif;
+  }
+  #entrar{
+    margin-top:12px;width:100%;cursor:pointer;font-family:'Oswald',sans-serif;font-weight:600;
+    font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--hueso);
+    background:linear-gradient(160deg,var(--rojo-claro),var(--rojo));border:none;border-radius:999px;padding:13px;
+  }
+  #login-error{color:#E0857D;font-size:12px;margin-top:10px;display:none}
+
+  .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--linea)}
+  .tab{
+    flex:0 0 auto;cursor:pointer;font-size:12.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--hueso-dim);padding:8px 14px;border-radius:999px;border:1px solid var(--linea);white-space:nowrap;
+  }
+  .tab.activa{color:var(--hueso);background:linear-gradient(160deg,var(--rojo-claro),var(--rojo));border-color:transparent}
+
+  .btn-agregar{
+    display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    color:#171310;background:var(--ambar);border:none;border-radius:999px;padding:12px;width:100%;margin-bottom:16px;
+  }
+
+  .card{
+    display:flex;align-items:center;gap:10px;background:var(--carbon-2);
+    border:1px solid var(--linea);border-radius:12px;padding:10px;margin-bottom:8px;
+  }
+  .card.inactivo{opacity:.5}
+  .thumb{width:44px;height:44px;border-radius:8px;flex:0 0 auto;background:#2b241c;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb span{font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;color:rgba(244,238,227,.25)}
+  .info{flex:1;min-width:0}
+  .info .nom{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .info .desc{font-size:11px;color:var(--hueso-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+  .precio{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;color:var(--ambar);white-space:nowrap;flex:0 0 auto}
+  .ord{display:flex;flex-direction:column;gap:2px;flex:0 0 auto}
+  .ord button{
+    width:22px;height:18px;border:1px solid var(--linea);background:var(--carbon);color:var(--hueso-dim);
+    border-radius:4px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  }
+  .toggle{width:34px;height:20px;border-radius:999px;position:relative;cursor:pointer;flex:0 0 auto;background:var(--verde)}
+  .toggle.off{background:rgba(244,238,227,.14)}
+  .toggle .bola{width:16px;height:16px;border-radius:50%;background:var(--hueso);position:absolute;top:2px;right:2px;transition:right .15s}
+  .toggle.off .bola{right:16px}
+  .lapiz{width:30px;height:30px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--hueso-dim);font-size:15px}
+
+  #modal{position:fixed;inset:0;z-index:200;background:rgba(10,8,6,.88);display:none;align-items:flex-end;justify-content:center}
+  #modal.abierto{display:flex}
+  .panel-modal{width:100%;max-width:520px;max-height:92dvh;overflow-y:auto;background:var(--carbon);border-radius:20px 20px 0 0;padding:20px 18px calc(env(safe-area-inset-bottom) + 24px)}
+  .barra-modal{width:38px;height:5px;border-radius:99px;background:var(--linea);margin:0 auto 18px}
+  .campo{margin-bottom:14px}
+  .campo label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--hueso-dim);margin-bottom:6px}
+  .campo input, .campo textarea, .campo select{
+    width:100%;background:var(--carbon-2);border:1px solid var(--linea);border-radius:10px;
+    color:var(--hueso);padding:11px 12px;font-family:'Jost',sans-serif;font-size:14px;
+  }
+  .campo textarea{resize:vertical;min-height:60px}
+  .fila2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn-guardar{
+    width:100%;margin-top:6px;cursor:pointer;font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--hueso);
+    background:linear-gradient(160deg,var(--rojo-claro),var(--rojo));border:none;border-radius:999px;padding:14px;
+  }
+  .btn-cancelar{width:100%;margin-top:8px;cursor:pointer;background:none;border:none;color:var(--hueso-dim);font-size:13px;padding:8px}
+  .aviso-foto{font-size:11px;color:var(--hueso-dim);margin-top:6px;line-height:1.4}
+  .estado-foto{font-size:12px;margin-top:8px;display:none}
+  .estado-foto.ok{color:#7DBF8F;display:block}
+  .estado-foto.err{color:#E0857D;display:block}
+  .vacio{color:var(--hueso-dim);font-size:13px;padding:20px 0;text-align:center}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="cinta">Grupo El Chiringuito</div>
+  <h1 style="margin-top:14px">Panel Lounge</h1>
+  <p>Ingresá el PIN de administración</p>
+  <input id="pin" type="password" inputmode="numeric" maxlength="8" placeholder="••••">
+  <button id="entrar" onclick="intentarLogin()">Entrar</button>
+  <div id="login-error">PIN incorrecto. Probá de nuevo.</div>
+</div>
+
+<div class="caja" id="app" hidden>
+  <div class="cinta">Grupo El Chiringuito</div>
+  <h1>Panel — Lounge</h1>
+
+  <button class="btn-agregar" onclick="abrirCrear()">+ Agregar producto</button>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="lista"></div>
+</div>
+
+<div id="modal">
+  <div class="panel-modal">
+    <div class="barra-modal"></div>
+    <div id="modal-contenido"></div>
+  </div>
+</div>
+
+<script>
+var API_URL = 'https://script.google.com/macros/s/AKfycbzOW8QgMiXCM8auujV9DFwGhgvB-yTPk4ukog-SOc4GZTgtfvwraSMmZhMR1fQTJPbX/exec';
+var FOTOS_BASE = '/carta/lounge/fotos/';
+var API_SUBIR_FOTO = '/api/subir-foto';
+
+var PIN = '';
+var PRODUCTOS = [];
+var SECCION_ACTIVA = '';
+
+function llamar(accion, extra){
+  var body = Object.assign({accion:accion, pin:PIN}, extra||{});
+  return fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(body)
+  }).then(function(r){ return r.json(); });
+}
+
+function intentarLogin(){
+  var val = document.getElementById('pin').value.trim();
+  if (!val) return;
+  PIN = val;
+  document.getElementById('login-error').style.display = 'none';
+  llamar('admin_list').then(function(res){
+    if (res.ok){
+      try{ sessionStorage.setItem('panelPin', PIN); }catch(e){}
+      PRODUCTOS = res.data;
+      document.getElementById('login').hidden = true;
+      document.getElementById('app').hidden = false;
+      render();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }).catch(function(){ document.getElementById('login-error').style.display = 'block'; });
+}
+
+(function initAuto(){
+  try {
+    var guardado = sessionStorage.getItem('panelPin');
+    if (guardado){ document.getElementById('pin').value = guardado; intentarLogin(); }
+  } catch(e){}
+})();
+
+function secciones(){
+  var vistas = [];
+  PRODUCTOS.forEach(function(p){ if (vistas.indexOf(p.seccion)===-1) vistas.push(p.seccion); });
+  return vistas;
+}
+
+function render(){
+  var secs = secciones();
+  if (!SECCION_ACTIVA) SECCION_ACTIVA = secs[0] || '';
+  var tabs = document.getElementById('tabs');
+  tabs.innerHTML = secs.map(function(s){
+    return '<div class="tab'+(s===SECCION_ACTIVA?' activa':'')+'" onclick="cambiarSeccion(\''+s.replace(/'/g,"\\'")+'\')">'+esc(s)+'</div>';
+  }).join('');
+
+  var lista = document.getElementById('lista');
+  var items = PRODUCTOS.filter(function(p){ return p.seccion === SECCION_ACTIVA; })
+    .sort(function(a,b){ return a.orden - b.orden; });
+
+  if (!items.length){ lista.innerHTML = '<div class="vacio">No hay productos en esta sección.</div>'; return; }
+
+  lista.innerHTML = items.map(function(p, i){
+    var thumb = p.foto
+      ? '<img src="'+FOTOS_BASE+encodeURIComponent(p.foto)+'" alt="" onerror="this.parentElement.innerHTML=\'<span>'+inicial(p.producto)+'</span>\'">'
+      : '<span>'+inicial(p.producto)+'</span>';
+    return '<div class="card'+(p.activo?'':' inactivo')+'">'+
+      '<div class="ord">'+
+        '<button onclick="mover('+p.id+',-1)" '+(i===0?'disabled style="opacity:.3"':'')+'>▲</button>'+
+        '<button onclick="mover('+p.id+',1)" '+(i===items.length-1?'disabled style="opacity:.3"':'')+'>▼</button>'+
+      '</div>'+
+      '<div class="thumb">'+thumb+'</div>'+
+      '<div class="info"><div class="nom">'+esc(p.producto)+'</div><div class="desc">'+esc(p.descripcion||'')+'</div></div>'+
+      '<div class="precio">'+(p.precio!=null?'$'+Number(p.precio).toLocaleString('es-AR'):'—')+'</div>'+
+      '<div class="toggle'+(p.activo?'':' off')+'" onclick="toggleActivo('+p.id+')"><div class="bola"></div></div>'+
+      '<div class="lapiz" onclick="abrirEditar('+p.id+')">✎</div>'+
+    '</div>';
+  }).join('');
+}
+
+function cambiarSeccion(s){ SECCION_ACTIVA = s; render(); }
+
+function toggleActivo(id){
+  var p = PRODUCTOS.find(function(x){ return x.id===id; });
+  p.activo = !p.activo;
+  render();
+  llamar('admin_toggle', {id:id}).then(function(res){
+    if (!res.ok){ p.activo = !p.activo; render(); }
+  });
+}
+
+function mover(id, dir){
+  var items = PRODUCTOS.filter(function(p){ return p.seccion===SECCION_ACTIVA; }).sort(function(a,b){return a.orden-b.orden;});
+  var idx = items.findIndex(function(p){ return p.id===id; });
+  var destino = idx + dir;
+  if (destino < 0 || destino >= items.length) return;
+  var tmp = items[idx].orden;
+  items[idx].orden = items[destino].orden;
+  items[destino].orden = tmp;
+  render();
+  llamar('admin_reordenar', {items: items.map(function(p){ return {id:p.id, orden:p.orden}; })});
+}
+
+function abrirEditar(id){
+  var p = PRODUCTOS.find(function(x){ return x.id===id; });
+  document.getElementById('modal-contenido').innerHTML =
+    '<div class="campo"><label>Nombre</label><input id="e-nombre" value="'+escAttr(p.producto)+'"></div>'+
+    '<div class="campo"><label>Descripción</label><textarea id="e-desc">'+esc(p.descripcion||'')+'</textarea></div>'+
+    '<div class="campo"><label>Precio</label><input id="e-precio" type="number" value="'+(p.precio!=null?p.precio:'')+'"></div>'+
+    '<button class="btn-guardar" onclick="guardarEdicion('+id+')">Guardar cambios</button>'+
+    '<button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>';
+  document.getElementById('modal').classList.add('abierto');
+}
+function guardarEdicion(id){
+  var p = PRODUCTOS.find(function(x){ return x.id===id; });
+  var nombre = document.getElementById('e-nombre').value.trim();
+  var desc = document.getElementById('e-desc').value.trim();
+  var precioVal = document.getElementById('e-precio').value;
+  var precio = precioVal === '' ? null : Number(precioVal);
+  p.producto = nombre; p.descripcion = desc; p.precio = precio;
+  cerrarModal(); render();
+  llamar('admin_editar', {id:id, producto:nombre, descripcion:desc, precio: precio===null?'':precio});
+}
+
+function abrirCrear(){
+  var secs = secciones();
+  document.getElementById('modal-contenido').innerHTML =
+    '<div class="campo"><label>Sección</label><select id="n-seccion">'+
+      secs.map(function(s){ return '<option value="'+escAttr(s)+'"'+(s===SECCION_ACTIVA?' selected':'')+'>'+esc(s)+'</option>'; }).join('')+
+    '</select></div>'+
+    '<div class="campo"><label>Nombre del producto</label><input id="n-nombre" placeholder="Ej: Milanesa napolitana"></div>'+
+    '<div class="campo"><label>Descripción</label><textarea id="n-desc" placeholder="Con papas fritas y ensalada"></textarea></div>'+
+    '<div class="fila2">'+
+      '<div class="campo"><label>Precio</label><input id="n-precio" type="number" placeholder="15000"></div>'+
+      '<div class="campo"><label>Tipo</label><select id="n-tipo"><option value="imagen">Plato con foto</option><option value="adicional">Adicional / opción</option></select></div>'+
+    '</div>'+
+    '<div class="campo"><label>Foto (opcional)</label><input id="n-foto" type="file" accept="image/*">'+
+      '<div class="aviso-foto">Se sube directo al repo, comprimida automáticamente. Podés dejarlo vacío y agregarla después.</div>'+
+      '<div class="estado-foto" id="n-foto-estado"></div>'+
+    '</div>'+
+    '<button class="btn-guardar" id="n-btn-guardar" onclick="guardarNuevo()">Crear producto</button>'+
+    '<button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>';
+  document.getElementById('modal').classList.add('abierto');
+}
+
+function guardarNuevo(){
+  var seccion = document.getElementById('n-seccion').value;
+  var nombre = document.getElementById('n-nombre').value.trim();
+  var desc = document.getElementById('n-desc').value.trim();
+  var precioVal = document.getElementById('n-precio').value;
+  var precio = precioVal === '' ? '' : Number(precioVal);
+  var tipo = document.getElementById('n-tipo').value;
+  var archivo = document.getElementById('n-foto').files[0];
+
+  if (!nombre){ alert('Falta el nombre del producto'); return; }
+
+  var btn = document.getElementById('n-btn-guardar');
+  btn.textContent = 'Guardando...'; btn.disabled = true;
+
+  function crearFinal(nombreFoto){
+    llamar('admin_crear', {
+      seccion:seccion, producto:nombre, descripcion:desc, precio:precio, tipo:tipo, foto:nombreFoto||''
+    }).then(function(res){
+      if (res.ok){
+        PRODUCTOS.push({id:res.id, seccion:seccion, orden:9999, producto:nombre, descripcion:desc,
+          precio: precio===''?null:precio, foto:nombreFoto||'', tipo:tipo, activo:true, likes:0});
+        SECCION_ACTIVA = seccion;
+        cerrarModal(); render();
+      } else {
+        alert('No se pudo crear: ' + (res.error||''));
+        btn.textContent = 'Crear producto'; btn.disabled = false;
+      }
+    });
+  }
+
+  if (archivo){
+    var estado = document.getElementById('n-foto-estado');
+    estado.className = 'estado-foto'; estado.textContent = 'Subiendo foto...'; estado.style.display='block';
+    subirFoto(archivo, nombre).then(function(nombreFoto){
+      estado.className = 'estado-foto ok'; estado.textContent = 'Foto subida ✓';
+      crearFinal(nombreFoto);
+    }).catch(function(err){
+      estado.className = 'estado-foto err'; estado.textContent = 'No se pudo subir la foto: ' + err;
+      btn.textContent = 'Crear producto'; btn.disabled = false;
+    });
+  } else {
+    crearFinal('');
+  }
+}
+
+function slugify(s){
+  return s.toString().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+}
+
+function subirFoto(archivo, nombreProducto){
+  return new Promise(function(resolve, reject){
+    var img = new Image();
+    var lector = new FileReader();
+    lector.onload = function(){
+      img.onload = function(){
+        var max = 1400;
+        var w = img.width, h = img.height;
+        var escala = Math.min(1, max / Math.max(w, h));
+        var cv = document.createElement('canvas');
+        cv.width = Math.round(w*escala); cv.height = Math.round(h*escala);
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+        var dataUrl = cv.toDataURL('image/jpeg', 0.82);
+        var base64 = dataUrl.split(',')[1];
+        var nombreArchivo = slugify(nombreProducto) + '-' + Date.now().toString(36) + '.jpg';
+        fetch(API_SUBIR_FOTO, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({nombre:nombreArchivo, base64:base64})
+        }).then(function(r){ return r.json(); })
+          .then(function(res){
+            if (res.ok) resolve(nombreArchivo);
+            else reject(res.error || 'error desconocido');
+          }).catch(function(){ reject('sin conexión con el servidor'); });
+      };
+      img.src = lector.result;
+    };
+    lector.readAsDataURL(archivo);
+  });
+}
+
+function cerrarModal(){ document.getElementById('modal').classList.remove('abierto'); }
+
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
+function inicial(s){ return esc((s||'?').trim().charAt(0).toUpperCase()); }
+</script>
+</body>
+</html>
