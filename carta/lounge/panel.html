@@ -31,6 +31,15 @@
   }
   #login-error{color:#E0857D;font-size:12px;margin-top:10px;display:none}
 
+  .fila-secciones{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:12px}
+  .btn-mover-sec{
+    width:32px;height:32px;border-radius:50%;border:1px solid var(--linea);
+    background:var(--carbon-2);color:var(--hueso-dim);font-size:14px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .btn-mover-sec:disabled{opacity:.3;cursor:default}
+  #sec-activa-nombre{font-family:'Oswald',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--hueso-dim);min-width:140px;text-align:center}
+
   .tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--linea)}
   .tab{
     flex:0 0 auto;cursor:pointer;font-size:12.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
@@ -113,6 +122,12 @@
 
   <button class="btn-agregar" onclick="abrirCrear()">+ Agregar producto</button>
 
+  <div class="fila-secciones" id="fila-secciones">
+    <button class="btn-mover-sec" onclick="moverSeccion(-1)" id="btn-sec-izq">◀</button>
+    <span id="sec-activa-nombre"></span>
+    <button class="btn-mover-sec" onclick="moverSeccion(1)" id="btn-sec-der">▶</button>
+  </div>
+
   <div class="tabs" id="tabs"></div>
   <div id="lista"></div>
 </div>
@@ -131,6 +146,7 @@ var API_SUBIR_FOTO = '/api/subir-foto';
 
 var PIN = '';
 var PRODUCTOS = [];
+var SECCIONES = [];
 var SECCION_ACTIVA = '';
 
 function llamar(accion, extra){
@@ -151,6 +167,7 @@ function intentarLogin(){
     if (res.ok){
       try{ sessionStorage.setItem('panelPin', PIN); }catch(e){}
       PRODUCTOS = res.data;
+      SECCIONES = res.secciones || [];
       document.getElementById('login').hidden = true;
       document.getElementById('app').hidden = false;
       render();
@@ -168,6 +185,7 @@ function intentarLogin(){
 })();
 
 function secciones(){
+  if (SECCIONES.length) return SECCIONES.map(function(s){ return s.seccion; });
   var vistas = [];
   PRODUCTOS.forEach(function(p){ if (vistas.indexOf(p.seccion)===-1) vistas.push(p.seccion); });
   return vistas;
@@ -180,6 +198,13 @@ function render(){
   tabs.innerHTML = secs.map(function(s){
     return '<div class="tab'+(s===SECCION_ACTIVA?' activa':'')+'" onclick="cambiarSeccion(\''+s.replace(/'/g,"\\'")+'\')">'+esc(s)+'</div>';
   }).join('');
+
+  var filaSecciones = document.getElementById('fila-secciones');
+  filaSecciones.style.display = secs.length > 1 ? 'flex' : 'none';
+  var idxSec = secs.indexOf(SECCION_ACTIVA);
+  document.getElementById('sec-activa-nombre').textContent = SECCION_ACTIVA || '—';
+  document.getElementById('btn-sec-izq').disabled = idxSec <= 0;
+  document.getElementById('btn-sec-der').disabled = idxSec === -1 || idxSec >= secs.length-1;
 
   var lista = document.getElementById('lista');
   var items = PRODUCTOS.filter(function(p){ return p.seccion === SECCION_ACTIVA; })
@@ -206,6 +231,22 @@ function render(){
 }
 
 function cambiarSeccion(s){ SECCION_ACTIVA = s; render(); }
+
+function moverSeccion(dir){
+  var secs = secciones();
+  var idx = secs.indexOf(SECCION_ACTIVA);
+  var destino = idx + dir;
+  if (idx === -1 || destino < 0 || destino >= secs.length) return;
+  var a = SECCIONES.find(function(s){ return s.seccion === secs[idx]; });
+  var b = SECCIONES.find(function(s){ return s.seccion === secs[destino]; });
+  if (!a || !b) return;
+  var tmp = a.orden; a.orden = b.orden; b.orden = tmp;
+  SECCIONES.sort(function(x,y){ return x.orden - y.orden; });
+  render();
+  llamar('admin_reordenar_secciones', {
+    items: SECCIONES.map(function(s){ return {seccion:s.seccion, orden:s.orden}; })
+  });
+}
 
 function toggleActivo(id){
   var p = PRODUCTOS.find(function(x){ return x.id===id; });
