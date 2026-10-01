@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Panel — El Chiringuito</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1F3C38">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Panel Chiringuito">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaushan+Script&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -278,8 +284,12 @@ function mover(id, dir){
 
 function abrirEditar(id){
   var p = PRODUCTOS.find(function(x){ return x.id===id; });
+  var secs = secciones();
   document.getElementById('modal-contenido').innerHTML =
     '<div class="campo"><label>Nombre</label><input id="e-nombre" value="'+escAttr(p.producto)+'"></div>'+
+    '<div class="campo"><label>Sección</label><select id="e-seccion">'+
+      secs.map(function(s){ return '<option value="'+escAttr(s)+'"'+(s===p.seccion?' selected':'')+'>'+esc(s)+'</option>'; }).join('')+
+    '</select></div>'+
     '<div class="campo"><label>Descripción</label><textarea id="e-desc">'+esc(p.descripcion||'')+'</textarea></div>'+
     '<div class="campo"><label>Precio</label><input id="e-precio" type="number" value="'+(p.precio!=null?p.precio:'')+'"></div>'+
     '<button class="btn-guardar" onclick="guardarEdicion('+id+')">Guardar cambios</button>'+
@@ -316,12 +326,23 @@ function confirmarEliminar(id){
 function guardarEdicion(id){
   var p = PRODUCTOS.find(function(x){ return x.id===id; });
   var nombre = document.getElementById('e-nombre').value.trim();
+  var seccionNueva = document.getElementById('e-seccion').value;
   var desc = document.getElementById('e-desc').value.trim();
   var precioVal = document.getElementById('e-precio').value;
   var precio = precioVal === '' ? null : Number(precioVal);
+  var cambioSeccion = seccionNueva !== p.seccion;
+
   p.producto = nombre; p.descripcion = desc; p.precio = precio;
+  if (cambioSeccion){
+    p.seccion = seccionNueva;
+    p.orden = 9999; // provisorio en pantalla; el server ya calculó el real
+    SECCION_ACTIVA = seccionNueva;
+  }
   cerrarModal(); render();
-  llamar('admin_editar', {id:id, producto:nombre, descripcion:desc, precio: precio===null?'':precio});
+
+  var payload = {id:id, producto:nombre, descripcion:desc, precio: precio===null?'':precio};
+  if (cambioSeccion) payload.seccion = seccionNueva;
+  llamar('admin_editar', payload);
 }
 
 function abrirCrear(){
@@ -432,6 +453,12 @@ function cerrarModal(){ document.getElementById('modal').classList.remove('abier
 function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
 function inicial(s){ return esc((s||'?').trim().charAt(0).toUpperCase()); }
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('panel-sw.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
