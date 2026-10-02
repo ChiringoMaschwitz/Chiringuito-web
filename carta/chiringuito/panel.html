@@ -112,7 +112,7 @@
 
   /* ---------- VISTAS: Carta / Resultados ---------- */
   .vistas{
-    display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:18px;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:4px;margin-bottom:18px;
     background:var(--tarjeta);border:1px solid var(--linea);border-radius:999px;
   }
   .vista-btn{
@@ -168,6 +168,70 @@
   .oculto-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--peligro);margin-left:6px}
   .total-likes{font-size:12px;color:var(--tinta-dim);text-align:center;margin-top:12px}
   .cargando-res{color:var(--tinta-dim);font-size:13px;text-align:center;padding:40px 0}
+
+  /* ---------- PROMOS ---------- */
+  .tira{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .tira::-webkit-scrollbar{display:none}
+  .tira-dia{flex:0 0 58px;text-align:center}
+  .tira-dia .td-fecha{font-size:10px;color:var(--tinta-dim);margin-bottom:4px;line-height:1.2}
+  .tira-dia.hoy .td-fecha{color:var(--tinta);font-weight:600}
+  .tira-dia .td-img{width:58px;height:72px;border-radius:8px;background:#EDE6D8;overflow:hidden;display:flex;align-items:center;justify-content:center;color:rgba(28,27,24,.3);font-size:16px;border:2px solid transparent}
+  .tira-dia.hoy .td-img{border-color:var(--verde)}
+  .tira-dia .td-img img{width:100%;height:100%;object-fit:cover}
+
+  .promo-card{display:flex;align-items:center;gap:10px;background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;padding:10px;margin-bottom:8px}
+  .promo-card.pausada{opacity:.6}
+  .promo-card .p-thumb{width:52px;height:64px;border-radius:8px;flex:0 0 auto;background:#EDE6D8;overflow:hidden;display:flex;align-items:center;justify-content:center;color:rgba(28,27,24,.3);font-size:11px;text-align:center}
+  .promo-card .p-thumb img{width:100%;height:100%;object-fit:cover}
+  .promo-card .p-info{flex:1;min-width:0}
+  .promo-card .p-nom{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .promo-card .p-prog{font-size:12px;color:var(--tinta-dim);margin-top:2px}
+  .chip-estado{display:inline-block;margin-top:5px;font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:rgba(28,27,24,.07);color:var(--tinta-dim)}
+  .chip-estado.hoy{background:var(--verde);color:var(--hueso)}
+  .chip-estado.prog{background:rgba(232,184,75,.25);color:var(--ambar-2)}
+  .chip-estado.alerta{background:rgba(179,38,30,.1);color:var(--peligro)}
+
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--tarjeta);border:1px solid var(--linea);border-radius:999px}
+  .seg button{cursor:pointer;border:none;background:none;border-radius:999px;padding:9px;font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-dim)}
+  .seg button.activa{background:var(--verde);color:var(--hueso)}
+  .dias-chips{display:flex;gap:6px;flex-wrap:wrap}
+  .dia-chip{cursor:pointer;width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:var(--tarjeta);font-family:'Jost',sans-serif;font-weight:600;font-size:12px;color:var(--tinta-dim)}
+  .dia-chip.on{background:linear-gradient(160deg,var(--ambar),var(--ambar-2));border-color:transparent;color:var(--tinta)}
+  .ayuda{font-size:11px;color:var(--tinta-dim);margin-top:6px;line-height:1.4}
+  .prev-img{width:100%;max-height:260px;object-fit:contain;border-radius:10px;background:#EDE6D8;display:block}
+  .prev-aviso{font-size:12px;color:var(--tinta-dim);background:#EDE6D8;border-radius:10px;padding:30px 14px;text-align:center}
+  .fila-check{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+  .fila-check input{width:20px;height:20px;accent-color:var(--verde)}
+  .btn-secundario{
+    width:100%;margin-top:8px;cursor:pointer;font-family:'Jost',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--verde);background:var(--tarjeta);border:1px solid var(--verde);border-radius:999px;padding:12px;
+  }
+  .progreso{font-size:13px;color:var(--tinta);background:rgba(232,184,75,.18);border-radius:10px;padding:10px 12px;margin-bottom:12px;display:none}
+
+  /* vista previa = misma placa que ve el comensal */
+  #pp{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:20px 18px;background:rgba(10,8,6,.78)}
+  #pp.abierta{display:flex}
+  #pp .pp-caja{position:relative;width:100%;max-width:420px;max-height:100%;display:flex;flex-direction:column;background:#221C16;border:1px solid rgba(244,238,227,.12);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+  #pp .pp-caja img{display:block;width:100%;object-fit:cover;max-height:56dvh}
+  #pp .pp-caja.solo{background:transparent;border:none;box-shadow:none}
+  #pp .pp-caja.solo img{max-height:calc(100dvh - 140px);object-fit:contain;border-radius:14px}
+  #pp .pp-ficha{padding:16px 20px 20px;color:#F4EEE3}
+  #pp .pp-et{display:inline-block;transform:rotate(-2deg);background:#E8B84B;color:#1C1B18;font-weight:600;font-size:10px;letter-spacing:.3em;text-transform:uppercase;padding:5px 12px;border-radius:3px}
+  #pp h3{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:34px;line-height:1.02;margin-top:10px}
+  #pp .pp-desc{margin-top:8px;font-size:14.5px;line-height:1.5;color:#B9AF9E}
+  #pp .pp-precio{margin-top:10px;font-family:'Anton',sans-serif;font-size:26px;color:#F0CA6E}
+  #pp .pp-btn{display:block;margin-top:14px;text-align:center;font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#1C1B18;background:linear-gradient(160deg,#F0CA6E,#E8B84B);border-radius:999px;padding:14px}
+  #pp .pp-x{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;background:rgba(23,19,16,.7);border:1px solid rgba(244,238,227,.25);color:#F4EEE3;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  #pp .pp-leyenda{position:fixed;bottom:16px;left:0;right:0;text-align:center;color:#B9AF9E;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+
+  .promo-res{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--linea)}
+  .promo-res:last-child{border-bottom:none}
+  .promo-res .p-thumb{width:40px;height:50px;border-radius:6px;overflow:hidden;background:#EDE6D8;flex:0 0 auto}
+  .promo-res .p-thumb img{width:100%;height:100%;object-fit:cover}
+  .promo-res .pr-info{flex:1;min-width:0}
+  .promo-res .pr-nom{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .promo-res .pr-datos{font-size:12px;color:var(--tinta-dim);margin-top:2px}
+  .promo-res .pr-pct{font-family:'Anton',sans-serif;font-size:20px;color:var(--verde);flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -187,10 +251,18 @@
 
   <div class="vistas">
     <button class="vista-btn activa" id="vb-carta" onclick="cambiarVista('carta')">Carta</button>
+    <button class="vista-btn" id="vb-promos" onclick="cambiarVista('promos')">Promos</button>
     <button class="vista-btn" id="vb-resultados" onclick="cambiarVista('resultados')">Resultados</button>
   </div>
 
   <div id="vista-resultados" hidden></div>
+
+  <div id="vista-promos" hidden>
+    <button class="btn-agregar" onclick="document.getElementById('input-placas').click()">+ Subir placas</button>
+    <input type="file" id="input-placas" accept="image/*" multiple hidden onchange="subirPlacas(this.files)">
+    <div class="progreso" id="progreso-placas"></div>
+    <div id="promos-contenido"><div class="cargando-res">Cargando placas…</div></div>
+  </div>
 
   <div id="vista-carta">
   <button class="btn-agregar" onclick="abrirCrear()">+ Agregar producto</button>
@@ -206,6 +278,8 @@
   </div>
 </div>
 
+<div id="pp" onclick="if(event.target===this)cerrarPreview()"></div>
+
 <div id="modal">
   <div class="panel-modal">
     <div class="barra-modal"></div>
@@ -218,6 +292,8 @@ var API_URL = 'https://script.google.com/macros/s/AKfycbyfEynCpShkMtsGMq4wt7JBQI
 var FOTOS_BASE = '/carta/chiringuito/fotos/';
 var API_SUBIR_FOTO = '/api/subir-foto';
 var CARPETA_FOTOS = 'carta/chiringuito/fotos';
+var PROMOS_BASE = '/carta/chiringuito/promos/';
+var CARPETA_PROMOS = 'carta/chiringuito/promos';
 
 var PIN = '';
 var PRODUCTOS = [];
@@ -485,7 +561,7 @@ function slugify(s){
     .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
 }
 
-function subirFoto(archivo, nombreProducto){
+function subirFoto(archivo, nombreProducto, carpeta){
   return new Promise(function(resolve, reject){
     var img = new Image();
     var lector = new FileReader();
@@ -503,13 +579,14 @@ function subirFoto(archivo, nombreProducto){
         fetch(API_SUBIR_FOTO, {
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({nombre:nombreArchivo, base64:base64, carpeta:CARPETA_FOTOS})
+          body: JSON.stringify({nombre:nombreArchivo, base64:base64, carpeta:carpeta || CARPETA_FOTOS})
         }).then(function(r){ return r.json(); })
           .then(function(res){
             if (res.ok) resolve(nombreArchivo);
             else reject(res.error || 'error desconocido');
           }).catch(function(){ reject('sin conexión con el servidor'); });
       };
+      img.onerror = function(){ reject('el archivo no es una imagen válida'); };
       img.src = lector.result;
     };
     lector.readAsDataURL(archivo);
@@ -524,12 +601,12 @@ var DIAS_SEMANA = ['Do','Lu','Ma','Mi','Ju','Vi','Sá'];
 var SVG_CORAZON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
 
 function cambiarVista(v){
-  var esRes = v === 'resultados';
-  document.getElementById('vista-carta').hidden = esRes;
-  document.getElementById('vista-resultados').hidden = !esRes;
-  document.getElementById('vb-carta').classList.toggle('activa', !esRes);
-  document.getElementById('vb-resultados').classList.toggle('activa', esRes);
-  if (esRes) cargarResultados();
+  ['carta','promos','resultados'].forEach(function(n){
+    document.getElementById('vista-' + n).hidden = n !== v;
+    document.getElementById('vb-' + n).classList.toggle('activa', n === v);
+  });
+  if (v === 'resultados') cargarResultados();
+  if (v === 'promos') cargarPromos();
 }
 
 function cargarResultados(){
@@ -619,8 +696,399 @@ function renderResultados(r){
   }
   html += '<div class="total-likes">Likes totales en la carta: <b>' + fmtNum(r.totalLikes) + '</b></div></div>';
 
+  /* --- Placas promocionales --- */
+  var promos = r.promos || [];
+  html += '<div class="bloque"><h3>Placas promocionales</h3>';
+  if (!promos.length){
+    html += '<div class="vacio">Todavía no se mostró ninguna placa.</div>';
+  } else {
+    promos.forEach(function(p){
+      var pct = p.vistas ? Math.round(p.clics / p.vistas * 100) : 0;
+      html += '<div class="promo-res">' +
+        '<div class="p-thumb">' + (p.foto ? '<img src="' + srcPromo(p.foto) + '" alt="" onerror="this.remove()">' : '') + '</div>' +
+        '<div class="pr-info"><div class="pr-nom">' + esc(p.nombre) + (p.activa ? '' : '<span class="oculto-tag">pausada</span>') + '</div>' +
+        '<div class="pr-datos">' + fmtNum(p.vistas) + ' vistas · ' + fmtNum(p.clics) + ' clics</div></div>' +
+        '<div class="pr-pct">' + pct + '%</div>' +
+      '</div>';
+    });
+    html += '<div class="total-likes">% = cuántos de los que la vieron tocaron el botón</div>';
+  }
+  html += '</div>';
+
   cont.innerHTML = html;
 }
+
+/* ================= PROMOS ================= */
+var PROMOS = [];
+var PROXIMOS = [];
+var HOY_OP = '';
+var DIAS_ORDEN = ['LU','MA','MI','JU','VI','SA','DO'];
+var DIAS_LARGO = {LU:'lunes',MA:'martes',MI:'miércoles',JU:'jueves',VI:'viernes',SA:'sábados',DO:'domingos'};
+var DIAS_CORTO = {LU:'Lu',MA:'Ma',MI:'Mi',JU:'Ju',VI:'Vi',SA:'Sá',DO:'Do'};
+var EDIT = null;   /* promo que se está editando */
+
+function srcPromo(nombre){
+  if (!nombre) return '';
+  return nombre.charAt(0) === '/' ? nombre : PROMOS_BASE + encodeURIComponent(nombre);
+}
+function fechaCorta(f){
+  if (!f) return '';
+  var p = String(f).split('-');
+  return p[2] + '/' + p[1];
+}
+
+function cargarPromos(){
+  var cont = document.getElementById('promos-contenido');
+  if (!PROMOS.length) cont.innerHTML = '<div class="cargando-res">Cargando placas…</div>';
+  return llamar('admin_promos_list').then(function(res){
+    if (!res || !res.ok){
+      cont.innerHTML = '<div class="cargando-res">No se pudieron cargar las placas' + (res && res.error ? ' (' + esc(res.error) + ')' : '') + '.<br><br>' +
+        '<button class="btn-actualizar" onclick="cargarPromos()">Reintentar</button></div>';
+      return;
+    }
+    PROMOS = res.promos || [];
+    PROXIMOS = res.proximos || [];
+    HOY_OP = res.hoy || '';
+    renderPromos();
+  }).catch(function(){
+    cont.innerHTML = '<div class="cargando-res">Sin conexión con el servidor.<br><br>' +
+      '<button class="btn-actualizar" onclick="cargarPromos()">Reintentar</button></div>';
+  });
+}
+
+function promoPorId(id){
+  for (var i = 0; i < PROMOS.length; i++){ if (PROMOS[i].id === id) return PROMOS[i]; }
+  return null;
+}
+
+function resumenProgramacion(p){
+  if (p.modo === 'fechas'){
+    if (!p.desde) return 'Sin fecha';
+    if (!p.hasta || p.hasta === p.desde) return 'Solo el ' + fechaCorta(p.desde);
+    return fechaCorta(p.desde) + ' → ' + fechaCorta(p.hasta);
+  }
+  var dias = DIAS_ORDEN.filter(function(d){ return (p.dias || []).indexOf(d) > -1; });
+  if (!dias.length) return 'Sin días elegidos';
+  var txt;
+  if (dias.length === 7) txt = 'Todos los días';
+  else if (dias.length === 1) txt = 'Todos los ' + DIAS_LARGO[dias[0]];
+  else txt = dias.map(function(d){ return DIAS_CORTO[d]; }).join(', ').replace(/, ([^,]*)$/, ' y $1');
+  if (p.desde) txt += ' · desde ' + fechaCorta(p.desde);
+  if (p.hasta) txt += ' · hasta ' + fechaCorta(p.hasta);
+  return txt;
+}
+
+function estadoPromo(p){
+  if (!p.activa) return {txt:'Pausada', cls:''};
+  if (PROXIMOS.length && PROXIMOS[0].promoId === p.id) return {txt:'Sale hoy', cls:'hoy'};
+  var fin = p.modo === 'fechas' ? (p.hasta || p.desde) : p.hasta;
+  if (fin && HOY_OP && fin < HOY_OP) return {txt:'Vencida', cls:'alerta'};
+  if (p.modo === 'semanal' && !(p.dias || []).length) return {txt:'Sin programar', cls:'alerta'};
+  var sale = PROXIMOS.some(function(d){ return d.promoId === p.id; });
+  if (sale) return {txt:'Programada', cls:'prog'};
+  return {txt:'No sale en 14 días', cls:''};
+}
+
+function renderPromos(){
+  var cont = document.getElementById('promos-contenido');
+  var html = '';
+
+  /* --- Próximos 14 días --- */
+  html += '<div class="bloque"><h3>Próximos 14 días</h3><div class="tira">';
+  PROXIMOS.forEach(function(d, i){
+    var p = d.promoId ? promoPorId(d.promoId) : null;
+    var dia = DIAS_CORTO[d.dia] || d.dia;
+    html += '<div class="tira-dia' + (i === 0 ? ' hoy' : '') + '"' + (p ? ' onclick="abrirEditorPromo(' + p.id + ')" style="cursor:pointer"' : '') + '>' +
+      '<div class="td-fecha">' + (i === 0 ? 'Hoy' : dia) + '<br>' + fechaCorta(d.fecha) + '</div>' +
+      '<div class="td-img">' + (p ? '<img src="' + srcPromo(p.foto) + '" alt="" onerror="this.parentElement.textContent=\'⏳\'">' : '—') + '</div>' +
+    '</div>';
+  });
+  html += '</div><div class="ayuda">"—" = ese día no sale ninguna placa. Tocá una miniatura para editarla.</div></div>';
+
+  /* --- Lista --- */
+  html += '<div class="bloque"><h3>Placas (' + PROMOS.length + ')</h3>';
+  if (!PROMOS.length){
+    html += '<div class="vacio">Todavía no hay placas. Subí las imágenes con el botón de arriba y después programalas.</div>';
+  } else {
+    PROMOS.forEach(function(p){
+      var est = estadoPromo(p);
+      html += '<div class="promo-card' + (p.activa ? '' : ' pausada') + '">' +
+        '<div class="p-thumb"><img src="' + srcPromo(p.foto) + '" alt="" onerror="this.parentElement.textContent=\'Publicando…\'"></div>' +
+        '<div class="p-info">' +
+          '<div class="p-nom">' + esc(p.nombre || p.titulo || ('Placa ' + p.id)) + '</div>' +
+          '<div class="p-prog">' + esc(resumenProgramacion(p)) + '</div>' +
+          '<span class="chip-estado ' + est.cls + '">' + est.txt + '</span>' +
+        '</div>' +
+        '<div class="toggle' + (p.activa ? '' : ' off') + '" onclick="togglePromo(' + p.id + ')"><div class="bola"></div></div>' +
+        '<div class="lapiz" onclick="abrirEditorPromo(' + p.id + ')">✎</div>' +
+      '</div>';
+    });
+  }
+  html += '</div>';
+  cont.innerHTML = html;
+}
+
+/* --- Subida múltiple: cada imagen queda como placa pausada --- */
+function subirPlacas(archivos){
+  var lista = Array.prototype.slice.call(archivos || []);
+  var input = document.getElementById('input-placas');
+  if (!lista.length) return;
+  var prog = document.getElementById('progreso-placas');
+  prog.style.display = 'block';
+  var ok = 0, fallas = [];
+
+  function siguiente(i){
+    if (i >= lista.length){
+      input.value = '';
+      prog.textContent = ok + ' placa' + (ok === 1 ? '' : 's') + ' subida' + (ok === 1 ? '' : 's') + ' ✓' +
+        (fallas.length ? ' · No se pudieron subir: ' + fallas.join(', ') : '') +
+        ' · Quedan pausadas: tocá el lápiz para programarlas.';
+      setTimeout(function(){ prog.style.display = 'none'; }, 9000);
+      cargarPromos();
+      return;
+    }
+    var archivo = lista[i];
+    var nombreBase = archivo.name.replace(/\.[^.]+$/, '');
+    prog.textContent = 'Subiendo placa ' + (i + 1) + ' de ' + lista.length + '…';
+    subirFoto(archivo, 'placa-' + nombreBase, CARPETA_PROMOS).then(function(nombreArchivo){
+      return llamar('admin_promo_guardar', {
+        nombre: nombreBase, foto: nombreArchivo, modo: 'semanal', dias: [], activa: false
+      });
+    }).then(function(res){
+      if (res && res.ok) ok++; else fallas.push(archivo.name);
+      siguiente(i + 1);
+    }).catch(function(){
+      fallas.push(archivo.name);
+      siguiente(i + 1);
+    });
+  }
+  siguiente(0);
+}
+
+function togglePromo(id){
+  var p = promoPorId(id);
+  if (!p) return;
+  p.activa = !p.activa;
+  renderPromos();
+  llamar('admin_promo_toggle', {id:id}).then(function(res){
+    if (!res || !res.ok){ p.activa = !p.activa; renderPromos(); alert('No se pudo cambiar el estado'); }
+    else cargarPromos();   /* refresca "Sale hoy" y la tira */
+  });
+}
+
+/* --- Editor --- */
+function opcionesPlatos(seleccionado){
+  var html = '<option value="">Elegí un plato…</option>';
+  secciones().forEach(function(sec){
+    var items = PRODUCTOS.filter(function(p){
+      var t = String(p.tipo || '').toLowerCase();
+      return p.seccion === sec && t !== 'adicional' && t !== 'opcion' && t !== 'opción';
+    });
+    if (!items.length) return;
+    html += '<optgroup label="' + escAttr(sec) + '">' + items.map(function(p){
+      return '<option value="' + p.id + '"' + (String(p.id) === String(seleccionado) ? ' selected' : '') + '>' +
+        esc(p.producto) + (p.activo ? '' : ' (apagado)') + '</option>';
+    }).join('') + '</optgroup>';
+  });
+  return html;
+}
+
+function abrirEditorPromo(id){
+  var p = promoPorId(id);
+  if (!p) return;
+  EDIT = JSON.parse(JSON.stringify(p));
+  EDIT.dias = EDIT.dias || [];
+  EDIT.fotoLocal = '';
+  pintarEditor();
+  document.getElementById('modal').classList.add('abierto');
+}
+
+function pintarEditor(){
+  var e = EDIT;
+  var src = e.fotoLocal || srcPromo(e.foto);
+  var html =
+    '<div class="campo"><label>Imagen</label>' +
+      '<div id="ed-prev-wrap"><img class="prev-img" id="ed-prev" src="' + src + '" alt="" onerror="document.getElementById(\'ed-prev-wrap\').innerHTML=\'<div class=prev-aviso>La imagen se está publicando (tarda ~2 min). Ya quedó guardada.</div>\'"></div>' +
+      '<button class="btn-secundario" onclick="document.getElementById(\'ed-foto\').click()">Cambiar imagen</button>' +
+      '<input type="file" id="ed-foto" accept="image/*" hidden onchange="cambiarImagenPromo(this.files[0])">' +
+      '<div class="estado-foto" id="ed-foto-estado"></div>' +
+    '</div>' +
+    '<div class="campo"><label>Nombre interno (solo lo ves vos)</label><input id="ed-nombre" value="' + escAttr(e.nombre || '') + '" placeholder="Ej: Burga libre miércoles"></div>' +
+
+    '<div class="campo"><label>Cuándo sale</label><div class="seg">' +
+      '<button id="ed-modo-semanal" class="' + (e.modo !== 'fechas' ? 'activa' : '') + '" onclick="setModo(\'semanal\')">Semanal</button>' +
+      '<button id="ed-modo-fechas" class="' + (e.modo === 'fechas' ? 'activa' : '') + '" onclick="setModo(\'fechas\')">Fechas</button>' +
+    '</div></div>';
+
+  if (e.modo === 'fechas'){
+    html +=
+      '<div class="fila2">' +
+        '<div class="campo"><label>Desde</label><input type="date" id="ed-desde" value="' + (e.desde || '') + '"></div>' +
+        '<div class="campo"><label>Hasta (opcional)</label><input type="date" id="ed-hasta" value="' + (e.hasta || '') + '"></div>' +
+      '</div>' +
+      '<div class="ayuda" style="margin:-6px 0 14px">Sin "hasta", sale solo el día "desde". Las fechas puntuales le ganan a las semanales.</div>';
+  } else {
+    html +=
+      '<div class="campo"><label>Días</label><div class="dias-chips">' +
+        DIAS_ORDEN.map(function(d){
+          return '<button class="dia-chip' + (e.dias.indexOf(d) > -1 ? ' on' : '') + '" onclick="toggleDia(\'' + d + '\')">' + DIAS_CORTO[d] + '</button>';
+        }).join('') +
+      '</div></div>' +
+      '<div class="fila2">' +
+        '<div class="campo"><label>Vigente desde (opcional)</label><input type="date" id="ed-desde" value="' + (e.desde || '') + '"></div>' +
+        '<div class="campo"><label>Hasta (opcional)</label><input type="date" id="ed-hasta" value="' + (e.hasta || '') + '"></div>' +
+      '</div>';
+  }
+
+  html +=
+    '<div class="campo"><label>Título (opcional)</label><input id="ed-titulo" value="' + escAttr(e.titulo || '') + '" placeholder="Vacío = se muestra solo la imagen">' +
+      '<div class="ayuda">Si la placa ya viene diseñada con texto, dejalo vacío.</div></div>' +
+    '<div class="campo"><label>Descripción (opcional)</label><textarea id="ed-desc">' + esc(e.descripcion || '') + '</textarea></div>' +
+    '<div class="campo"><label>Precio (opcional)</label><input id="ed-precio" type="number" value="' + (e.precio != null ? e.precio : '') + '"></div>' +
+
+    '<div class="campo"><label>Botón</label><select id="ed-btn-tipo" onchange="setBotonTipo(this.value)">' +
+      '<option value="ninguno"' + (e.botonTipo === 'ninguno' || !e.botonTipo ? ' selected' : '') + '>Sin botón</option>' +
+      '<option value="plato"' + (e.botonTipo === 'plato' ? ' selected' : '') + '>Ver un plato de la carta</option>' +
+      '<option value="link"' + (e.botonTipo === 'link' ? ' selected' : '') + '>Abrir un link (WhatsApp, reservas…)</option>' +
+    '</select></div>';
+
+  if (e.botonTipo === 'plato'){
+    html += '<div class="campo"><label>Plato</label><select id="ed-btn-destino">' + opcionesPlatos(e.botonDestino) + '</select>' +
+      '<div class="ayuda">Si el plato está apagado en la carta, el botón no aparece.</div></div>';
+  } else if (e.botonTipo === 'link'){
+    html += '<div class="campo"><label>Link</label><input id="ed-btn-destino" value="' + escAttr(e.botonDestino || '') + '" placeholder="https://wa.me/5491122721108"></div>';
+  }
+  if (e.botonTipo === 'plato' || e.botonTipo === 'link'){
+    html += '<div class="campo"><label>Texto del botón (opcional)</label><input id="ed-btn-texto" value="' + escAttr(e.botonTexto || '') + '" placeholder="' + (e.botonTipo === 'plato' ? 'Ver en la carta' : 'Ver más') + '"></div>';
+  }
+
+  html +=
+    '<div class="campo"><label class="fila-check"><input type="checkbox" id="ed-activa"' + (e.activa ? ' checked' : '') + '> Placa activa</label></div>' +
+    '<button class="btn-guardar" id="ed-guardar" onclick="guardarPromo()">Guardar</button>' +
+    '<button class="btn-secundario" onclick="abrirPreview()">Vista previa</button>' +
+    '<button class="btn-eliminar" id="ed-eliminar" onclick="eliminarPromo()">Eliminar placa</button>' +
+    '<button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>';
+
+  document.getElementById('modal-contenido').innerHTML = html;
+}
+
+/* guarda en EDIT lo que hay en pantalla antes de repintar */
+function leerFormulario(){
+  var e = EDIT;
+  function val(id){ var el = document.getElementById(id); return el ? el.value : undefined; }
+  if (val('ed-nombre') !== undefined) e.nombre = val('ed-nombre').trim();
+  if (val('ed-desde') !== undefined) e.desde = val('ed-desde');
+  if (val('ed-hasta') !== undefined) e.hasta = val('ed-hasta');
+  if (val('ed-titulo') !== undefined) e.titulo = val('ed-titulo').trim();
+  if (val('ed-desc') !== undefined) e.descripcion = val('ed-desc').trim();
+  if (val('ed-precio') !== undefined) e.precio = val('ed-precio') === '' ? null : Number(val('ed-precio'));
+  if (val('ed-btn-tipo') !== undefined) e.botonTipo = val('ed-btn-tipo');
+  if (val('ed-btn-destino') !== undefined) e.botonDestino = val('ed-btn-destino').trim();
+  if (val('ed-btn-texto') !== undefined) e.botonTexto = val('ed-btn-texto').trim();
+  var act = document.getElementById('ed-activa');
+  if (act) e.activa = act.checked;
+}
+
+function setModo(m){ leerFormulario(); EDIT.modo = m; pintarEditor(); }
+function toggleDia(d){
+  leerFormulario();
+  var i = EDIT.dias.indexOf(d);
+  if (i > -1) EDIT.dias.splice(i, 1); else EDIT.dias.push(d);
+  pintarEditor();
+}
+function setBotonTipo(t){ leerFormulario(); EDIT.botonTipo = t; if (t === 'ninguno') EDIT.botonDestino = ''; pintarEditor(); }
+
+function cambiarImagenPromo(archivo){
+  if (!archivo) return;
+  leerFormulario();
+  var estado = document.getElementById('ed-foto-estado');
+  estado.className = 'estado-foto'; estado.style.display = 'block'; estado.textContent = 'Subiendo imagen…';
+  var lector = new FileReader();
+  lector.onload = function(){ EDIT.fotoLocal = lector.result; };
+  lector.readAsDataURL(archivo);
+  subirFoto(archivo, 'placa-' + (EDIT.nombre || 'promo'), CARPETA_PROMOS).then(function(nombreArchivo){
+    EDIT.foto = nombreArchivo;
+    pintarEditor();
+    var est = document.getElementById('ed-foto-estado');
+    est.className = 'estado-foto ok'; est.textContent = 'Imagen nueva subida ✓ — tocá Guardar para aplicarla';
+  }).catch(function(err){
+    var est = document.getElementById('ed-foto-estado');
+    est.className = 'estado-foto err'; est.textContent = 'No se pudo subir: ' + err;
+  });
+}
+
+function validarEdit(){
+  var e = EDIT;
+  if (e.modo === 'fechas' && !e.desde) return 'Elegí la fecha "desde".';
+  if (e.desde && e.hasta && e.hasta < e.desde) return 'La fecha "hasta" es anterior a "desde".';
+  if (e.botonTipo === 'plato' && !e.botonDestino) return 'Elegí el plato del botón (o sacá el botón).';
+  if (e.botonTipo === 'link' && !/^https?:\/\//i.test(e.botonDestino || '')) return 'El link tiene que empezar con https://';
+  if (e.activa && e.modo === 'semanal' && !e.dias.length) return 'Elegí al menos un día, o dejala pausada.';
+  return '';
+}
+
+function guardarPromo(){
+  leerFormulario();
+  var error = validarEdit();
+  if (error){ alert(error); return; }
+  var e = EDIT;
+  var btn = document.getElementById('ed-guardar');
+  btn.textContent = 'Guardando…'; btn.disabled = true;
+  llamar('admin_promo_guardar', {
+    id: e.id, nombre: e.nombre, foto: e.foto, titulo: e.titulo, descripcion: e.descripcion,
+    precio: e.precio === null ? '' : e.precio,
+    botonTexto: e.botonTipo === 'ninguno' ? '' : e.botonTexto,
+    botonTipo: e.botonTipo || 'ninguno',
+    botonDestino: e.botonTipo === 'ninguno' ? '' : e.botonDestino,
+    modo: e.modo, dias: e.modo === 'semanal' ? e.dias : [],
+    desde: e.desde || '', hasta: e.hasta || '', activa: e.activa
+  }).then(function(res){
+    if (res && res.ok){ cerrarModal(); cargarPromos(); }
+    else { alert('No se pudo guardar: ' + ((res && res.error) || '')); btn.textContent = 'Guardar'; btn.disabled = false; }
+  }).catch(function(){
+    alert('Sin conexión con el servidor'); btn.textContent = 'Guardar'; btn.disabled = false;
+  });
+}
+
+function eliminarPromo(){
+  var btn = document.getElementById('ed-eliminar');
+  if (btn.dataset.confirmar !== '1'){
+    btn.dataset.confirmar = '1';
+    btn.textContent = '¿Seguro? Tocá de nuevo para eliminar';
+    setTimeout(function(){
+      if (btn && btn.dataset.confirmar === '1'){ btn.dataset.confirmar = '0'; btn.textContent = 'Eliminar placa'; }
+    }, 3500);
+    return;
+  }
+  btn.textContent = 'Eliminando…'; btn.disabled = true;
+  llamar('admin_promo_eliminar', {id: EDIT.id}).then(function(res){
+    if (res && res.ok){ cerrarModal(); cargarPromos(); }
+    else { alert('No se pudo eliminar: ' + ((res && res.error) || '')); btn.textContent = 'Eliminar placa'; btn.disabled = false; btn.dataset.confirmar = '0'; }
+  });
+}
+
+/* --- Vista previa: la misma placa que va a ver el comensal --- */
+function abrirPreview(){
+  leerFormulario();
+  var e = EDIT;
+  var src = e.fotoLocal || srcPromo(e.foto);
+  var solo = !e.titulo;
+  var precio = (e.precio != null && !isNaN(e.precio)) ? '$' + Number(e.precio).toLocaleString('es-AR') : '';
+  var textoBtn = e.botonTipo === 'plato' ? (e.botonTexto || 'Ver en la carta') : (e.botonTipo === 'link' ? (e.botonTexto || 'Ver más') : '');
+  var boton = textoBtn ? '<div class="pp-btn">' + esc(textoBtn) + '</div>' : '';
+  var html = '<div class="pp-caja' + (solo ? ' solo' : '') + '">' +
+    '<div class="pp-x" onclick="cerrarPreview()">✕</div>' +
+    '<img src="' + src + '" alt="" onerror="this.outerHTML=\'<div class=prev-aviso>La imagen se está publicando (~2 min)</div>\'">';
+  if (solo) html += boton;
+  else html += '<div class="pp-ficha"><div class="pp-et">Promo</div><h3>' + esc(e.titulo) + '</h3>' +
+    (e.descripcion ? '<div class="pp-desc">' + esc(e.descripcion) + '</div>' : '') +
+    (precio ? '<div class="pp-precio">' + precio + '</div>' : '') + boton + '</div>';
+  html += '</div><div class="pp-leyenda">Vista previa · tocá afuera para volver</div>';
+  var pp = document.getElementById('pp');
+  pp.innerHTML = html;
+  pp.classList.add('abierta');
+}
+function cerrarPreview(){ document.getElementById('pp').classList.remove('abierta'); }
 
 function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
