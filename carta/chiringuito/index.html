@@ -286,6 +286,7 @@
     color:var(--hueso);cursor:pointer;user-select:none;-webkit-user-select:none;
     font-family:var(--texto);font-weight:600;font-size:11px;letter-spacing:.03em;
     transition:border-color .2s, background .2s;
+    position:relative;
   }
   .like svg{
     width:15px;height:15px;flex:0 0 auto;
@@ -295,8 +296,15 @@
   .like.dado svg{fill:var(--like);stroke:var(--like)}
   .like.dado{border-color:rgba(232,184,75,.42)}
   .like .n:empty{display:none}
-  .like.pop svg{animation:latido .45s ease}
-  @keyframes latido{0%{transform:scale(1)}35%{transform:scale(1.35)}70%{transform:scale(.92)}100%{transform:scale(1)}}
+  .like::after{
+    content:"";position:absolute;left:50%;top:50%;width:100%;height:100%;
+    border-radius:999px;border:2px solid var(--like);
+    transform:translate(-50%,-50%) scale(1);opacity:0;pointer-events:none;
+  }
+  .like.pop svg{animation:latido .7s cubic-bezier(.2,.9,.3,1.2)}
+  .like.pop::after{animation:onda .7s ease-out}
+  @keyframes latido{0%{transform:scale(1)}25%{transform:scale(1.7)}50%{transform:scale(.9)}75%{transform:scale(1.2)}100%{transform:scale(1)}}
+  @keyframes onda{0%{opacity:.9;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
   .tile .like{position:absolute;top:6px;right:6px;z-index:2}
   .like.grande{
     height:46px;min-width:46px;padding:0 14px;gap:7px;font-size:14px;
@@ -308,6 +316,60 @@
     display:flex;align-items:center;justify-content:space-between;gap:16px;
   }
   .slide .fila-valor .valor{margin-top:0}
+
+  /* ---------- PLACA PROMO ---------- */
+  #promo{
+    position:fixed;inset:0;z-index:150;
+    display:flex;align-items:center;justify-content:center;
+    padding:calc(env(safe-area-inset-top) + 20px) 18px calc(env(safe-area-inset-bottom) + 20px);
+    background:rgba(10,8,6,.74);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  #promo.abierta{opacity:1;pointer-events:auto}
+  .promo-caja{
+    position:relative;width:100%;max-width:420px;max-height:100%;
+    display:flex;flex-direction:column;
+    background:var(--carbon-2);border:1px solid var(--linea-osc);border-radius:18px;
+    overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6);
+    transform:translateY(18px) scale(.97);transition:transform .3s cubic-bezier(.2,.9,.3,1.1);
+  }
+  #promo.abierta .promo-caja{transform:none}
+  .promo-caja img{display:block;width:100%;flex:0 1 auto;min-height:0;object-fit:cover;max-height:56dvh}
+  .promo-caja.solo-imagen{background:transparent;border:none;box-shadow:none;border-radius:14px}
+  .promo-caja.solo-imagen img{max-height:calc(100dvh - 140px);object-fit:contain;border-radius:14px}
+  .promo-ficha{padding:16px 20px 20px;overflow-y:auto}
+  .promo-ficha .etiqueta-promo{
+    display:inline-block;transform:rotate(-2deg);
+    background:var(--ambar);color:var(--tinta);
+    font-family:var(--texto);font-weight:600;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    padding:5px 12px;border-radius:3px;
+  }
+  .promo-ficha h3{
+    font-family:var(--display);font-weight:400;text-transform:uppercase;
+    font-size:clamp(28px,8vw,40px);line-height:1.02;letter-spacing:.02em;
+    margin-top:10px;color:var(--hueso);
+  }
+  .promo-ficha .p-desc{margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--hueso-dim)}
+  .promo-ficha .p-precio{
+    margin-top:10px;font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:.04em;color:var(--ambar-claro);
+  }
+  .promo-btn{
+    display:block;width:100%;margin-top:14px;cursor:pointer;text-align:center;text-decoration:none;
+    font-family:var(--texto);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--tinta);background:linear-gradient(160deg, var(--ambar-claro), var(--ambar));
+    border:none;border-radius:999px;padding:14px 20px;
+    box-shadow:0 6px 16px rgba(0,0,0,.5);
+  }
+  .promo-caja.solo-imagen .promo-btn{margin-top:12px}
+  #promo-cerrar{
+    position:absolute;top:10px;right:10px;z-index:2;
+    width:40px;height:40px;border-radius:50%;cursor:pointer;
+    background:rgba(23,19,16,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(244,238,227,.25);color:var(--hueso);
+    font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.45);
+  }
 
   /* ---------- ESTADOS ---------- */
   #cargando,#error{
@@ -371,6 +433,7 @@
 </footer>
 
 <div id="visor" aria-modal="true" role="dialog"></div>
+<div id="promo" aria-modal="true" role="dialog" aria-label="Promoción"></div>
 <button id="cerrar" aria-label="Cerrar">✕</button>
 
 <script>
@@ -380,6 +443,8 @@ var FOTOS_BASE = '/carta/chiringuito/fotos/';
 var CLAVE_LOCAL = 'chiri';      /* prefijo para lo que se guarda en el celular */
 var UMBRAL_LIKES = 5;           /* el número de likes se muestra recién desde este valor */
 var HORA_CORTE_DIA = 6;         /* igual que en el Code.gs: el día arranca a las 6 AM */
+var PROMOS_BASE = '/carta/chiringuito/promos/';
+var DEMORA_PROMO = 700;         /* ms después de cargar la carta */
 /* =========================================== */
 
 var DATA = null;
@@ -502,6 +567,7 @@ function render(){
   document.getElementById('nav').hidden = false;
   document.getElementById('pie').hidden = false;
   activarSpyTabs();
+  programarPromo();
 }
 
 function activarSpyTabs(){
@@ -520,7 +586,7 @@ function activarSpyTabs(){
 }
 
 /* ---------- VISOR ---------- */
-function abrirVisor(idx){
+function abrirVisor(idx, reemplazarHistorial){
   var v = document.getElementById('visor');
   v.innerHTML = '';
   PLANOS.forEach(function(p, i){
@@ -553,7 +619,8 @@ function abrirVisor(idx){
   v.classList.add('abierto');
   document.body.style.overflow = 'hidden';
   v.children[idx].scrollIntoView();
-  history.pushState({visor:true}, '');
+  if (reemplazarHistorial) history.replaceState({visor:true}, '');
+  else history.pushState({visor:true}, '');
 }
 function cerrarVisor(desdePop){
   var v = document.getElementById('visor');
@@ -564,7 +631,13 @@ function cerrarVisor(desdePop){
   if (!desdePop && history.state && history.state.visor) history.back();
 }
 document.getElementById('cerrar').onclick = function(){ cerrarVisor(false); };
-window.addEventListener('popstate', function(){ cerrarVisor(true); });
+window.addEventListener('popstate', function(){ cerrarPromo(true); cerrarVisor(true); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){
+    if (document.getElementById('promo').classList.contains('abierta')) cerrarPromo(false);
+    else cerrarVisor(false);
+  }
+});
 
 /* ---------- LIKES ---------- */
 var SVG_CORAZON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
@@ -605,6 +678,7 @@ function darLike(id){
   marcarLike(id);
   LIKES[id] = (LIKES[id] || 0) + 1;
   refrescarLike(id, true);
+  try { if (navigator.vibrate) navigator.vibrate(12); } catch(e){}
   fetch(API_URL, {
     method:'POST',
     headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -635,6 +709,117 @@ document.addEventListener('keydown', function(e){
   e.preventDefault();
   darLike(Number(el.dataset.likeId));
 }, true);
+
+/* ---------- PLACA PROMO ---------- */
+var PROMO_ACTUAL = null;
+
+function srcPromo(nombre){
+  if (!nombre) return '';
+  if (nombre.charAt(0) === '/') return nombre;
+  return PROMOS_BASE + encodeURIComponent(nombre);
+}
+function clavePromo(){ return 'promo_' + CLAVE_LOCAL; }
+function enIframe(){ try { return window.self !== window.top; } catch(e){ return true; } }
+
+function programarPromo(){
+  var p = DATA && DATA.promo;
+  if (!p || !p.foto) return;
+  if (enIframe()) return;
+  var forzar = /[?&]verpromo\b/.test(location.search);   /* ?verpromo para probar sin esperar al día siguiente */
+  var marca = fechaOperativa() + '|' + p.version;
+  if (!forzar){
+    try { if (localStorage.getItem(clavePromo()) === marca) return; } catch(e){}
+  }
+  /* se precarga la imagen: si todavía no está publicada o falla, la placa no se muestra */
+  var img = new Image();
+  img.onload = function(){ setTimeout(function(){ mostrarPromo(p, marca); }, DEMORA_PROMO); };
+  img.src = srcPromo(p.foto);
+}
+
+function mostrarPromo(p, marca){
+  if (document.getElementById('visor').classList.contains('abierto')) return; /* ya está mirando platos */
+  PROMO_ACTUAL = p;
+  var soloImagen = !p.titulo;
+  var precio = fmtPrecio(p.precio);
+  var boton = '';
+  if (p.botonTipo === 'plato' && indicePlato(p.botonDestino) > -1){
+    boton = '<button class="promo-btn" id="promo-accion">' + esc(p.botonTexto || 'Ver en la carta') + '</button>';
+  } else if (p.botonTipo === 'link' && /^https?:\/\//i.test(p.botonDestino || '')){
+    boton = '<a class="promo-btn" id="promo-accion" href="' + esc(p.botonDestino) + '" target="_blank" rel="noopener">' + esc(p.botonTexto || 'Ver más') + '</a>';
+  }
+
+  var html = '<div class="promo-caja' + (soloImagen ? ' solo-imagen' : '') + '">' +
+    '<button id="promo-cerrar" aria-label="Cerrar promoción">✕</button>' +
+    '<img src="' + srcPromo(p.foto) + '" alt="' + esc(p.titulo || 'Promoción') + '">';
+  if (soloImagen){
+    html += boton;
+  } else {
+    html += '<div class="promo-ficha">' +
+      '<div class="etiqueta-promo">Promo</div>' +
+      '<h3>' + esc(p.titulo) + '</h3>' +
+      (p.descripcion ? '<div class="p-desc">' + esc(p.descripcion) + '</div>' : '') +
+      (precio ? '<div class="p-precio">' + precio + '</div>' : '') +
+      boton +
+    '</div>';
+  }
+  html += '</div>';
+
+  var cont = document.getElementById('promo');
+  cont.innerHTML = html;
+  cont.classList.add('abierta');
+  document.body.style.overflow = 'hidden';
+  history.pushState({promo:true}, '');
+
+  try { localStorage.setItem(clavePromo(), marca); } catch(e){}
+  eventoPromo(p.id, 'vista');
+
+  document.getElementById('promo-cerrar').onclick = function(e){ e.stopPropagation(); cerrarPromo(false); };
+  cont.onclick = function(e){ if (e.target === cont) cerrarPromo(false); };   /* tocar afuera cierra */
+  var acc = document.getElementById('promo-accion');
+  if (acc){
+    acc.onclick = function(e){
+      eventoPromo(p.id, 'clic');
+      if (p.botonTipo === 'plato'){
+        e.preventDefault();
+        var idx = indicePlato(p.botonDestino);
+        ocultarPromo();
+        if (idx > -1) abrirVisor(idx, true);   /* reemplaza la entrada del historial de la promo */
+        else if (history.state && history.state.promo) history.back();
+      } else {
+        cerrarPromo(false);   /* el link abre en otra pestaña; la carta queda abierta debajo */
+      }
+    };
+  }
+}
+
+function indicePlato(id){
+  var n = Number(id);
+  if (!n) return -1;
+  for (var i = 0; i < PLANOS.length; i++){ if (Number(PLANOS[i].id) === n) return i; }
+  return -1;
+}
+
+function ocultarPromo(){
+  var cont = document.getElementById('promo');
+  if (!cont.classList.contains('abierta')) return false;
+  cont.classList.remove('abierta');
+  document.body.style.overflow = '';
+  setTimeout(function(){ if (!cont.classList.contains('abierta')) cont.innerHTML = ''; }, 300);
+  PROMO_ACTUAL = null;
+  return true;
+}
+function cerrarPromo(desdePop){
+  if (!ocultarPromo()) return;
+  if (!desdePop && history.state && history.state.promo) history.back();
+}
+
+function eventoPromo(id, tipo){
+  fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({accion:'promo_evento', id:id, tipo:tipo})
+  }).catch(function(){});
+}
 
 /* ---------- VISITAS (una por celular por día) ---------- */
 function dos(n){ return (n < 10 ? '0' : '') + n; }
