@@ -28,6 +28,7 @@
     --display:'Anton',sans-serif;
     --script:'Kaushan Script',cursive;
     --texto:'Jost',sans-serif;
+    --like:#E8B84B;            /* color del corazón dado (ámbar de marca) */
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:smooth}
@@ -275,6 +276,39 @@
   }
   #visor.abierto ~ #cerrar{display:flex}
 
+  /* ---------- LIKES (corazón) ---------- */
+  .like{
+    display:inline-flex;align-items:center;justify-content:center;gap:4px;
+    min-width:30px;height:30px;padding:0 7px;border-radius:999px;
+    background:rgba(28,27,24,.6);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.1);
+    color:var(--hueso);cursor:pointer;user-select:none;-webkit-user-select:none;
+    font-family:var(--texto);font-weight:600;font-size:11px;letter-spacing:.03em;
+    transition:border-color .2s, background .2s;
+  }
+  .like svg{
+    width:15px;height:15px;flex:0 0 auto;
+    fill:none;stroke:var(--hueso);stroke-width:2;stroke-linejoin:round;
+    transition:fill .15s, stroke .15s;
+  }
+  .like.dado svg{fill:var(--like);stroke:var(--like)}
+  .like.dado{border-color:rgba(232,184,75,.42)}
+  .like .n:empty{display:none}
+  .like.pop svg{animation:latido .45s ease}
+  @keyframes latido{0%{transform:scale(1)}35%{transform:scale(1.35)}70%{transform:scale(.92)}100%{transform:scale(1)}}
+  .tile .like{position:absolute;top:6px;right:6px;z-index:2}
+  .like.grande{
+    height:46px;min-width:46px;padding:0 14px;gap:7px;font-size:14px;
+    background:rgba(244,238,227,.06);border-color:var(--linea-osc);
+  }
+  .like.grande svg{width:22px;height:22px}
+  .slide .fila-valor{
+    margin-top:14px;max-width:520px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .slide .fila-valor .valor{margin-top:0}
+
   /* ---------- ESTADOS ---------- */
   #cargando,#error{
     min-height:55dvh;display:flex;flex-direction:column;
@@ -343,11 +377,15 @@
 /* ================= CONFIG ================= */
 var API_URL = 'https://script.google.com/macros/s/AKfycbyfEynCpShkMtsGMq4wt7JBQIBqWSS74sUvsZdddnHNOW8EJv8u21X8jLGpMxtWlShHKg/exec';
 var FOTOS_BASE = '/carta/chiringuito/fotos/';
+var CLAVE_LOCAL = 'chiri';      /* prefijo para lo que se guarda en el celular */
+var UMBRAL_LIKES = 5;           /* el número de likes se muestra recién desde este valor */
+var HORA_CORTE_DIA = 6;         /* igual que en el Code.gs: el día arranca a las 6 AM */
 /* =========================================== */
 
 var DATA = null;
 var PLANOS = [];
 var observadorTabs = null;
+var LIKES = {};   /* id -> cantidad de likes */
 
 function fmtPrecio(p){
   if (p === null || isNaN(p)) return '';
@@ -382,6 +420,10 @@ function render(){
   var main = document.getElementById('carta');
   var tabs = document.getElementById('tabs');
   main.innerHTML = ''; tabs.innerHTML = ''; PLANOS = [];
+  LIKES = {};
+  DATA.secciones.forEach(function(sec){
+    sec.productos.forEach(function(p){ if (p.id) LIKES[p.id] = Number(p.likes) || 0; });
+  });
 
   DATA.secciones.forEach(function(sec, si){
     var id = 'sec-' + si;
@@ -427,6 +469,7 @@ function render(){
       }
       var precio = fmtPrecio(p.precio);
       t.innerHTML = media +
+        htmlLike(p, '') +
         '<div class="chip">' +
           '<span class="nombre">' + esc(p.producto) + '</span>' +
           (precio ? '<span class="precio">' + precio + '</span>' : '') +
@@ -499,7 +542,10 @@ function abrirVisor(idx){
         '<div class="etiqueta">' + esc(p.seccion) + '</div>' +
         '<h3>' + esc(p.producto) + '</h3>' +
         (p.descripcion ? '<div class="desc">' + esc(p.descripcion) + '</div>' : '') +
-        '<div class="valor">' + fmtPrecio(p.precio) + '</div>' +
+        '<div class="fila-valor">' +
+          '<div class="valor">' + fmtPrecio(p.precio) + '</div>' +
+          htmlLike(p, 'grande') +
+        '</div>' +
       '</div>' +
       (i < PLANOS.length - 1 ? '<div class="pista">▲<span>deslizá</span></div>' : '');
     v.appendChild(d);
@@ -520,6 +566,99 @@ function cerrarVisor(desdePop){
 document.getElementById('cerrar').onclick = function(){ cerrarVisor(false); };
 window.addEventListener('popstate', function(){ cerrarVisor(true); });
 
+/* ---------- LIKES ---------- */
+var SVG_CORAZON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+
+function claveLike(id){ return 'like_' + CLAVE_LOCAL + '_' + id; }
+function yaDioLike(id){ try { return localStorage.getItem(claveLike(id)) === '1'; } catch(e){ return false; } }
+function marcarLike(id){ try { localStorage.setItem(claveLike(id), '1'); } catch(e){} }
+function textoLikes(n){ return n >= UMBRAL_LIKES ? String(n) : ''; }
+
+function htmlLike(p, clase){
+  if (!p.id) return '';
+  var dado = yaDioLike(p.id);
+  var n = LIKES[p.id] || 0;
+  return '<span class="like' + (clase ? ' ' + clase : '') + (dado ? ' dado' : '') + '"' +
+    ' role="button" tabindex="0" aria-label="Me gusta" aria-pressed="' + dado + '"' +
+    ' data-like-id="' + p.id + '">' +
+    SVG_CORAZON + '<span class="n">' + textoLikes(n) + '</span></span>';
+}
+
+function refrescarLike(id, animar){
+  var dado = yaDioLike(id);
+  var n = LIKES[id] || 0;
+  document.querySelectorAll('[data-like-id="' + id + '"]').forEach(function(el){
+    el.classList.toggle('dado', dado);
+    el.setAttribute('aria-pressed', dado);
+    el.querySelector('.n').textContent = textoLikes(n);
+    if (animar){
+      el.classList.remove('pop');
+      void el.offsetWidth;
+      el.classList.add('pop');
+    }
+  });
+}
+
+function darLike(id){
+  if (!id) return;
+  if (yaDioLike(id)){ refrescarLike(id, true); return; }  /* ya lo likeó: solo late */
+  marcarLike(id);
+  LIKES[id] = (LIKES[id] || 0) + 1;
+  refrescarLike(id, true);
+  fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({accion:'like', id:id})
+  }).then(function(r){ return r.json(); })
+    .then(function(res){
+      if (res && res.ok && typeof res.likes === 'number'){
+        LIKES[id] = res.likes;
+        refrescarLike(id, false);
+      }
+    })
+    .catch(function(){});
+}
+
+/* el corazón está dentro del botón del plato: se ataja el toque antes de que abra el visor */
+document.addEventListener('click', function(e){
+  var el = e.target.closest ? e.target.closest('[data-like-id]') : null;
+  if (!el) return;
+  e.stopPropagation();
+  e.preventDefault();
+  darLike(Number(el.dataset.likeId));
+}, true);
+document.addEventListener('keydown', function(e){
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  var el = e.target.closest ? e.target.closest('[data-like-id]') : null;
+  if (!el) return;
+  e.stopPropagation();
+  e.preventDefault();
+  darLike(Number(el.dataset.likeId));
+}, true);
+
+/* ---------- VISITAS (una por celular por día) ---------- */
+function dos(n){ return (n < 10 ? '0' : '') + n; }
+function fechaOperativa(){
+  var d = new Date(Date.now() - HORA_CORTE_DIA * 3600 * 1000);
+  return d.getFullYear() + '-' + dos(d.getMonth() + 1) + '-' + dos(d.getDate());
+}
+function registrarVisita(){
+  try { if (window.self !== window.top) return; } catch(e){ return; }   /* dentro de un iframe no cuenta */
+  if (/[?&]nocount\b/.test(location.search)) return;                     /* ?nocount para pruebas */
+  var hoy = fechaOperativa();
+  var clave = 'visita_' + CLAVE_LOCAL;
+  try { if (localStorage.getItem(clave) === hoy) return; } catch(e){}
+  fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({accion:'visita'})
+  }).then(function(r){ return r.json(); })
+    .then(function(res){
+      if (res && res.ok){ try { localStorage.setItem(clave, hoy); } catch(e){} }
+    })
+    .catch(function(){});
+}
+
 /* ---------- utiles ---------- */
 function esc(s){
   return String(s).replace(/[&<>"']/g, function(c){
@@ -529,6 +668,7 @@ function esc(s){
 function inicial(s){ return esc((s || '?').trim().charAt(0).toUpperCase()); }
 
 cargar();
+setTimeout(registrarVisita, 1500);   /* después de la carta, para no competir con la carga */
 </script>
 </body>
 </html>
