@@ -109,6 +109,65 @@
   .estado-foto.ok{color:#1F7A4D;display:block}
   .estado-foto.err{color:var(--peligro);display:block}
   .vacio{color:var(--tinta-dim);font-size:13px;padding:20px 0;text-align:center}
+
+  /* ---------- VISTAS: Carta / Resultados ---------- */
+  .vistas{
+    display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:18px;
+    background:var(--tarjeta);border:1px solid var(--linea);border-radius:999px;
+  }
+  .vista-btn{
+    cursor:pointer;border:none;background:none;border-radius:999px;padding:10px;
+    font-family:'Jost',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--tinta-dim);
+  }
+  .vista-btn.activa{color:var(--hueso);background:var(--verde)}
+
+  /* ---------- RESULTADOS ---------- */
+  .res-cabecera{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .res-titulo{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:18px;letter-spacing:.02em}
+  .res-sub{font-size:11px;color:var(--tinta-dim);margin-top:2px}
+  .btn-actualizar{
+    cursor:pointer;flex:0 0 auto;border:1px solid var(--linea);background:var(--tarjeta);color:var(--tinta);
+    border-radius:999px;padding:8px 14px;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;
+  }
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+  .kpi{background:var(--tarjeta);border:1px solid var(--linea);border-radius:14px;padding:12px 10px;text-align:center}
+  .kpi .num{font-family:'Anton',sans-serif;font-weight:400;font-size:30px;line-height:1.05;color:var(--tinta)}
+  .kpi .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-dim);margin-top:4px}
+  .kpi.destacado{background:var(--verde);border-color:var(--verde)}
+  .kpi.destacado .num{color:var(--ambar)}
+  .kpi.destacado .lbl{color:rgba(243,239,231,.7)}
+  .total-hist{font-size:12px;color:var(--tinta-dim);text-align:center;margin-bottom:22px}
+  .total-hist b{color:var(--tinta);font-weight:600}
+
+  .bloque{background:var(--tarjeta);border:1px solid var(--linea);border-radius:16px;padding:16px 14px;margin-bottom:16px}
+  .bloque h3{font-family:'Jost',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--tinta-dim);margin-bottom:14px}
+
+  .grafico{display:flex;align-items:flex-end;gap:4px;height:150px}
+  .barra-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+  .barra-val{font-size:10px;font-weight:600;color:var(--tinta);margin-bottom:3px;min-height:12px}
+  .barra{width:100%;max-width:26px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--ambar),var(--ambar-2));min-height:3px}
+  .barra.cero{background:var(--linea)}
+  .barra-col.hoy .barra{background:var(--verde)}
+  .barra-dia{font-size:10px;color:var(--tinta-dim);margin-top:5px;line-height:1.15;text-align:center}
+  .barra-col.hoy .barra-dia{color:var(--tinta);font-weight:600}
+  .barra-col.finde .barra-dia{color:var(--ambar-2)}
+
+  .rank{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--linea)}
+  .rank:last-child{border-bottom:none}
+  .rank .pos{font-family:'Anton',sans-serif;font-weight:400;font-size:22px;width:22px;text-align:center;color:var(--ambar-2);flex:0 0 auto}
+  .rank .pos.oro{color:var(--verde)}
+  .rank .thumb{width:46px;height:46px}
+  .rank .r-info{flex:1;min-width:0}
+  .rank .r-nom{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rank .r-sec{font-size:11px;color:var(--tinta-dim);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rank .r-barra{height:5px;border-radius:99px;background:var(--linea);margin-top:6px;overflow:hidden}
+  .rank .r-barra i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--ambar),var(--ambar-2))}
+  .rank .r-likes{display:flex;align-items:center;gap:4px;font-family:'Jost',sans-serif;font-weight:600;font-size:14px;flex:0 0 auto}
+  .rank .r-likes svg{width:15px;height:15px;fill:var(--ambar);stroke:var(--ambar-2);stroke-width:1.2}
+  .oculto-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--peligro);margin-left:6px}
+  .total-likes{font-size:12px;color:var(--tinta-dim);text-align:center;margin-top:12px}
+  .cargando-res{color:var(--tinta-dim);font-size:13px;text-align:center;padding:40px 0}
 </style>
 </head>
 <body>
@@ -126,6 +185,14 @@
   <div class="cinta">Grupo El Chiringuito</div>
   <h1>Panel — <span class="accent">El Chiringuito</span></h1>
 
+  <div class="vistas">
+    <button class="vista-btn activa" id="vb-carta" onclick="cambiarVista('carta')">Carta</button>
+    <button class="vista-btn" id="vb-resultados" onclick="cambiarVista('resultados')">Resultados</button>
+  </div>
+
+  <div id="vista-resultados" hidden></div>
+
+  <div id="vista-carta">
   <button class="btn-agregar" onclick="abrirCrear()">+ Agregar producto</button>
 
   <div class="fila-secciones" id="fila-secciones">
@@ -136,6 +203,7 @@
 
   <div class="tabs" id="tabs"></div>
   <div id="lista"></div>
+  </div>
 </div>
 
 <div id="modal">
@@ -449,6 +517,110 @@ function subirFoto(archivo, nombreProducto){
 }
 
 function cerrarModal(){ document.getElementById('modal').classList.remove('abierto'); }
+
+/* ================= RESULTADOS ================= */
+var DIAS_GRAFICO = 14;
+var DIAS_SEMANA = ['Do','Lu','Ma','Mi','Ju','Vi','Sá'];
+var SVG_CORAZON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+
+function cambiarVista(v){
+  var esRes = v === 'resultados';
+  document.getElementById('vista-carta').hidden = esRes;
+  document.getElementById('vista-resultados').hidden = !esRes;
+  document.getElementById('vb-carta').classList.toggle('activa', !esRes);
+  document.getElementById('vb-resultados').classList.toggle('activa', esRes);
+  if (esRes) cargarResultados();
+}
+
+function cargarResultados(){
+  var cont = document.getElementById('vista-resultados');
+  cont.innerHTML = '<div class="cargando-res">Cargando resultados…</div>';
+  llamar('admin_stats').then(function(res){
+    if (!res || !res.ok){
+      cont.innerHTML = '<div class="cargando-res">No se pudieron cargar los resultados' + (res && res.error ? ' (' + esc(res.error) + ')' : '') + '.<br><br>' +
+        '<button class="btn-actualizar" onclick="cargarResultados()">Reintentar</button></div>';
+      return;
+    }
+    renderResultados(res);
+  }).catch(function(){
+    cont.innerHTML = '<div class="cargando-res">Sin conexión con el servidor.<br><br>' +
+      '<button class="btn-actualizar" onclick="cargarResultados()">Reintentar</button></div>';
+  });
+}
+
+function fmtNum(n){ return Number(n || 0).toLocaleString('es-AR'); }
+
+function partesFecha(f){
+  var p = String(f).split('-');
+  return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+}
+
+function renderResultados(r){
+  var cont = document.getElementById('vista-resultados');
+  var ahora = new Date();
+  var hora = ahora.getHours() + ':' + (ahora.getMinutes() < 10 ? '0' : '') + ahora.getMinutes();
+
+  /* --- KPIs --- */
+  var html =
+    '<div class="res-cabecera">' +
+      '<div><div class="res-titulo">Visitas a la carta</div>' +
+      '<div class="res-sub">Un celular cuenta una vez por día · el día arranca a las ' + (r.corteDia != null ? r.corteDia : 6) + ' AM · actualizado ' + hora + '</div></div>' +
+      '<button class="btn-actualizar" onclick="cargarResultados()">↻ Actualizar</button>' +
+    '</div>' +
+    '<div class="kpis">' +
+      '<div class="kpi destacado"><div class="num">' + fmtNum(r.hoy) + '</div><div class="lbl">Hoy</div></div>' +
+      '<div class="kpi"><div class="num">' + fmtNum(r.ultimos7) + '</div><div class="lbl">7 días</div></div>' +
+      '<div class="kpi"><div class="num">' + fmtNum(r.ultimos30) + '</div><div class="lbl">30 días</div></div>' +
+    '</div>' +
+    '<div class="total-hist">Total desde que se empezó a contar: <b>' + fmtNum(r.total) + '</b></div>';
+
+  /* --- Gráfico últimos 14 días --- */
+  var serie = (r.serie || []).slice(-DIAS_GRAFICO);
+  var max = 0;
+  serie.forEach(function(d){ if (d.visitas > max) max = d.visitas; });
+  html += '<div class="bloque"><h3>Visitas por día — últimos ' + serie.length + ' días</h3><div class="grafico">';
+  serie.forEach(function(d, i){
+    var fecha = partesFecha(d.fecha);
+    var dow = fecha.getDay();
+    var alto = max ? Math.max(3, Math.round(d.visitas / max * 110)) : 3;
+    var clases = 'barra-col' + (i === serie.length - 1 ? ' hoy' : '') + ((dow === 0 || dow === 6) ? ' finde' : '');
+    html += '<div class="' + clases + '">' +
+      '<div class="barra-val">' + (d.visitas ? d.visitas : '') + '</div>' +
+      '<div class="barra' + (d.visitas ? '' : ' cero') + '" style="height:' + alto + 'px"></div>' +
+      '<div class="barra-dia">' + DIAS_SEMANA[dow] + '<br>' + fecha.getDate() + '</div>' +
+    '</div>';
+  });
+  html += '</div></div>';
+
+  /* --- Top 5 likes --- */
+  var top = r.top5 || [];
+  html += '<div class="bloque"><h3>Top 5 más likeados</h3>';
+  if (!top.length){
+    html += '<div class="vacio">Todavía nadie likeó ningún plato.</div>';
+  } else {
+    var maxL = top[0].likes || 1;
+    top.forEach(function(p, i){
+      var src = fotoSrc_(p.foto);
+      var esVid = p.tipo === 'video' || /\.(mp4|webm|mov)$/i.test(p.foto || '');
+      var thumb = (src && !esVid)
+        ? '<img src="' + src + '" alt="" onerror="this.parentElement.innerHTML=\'<span>' + inicial(p.producto) + '</span>\'">'
+        : '<span>' + inicial(p.producto) + '</span>';
+      html += '<div class="rank">' +
+        '<div class="pos' + (i === 0 ? ' oro' : '') + '">' + (i + 1) + '</div>' +
+        '<div class="thumb">' + thumb + '</div>' +
+        '<div class="r-info">' +
+          '<div class="r-nom">' + esc(p.producto) + (p.activo === false ? '<span class="oculto-tag">oculto</span>' : '') + '</div>' +
+          '<div class="r-sec">' + esc(p.seccion) + '</div>' +
+          '<div class="r-barra"><i style="width:' + Math.round(p.likes / maxL * 100) + '%"></i></div>' +
+        '</div>' +
+        '<div class="r-likes">' + SVG_CORAZON + fmtNum(p.likes) + '</div>' +
+      '</div>';
+    });
+  }
+  html += '<div class="total-likes">Likes totales en la carta: <b>' + fmtNum(r.totalLikes) + '</b></div></div>';
+
+  cont.innerHTML = html;
+}
 
 function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
