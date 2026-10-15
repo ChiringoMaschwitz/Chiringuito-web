@@ -51,9 +51,8 @@
      "geo":{"@type":"GeoCoordinates","latitude":-34.3815486,"longitude":-58.7471325},
      "sameAs":["https://www.instagram.com/lafocacceria.elchiringuito"],
      "openingHoursSpecification":[
-       {"@type":"OpeningHoursSpecification","dayOfWeek":["Wednesday","Thursday"],"opens":"17:00","closes":"01:00"},
-       {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"10:00","closes":"01:00"},
-       {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"00:30"}]},
+       {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday"],"opens":"09:00","closes":"19:00"},
+       {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday","Sunday"],"opens":"09:00","closes":"01:00"}]},
     {"@type":"Restaurant","@id":"https://grupochiringuito.com.ar/#unapizza","name":"Una Pizza","url":"https://grupochiringuito.com.ar/","telephone":"+5491126091109","priceRange":"$$",
      "servesCuisine":["Pizza","Empanadas"],
      "address":{"@type":"PostalAddress","streetAddress":"Mendoza 1578, Paseo Mendoza","addressLocality":"Ingeniero Maschwitz","addressRegion":"Buenos Aires","postalCode":"B1623","addressCountry":"AR"},
@@ -650,7 +649,7 @@ body.modal-open{overflow:hidden}
       <div class="m-promo">👷 <b>Menú Worker:</b> menú ejecutivo por $19.500, todos los días.</div>
 
       <div class="m-info">
-        <div><div class="lbl">Horarios</div>Mié–Jue 17 a 01 · Vie–Sáb 10 a 01<br>Dom 10 a 00:30 · Lun–Mar cerrado</div>
+        <div><div class="lbl">Horarios</div>Mar–Jue 9 a 19<br>Vie–Dom 9 a 01 · Lun cerrado</div>
         <div><div class="lbl">Dirección y teléfono</div>Mendoza 1578, Paseo Mendoza, Ing. Maschwitz<br>11 7819-6138</div>
       </div>
       <div class="m-ctas">
@@ -919,7 +918,7 @@ function sendWA(){
 const HORARIOS={
   chiringuito:{nombre:'El Chiringuito',2:[[1020,1560]],3:[[1020,1560]],4:[[1020,1560]],5:[[1020,1620]],6:[[660,1620]],0:[[660,1440]]},
   lounge:     {nombre:'Chiringuito Lounge',3:[[540,1500]],4:[[540,1500]],5:[[540,1500]],6:[[540,1500]],0:[[540,1500]]},
-  focacceria: {nombre:'La Focacceria',3:[[1020,1500]],4:[[1020,1500]],5:[[600,1500]],6:[[600,1500]],0:[[600,1470]]},
+  focacceria: {nombre:'La Focacceria',2:[[540,1140]],3:[[540,1140]],4:[[540,1140]],5:[[540,1500]],6:[[540,1500]],0:[[540,1500]]},
   unapizza:   {nombre:'Una Pizza',3:[[1140,1440]],4:[[1140,1440]],5:[[1140,1500]],6:[[1140,1500]],0:[[1140,1440]]},
   bakery:     {nombre:'ChirinBakery',2:[[600,1260]],3:[[600,1260]],4:[[600,1260]],5:[[600,1260]],6:[[600,1260]],0:[[600,1260]]}
 };
