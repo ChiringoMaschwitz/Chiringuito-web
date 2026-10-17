@@ -232,6 +232,41 @@
   .promo-res .pr-nom{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .promo-res .pr-datos{font-size:12px;color:var(--tinta-dim);margin-top:2px}
   .promo-res .pr-pct{font-family:'Anton',sans-serif;font-size:20px;color:var(--verde);flex:0 0 auto}
+
+  /* ---------- CALENDARIO DE PROMOS ---------- */
+  .cal-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .cal-titulo{font-family:'Anton',sans-serif;font-size:16px;text-transform:uppercase;text-align:center;line-height:1.1}
+  .cal-titulo span{display:block;font-family:'Jost',sans-serif;font-size:11px;color:var(--tinta-dim);text-transform:none;letter-spacing:.04em}
+  .cal-hoy-link{text-align:center;font-size:12px;color:var(--verde);font-weight:600;margin:-4px 0 10px;cursor:pointer}
+  .cal{display:grid;grid-template-columns:24px repeat(7,1fr);gap:2px}
+  .cal-dia-cab{height:30px;text-align:center;font-size:10px;font-weight:600;color:var(--tinta-dim);letter-spacing:.06em;line-height:1.2}
+  .cal-dia-cab span{display:block;font-size:13px;color:var(--tinta)}
+  .cal-col.hoy .cal-dia-cab span{display:inline-block;background:var(--verde);color:var(--hueso);border-radius:999px;padding:0 6px}
+  .cal-horas,.cal-dia{position:relative}
+  .cal-hora{position:absolute;right:2px;font-size:9px;color:var(--tinta-dim);transform:translateY(-5px)}
+  .cal-dia{background:#F7F3EC;border-radius:6px;overflow:hidden}
+  .cal-col.hoy .cal-dia{background:#EFE8DA}
+  .cal-linea{position:absolute;left:0;right:0;height:1px;background:rgba(28,27,24,.07)}
+  .cal-bloque{position:absolute;border-radius:4px;overflow:hidden;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+  .cal-bloque span{display:block;padding:2px 3px;font-size:9px;font-weight:600;line-height:1.15;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45);word-break:break-word}
+  .cal-bloque.pausada{opacity:.3}
+  .cal-bloque.choque{box-shadow:inset 0 0 0 2px var(--peligro);background-image:repeating-linear-gradient(135deg,rgba(179,38,30,.35) 0 4px,transparent 4px 8px)!important}
+  .cal-ahora{position:absolute;left:0;right:0;height:2px;background:var(--peligro);z-index:2}
+  .cal-ahora::before{content:"";position:absolute;left:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--peligro)}
+
+  .bloque-fila{display:flex;align-items:center;gap:8px;background:var(--tarjeta);border:1px solid var(--linea);border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:13px;font-weight:500}
+  .bf-color{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+  .bf-txt{flex:1}
+  .bf-x{border:none;background:none;color:var(--peligro);font-size:15px;cursor:pointer;padding:2px 6px}
+  .agregar-bloque{border:1px dashed var(--linea);border-radius:12px;padding:12px;margin-bottom:14px;background:rgba(232,184,75,.06)}
+  .ab-titulo{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-dim);margin-bottom:8px}
+
+  #alerta{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(28,22,14,.6)}
+  #alerta.abierta{display:flex}
+  .alerta-caja{width:100%;max-width:440px;background:var(--hueso);border-radius:18px;padding:20px 18px}
+  .alerta-tit{font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;color:var(--peligro);margin-bottom:10px}
+  .alerta-caja ul{margin:0 0 10px 18px;font-size:13px;line-height:1.5}
+  .alerta-caja li{margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -277,6 +312,8 @@
   <div id="lista"></div>
   </div>
 </div>
+
+<div id="alerta"></div>
 
 <div id="pp" onclick="if(event.target===this)cerrarPreview()"></div>
 
@@ -718,14 +755,20 @@ function renderResultados(r){
   cont.innerHTML = html;
 }
 
-/* ================= PROMOS ================= */
+/* ================= PROMOS — CALENDARIO ================= */
 var PROMOS = [];
-var PROXIMOS = [];
 var HOY_OP = '';
+var AHORA_MIN = 0;
+var EN_AIRE = null;
+var CORTE = 6;
+var SEMANA_OFFSET = 0;
+var EDIT = null;   /* placa que se está editando */
+var H_HORA = 18;   /* alto en px de una hora en el calendario */
 var DIAS_ORDEN = ['LU','MA','MI','JU','VI','SA','DO'];
 var DIAS_LARGO = {LU:'lunes',MA:'martes',MI:'miércoles',JU:'jueves',VI:'viernes',SA:'sábados',DO:'domingos'};
 var DIAS_CORTO = {LU:'Lu',MA:'Ma',MI:'Mi',JU:'Ju',VI:'Vi',SA:'Sá',DO:'Do'};
-var EDIT = null;   /* promo que se está editando */
+var DIA_UTC = ['DO','LU','MA','MI','JU','VI','SA'];
+var COLORES = ['#E8B84B','#1F3C38','#B8892A','#5B7A6E','#8C5A3C','#3E5C76'];
 
 function srcPromo(nombre){
   if (!nombre) return '';
@@ -736,6 +779,24 @@ function fechaCorta(f){
   var p = String(f).split('-');
   return p[2] + '/' + p[1];
 }
+function utcDe(f){ var p = String(f).split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+function fmtFecha(d){ return d.getUTCFullYear() + '-' + ('0' + (d.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + d.getUTCDate()).slice(-2); }
+function sumarDias(f, n){ var d = utcDe(f); d.setUTCDate(d.getUTCDate() + n); return fmtFecha(d); }
+function diaDe(f){ return DIA_UTC[utcDe(f).getUTCDay()]; }
+function lunesDe(f){ var dow = utcDe(f).getUTCDay(); return sumarDias(f, dow === 0 ? -6 : 1 - dow); }
+
+/* minutos operativos (0 = hora de corte) <-> 'HH:mm' */
+function horaAMin(h){ var p = String(h).split(':'); return ((+p[0]) * 60 + (+p[1]) - CORTE * 60 + 1440) % 1440; }
+function minAHora(m){ var t = (m + CORTE * 60) % 1440; return ('0' + Math.floor(t / 60)).slice(-2) + ':' + ('0' + (t % 60)).slice(-2); }
+function rango(b){
+  if (b.todoDia) return [0, 1440];
+  var s = horaAMin(b.desde), e = horaAMin(b.hasta);
+  if (e === 0) e = 1440;
+  return [s, e];
+}
+function textoHorario(b){ return b.todoDia ? 'todo el día' : b.desde + '–' + b.hasta; }
+function colorDe(id){ return COLORES[id % COLORES.length]; }
+function nombreDe(p){ return p.nombre || p.titulo || ('Placa ' + p.id); }
 
 function cargarPromos(){
   var cont = document.getElementById('promos-contenido');
@@ -747,8 +808,10 @@ function cargarPromos(){
       return;
     }
     PROMOS = res.promos || [];
-    PROXIMOS = res.proximos || [];
     HOY_OP = res.hoy || '';
+    AHORA_MIN = res.ahoraMin || 0;
+    EN_AIRE = res.enAire || null;
+    if (res.corteDia != null) CORTE = res.corteDia;
     renderPromos();
   }).catch(function(){
     cont.innerHTML = '<div class="cargando-res">Sin conexión con el servidor.<br><br>' +
@@ -761,51 +824,126 @@ function promoPorId(id){
   return null;
 }
 
-function resumenProgramacion(p){
-  if (p.modo === 'fechas'){
-    if (!p.desde) return 'Sin fecha';
-    if (!p.hasta || p.hasta === p.desde) return 'Solo el ' + fechaCorta(p.desde);
-    return fechaCorta(p.desde) + ' → ' + fechaCorta(p.hasta);
-  }
-  var dias = DIAS_ORDEN.filter(function(d){ return (p.dias || []).indexOf(d) > -1; });
-  if (!dias.length) return 'Sin días elegidos';
-  var txt;
-  if (dias.length === 7) txt = 'Todos los días';
-  else if (dias.length === 1) txt = 'Todos los ' + DIAS_LARGO[dias[0]];
-  else txt = dias.map(function(d){ return DIAS_CORTO[d]; }).join(', ').replace(/, ([^,]*)$/, ' y $1');
-  if (p.desde) txt += ' · desde ' + fechaCorta(p.desde);
-  if (p.hasta) txt += ' · hasta ' + fechaCorta(p.hasta);
+/* ¿el bloque b de la placa p cae en la fecha f? */
+function bloqueEnFecha(p, b, f){
+  if (b.tipo === 'fecha') return b.fecha === f;
+  if (b.dia !== diaDe(f)) return false;
+  if (p.vigDesde && f < p.vigDesde) return false;
+  if (p.vigHasta && f > p.vigHasta) return false;
+  return true;
+}
+function seSolapan(r1, r2){ return r1[0] < r2[1] && r2[0] < r1[1]; }
+
+function resumenBloques(p){
+  var bl = p.bloques || [];
+  if (!bl.length) return 'Sin programar';
+  var grupos = {}, orden = [];
+  bl.forEach(function(b){
+    if (b.tipo !== 'semanal') return;
+    var k = textoHorario(b);
+    if (!grupos[k]){ grupos[k] = []; orden.push(k); }
+    if (grupos[k].indexOf(b.dia) === -1) grupos[k].push(b.dia);
+  });
+  var partes = orden.map(function(k){
+    var dias = DIAS_ORDEN.filter(function(d){ return grupos[k].indexOf(d) > -1; });
+    var txt = dias.length === 7 ? 'Todos los días' : (dias.length === 1 ? 'Todos los ' + DIAS_LARGO[dias[0]] :
+      dias.map(function(d){ return DIAS_CORTO[d]; }).join(', ').replace(/, ([^,]*)$/, ' y $1'));
+    return txt + ' ' + k;
+  });
+  bl.filter(function(b){ return b.tipo === 'fecha'; })
+    .sort(function(a, b){ return a.fecha < b.fecha ? -1 : 1; })
+    .forEach(function(b){ partes.push(fechaCorta(b.fecha) + ' ' + textoHorario(b)); });
+  var txt = partes.join(' · ');
+  if (p.vigDesde) txt += ' · desde ' + fechaCorta(p.vigDesde);
+  if (p.vigHasta) txt += ' · hasta ' + fechaCorta(p.vigHasta);
   return txt;
 }
 
 function estadoPromo(p){
   if (!p.activa) return {txt:'Pausada', cls:''};
-  if (PROXIMOS.length && PROXIMOS[0].promoId === p.id) return {txt:'Sale hoy', cls:'hoy'};
-  var fin = p.modo === 'fechas' ? (p.hasta || p.desde) : p.hasta;
-  if (fin && HOY_OP && fin < HOY_OP) return {txt:'Vencida', cls:'alerta'};
-  if (p.modo === 'semanal' && !(p.dias || []).length) return {txt:'Sin programar', cls:'alerta'};
-  var sale = PROXIMOS.some(function(d){ return d.promoId === p.id; });
-  if (sale) return {txt:'Programada', cls:'prog'};
-  return {txt:'No sale en 14 días', cls:''};
+  if (EN_AIRE === p.id) return {txt:'Al aire ahora', cls:'hoy'};
+  var bl = p.bloques || [];
+  if (!bl.length) return {txt:'Sin programar', cls:'alerta'};
+  var futuro = bl.some(function(b){
+    if (b.tipo === 'fecha') return b.fecha >= HOY_OP;
+    return !p.vigHasta || p.vigHasta >= HOY_OP;
+  });
+  return futuro ? {txt:'Programada', cls:'prog'} : {txt:'Vencida', cls:'alerta'};
 }
+
+/* ---------- calendario semanal ---------- */
+function itemsDelDia(f){
+  var items = [];
+  PROMOS.forEach(function(p){
+    (p.bloques || []).forEach(function(b){
+      if (bloqueEnFecha(p, b, f)) items.push({p:p, b:b, r:rango(b)});
+    });
+  });
+  items.sort(function(a, b){ return a.r[0] - b.r[0] || a.p.id - b.p.id; });
+  /* carriles y choques (solo entre placas activas distintas) */
+  var carriles = [];
+  items.forEach(function(it){
+    it.choque = it.p.activa && items.some(function(o){
+      return o !== it && o.p.activa && o.p.id !== it.p.id && seSolapan(o.r, it.r);
+    });
+    var c = 0;
+    while (carriles[c] !== undefined && carriles[c] > it.r[0]) c++;
+    carriles[c] = it.r[1];
+    it.carril = c;
+  });
+  items.forEach(function(it){ it.carriles = carriles.length; });
+  return items;
+}
+
+function renderCalendario(){
+  var lunes = sumarDias(lunesDe(HOY_OP), SEMANA_OFFSET * 7);
+  var domingo = sumarDias(lunes, 6);
+  var altoTotal = 24 * H_HORA;
+  var html = '<div class="bloque"><div class="cal-cab">' +
+    '<button class="btn-mover-sec" onclick="moverSemana(-1)">◀</button>' +
+    '<div class="cal-titulo">' + (SEMANA_OFFSET === 0 ? 'Esta semana' : 'Semana') + '<span>' + fechaCorta(lunes) + ' → ' + fechaCorta(domingo) + '</span></div>' +
+    '<button class="btn-mover-sec" onclick="moverSemana(1)">▶</button>' +
+  '</div>';
+  if (SEMANA_OFFSET !== 0) html += '<div class="cal-hoy-link" onclick="moverSemana(0)">Volver a esta semana</div>';
+
+  html += '<div class="cal"><div class="cal-col-horas"><div class="cal-dia-cab"></div><div class="cal-horas" style="height:' + altoTotal + 'px">';
+  for (var h = 0; h < 24; h += 2){
+    html += '<div class="cal-hora" style="top:' + (h * H_HORA) + 'px">' + minAHora(h * 60).slice(0, 2) + '</div>';
+  }
+  html += '</div></div>';
+
+  var hayChoques = false;
+  for (var i = 0; i < 7; i++){
+    var f = sumarDias(lunes, i);
+    var esHoy = f === HOY_OP;
+    html += '<div class="cal-col' + (esHoy ? ' hoy' : '') + '"><div class="cal-dia-cab">' + DIAS_CORTO[DIAS_ORDEN[i]] + '<span>' + utcDe(f).getUTCDate() + '</span></div>' +
+      '<div class="cal-dia" style="height:' + altoTotal + 'px">';
+    for (var g = 2; g < 24; g += 2) html += '<div class="cal-linea" style="top:' + (g * H_HORA) + 'px"></div>';
+    itemsDelDia(f).forEach(function(it){
+      if (it.choque) hayChoques = true;
+      var top = it.r[0] / 60 * H_HORA;
+      var alto = Math.max(10, (it.r[1] - it.r[0]) / 60 * H_HORA - 1);
+      var ancho = 100 / it.carriles;
+      html += '<div class="cal-bloque' + (it.choque ? ' choque' : '') + (it.p.activa ? '' : ' pausada') + '"' +
+        ' style="top:' + top + 'px;height:' + alto + 'px;left:' + (it.carril * ancho) + '%;width:' + ancho + '%;background:' + colorDe(it.p.id) + '"' +
+        ' onclick="abrirEditorPromo(' + it.p.id + ')" title="' + escAttr(nombreDe(it.p) + ' · ' + textoHorario(it.b)) + '">' +
+        '<span>' + esc(nombreDe(it.p)) + '</span></div>';
+    });
+    if (esHoy) html += '<div class="cal-ahora" style="top:' + (AHORA_MIN / 60 * H_HORA) + 'px"></div>';
+    html += '</div></div>';
+  }
+  html += '</div>';
+  html += '<div class="ayuda">El día arranca a las ' + ('0' + CORTE).slice(-2) + ':00. Tocá un bloque para editar la placa. ' +
+    (hayChoques ? '<b style="color:var(--peligro)">Los bloques en rojo se pisan</b>: sale la de fecha puntual o, si empatan, la más nueva.' : 'Sin choques esta semana ✓') +
+    '</div></div>';
+  return html;
+}
+function moverSemana(d){ SEMANA_OFFSET = d === 0 ? 0 : SEMANA_OFFSET + d; renderPromos(); }
 
 function renderPromos(){
   var cont = document.getElementById('promos-contenido');
-  var html = '';
+  var html = renderCalendario();
 
-  /* --- Próximos 14 días --- */
-  html += '<div class="bloque"><h3>Próximos 14 días</h3><div class="tira">';
-  PROXIMOS.forEach(function(d, i){
-    var p = d.promoId ? promoPorId(d.promoId) : null;
-    var dia = DIAS_CORTO[d.dia] || d.dia;
-    html += '<div class="tira-dia' + (i === 0 ? ' hoy' : '') + '"' + (p ? ' onclick="abrirEditorPromo(' + p.id + ')" style="cursor:pointer"' : '') + '>' +
-      '<div class="td-fecha">' + (i === 0 ? 'Hoy' : dia) + '<br>' + fechaCorta(d.fecha) + '</div>' +
-      '<div class="td-img">' + (p ? '<img src="' + srcPromo(p.foto) + '" alt="" onerror="this.parentElement.textContent=\'⏳\'">' : '—') + '</div>' +
-    '</div>';
-  });
-  html += '</div><div class="ayuda">"—" = ese día no sale ninguna placa. Tocá una miniatura para editarla.</div></div>';
-
-  /* --- Lista --- */
   html += '<div class="bloque"><h3>Placas (' + PROMOS.length + ')</h3>';
   if (!PROMOS.length){
     html += '<div class="vacio">Todavía no hay placas. Subí las imágenes con el botón de arriba y después programalas.</div>';
@@ -813,10 +951,10 @@ function renderPromos(){
     PROMOS.forEach(function(p){
       var est = estadoPromo(p);
       html += '<div class="promo-card' + (p.activa ? '' : ' pausada') + '">' +
-        '<div class="p-thumb"><img src="' + srcPromo(p.foto) + '" alt="" onerror="this.parentElement.textContent=\'Publicando…\'"></div>' +
+        '<div class="p-thumb" style="border-left:4px solid ' + colorDe(p.id) + '"><img src="' + srcPromo(p.foto) + '" alt="" onerror="this.parentElement.textContent=\'Publicando…\'"></div>' +
         '<div class="p-info">' +
-          '<div class="p-nom">' + esc(p.nombre || p.titulo || ('Placa ' + p.id)) + '</div>' +
-          '<div class="p-prog">' + esc(resumenProgramacion(p)) + '</div>' +
+          '<div class="p-nom">' + esc(nombreDe(p)) + '</div>' +
+          '<div class="p-prog">' + esc(resumenBloques(p)) + '</div>' +
           '<span class="chip-estado ' + est.cls + '">' + est.txt + '</span>' +
         '</div>' +
         '<div class="toggle' + (p.activa ? '' : ' off') + '" onclick="togglePromo(' + p.id + ')"><div class="bola"></div></div>' +
@@ -828,7 +966,7 @@ function renderPromos(){
   cont.innerHTML = html;
 }
 
-/* --- Subida múltiple: cada imagen queda como placa pausada --- */
+/* --- Subida múltiple: cada imagen queda como placa pausada, sin programar --- */
 function subirPlacas(archivos){
   var lista = Array.prototype.slice.call(archivos || []);
   var input = document.getElementById('input-placas');
@@ -851,9 +989,7 @@ function subirPlacas(archivos){
     var nombreBase = archivo.name.replace(/\.[^.]+$/, '');
     prog.textContent = 'Subiendo placa ' + (i + 1) + ' de ' + lista.length + '…';
     subirFoto(archivo, 'placa-' + nombreBase, CARPETA_PROMOS).then(function(nombreArchivo){
-      return llamar('admin_promo_guardar', {
-        nombre: nombreBase, foto: nombreArchivo, modo: 'semanal', dias: [], activa: false
-      });
+      return llamar('admin_promo_guardar', {nombre: nombreBase, foto: nombreArchivo, bloques: [], activa: false});
     }).then(function(res){
       if (res && res.ok) ok++; else fallas.push(archivo.name);
       siguiente(i + 1);
@@ -868,11 +1004,12 @@ function subirPlacas(archivos){
 function togglePromo(id){
   var p = promoPorId(id);
   if (!p) return;
+  if (!p.activa && !(p.bloques || []).length){ abrirEditorPromo(id); alert('Programá al menos un bloque antes de activarla.'); return; }
   p.activa = !p.activa;
   renderPromos();
   llamar('admin_promo_toggle', {id:id}).then(function(res){
     if (!res || !res.ok){ p.activa = !p.activa; renderPromos(); alert('No se pudo cambiar el estado'); }
-    else cargarPromos();   /* refresca "Sale hoy" y la tira */
+    else cargarPromos();
   });
 }
 
@@ -893,19 +1030,42 @@ function opcionesPlatos(seleccionado){
   return html;
 }
 
+function opcionesHora(seleccionada, esHasta){
+  var html = '';
+  for (var m = esHasta ? 30 : 0; m <= (esHasta ? 1440 : 1410); m += 30){
+    var h = minAHora(m % 1440);
+    var etiqueta = (esHasta && m === 1440) ? h + ' (fin del día)' : h;
+    html += '<option value="' + h + '"' + (h === seleccionada ? ' selected' : '') + '>' + etiqueta + '</option>';
+  }
+  return html;
+}
+
+function nuevoForm(){ return {tipo:'semanal', dias:[], fecha:HOY_OP, todoDia:false, desde:'19:00', hasta:'23:00'}; }
+
 function abrirEditorPromo(id){
   var p = promoPorId(id);
   if (!p) return;
   EDIT = JSON.parse(JSON.stringify(p));
-  EDIT.dias = EDIT.dias || [];
+  EDIT.bloques = EDIT.bloques || [];
   EDIT.fotoLocal = '';
+  EDIT.nuevo = nuevoForm();
   pintarEditor();
   document.getElementById('modal').classList.add('abierto');
 }
 
+function textoBloque(b){
+  return (b.tipo === 'fecha' ? DIAS_CORTO[diaDe(b.fecha)] + ' ' + fechaCorta(b.fecha) : 'Todos los ' + DIAS_LARGO[b.dia]) + ' · ' + textoHorario(b);
+}
+
 function pintarEditor(){
-  var e = EDIT;
+  var e = EDIT, n = e.nuevo;
   var src = e.fotoLocal || srcPromo(e.foto);
+  var orden = e.bloques.map(function(b, i){ return {b:b, i:i}; }).sort(function(x, y){
+    var kx = x.b.tipo === 'fecha' ? '1' + x.b.fecha : '0' + DIAS_ORDEN.indexOf(x.b.dia);
+    var ky = y.b.tipo === 'fecha' ? '1' + y.b.fecha : '0' + DIAS_ORDEN.indexOf(y.b.dia);
+    return kx < ky ? -1 : kx > ky ? 1 : rango(x.b)[0] - rango(y.b)[0];
+  });
+
   var html =
     '<div class="campo"><label>Imagen</label>' +
       '<div id="ed-prev-wrap"><img class="prev-img" id="ed-prev" src="' + src + '" alt="" onerror="document.getElementById(\'ed-prev-wrap\').innerHTML=\'<div class=prev-aviso>La imagen se está publicando (tarda ~2 min). Ya quedó guardada.</div>\'"></div>' +
@@ -915,32 +1075,42 @@ function pintarEditor(){
     '</div>' +
     '<div class="campo"><label>Nombre interno (solo lo ves vos)</label><input id="ed-nombre" value="' + escAttr(e.nombre || '') + '" placeholder="Ej: Burga libre miércoles"></div>' +
 
-    '<div class="campo"><label>Cuándo sale</label><div class="seg">' +
-      '<button id="ed-modo-semanal" class="' + (e.modo !== 'fechas' ? 'activa' : '') + '" onclick="setModo(\'semanal\')">Semanal</button>' +
-      '<button id="ed-modo-fechas" class="' + (e.modo === 'fechas' ? 'activa' : '') + '" onclick="setModo(\'fechas\')">Fechas</button>' +
-    '</div></div>';
+    '<div class="campo"><label>Programación</label>' +
+      (orden.length ? orden.map(function(o){
+        return '<div class="bloque-fila"><span class="bf-color" style="background:' + colorDe(e.id) + '"></span>' +
+          '<span class="bf-txt">' + esc(textoBloque(o.b)) + '</span>' +
+          '<button class="bf-x" onclick="quitarBloque(' + o.i + ')" aria-label="Quitar">✕</button></div>';
+      }).join('') : '<div class="ayuda" style="margin:0 0 8px">Todavía no tiene bloques. Agregá al menos uno para que salga.</div>') +
+    '</div>' +
 
-  if (e.modo === 'fechas'){
-    html +=
-      '<div class="fila2">' +
-        '<div class="campo"><label>Desde</label><input type="date" id="ed-desde" value="' + (e.desde || '') + '"></div>' +
-        '<div class="campo"><label>Hasta (opcional)</label><input type="date" id="ed-hasta" value="' + (e.hasta || '') + '"></div>' +
-      '</div>' +
-      '<div class="ayuda" style="margin:-6px 0 14px">Sin "hasta", sale solo el día "desde". Las fechas puntuales le ganan a las semanales.</div>';
-  } else {
-    html +=
-      '<div class="campo"><label>Días</label><div class="dias-chips">' +
-        DIAS_ORDEN.map(function(d){
-          return '<button class="dia-chip' + (e.dias.indexOf(d) > -1 ? ' on' : '') + '" onclick="toggleDia(\'' + d + '\')">' + DIAS_CORTO[d] + '</button>';
-        }).join('') +
-      '</div></div>' +
-      '<div class="fila2">' +
-        '<div class="campo"><label>Vigente desde (opcional)</label><input type="date" id="ed-desde" value="' + (e.desde || '') + '"></div>' +
-        '<div class="campo"><label>Hasta (opcional)</label><input type="date" id="ed-hasta" value="' + (e.hasta || '') + '"></div>' +
+    '<div class="agregar-bloque"><div class="ab-titulo">Agregar bloque</div>' +
+      '<div class="seg" style="margin-bottom:10px">' +
+        '<button class="' + (n.tipo === 'semanal' ? 'activa' : '') + '" onclick="setTipoNuevo(\'semanal\')">Cada semana</button>' +
+        '<button class="' + (n.tipo === 'fecha' ? 'activa' : '') + '" onclick="setTipoNuevo(\'fecha\')">Fecha puntual</button>' +
       '</div>';
+  if (n.tipo === 'semanal'){
+    html += '<div class="dias-chips" style="margin-bottom:10px">' + DIAS_ORDEN.map(function(d){
+      return '<button class="dia-chip' + (n.dias.indexOf(d) > -1 ? ' on' : '') + '" onclick="toggleDiaNuevo(\'' + d + '\')">' + DIAS_CORTO[d] + '</button>';
+    }).join('') + '</div>';
+  } else {
+    html += '<div class="campo"><input type="date" id="n-fecha" value="' + (n.fecha || '') + '"></div>';
   }
-
   html +=
+      '<label class="fila-check" style="margin-bottom:10px"><input type="checkbox" id="n-todo"' + (n.todoDia ? ' checked' : '') + ' onchange="setTodoDia(this.checked)"> Todo el día</label>' +
+      (n.todoDia ? '' :
+        '<div class="fila2">' +
+          '<div class="campo"><label>Desde</label><select id="n-desde">' + opcionesHora(n.desde, false) + '</select></div>' +
+          '<div class="campo"><label>Hasta</label><select id="n-hasta">' + opcionesHora(n.hasta, true) + '</select></div>' +
+        '</div>') +
+      '<button class="btn-secundario" style="margin-top:0" onclick="agregarBloque()">+ Agregar</button>' +
+    '</div>' +
+
+    '<div class="fila2">' +
+      '<div class="campo"><label>Vigente desde (opcional)</label><input type="date" id="ed-desde" value="' + (e.vigDesde || '') + '"></div>' +
+      '<div class="campo"><label>Hasta (opcional)</label><input type="date" id="ed-hasta" value="' + (e.vigHasta || '') + '"></div>' +
+    '</div>' +
+    '<div class="ayuda" style="margin:-6px 0 14px">La vigencia aplica a los bloques "cada semana": fuera de esas fechas no salen. Las fechas puntuales no la necesitan.</div>' +
+
     '<div class="campo"><label>Título (opcional)</label><input id="ed-titulo" value="' + escAttr(e.titulo || '') + '" placeholder="Vacío = se muestra solo la imagen">' +
       '<div class="ayuda">Si la placa ya viene diseñada con texto, dejalo vacío.</div></div>' +
     '<div class="campo"><label>Descripción (opcional)</label><textarea id="ed-desc">' + esc(e.descripcion || '') + '</textarea></div>' +
@@ -977,8 +1147,8 @@ function leerFormulario(){
   var e = EDIT;
   function val(id){ var el = document.getElementById(id); return el ? el.value : undefined; }
   if (val('ed-nombre') !== undefined) e.nombre = val('ed-nombre').trim();
-  if (val('ed-desde') !== undefined) e.desde = val('ed-desde');
-  if (val('ed-hasta') !== undefined) e.hasta = val('ed-hasta');
+  if (val('ed-desde') !== undefined) e.vigDesde = val('ed-desde');
+  if (val('ed-hasta') !== undefined) e.vigHasta = val('ed-hasta');
   if (val('ed-titulo') !== undefined) e.titulo = val('ed-titulo').trim();
   if (val('ed-desc') !== undefined) e.descripcion = val('ed-desc').trim();
   if (val('ed-precio') !== undefined) e.precio = val('ed-precio') === '' ? null : Number(val('ed-precio'));
@@ -987,16 +1157,51 @@ function leerFormulario(){
   if (val('ed-btn-texto') !== undefined) e.botonTexto = val('ed-btn-texto').trim();
   var act = document.getElementById('ed-activa');
   if (act) e.activa = act.checked;
+  if (val('n-fecha') !== undefined) e.nuevo.fecha = val('n-fecha');
+  if (val('n-desde') !== undefined) e.nuevo.desde = val('n-desde');
+  if (val('n-hasta') !== undefined) e.nuevo.hasta = val('n-hasta');
 }
 
-function setModo(m){ leerFormulario(); EDIT.modo = m; pintarEditor(); }
-function toggleDia(d){
+function setTipoNuevo(t){ leerFormulario(); EDIT.nuevo.tipo = t; pintarEditor(); }
+function toggleDiaNuevo(d){
   leerFormulario();
-  var i = EDIT.dias.indexOf(d);
-  if (i > -1) EDIT.dias.splice(i, 1); else EDIT.dias.push(d);
+  var arr = EDIT.nuevo.dias, i = arr.indexOf(d);
+  if (i > -1) arr.splice(i, 1); else arr.push(d);
   pintarEditor();
 }
+function setTodoDia(v){ leerFormulario(); EDIT.nuevo.todoDia = v; pintarEditor(); }
 function setBotonTipo(t){ leerFormulario(); EDIT.botonTipo = t; if (t === 'ninguno') EDIT.botonDestino = ''; pintarEditor(); }
+function quitarBloque(i){ leerFormulario(); EDIT.bloques.splice(i, 1); pintarEditor(); }
+
+function agregarBloque(){
+  leerFormulario();
+  var n = EDIT.nuevo;
+  var base = {todoDia: n.todoDia};
+  if (!n.todoDia){
+    base.desde = n.desde; base.hasta = n.hasta;
+    var r = rango(base);
+    if (r[1] <= r[0]){ alert('El "hasta" tiene que ser después del "desde" (el día termina a las ' + ('0' + CORTE).slice(-2) + ':00).'); return; }
+  }
+  var nuevos = [];
+  if (n.tipo === 'semanal'){
+    if (!n.dias.length){ alert('Elegí al menos un día.'); return; }
+    n.dias.forEach(function(d){ nuevos.push(Object.assign({tipo:'semanal', dia:d}, base)); });
+  } else {
+    if (!n.fecha){ alert('Elegí la fecha.'); return; }
+    nuevos.push(Object.assign({tipo:'fecha', fecha:n.fecha}, base));
+  }
+  /* evita duplicados exactos y choques dentro de la misma placa */
+  for (var k = 0; k < nuevos.length; k++){
+    var nb = nuevos[k];
+    var pisa = EDIT.bloques.some(function(b){
+      return b.tipo === nb.tipo && (b.tipo === 'fecha' ? b.fecha === nb.fecha : b.dia === nb.dia) && seSolapan(rango(b), rango(nb));
+    });
+    if (pisa){ alert('Esta placa ya tiene un bloque que se superpone: ' + textoBloque(nb)); return; }
+  }
+  EDIT.bloques = EDIT.bloques.concat(nuevos);
+  EDIT.nuevo = nuevoForm();
+  pintarEditor();
+}
 
 function cambiarImagenPromo(archivo){
   if (!archivo) return;
@@ -1019,18 +1224,80 @@ function cambiarImagenPromo(archivo){
 
 function validarEdit(){
   var e = EDIT;
-  if (e.modo === 'fechas' && !e.desde) return 'Elegí la fecha "desde".';
-  if (e.desde && e.hasta && e.hasta < e.desde) return 'La fecha "hasta" es anterior a "desde".';
+  if (e.vigDesde && e.vigHasta && e.vigHasta < e.vigDesde) return 'La vigencia "hasta" es anterior a "desde".';
+  if (e.activa && !e.bloques.length) return 'Agregá al menos un bloque de programación, o dejala pausada.';
   if (e.botonTipo === 'plato' && !e.botonDestino) return 'Elegí el plato del botón (o sacá el botón).';
   if (e.botonTipo === 'link' && !/^https?:\/\//i.test(e.botonDestino || '')) return 'El link tiene que empezar con https://';
-  if (e.activa && e.modo === 'semanal' && !e.dias.length) return 'Elegí al menos un día, o dejala pausada.';
   return '';
+}
+
+/* ---------- detección de choques contra las otras placas activas ---------- */
+function vigenciasCruzan(a, b){
+  var aD = a.vigDesde || '0000-00-00', aH = a.vigHasta || '9999-12-31';
+  var bD = b.vigDesde || '0000-00-00', bH = b.vigHasta || '9999-12-31';
+  return aD <= bH && bD <= aH;
+}
+function enVigencia(p, f){ return (!p.vigDesde || f >= p.vigDesde) && (!p.vigHasta || f <= p.vigHasta); }
+
+function conflictosDe(e){
+  if (!e.activa) return [];
+  var lista = [];
+  PROMOS.forEach(function(q){
+    if (q.id === e.id || !q.activa) return;
+    e.bloques.forEach(function(b){
+      (q.bloques || []).forEach(function(c){
+        var rb = rango(b), rc = rango(c);
+        if (!seSolapan(rb, rc)) return;
+        var donde = '';
+        if (b.tipo === 'semanal' && c.tipo === 'semanal'){
+          if (b.dia !== c.dia || !vigenciasCruzan(e, q)) return;
+          donde = 'Todos los ' + DIAS_LARGO[b.dia];
+        } else if (b.tipo === 'fecha' && c.tipo === 'fecha'){
+          if (b.fecha !== c.fecha || b.fecha < HOY_OP) return;
+          donde = DIAS_CORTO[diaDe(b.fecha)] + ' ' + fechaCorta(b.fecha);
+        } else {
+          var bf = b.tipo === 'fecha' ? b : c, bs = b.tipo === 'fecha' ? c : b;
+          var ps = b.tipo === 'fecha' ? q : e;
+          if (bf.fecha < HOY_OP || diaDe(bf.fecha) !== bs.dia || !enVigencia(ps, bf.fecha)) return;
+          donde = DIAS_CORTO[diaDe(bf.fecha)] + ' ' + fechaCorta(bf.fecha);
+        }
+        var ini = Math.max(rb[0], rc[0]), fin = Math.min(rb[1], rc[1]);
+        var gana;
+        if (b.tipo === 'fecha' && c.tipo !== 'fecha') gana = nombreDe(e) || 'esta placa';
+        else if (c.tipo === 'fecha' && b.tipo !== 'fecha') gana = nombreDe(q);
+        else gana = (!e.id || e.id > q.id) ? (e.nombre || 'esta placa') : nombreDe(q);
+        lista.push(donde + ' de ' + minAHora(ini) + ' a ' + minAHora(fin % 1440) + ' se pisa con «' + nombreDe(q) + '» → sale «' + gana + '»');
+      });
+    });
+  });
+  return lista;
 }
 
 function guardarPromo(){
   leerFormulario();
   var error = validarEdit();
   if (error){ alert(error); return; }
+  var choques = conflictosDe(EDIT);
+  if (choques.length){ mostrarAlertaChoques(choques); return; }
+  enviarGuardado();
+}
+
+function mostrarAlertaChoques(choques){
+  var al = document.getElementById('alerta');
+  var lista = choques.slice(0, 6).map(function(c){ return '<li>' + esc(c) + '</li>'; }).join('') +
+    (choques.length > 6 ? '<li>…y ' + (choques.length - 6) + ' más</li>' : '');
+  al.innerHTML = '<div class="alerta-caja">' +
+    '<div class="alerta-tit">⚠️ Esta placa se pisa con otras</div>' +
+    '<ul>' + lista + '</ul>' +
+    '<div class="ayuda">Si guardás igual, en esos horarios sale la que figura después de la flecha (fecha puntual le gana a semanal; si empatan, la más nueva).</div>' +
+    '<button class="btn-guardar" onclick="cerrarAlerta()">Corregir</button>' +
+    '<button class="btn-secundario" onclick="cerrarAlerta();enviarGuardado()">Guardar igual</button>' +
+  '</div>';
+  al.classList.add('abierta');
+}
+function cerrarAlerta(){ document.getElementById('alerta').classList.remove('abierta'); }
+
+function enviarGuardado(){
   var e = EDIT;
   var btn = document.getElementById('ed-guardar');
   btn.textContent = 'Guardando…'; btn.disabled = true;
@@ -1040,8 +1307,8 @@ function guardarPromo(){
     botonTexto: e.botonTipo === 'ninguno' ? '' : e.botonTexto,
     botonTipo: e.botonTipo || 'ninguno',
     botonDestino: e.botonTipo === 'ninguno' ? '' : e.botonDestino,
-    modo: e.modo, dias: e.modo === 'semanal' ? e.dias : [],
-    desde: e.desde || '', hasta: e.hasta || '', activa: e.activa
+    bloques: e.bloques, vigDesde: e.vigDesde || '', vigHasta: e.vigHasta || '',
+    activa: e.activa
   }).then(function(res){
     if (res && res.ok){ cerrarModal(); cargarPromos(); }
     else { alert('No se pudo guardar: ' + ((res && res.error) || '')); btn.textContent = 'Guardar'; btn.disabled = false; }
