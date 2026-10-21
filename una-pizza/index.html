@@ -993,11 +993,34 @@ footer a:hover{color:var(--tiza)}
   .tira::-webkit-scrollbar{display:none}
   .tira figure{flex:0 0 82vw;height:62vh;max-height:560px;scroll-snap-align:start}
 }
-@media(max-width:400px){
-  .r.dos,.enc{grid-template-columns:auto 1fr 66px 66px}
-  .enc{grid-template-columns:1fr 66px 66px}
-  .r .n,.r .p{font-size:19px}
-  .r.muzza .n{font-size:24px}.r.muzza .p{font-size:19px}
+/* celular: todo un punto más chico para que la portada entre en una pantalla */
+@media(max-width:600px){
+  body{font-size:17px}
+  h1{font-size:28px}
+  h2{font-size:28px}
+  .toldo .wrap{padding-top:18px;padding-bottom:22px;gap:14px}
+  .logo{width:min(200px,60%)}
+  .bajada{font-size:17px;margin:10px 0 12px}
+  .estado{font-size:17px;margin-bottom:14px}
+  .btn{font-size:17px;min-height:44px;padding:0 18px;border-radius:10px}
+  .tira figure{height:48vh}
+  .pared,.horno,.pedir,.donde,.faq{padding:44px 0}
+  .pared-head p,.saltos{font-size:17px}
+  .tablero{padding:20px 14px}
+  .grupo-c h3{font-size:22px}
+  .r.dos{grid-template-columns:auto 1fr 62px 62px}
+  .enc{grid-template-columns:1fr 62px 62px;font-size:14px}
+  .r .n,.r .p{font-size:18px}
+  .r.muzza .n{font-size:22px}.r.muzza .p{font-size:18px}
+  .r small{font-size:15px}
+  .gustos{font-size:16px}
+  .pedir p,.donde dl{font-size:17px}
+  .iman a{font-size:28px}
+  .iman .modo,.iman .dias{font-size:16px}
+  .faq summary{font-size:18px}
+  .faq p{font-size:17px}
+  footer{font-size:16px}
+  .flotante{font-size:18px;min-height:48px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
