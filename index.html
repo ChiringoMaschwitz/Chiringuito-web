@@ -112,6 +112,8 @@ nav.solid{background:rgba(23,19,16,.92);backdrop-filter:blur(10px);-webkit-backd
 .hero-sub{font-size:18px;font-weight:300;max-width:46ch;color:rgba(247,244,236,.86);margin-bottom:32px}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .hero .btn-line{color:var(--hueso)}
+/* Compu: título en 2 renglones y todo el bloque visible en la primera pantalla */
+@media(min-width:921px){.hero-in{padding-top:110px}.hero h1{font-size:clamp(52px,min(7vw,12svh),110px);max-width:none;margin:14px 0 22px}.hero h1 .l{white-space:nowrap}.hero-sub{margin-bottom:26px}}
 
 /* cinta de abiertos */
 .ticker{position:relative;z-index:2;border-top:1px solid rgba(247,244,236,.12);border-bottom:1px solid rgba(247,244,236,.06);background:rgba(23,19,16,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow:hidden}
