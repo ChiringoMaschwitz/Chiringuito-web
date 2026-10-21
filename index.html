@@ -129,7 +129,7 @@ nav.solid{background:rgba(23,19,16,.92);backdrop-filter:blur(10px);-webkit-backd
 /* ══ CARTAS ══ */
 .cartas{position:relative;padding:70px 0 90px;color:var(--hueso);background:radial-gradient(55% 45% at 30% 35%,rgba(224,163,62,.11),transparent 70%),radial-gradient(45% 40% at 85% 70%,rgba(217,108,51,.08),transparent 70%),var(--carbon)}
 .cartas .s-title{color:var(--hueso)}
-.c-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+.c-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px}
 .carta{position:relative;min-height:460px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px;color:var(--hueso);overflow:hidden;background:var(--carbon-2);box-shadow:var(--sombra-dark);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
 .carta:hover{transform:translateY(-4px)}
 .carta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
@@ -140,7 +140,7 @@ nav.solid{background:rgba(23,19,16,.92);backdrop-filter:blur(10px);-webkit-backd
 .carta h3{font-size:clamp(40px,4.6vw,58px);font-weight:600}
 .carta p{font-size:16px;color:rgba(247,244,236,.82);margin:8px 0 22px;font-weight:300}
 .carta .btn{align-self:flex-start}
-.otros{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(247,244,236,.1);border:1px solid rgba(247,244,236,.1);margin-top:18px}
+.otros{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(247,244,236,.1);border:1px solid rgba(247,244,236,.1);margin-top:18px}
 .otro{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--carbon-2);padding:18px 20px;min-height:64px;transition:background .2s}
 .otro:hover{background:#2c251f}
 .otro b{font-family:var(--f-display);font-size:23px;color:var(--hueso);font-weight:600;line-height:1.1}
@@ -399,10 +399,16 @@ body.modal-open{overflow:hidden}
         <p>Desayunos, meriendas, bifes, pastas y picadas.</p>
         <span class="btn btn-fill">Ver la carta</span>
       </a>
+      <a class="carta" href="/una-pizza/">
+        <img src="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg" srcset="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg 640w, /una-pizza/fotos/muzzarella-frente-al-horno.jpg 1400w" sizes="(max-width:860px) 100vw, 33vw" alt="Pizza muzzarella frente al horno de Una Pizza" loading="lazy">
+        <span class="chip" data-chip="unapizza"></span>
+        <h3>Una Pizza</h3>
+        <p>Pizza a la piedra, empanadas y fainá.</p>
+        <span class="btn btn-fill">Ver la carta</span>
+      </a>
     </div>
     <div class="otros">
       <a class="otro" href="tel:+5491178196138"><span><b>La Focacceria</b><small>Focaccias de masa propia</small></span><em>Llamar</em></a>
-      <a class="otro" href="https://wa.me/5491126091109" target="_blank" rel="noopener"><span><b>Una Pizza</b><small>Pizza, empanadas y fainá</small></span><em>Pedir por WhatsApp</em></a>
       <a class="otro" href="https://wa.me/5491144002737" target="_blank" rel="noopener"><span><b>ChirinBakery</b><small>Tortas, tartas y postres</small></span><em>Encargar</em></a>
     </div>
   </div>
@@ -925,6 +931,7 @@ body.modal-open{overflow:hidden}
         <h5>Más</h5>
         <a href="/carta/chiringuito/">Carta El Chiringuito</a>
         <a href="/carta/lounge/">Carta Chiringuito Lounge</a>
+        <a href="/una-pizza/">Carta Una Pizza</a>
         <a href="#viandas">Viandas caseras</a>
         <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a>
       </div>
