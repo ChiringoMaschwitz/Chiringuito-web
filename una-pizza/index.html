@@ -3,23 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Una Pizza | Pizzería a la piedra en Maschwitz · Paseo Mendoza</title>
+<title>Una Pizza | Pizzería con horno a leña en Maschwitz, Paseo Mendoza</title>
 <meta name="description" content="Pizza a la piedra en horno a leña, empanadas y fainá en Mendoza 1578, Ingeniero Maschwitz. Mirá la carta con precios y pedí por WhatsApp: delivery propio.">
 <link rel="canonical" href="https://grupochiringuito.com.ar/una-pizza/">
 <meta name="theme-color" content="#B21818">
-<meta property="og:title" content="Una Pizza | Pizzería a la piedra en Maschwitz · Paseo Mendoza">
+<meta property="og:title" content="Una Pizza | Pizzería con horno a leña en Maschwitz, Paseo Mendoza">
 <meta property="og:description" content="Pizza a la piedra en horno a leña, empanadas y fainá en Mendoza 1578, Ingeniero Maschwitz. Mirá la carta con precios y pedí por WhatsApp: delivery propio.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://grupochiringuito.com.ar/una-pizza/">
 <meta property="og:site_name" content="Grupo El Chiringuito">
-<meta property="og:image" content="https://grupochiringuito.com.ar/una-pizza/fotos/pizza-jamon-y-morrones.jpg">
+<meta property="og:image" content="https://grupochiringuito.com.ar/una-pizza/fotos/muzzarella-frente-al-horno.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="fotos/logo-una-pizza.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="fotos/muzzarella-frente-al-horno-640.jpg" media="(max-width:767px)">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Big+Shoulders+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -844,249 +843,282 @@
 }
 </script>
 <style>
-/* ══ Una Pizza · colores de la carta ══ */
+/* ══ Una Pizza ══
+   La página copia el local: toldo rojo, pared de azulejos blancos, tablero de precios
+   colgado y el imán de heladera para pedir. Colores de la carta impresa. */
 :root{
   --rojo:#B21818; --rojo-osc:#8E1212;
-  --crema:#EFEDDE; --crema-2:#E4E1CC;
-  --oliva:#3B431E; --oliva-2:#676E4D;
-  --tinta:#26221D; --gris:#6C6658;
-  --cond:'Oswald',sans-serif; --texto:'Jost',sans-serif;
+  --azulejo:#F3F0E4; --junta:#DDD7C3;
+  --pizarra:#262B16; --tiza:#EFEDDE; --tiza-2:#C9C6AE;
+  --madera:#5B3D24; --tinta:#26221D; --gris:#6C6658; --heladera:#E8E6E1;
+  --slab:'Alfa Slab One',Georgia,serif;
+  --cond:'Big Shoulders Text','Arial Narrow',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--crema);color:var(--tinta);font-family:var(--texto);font-size:16px;line-height:1.55}
+body{background:var(--azulejo);color:var(--tinta);font-family:var(--cond);font-size:19px;line-height:1.45;font-weight:500}
 img{display:block;max-width:100%}
 a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
-.cuadros{height:14px;background:repeating-conic-gradient(var(--rojo) 0 25%,var(--crema) 0 50%) 0 0/14px 14px}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 18px}
+h1,h2{font-family:var(--slab);font-weight:400;line-height:1.02;letter-spacing:-.005em}
+h2{font-size:clamp(34px,5vw,54px);color:var(--rojo)}
+
+/* botones: bordes redondeados como el imán, nada de mayúsculas forzadas */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:12px;font-family:var(--cond);font-weight:700;font-size:20px;text-decoration:none;border:2.5px solid currentColor;transition:background .15s,color .15s}
+.btn.tiza{background:var(--tiza);color:var(--rojo);border-color:var(--tiza)}
+.btn.tiza:hover{background:#fff;border-color:#fff}
+.btn.hueco{color:var(--tiza)}
+.btn.hueco:hover{background:var(--tiza);color:var(--rojo)}
+.btn.rojo{background:var(--rojo);color:var(--tiza);border-color:var(--rojo)}
+.btn.rojo:hover{background:var(--rojo-osc);border-color:var(--rojo-osc)}
+.btn.borde{color:var(--rojo)}
+.btn.borde:hover{background:var(--rojo);color:var(--tiza)}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
 
 /* barra del grupo */
-.grupo{background:var(--tinta);color:var(--crema);font-size:13px}
-.grupo .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:9px;padding-bottom:9px}
-.grupo a{text-decoration:none;opacity:.85}
+.grupo{background:var(--tinta);color:var(--tiza);font-size:16px}
+.grupo .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:8px}
+.grupo a{text-decoration:none;opacity:.8}
 .grupo a:hover{opacity:1}
 
-/* portada */
-.hero{background:var(--rojo);color:var(--crema)}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:44px;padding-bottom:52px}
-.logo{width:min(300px,70%);height:auto;margin-bottom:22px}
-h1{font-family:var(--cond);font-weight:600;text-transform:uppercase;font-size:clamp(30px,4.6vw,48px);line-height:1.05;letter-spacing:.01em}
-.hero p.sub{font-size:18px;font-weight:300;margin:14px 0 20px;max-width:44ch;color:rgba(239,237,222,.9)}
-.estado{display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,.18);padding:7px 14px;border-radius:999px;font-size:14px;margin-bottom:22px}
-.estado i{width:9px;height:9px;border-radius:50%;background:#C9C3A8}
-.estado.abierto i{background:#7BD389;box-shadow:0 0 0 4px rgba(123,211,137,.25)}
-.ctas{display:flex;flex-wrap:wrap;gap:10px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.06em;font-size:15px;text-decoration:none;border:2px solid var(--crema);border-radius:4px}
-.btn.lleno{background:var(--crema);color:var(--rojo)}
-.btn.lleno:hover{background:#fff}
-.btn.linea{color:var(--crema)}
-.btn.linea:hover{background:rgba(255,255,255,.1)}
-.hero-foto{position:relative;aspect-ratio:4/5;overflow:hidden;border:6px solid var(--crema);box-shadow:12px 12px 0 var(--oliva)}
-.hero-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+/* ── portada: el toldo rojo y, abajo, la tira de fotos del local ── */
+.toldo{background:var(--rojo);color:var(--tiza)}
+.toldo .wrap{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:20px 56px;align-items:center;padding-top:34px;padding-bottom:38px}
+.logo{width:100%;height:auto}
+h1{font-size:clamp(36px,4.4vw,58px);color:var(--tiza);max-width:15ch}
+.bajada{font-size:21px;max-width:40ch;margin:14px 0 16px;color:rgba(239,237,222,.92)}
+.estado{display:inline-flex;align-items:center;gap:9px;font-size:19px;font-weight:600;margin-bottom:18px}
+.estado i{width:11px;height:11px;border-radius:50%;background:var(--tiza-2)}
+.estado.abierto i{background:#7BD389;box-shadow:0 0 0 4px rgba(123,211,137,.28)}
+.tira{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--tinta);padding:6px 0 0}
+.tira figure{height:min(64vh,620px);overflow:hidden}
+.tira img{width:100%;height:100%;object-fit:cover}
 
-/* secciones */
-section{padding:64px 0}
-.eyebrow{font-family:var(--cond);text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:var(--rojo);font-weight:500}
-h2{font-family:var(--cond);text-transform:uppercase;font-weight:600;font-size:clamp(30px,4vw,42px);line-height:1.05;margin:6px 0 10px;color:var(--oliva)}
-.lead{color:var(--gris);max-width:60ch}
+/* ── carta: tablero colgado en la pared de azulejos ── */
+.pared{background-color:var(--azulejo);background-image:linear-gradient(var(--junta) 1.5px,transparent 1.5px),linear-gradient(90deg,var(--junta) 1.5px,transparent 1.5px);background-size:46px 46px;background-position:-1px -1px;padding:64px 0 70px}
+.pared-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px 30px;margin-bottom:22px}
+.pared-head p{max-width:44ch;font-size:20px;background:var(--azulejo);padding:2px 0}
+.saltos{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0 0 18px;font-size:20px;font-weight:700}
+.saltos a{color:var(--rojo);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;background:var(--azulejo)}
+.tablero{background:var(--pizarra);color:var(--tiza);border:14px solid var(--madera);border-radius:4px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),0 18px 34px -16px rgba(38,34,29,.55);padding:34px 38px;display:grid;grid-template-columns:1fr 1fr;gap:10px 56px}
+.tablero+.tablero{margin-top:26px}
+.grupo-c{scroll-margin-top:16px;margin-bottom:26px}
+.grupo-c:last-child{margin-bottom:0}
+.grupo-c h3{font-family:var(--cond);font-weight:800;font-size:27px;text-transform:uppercase;letter-spacing:.04em;line-height:1.1;color:var(--tiza);padding-bottom:6px;border-bottom:2px solid rgba(239,237,222,.5);margin-bottom:6px}
+.grupo-c ul{list-style:none}
+.r{display:grid;grid-template-columns:auto 1fr 84px;align-items:baseline;column-gap:8px;padding:6px 0}
+.r.dos{grid-template-columns:auto 1fr 76px 76px}
+.r .n{font-size:21px;font-weight:600}
+.r i{border-bottom:2.5px dotted rgba(239,237,222,.42);transform:translateY(-5px);min-width:14px}
+.r .p{text-align:right;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.r small{grid-column:1/-1;font-size:17px;color:var(--tiza-2);font-weight:400;margin-top:-2px}
+.r.muzza .n{font-size:28px;font-weight:800}
+.r.muzza .p{font-size:22px;font-weight:800}
+.enc{display:grid;grid-template-columns:1fr 76px 76px;column-gap:8px;font-size:16px;font-weight:700;color:var(--tiza-2);padding-top:2px}
+.enc span:first-child{grid-column:2}
+.enc span{text-align:right}
+.gustos{font-size:19px;color:var(--tiza-2);margin:4px 0 2px}
+.nota{margin-top:18px;font-size:17px;color:var(--gris);display:inline-block;background:var(--azulejo)}
 
-/* carta */
-.saltos{display:flex;gap:8px;overflow-x:auto;padding:18px 0 4px;scrollbar-width:none}
-.saltos::-webkit-scrollbar{display:none}
-.saltos a{flex:none;font-family:var(--cond);text-transform:uppercase;letter-spacing:.06em;font-size:14px;text-decoration:none;padding:8px 14px;border:1.5px solid var(--oliva);color:var(--oliva);border-radius:999px}
-.saltos a:hover{background:var(--oliva);color:var(--crema)}
-.carta{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:22px}
-.bloque{background:#F7F5EA;border:2px solid var(--oliva);padding:22px 20px;scroll-margin-top:16px}
-.bloque h3{font-family:var(--cond);font-weight:700;text-transform:uppercase;font-size:28px;color:var(--oliva);letter-spacing:.02em;margin-bottom:10px}
-.bloque h3 em{font-style:normal;font-size:.55em;color:#fff;background:var(--rojo);padding:3px 8px;vertical-align:middle;letter-spacing:.08em;margin-left:6px}
-.bloque h3.sub{font-size:20px;margin-top:22px}
-.lista{list-style:none}
-.it,.cab{display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:baseline;padding:9px 0;border-bottom:1px dashed rgba(59,67,30,.28)}
-.lista.dos .it,.lista.dos .cab{grid-template-columns:1fr 74px 74px}
-.cab{border-bottom:2px solid var(--rojo);padding-top:0;font-family:var(--cond);text-transform:uppercase;font-size:12.5px;letter-spacing:.08em;color:var(--rojo)}
-.cab span{text-align:right}
-.it:last-child{border-bottom:0}
-.nm b{font-weight:500}
-.nm small{display:block;font-size:13.5px;color:var(--gris);font-weight:300}
-.pr{font-family:var(--cond);font-weight:500;font-size:16px;text-align:right;white-space:nowrap;color:var(--tinta)}
-.bloque.verde{background:var(--oliva);color:var(--crema);border-color:var(--oliva)}
-.bloque.verde h3{color:var(--crema)}
-.bloque.verde .it{border-color:rgba(239,237,222,.25)}
-.bloque.verde .pr{color:var(--crema);font-size:18px}
-.gustos{font-size:16px;line-height:1.7;margin-bottom:8px;color:rgba(239,237,222,.92)}
-.nota{font-size:13.5px;color:var(--gris);margin-top:18px}
-
-/* galería */
-.fotos{background:var(--tinta);color:var(--crema)}
-.fotos h2{color:var(--crema)}
-.fotos .eyebrow{color:#E8A79E}
-.galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
-.g{border:0;padding:0;background:#000;cursor:zoom-in;aspect-ratio:1;overflow:hidden}
-.g img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.g:hover img{transform:scale(1.05)}
+/* ── fotos ── */
+.horno{background:var(--tinta);color:var(--tiza);padding:64px 0}
+.horno h2{color:var(--tiza);margin-bottom:22px}
+.galeria{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,230px);gap:6px}
+.g{border:0;padding:0;background:#000;cursor:zoom-in;overflow:hidden}
+.g.grande{grid-column:span 2;grid-row:span 2}
+.g.ancha{grid-column:span 2}
+.g img{width:100%;height:100%;object-fit:cover}
+.g:hover img{opacity:.88}
 #visor{position:fixed;inset:0;background:rgba(20,17,14,.94);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}
 #visor.on{display:flex}
 #visor img{max-height:88vh;max-width:100%;object-fit:contain}
-#visor button{position:absolute;top:14px;right:14px;width:46px;height:46px;border-radius:50%;border:0;background:var(--crema);color:var(--tinta);font-size:20px;cursor:pointer}
+#visor button{position:absolute;top:14px;right:14px;width:46px;height:46px;border-radius:50%;border:0;background:var(--tiza);color:var(--tinta);font-size:20px;cursor:pointer}
 
-/* cómo pedir */
-.pedir{background:var(--rojo);color:var(--crema)}
-.pedir h2{color:var(--crema)}
-.pedir .eyebrow{color:var(--crema);opacity:.8}
-.opciones{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 28px}
-.op{border:2px solid rgba(239,237,222,.5);padding:22px}
-.op h3{font-family:var(--cond);text-transform:uppercase;font-size:22px;font-weight:600;margin-bottom:6px}
-.op p{font-weight:300;color:rgba(239,237,222,.9)}
+/* ── cómo pedir: el imán en la puerta de la heladera ── */
+.pedir{background:var(--heladera);padding:70px 0}
+.pedir .wrap{display:grid;grid-template-columns:1fr minmax(300px,430px);gap:40px 64px;align-items:center}
+.pedir h2{margin-bottom:14px}
+.pedir p{font-size:21px;max-width:38ch;margin-bottom:22px}
+.iman{background:var(--rojo);color:var(--tiza);border-radius:26px;padding:22px 26px 26px;transform:rotate(-2deg);box-shadow:0 1px 0 rgba(0,0,0,.15),0 14px 22px -10px rgba(38,34,29,.5);text-align:center}
+.iman img{width:62%;height:auto;margin:0 auto 10px}
+.iman .modo{font-size:19px;font-weight:700;line-height:1.3;margin-bottom:12px}
+.iman a{display:block;text-decoration:none;font-family:var(--slab);font-size:clamp(30px,3.4vw,40px);line-height:1.1}
+.iman a small{display:block;font-family:var(--cond);font-size:17px;font-weight:600;opacity:.85;margin-top:12px}
+.iman a small:first-child{margin-top:0}
+.iman .dias{border-top:2px dashed rgba(239,237,222,.5);margin-top:16px;padding-top:12px;font-size:18px;font-weight:600}
 
-/* dónde y cuándo */
-.donde .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:34px;align-items:start}
-.dato{margin:18px 0}
-.dato .lbl{font-family:var(--cond);text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--rojo)}
-.dato p{font-size:17px}
-.mapa{border:2px solid var(--oliva);aspect-ratio:4/3;background:var(--crema-2)}
+/* ── dónde ── */
+.donde{padding:64px 0}
+.donde .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:34px;align-items:start}
+.donde h2{margin-bottom:16px}
+.donde dl{font-size:20px;margin-bottom:22px}
+.donde dt{font-weight:800;color:var(--rojo);margin-top:12px}
+.mapa{border:3px solid var(--tinta);border-radius:6px;overflow:hidden;aspect-ratio:4/3;background:var(--junta)}
 .mapa iframe{width:100%;height:100%;border:0;display:block}
-.donde .btn{border-color:var(--oliva);color:var(--oliva);margin-top:6px}
-.donde .btn:hover{background:var(--oliva);color:var(--crema)}
 
-/* preguntas */
-.faq{background:var(--crema-2)}
-.faq details{border-bottom:1.5px solid rgba(59,67,30,.3);padding:16px 0}
-.faq summary{cursor:pointer;font-weight:500;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:14px}
-.faq summary::after{content:'+';font-family:var(--cond);font-size:24px;line-height:1;color:var(--rojo)}
+/* ── preguntas ── */
+.faq{background:var(--tiza);padding:64px 0;border-top:3px solid var(--junta)}
+.faq h2{margin-bottom:10px}
+.faq details{border-bottom:2px solid var(--junta);padding:14px 0;max-width:820px}
+.faq summary{cursor:pointer;font-weight:700;font-size:21px;list-style:none;display:flex;justify-content:space-between;gap:14px}
+.faq summary::after{content:'+';font-family:var(--slab);font-size:24px;line-height:1;color:var(--rojo)}
 .faq details[open] summary::after{content:'–'}
 .faq summary::-webkit-details-marker{display:none}
-.faq p{margin-top:8px;color:var(--gris);max-width:70ch}
+.faq p{margin-top:6px;color:var(--gris);max-width:62ch;font-size:19px}
 
-/* pie */
-footer{background:var(--tinta);color:rgba(239,237,222,.75);padding:44px 0 96px;font-size:14px}
+/* ── pie ── */
+footer{background:var(--tinta);color:rgba(239,237,222,.78);padding:44px 0 100px;font-size:18px}
 footer .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
-footer h4{font-family:var(--cond);text-transform:uppercase;letter-spacing:.08em;color:var(--crema);font-size:15px;margin-bottom:10px}
+footer h4{font-family:var(--slab);font-weight:400;color:var(--tiza);font-size:22px;margin-bottom:10px}
 footer a{display:block;text-decoration:none;margin-bottom:6px}
-footer a:hover{color:var(--crema)}
+footer p{margin-bottom:8px}
+footer a:hover{color:var(--tiza)}
 
 /* WhatsApp fijo en el celu */
+.flotante{opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s;position:fixed;left:14px;right:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:none;background:#1F8F4E;color:#fff;text-decoration:none;font-family:var(--cond);font-weight:800;font-size:21px;min-height:54px;align-items:center;justify-content:center;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .flotante.ver{opacity:1;transform:none;pointer-events:auto}
-.flotante{opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s;position:fixed;left:14px;right:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:none;background:#1F8F4E;color:#fff;text-decoration:none;font-family:var(--cond);text-transform:uppercase;letter-spacing:.06em;font-size:16px;min-height:52px;align-items:center;justify-content:center;gap:10px;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 
 @media(max-width:860px){
-  .hero .wrap{grid-template-columns:1fr;gap:28px;padding-top:30px}
-  .hero-foto{aspect-ratio:4/5;max-height:72vh;box-shadow:8px 8px 0 var(--oliva)}
-  .hero-foto img{object-position:50% 64%}
-  .carta{grid-template-columns:1fr}
-  .galeria{grid-template-columns:repeat(2,1fr)}
-  .opciones{grid-template-columns:1fr}
-  .donde .wrap{grid-template-columns:1fr}
-  footer .wrap{grid-template-columns:1fr}
+  .toldo .wrap{grid-template-columns:1fr;padding-top:24px;padding-bottom:28px}
+  .logo{width:min(250px,70%)}
+  .tablero{grid-template-columns:1fr;padding:24px 18px;border-width:10px}
+  .galeria{grid-template-columns:repeat(2,1fr);grid-auto-rows:42vw}
+  .pedir .wrap,.donde .wrap,footer .wrap{grid-template-columns:1fr}
+  .iman{max-width:400px;margin:0 auto}
   .flotante{display:flex}
-  section{padding:48px 0}
 }
-@media(max-width:380px){.lista.dos .it,.lista.dos .cab{grid-template-columns:1fr 64px 64px}.pr{font-size:15px}}
+@media(max-width:760px){
+  .tira{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px}
+  .tira::-webkit-scrollbar{display:none}
+  .tira figure{flex:0 0 82vw;height:62vh;max-height:560px;scroll-snap-align:start}
+}
+@media(max-width:400px){
+  .r.dos,.enc{grid-template-columns:auto 1fr 66px 66px}
+  .enc{grid-template-columns:1fr 66px 66px}
+  .r .n,.r .p{font-size:19px}
+  .r.muzza .n{font-size:24px}.r.muzza .p{font-size:19px}
+}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
 <div class="grupo"><div class="wrap">
-  <a href="/">← Grupo El Chiringuito · Paseo Mendoza</a>
+  <a href="/">← Grupo El Chiringuito</a>
   <a href="https://www.instagram.com/unapizza.maschwitz" target="_blank" rel="noopener">@unapizza.maschwitz</a>
 </div></div>
 
-<header class="hero">
+<header class="toldo">
   <div class="wrap">
+    <img class="logo" src="fotos/logo-una-pizza.jpg" alt="Logo de Una Pizza a la piedra" width="720" height="569">
     <div>
-      <img class="logo" src="fotos/logo-una-pizza.jpg" alt="Una Pizza a la piedra · Est. 24" width="720" height="569">
-      <h1>Pizzería a la piedra en Ingeniero Maschwitz</h1>
-      <p class="sub">Pizzas a la piedra que salen del horno a leña, empanadas y fainá. Delivery propio, retiro o en el local, en Mendoza 1578, Paseo Mendoza.</p>
-      <div class="estado" id="estado"><i></i><span>Mié a dom desde las 19</span></div>
+      <h1>Pizzería con horno a leña en Ingeniero Maschwitz</h1>
+      <p class="bajada">Pizza a la piedra que sale del horno de mosaico, empanadas y fainá. Delivery propio, retiro o mesa en Mendoza 1578, en el Paseo Mendoza.</p>
+      <div class="estado" id="estado"><i></i><span>Abrimos de miércoles a domingo desde las 19</span></div>
       <div class="ctas">
-        <a class="btn lleno" href="https://wa.me/5491126091109?text=Hola%20Una%20Pizza!%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp</a>
-        <a class="btn linea" href="tel:+543484625434">Llamar</a>
-        <a class="btn linea" href="#carta">Ver la carta</a>
+        <a class="btn tiza" href="https://wa.me/5491126091109?text=Hola%20Una%20Pizza!%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        <a class="btn hueco" href="#carta">Ver la carta</a>
       </div>
-    </div>
-    <div class="hero-foto">
-      <img src="fotos/muzzarella-frente-al-horno.jpg" srcset="fotos/muzzarella-frente-al-horno-640.jpg 720w, fotos/muzzarella-frente-al-horno.jpg 1400w" sizes="(max-width:860px) 100vw, 480px" alt="Muzzarella con aceitunas recién salida, frente al horno a leña de mosaico de Una Pizza" width="788" height="1400" fetchpriority="high">
     </div>
   </div>
 </header>
-<div class="cuadros"></div>
+<div class="tira"><figure><img src="fotos/muzzarella-frente-al-horno-640.jpg" srcset="fotos/muzzarella-frente-al-horno-640.jpg 640w, fotos/muzzarella-frente-al-horno.jpg 1400w" sizes="(max-width:760px) 82vw, 34vw" alt="Muzzarella con aceitunas recién salida, frente al horno a leña de mosaico de Una Pizza" width="640" height="960" style="object-position:50% 70%" fetchpriority="high"></figure><figure><img src="fotos/pizzero-una-pizza-640.jpg" srcset="fotos/pizzero-una-pizza-640.jpg 640w, fotos/pizzero-una-pizza.jpg 1400w" sizes="(max-width:760px) 82vw, 34vw" alt="Pizzero de Una Pizza con una pizza de tomate recién armada, horno a leña atrás" width="640" height="960" style="object-position:50% 55%" loading="lazy"></figure><figure><img src="fotos/local-una-pizza-640.jpg" srcset="fotos/local-una-pizza-640.jpg 640w, fotos/local-una-pizza.jpg 1400w" sizes="(max-width:760px) 82vw, 34vw" alt="Pared de azulejos blancos con el logo de Una Pizza pintado en rojo" width="640" height="960" style="object-position:50% 40%" loading="lazy"></figure></div>
 
-<section id="carta">
+<section class="pared" id="carta">
   <div class="wrap">
-    <span class="eyebrow">La carta</span>
-    <h2>Pizzas, empanadas y fainá</h2>
-    <p class="lead">Todas las pizzas son a la piedra y vienen en dos tamaños: individual y de 8 porciones.</p>
+    <div class="pared-head">
+      <h2>La carta</h2>
+      <p>Todas las pizzas son a la piedra y vienen en dos tamaños: individual y de 8 porciones.</p>
+    </div>
     <nav class="saltos" aria-label="Secciones de la carta">
       <a href="#clasicas">Clásicas</a><a href="#gourmet">Gourmet</a><a href="#rellenas">Rellenas</a><a href="#empanadas">Empanadas</a><a href="#bebidas">Bebidas</a><a href="#postres">Postres</a>
     </nav>
-    <div class="carta">
-  <div class="bloque" id="clasicas">
-    <h3>Clásicas <em>a la piedra</em></h3>
-    <ul class="lista dos"><li class="cab"><span></span><span>Indiv.</span><span>8 porc.</span></li><li class="it"><div class="nm"><b>Muzzarella</b></div><span class="pr">$20.000</span><span class="pr">$24.000</span></li><li class="it"><div class="nm"><b>Napolitana</b></div><span class="pr">$21.000</span><span class="pr">$30.000</span></li><li class="it"><div class="nm"><b>Fugazzetta</b></div><span class="pr">$22.500</span><span class="pr">$32.500</span></li><li class="it"><div class="nm"><b>Calabresa</b></div><span class="pr">$22.000</span><span class="pr">$32.500</span></li><li class="it"><div class="nm"><b>Jamón y morrones</b></div><span class="pr">$22.000</span><span class="pr">$32.500</span></li><li class="it"><div class="nm"><b>Cuatro quesos</b></div><span class="pr">$23.500</span><span class="pr">$36.500</span></li><li class="it"><div class="nm"><b>Anchoas</b></div><span class="pr">$20.500</span><span class="pr">$31.000</span></li><li class="it"><div class="nm"><b>Palmitos</b><small>Con salsa golf</small></div><span class="pr">$24.000</span><span class="pr">$36.500</span></li><li class="it"><div class="nm"><b>Provolone</b></div><span class="pr">$26.500</span><span class="pr">$37.000</span></li><li class="it"><div class="nm"><b>Margarita</b><small>Mozzarella y albahaca</small></div><span class="pr">$22.000</span><span class="pr">$30.500</span></li><li class="it"><div class="nm"><b>Capresse</b><small>Mozzarella, albahaca y tomate</small></div><span class="pr">$22.000</span><span class="pr">$30.500</span></li><li class="it"><div class="nm"><b>Pepperoni</b></div><span class="pr">$22.000</span><span class="pr">$32.500</span></li><li class="it"><div class="nm"><b>Ananá con jamón</b></div><span class="pr">$23.000</span><span class="pr">$33.000</span></li><li class="it"><div class="nm"><b>Espinaca con salsa blanca</b></div><span class="pr">$20.000</span><span class="pr">$33.800</span></li><li class="it"><div class="nm"><b>Primavera</b><small>Jamón y huevo</small></div><span class="pr">$20.500</span><span class="pr">$30.000</span></li></ul>
-  </div>
-  <div class="bloque" id="gourmet">
-    <h3>Gourmet</h3>
-    <ul class="lista dos"><li class="cab"><span></span><span>Indiv.</span><span>8 porc.</span></li><li class="it"><div class="nm"><b>Jamón crudo Las Dinas</b><small>Rúcula y parmesano</small></div><span class="pr">$26.500</span><span class="pr">$39.000</span></li><li class="it"><div class="nm"><b>Salame tandilero</b><small>Con queso pategrás</small></div><span class="pr">$22.000</span><span class="pr">$39.500</span></li><li class="it"><div class="nm"><b>Cuatro quesos con miel y nueces</b></div><span class="pr">$25.500</span><span class="pr">$39.500</span></li><li class="it"><div class="nm"><b>Panceta y verdeo</b></div><span class="pr">$26.500</span><span class="pr">$38.000</span></li><li class="it"><div class="nm"><b>Panceta crispy y cheddar</b></div><span class="pr">—</span><span class="pr">$39.500</span></li></ul>
-  </div>
-  <div class="bloque" id="rellenas">
-    <h3>Rellenas <em>a la piedra</em></h3>
-    <ul class="lista"><li class="it uno"><div class="nm"><b>Fugazzetta rellena</b></div><span class="pr">$35.500</span></li><li class="it uno"><div class="nm"><b>Jamón</b></div><span class="pr">$40.000</span></li><li class="it uno"><div class="nm"><b>Jamón y morrones</b></div><span class="pr">$41.000</span></li></ul>
-    <h3 class="sub">Fainá</h3>
-    <ul class="lista"><li class="it uno"><div class="nm"><b>Porción de fainá</b></div><span class="pr">$2.700</span></li></ul>
-  </div>
-  <div class="bloque verde" id="empanadas">
-    <h3>Empanadas</h3>
-    <p class="gustos">Carne cortada a cuchillo · Pollo · Jamón y queso · Verdura · Bondiola desmechada a la mostaza</p>
-    <ul class="lista"><li class="it uno"><div class="nm"><b>Unidad</b></div><span class="pr">$3.000</span></li><li class="it uno"><div class="nm"><b>1/2 docena</b></div><span class="pr">$17.000</span></li><li class="it uno"><div class="nm"><b>Docena</b></div><span class="pr">$33.000</span></li></ul>
-  </div>
-  <div class="bloque" id="bebidas">
-    <h3>Bebidas</h3>
-    <ul class="lista"><li class="it uno"><div class="nm"><b>Heineken (litro)</b></div><span class="pr">$14.500</span></li><li class="it uno"><div class="nm"><b>Heineken (lata)</b></div><span class="pr">$7.000</span></li><li class="it uno"><div class="nm"><b>Heineken (porrón)</b></div><span class="pr">$7.000</span></li><li class="it uno"><div class="nm"><b>Imperial (litro)</b></div><span class="pr">$14.500</span></li><li class="it uno"><div class="nm"><b>Imperial (lata)</b></div><span class="pr">$6.000</span></li><li class="it uno"><div class="nm"><b>Amstel (lata)</b></div><span class="pr">$6.000</span></li><li class="it uno"><div class="nm"><b>Blue Moon (lata)</b></div><span class="pr">$6.600</span></li><li class="it uno"><div class="nm"><b>Miller (lata)</b></div><span class="pr">$6.600</span></li><li class="it uno"><div class="nm"><b>Warsteiner (lata)</b></div><span class="pr">$6.600</span></li><li class="it uno"><div class="nm"><b>Copa de vino</b></div><span class="pr">$5.200</span></li></ul>
-    <h3 class="sub">Sin alcohol</h3>
-    <ul class="lista"><li class="it uno"><div class="nm"><b>Coca-Cola (lata)</b></div><span class="pr">$5.200</span></li><li class="it uno"><div class="nm"><b>Coca-Cola (1,75 L)</b></div><span class="pr">$15.000</span></li><li class="it uno"><div class="nm"><b>Saborizada</b><small>Especificá el sabor</small></div><span class="pr">$5.000</span></li><li class="it uno"><div class="nm"><b>Agua sin gas</b></div><span class="pr">$4.800</span></li><li class="it uno"><div class="nm"><b>Agua con gas</b></div><span class="pr">$4.800</span></li></ul>
-  </div>
-  <div class="bloque" id="postres">
-    <h3>Postres</h3>
-    <ul class="lista"><li class="it uno"><div class="nm"><b>Porción de torta del día</b></div><span class="pr">$9.900</span></li><li class="it uno"><div class="nm"><b>Flan casero</b></div><span class="pr">$5.500</span></li><li class="it uno"><div class="nm"><b>Flan con crema o dulce de leche</b></div><span class="pr">$7.000</span></li></ul>
-  </div>
+    <div class="tablero">
+      <div class="col">
+        <div class="grupo-c" id="clasicas">
+          <h3>Clásicas a la piedra</h3>
+          <ul><li class="enc" aria-hidden="true"><span>Indiv.</span><span>8 porc.</span></li><li class="r dos muzza"><span class="n">Muzzarella</span><i aria-hidden="true"></i><span class="p">$20.000</span><span class="p">$24.000</span></li><li class="r dos"><span class="n">Napolitana</span><i aria-hidden="true"></i><span class="p">$21.000</span><span class="p">$30.000</span></li><li class="r dos"><span class="n">Fugazzetta</span><i aria-hidden="true"></i><span class="p">$22.500</span><span class="p">$32.500</span></li><li class="r dos"><span class="n">Calabresa</span><i aria-hidden="true"></i><span class="p">$22.000</span><span class="p">$32.500</span></li><li class="r dos"><span class="n">Jamón y morrones</span><i aria-hidden="true"></i><span class="p">$22.000</span><span class="p">$32.500</span></li><li class="r dos"><span class="n">Cuatro quesos</span><i aria-hidden="true"></i><span class="p">$23.500</span><span class="p">$36.500</span></li><li class="r dos"><span class="n">Anchoas</span><i aria-hidden="true"></i><span class="p">$20.500</span><span class="p">$31.000</span></li><li class="r dos"><span class="n">Palmitos</span><i aria-hidden="true"></i><span class="p">$24.000</span><span class="p">$36.500</span><small>Con salsa golf</small></li><li class="r dos"><span class="n">Provolone</span><i aria-hidden="true"></i><span class="p">$26.500</span><span class="p">$37.000</span></li><li class="r dos"><span class="n">Margarita</span><i aria-hidden="true"></i><span class="p">$22.000</span><span class="p">$30.500</span><small>Mozzarella y albahaca</small></li><li class="r dos"><span class="n">Capresse</span><i aria-hidden="true"></i><span class="p">$22.000</span><span class="p">$30.500</span><small>Mozzarella, albahaca y tomate</small></li><li class="r dos"><span class="n">Pepperoni</span><i aria-hidden="true"></i><span class="p">$22.000</span><span class="p">$32.500</span></li><li class="r dos"><span class="n">Ananá con jamón</span><i aria-hidden="true"></i><span class="p">$23.000</span><span class="p">$33.000</span></li><li class="r dos"><span class="n">Espinaca con salsa blanca</span><i aria-hidden="true"></i><span class="p">$20.000</span><span class="p">$33.800</span></li><li class="r dos"><span class="n">Primavera</span><i aria-hidden="true"></i><span class="p">$20.500</span><span class="p">$30.000</span><small>Jamón y huevo</small></li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="grupo-c" id="gourmet">
+          <h3>Gourmet</h3>
+          <ul><li class="enc" aria-hidden="true"><span>Indiv.</span><span>8 porc.</span></li><li class="r dos"><span class="n">Jamón crudo Las Dinas</span><i aria-hidden="true"></i><span class="p">$26.500</span><span class="p">$39.000</span><small>Rúcula y parmesano</small></li><li class="r dos"><span class="n">Salame tandilero</span><i aria-hidden="true"></i><span class="p">$22.000</span><span class="p">$39.500</span><small>Con queso pategrás</small></li><li class="r dos"><span class="n">Cuatro quesos con miel y nueces</span><i aria-hidden="true"></i><span class="p">$25.500</span><span class="p">$39.500</span></li><li class="r dos"><span class="n">Panceta y verdeo</span><i aria-hidden="true"></i><span class="p">$26.500</span><span class="p">$38.000</span></li><li class="r dos"><span class="n">Panceta crispy y cheddar</span><i aria-hidden="true"></i><span class="p">—</span><span class="p">$39.500</span></li></ul>
+        </div>
+        <div class="grupo-c" id="rellenas">
+          <h3>Rellenas a la piedra</h3>
+          <ul><li class="r"><span class="n">Fugazzetta rellena</span><i aria-hidden="true"></i><span class="p">$35.500</span></li><li class="r"><span class="n">Jamón</span><i aria-hidden="true"></i><span class="p">$40.000</span></li><li class="r"><span class="n">Jamón y morrones</span><i aria-hidden="true"></i><span class="p">$41.000</span></li></ul>
+        </div>
+        <div class="grupo-c">
+          <h3>Fainá</h3>
+          <ul><li class="r"><span class="n">Porción de fainá</span><i aria-hidden="true"></i><span class="p">$2.700</span></li></ul>
+        </div>
+        <div class="grupo-c" id="empanadas">
+          <h3>Empanadas</h3>
+          <p class="gustos">Carne cortada a cuchillo, pollo, jamón y queso, verdura y bondiola desmechada a la mostaza.</p>
+          <ul><li class="r"><span class="n">Unidad</span><i aria-hidden="true"></i><span class="p">$3.000</span></li><li class="r"><span class="n">1/2 docena</span><i aria-hidden="true"></i><span class="p">$17.000</span></li><li class="r"><span class="n">Docena</span><i aria-hidden="true"></i><span class="p">$33.000</span></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="tablero">
+      <div class="col">
+        <div class="grupo-c" id="bebidas">
+          <h3>Bebidas</h3>
+          <ul><li class="r"><span class="n">Heineken (litro)</span><i aria-hidden="true"></i><span class="p">$14.500</span></li><li class="r"><span class="n">Heineken (lata)</span><i aria-hidden="true"></i><span class="p">$7.000</span></li><li class="r"><span class="n">Heineken (porrón)</span><i aria-hidden="true"></i><span class="p">$7.000</span></li><li class="r"><span class="n">Imperial (litro)</span><i aria-hidden="true"></i><span class="p">$14.500</span></li><li class="r"><span class="n">Imperial (lata)</span><i aria-hidden="true"></i><span class="p">$6.000</span></li><li class="r"><span class="n">Amstel (lata)</span><i aria-hidden="true"></i><span class="p">$6.000</span></li><li class="r"><span class="n">Blue Moon (lata)</span><i aria-hidden="true"></i><span class="p">$6.600</span></li><li class="r"><span class="n">Miller (lata)</span><i aria-hidden="true"></i><span class="p">$6.600</span></li><li class="r"><span class="n">Warsteiner (lata)</span><i aria-hidden="true"></i><span class="p">$6.600</span></li><li class="r"><span class="n">Copa de vino</span><i aria-hidden="true"></i><span class="p">$5.200</span></li></ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="grupo-c">
+          <h3>Sin alcohol</h3>
+          <ul><li class="r"><span class="n">Coca-Cola (lata)</span><i aria-hidden="true"></i><span class="p">$5.200</span></li><li class="r"><span class="n">Coca-Cola (1,75 L)</span><i aria-hidden="true"></i><span class="p">$15.000</span></li><li class="r"><span class="n">Saborizada</span><i aria-hidden="true"></i><span class="p">$5.000</span><small>Especificá el sabor</small></li><li class="r"><span class="n">Agua sin gas</span><i aria-hidden="true"></i><span class="p">$4.800</span></li><li class="r"><span class="n">Agua con gas</span><i aria-hidden="true"></i><span class="p">$4.800</span></li></ul>
+        </div>
+        <div class="grupo-c" id="postres">
+          <h3>Postres</h3>
+          <ul><li class="r"><span class="n">Porción de torta del día</span><i aria-hidden="true"></i><span class="p">$9.900</span></li><li class="r"><span class="n">Flan casero</span><i aria-hidden="true"></i><span class="p">$5.500</span></li><li class="r"><span class="n">Flan con crema o dulce de leche</span><i aria-hidden="true"></i><span class="p">$7.000</span></li></ul>
+        </div>
+      </div>
     </div>
     <p class="nota">Precios en pesos. Pueden cambiar sin aviso: confirmalos al hacer tu pedido.</p>
   </div>
 </section>
 
-<section class="fotos">
+<section class="horno">
   <div class="wrap">
-    <span class="eyebrow">Del horno a la mesa</span>
-    <h2>Así sale cada pizza</h2>
-    <div class="galeria"><button class="g" data-full="fotos/pizzero-una-pizza.jpg" aria-label="Ampliar: Pizzero de Una Pizza con una pizza de tomate recién armada, horno a leña atrás"><img src="fotos/pizzero-una-pizza-640.jpg" alt="Pizzero de Una Pizza con una pizza de tomate recién armada, horno a leña atrás" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/pizza-jamon-y-morrones.jpg" aria-label="Ampliar: Pizza de jamón y morrones a la piedra con cerveza"><img src="fotos/pizza-jamon-y-morrones-640.jpg" alt="Pizza de jamón y morrones a la piedra con cerveza" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/pizza-anana-con-jamon-horno.jpg" aria-label="Ampliar: Pizza de ananá con jamón entrando al horno a leña"><img src="fotos/pizza-anana-con-jamon-horno-640.jpg" alt="Pizza de ananá con jamón entrando al horno a leña" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/muzzarella-con-cerveza.jpg" aria-label="Ampliar: Muzzarella a la piedra con aceitunas y cervezas en la mesa"><img src="fotos/muzzarella-con-cerveza-640.jpg" alt="Muzzarella a la piedra con aceitunas y cervezas en la mesa" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/cuatro-quesos-miel-y-nueces.jpg" aria-label="Ampliar: Pizza cuatro quesos con miel y nueces"><img src="fotos/cuatro-quesos-miel-y-nueces-640.jpg" alt="Pizza cuatro quesos con miel y nueces" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/empanada-bondiola.jpg" aria-label="Ampliar: Empanada de bondiola desmechada a la mostaza"><img src="fotos/empanada-bondiola-640.jpg" alt="Empanada de bondiola desmechada a la mostaza" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/empanada-al-horno.jpg" aria-label="Ampliar: Empanada al horno abierta a mano"><img src="fotos/empanada-al-horno-640.jpg" alt="Empanada al horno abierta a mano" loading="lazy" decoding="async" width="640" height="640"></button><button class="g" data-full="fotos/porcion-de-faina.jpg" aria-label="Ampliar: Porción de fainá"><img src="fotos/porcion-de-faina-640.jpg" alt="Porción de fainá" loading="lazy" decoding="async" width="640" height="640"></button></div>
+    <h2>Recién salidas del horno</h2>
+    <div class="galeria"><button class="g grande" data-full="fotos/pizza-anana-con-jamon-horno.jpg" aria-label="Ampliar: Pizza de ananá con jamón entrando al horno a leña"><img src="fotos/pizza-anana-con-jamon-horno-640.jpg" alt="Pizza de ananá con jamón entrando al horno a leña" loading="lazy" decoding="async"></button><button class="g " data-full="fotos/pizza-jamon-y-morrones.jpg" aria-label="Ampliar: Pizza de jamón y morrones a la piedra con cerveza"><img src="fotos/pizza-jamon-y-morrones-640.jpg" alt="Pizza de jamón y morrones a la piedra con cerveza" loading="lazy" decoding="async"></button><button class="g " data-full="fotos/muzzarella-con-cerveza.jpg" aria-label="Ampliar: Muzzarella a la piedra con aceitunas y cervezas en la mesa"><img src="fotos/muzzarella-con-cerveza-640.jpg" alt="Muzzarella a la piedra con aceitunas y cervezas en la mesa" loading="lazy" decoding="async"></button><button class="g " data-full="fotos/cuatro-quesos-miel-y-nueces.jpg" aria-label="Ampliar: Pizza cuatro quesos con miel y nueces"><img src="fotos/cuatro-quesos-miel-y-nueces-640.jpg" alt="Pizza cuatro quesos con miel y nueces" loading="lazy" decoding="async"></button><button class="g " data-full="fotos/pizza-horno-a-lena.jpg" aria-label="Ampliar: Pizza saliendo de la boca del horno a leña"><img src="fotos/pizza-horno-a-lena-640.jpg" alt="Pizza saliendo de la boca del horno a leña" loading="lazy" decoding="async"></button><button class="g ancha" data-full="fotos/porcion-de-faina.jpg" aria-label="Ampliar: Porción de fainá"><img src="fotos/porcion-de-faina-640.jpg" alt="Porción de fainá" loading="lazy" decoding="async"></button><button class="g " data-full="fotos/empanada-bondiola.jpg" aria-label="Ampliar: Empanada de bondiola desmechada a la mostaza"><img src="fotos/empanada-bondiola-640.jpg" alt="Empanada de bondiola desmechada a la mostaza" loading="lazy" decoding="async"></button><button class="g " data-full="fotos/empanada-al-horno.jpg" aria-label="Ampliar: Empanada al horno abierta a mano"><img src="fotos/empanada-al-horno-640.jpg" alt="Empanada al horno abierta a mano" loading="lazy" decoding="async"></button></div>
   </div>
 </section>
 
-<section class="pedir">
+<section class="pedir" id="pedir">
   <div class="wrap">
-    <span class="eyebrow">Cómo pedir</span>
-    <h2>Vení, llevala o te la llevamos</h2>
-    <div class="opciones">
-      <div class="op"><h3>Delivery propio</h3><p>Pedí por WhatsApp o por teléfono y te la llevamos nosotros.</p></div>
-      <div class="op"><h3>Retiro en el local</h3><p>Pedí antes y pasá a buscarla por Mendoza 1578.</p></div>
-      <div class="op"><h3>Comé acá</h3><p>Pizza recién salida del horno, en el Paseo Mendoza.</p></div>
+    <div>
+      <h2>Pedila y te la llevamos</h2>
+      <p>Tenemos delivery propio. Si preferís, pedí antes y pasá a buscarla por Mendoza 1578, o vení a comerla acá, recién salida.</p>
+      <div class="ctas">
+        <a class="btn rojo" href="https://wa.me/5491126091109?text=Hola%20Una%20Pizza!%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        <a class="btn borde" href="tel:+543484625434">Llamar</a>
+      </div>
     </div>
-    <div class="ctas">
-      <a class="btn lleno" href="https://wa.me/5491126091109?text=Hola%20Una%20Pizza!%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">WhatsApp 11 2609-1109</a>
-      <a class="btn linea" href="tel:+543484625434">Teléfono 348 462-5434</a>
+    <div class="iman" aria-label="Datos para pedir">
+      <img src="fotos/logo-una-pizza.jpg" alt="" width="720" height="569" loading="lazy">
+      <div class="modo">Delivery propio, retiro o en el local</div>
+      <a href="https://wa.me/5491126091109?text=Hola%20Una%20Pizza!%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener"><small>WhatsApp</small>11 2609-1109</a>
+      <a href="tel:+543484625434"><small>Teléfono</small>348 462-5434</a>
+      <div class="dias">Miércoles a domingo desde las 19</div>
     </div>
   </div>
 </section>
-<div class="cuadros"></div>
 
 <section class="donde">
   <div class="wrap">
     <div>
-      <span class="eyebrow">Dónde y cuándo</span>
       <h2>En el Paseo Mendoza</h2>
-      <div class="dato"><div class="lbl">Dirección</div><p>Mendoza 1578, Paseo Mendoza<br>Ingeniero Maschwitz, Escobar</p></div>
-      <div class="dato"><div class="lbl">Horarios</div><p>Miércoles, jueves y domingo: 19 a 24 h<br>Viernes y sábado: 19 a 1 h<br>Lunes y martes: cerrado</p></div>
-      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">Cómo llegar</a>
+      <dl>
+        <dt>Dirección</dt><dd>Mendoza 1578, Paseo Mendoza<br>Ingeniero Maschwitz, Escobar</dd>
+        <dt>Horarios</dt><dd>Miércoles, jueves y domingo: 19 a 24 h<br>Viernes y sábado: 19 a 1 h<br>Lunes y martes: cerrado</dd>
+      </dl>
+      <a class="btn borde" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
     <div class="mapa">
       <iframe title="Mapa de Una Pizza en Mendoza 1578, Ingeniero Maschwitz" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Una%20Pizza%20Mendoza%201578%20Ingeniero%20Maschwitz&z=16&output=embed"></iframe>
@@ -1096,8 +1128,7 @@ footer a:hover{color:var(--crema)}
 
 <section class="faq">
   <div class="wrap">
-    <span class="eyebrow">Preguntas frecuentes</span>
-    <h2>Lo que más nos preguntan</h2>
+    <h2>Preguntas frecuentes</h2>
     <details><summary>¿Dónde queda Una Pizza?</summary><p>En Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz (partido de Escobar). Es el mismo paseo de El Chiringuito, La Focacceria y ChirinBakery.</p></details><details><summary>¿Qué días y horarios abren?</summary><p>Miércoles, jueves y domingo de 19 a 24 h. Viernes y sábado de 19 a 1 h. Lunes y martes cerrado.</p></details><details><summary>¿Hacen delivery?</summary><p>Sí, tenemos delivery propio. Pedí por WhatsApp al 11 2609-1109 o llamá al 348 462-5434.</p></details><details><summary>¿Puedo retirar o comer en el local?</summary><p>Sí, podés comer en el local o pasar a retirar tu pedido por Mendoza 1578.</p></details><details><summary>¿Cómo son las pizzas?</summary><p>Son a la piedra y salen del horno a leña. Las hay en dos tamaños: individual y de 8 porciones.</p></details><details><summary>¿Tienen opciones sin TACC?</summary><p>No, no tenemos opciones sin TACC.</p></details>
   </div>
 </section>
@@ -1106,7 +1137,7 @@ footer a:hover{color:var(--crema)}
   <div class="wrap">
     <div>
       <h4>Una Pizza</h4>
-      <p>Mendoza 1578, Paseo Mendoza · Ingeniero Maschwitz</p>
+      <p>Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz</p>
       <a href="https://wa.me/5491126091109?text=Hola%20Una%20Pizza!%20Quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">WhatsApp 11 2609-1109</a>
       <a href="tel:+543484625434">Teléfono 348 462-5434</a>
       <a href="https://www.instagram.com/unapizza.maschwitz" target="_blank" rel="noopener">Instagram @unapizza.maschwitz</a>
@@ -1114,8 +1145,8 @@ footer a:hover{color:var(--crema)}
     <div>
       <h4>En el mismo paseo</h4>
       <a href="/">Grupo El Chiringuito</a>
-      <a href="/carta/chiringuito/">El Chiringuito · carta</a>
-      <a href="/carta/lounge/">Chiringuito Lounge · carta</a>
+      <a href="/carta/chiringuito/">Carta de El Chiringuito</a>
+      <a href="/carta/lounge/">Carta de Chiringuito Lounge</a>
     </div>
   </div>
 </footer>
@@ -1126,7 +1157,7 @@ footer a:hover{color:var(--crema)}
 
 <script>
 /* ── Abierto / cerrado ──
-   Si cambia el horario: editar acá, en el texto de "Dónde y cuándo", en las preguntas
+   Si cambia el horario: editar acá, en "En el Paseo Mendoza", en el imán, en las preguntas
    frecuentes y en el bloque de datos para Google de arriba.
    Minutos desde las 00:00 (después de medianoche se suma 1440: 01:00 = 1500).
    Días: 0 dom, 1 lun, 2 mar, 3 mié, 4 jue, 5 vie, 6 sáb. */
@@ -1143,24 +1174,24 @@ function hh(x){ x=x%1440; return String(Math.floor(x/60)).padStart(2,'0')+':'+St
 function pintarEstado(){
   var n = ahora(), el = document.getElementById('estado'), txt;
   var hoy = HORARIO[n.d], ayer = HORARIO[(n.d+6)%7];
-  if (hoy && n.m >= hoy[0] && n.m < hoy[1]) txt = 'Abierto · hasta las ' + hh(hoy[1]);
-  else if (ayer && ayer[1] > 1440 && n.m < ayer[1]-1440) txt = 'Abierto · hasta las ' + hh(ayer[1]);
+  if (hoy && n.m >= hoy[0] && n.m < hoy[1]) txt = 'Abierto hasta las ' + hh(hoy[1]);
+  else if (ayer && ayer[1] > 1440 && n.m < ayer[1]-1440) txt = 'Abierto hasta las ' + hh(ayer[1]);
   if (txt){ el.className = 'estado abierto'; el.lastElementChild.textContent = txt; return; }
   for (var k=0; k<8; k++){
     var d = (n.d+k)%7, h = HORARIO[d];
     if (h && (k>0 || h[0] > n.m)){
       el.className = 'estado';
-      el.lastElementChild.textContent = 'Cerrado · abre ' + (k===0?'hoy':k===1?'mañana':'el '+DIAS[d]) + ' a las ' + hh(h[0]);
+      el.lastElementChild.textContent = 'Cerrado, abre ' + (k===0?'hoy':k===1?'mañana':'el '+DIAS[d]) + ' a las ' + hh(h[0]);
       return;
     }
   }
 }
 pintarEstado(); setInterval(pintarEstado, 60000);
 
-/* ── Botón flotante: aparece cuando la portada sale de pantalla ── */
+/* ── Botón flotante: aparece cuando los botones de la portada salen de pantalla ── */
 var flot = document.querySelector('.flotante');
 if ('IntersectionObserver' in window){
-  new IntersectionObserver(function(e){ flot.classList.toggle('ver', !e[0].isIntersecting); }).observe(document.querySelector('.hero .ctas'));
+  new IntersectionObserver(function(e){ flot.classList.toggle('ver', !e[0].isIntersecting); }).observe(document.querySelector('.toldo .ctas'));
 } else { flot.classList.add('ver'); }
 
 /* ── Galería ── */
