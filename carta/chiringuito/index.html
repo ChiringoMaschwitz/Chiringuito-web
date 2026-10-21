@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Carta — El Chiringuito</title>
-<meta name="description" content="La carta de El Chiringuito, Paseo Mendoza, Ingeniero Maschwitz.">
+<title>Carta El Chiringuito Maschwitz | Hamburguesas, pizzas y birra tirada</title>
+<meta name="description" content="Mirá la carta de El Chiringuito con fotos y precios: hamburguesas, pizzas, pastas, picadas, cervezas tiradas y tragos. Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz.">
+<link rel="canonical" href="https://grupochiringuito.com.ar/carta/chiringuito/">
+<meta property="og:title" content="Carta El Chiringuito Maschwitz | Hamburguesas, pizzas y birra tirada">
+<meta property="og:description" content="Mirá la carta de El Chiringuito con fotos y precios: hamburguesas, pizzas, pastas, picadas, cervezas tiradas y tragos. Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://grupochiringuito.com.ar/carta/chiringuito/">
+<meta property="og:site_name" content="Grupo El Chiringuito">
+<meta property="og:image" content="https://grupochiringuito.com.ar/carta/chiringuito/fotos/doble-cheese-bacon-burger.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": [
+  "Restaurant",
+  "BarOrPub"
+ ],
+ "@id": "https://grupochiringuito.com.ar/#chiringuito",
+ "name": "El Chiringuito",
+ "url": "https://grupochiringuito.com.ar/",
+ "telephone": "+541140857072",
+ "image": "https://grupochiringuito.com.ar/carta/chiringuito/fotos/doble-cheese-bacon-burger.jpg",
+ "hasMenu": "https://grupochiringuito.com.ar/carta/chiringuito/#menu",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "Mendoza 1578, Paseo Mendoza",
+  "addressLocality": "Ingeniero Maschwitz",
+  "addressRegion": "Buenos Aires",
+  "addressCountry": "AR"
+ }
+}
+</script>
 <meta name="theme-color" content="#F3EFE7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -430,6 +461,7 @@
 <footer hidden id="pie">
   <div class="f-marca">El Chiringuito</div>
   <p>Mendoza 1578, Paseo Mendoza · Ingeniero Maschwitz</p>
+  <p>Hamburguesas, pizzas, pastas, picadas, cervezas tiradas y tragos · Martes a domingo desde las 11</p>
 </footer>
 
 <div id="visor" aria-modal="true" role="dialog"></div>
@@ -568,6 +600,39 @@ function render(){
   document.getElementById('pie').hidden = false;
   activarSpyTabs();
   programarPromo();
+  publicarSchemaMenu();
+}
+
+/* ---------- SEO: carta en formato Google (schema.org/Menu) ----------
+   Se arma solo con los datos del Sheet cada vez que carga la carta.
+   No hay que mantener nada aparte. */
+function publicarSchemaMenu(){
+  try {
+    var URL_CARTA = 'https://grupochiringuito.com.ar/carta/chiringuito/';
+    var EXCLUIR = ["promos"];
+    var abs = function(f){ var s = srcFoto(f); return s ? (s.charAt(0) === '/' ? location.origin + s : s) : null; };
+    var secciones = DATA.secciones.filter(function(s){
+      return EXCLUIR.indexOf(String(s.seccion).trim().toLowerCase()) === -1;
+    }).map(function(s){
+      var items = s.productos.filter(function(p){
+        var t = String(p.tipo || '').trim().toLowerCase();
+        return p.producto && p.activo !== false && t !== 'adicional' && t !== 'opcion' && t !== 'opción';
+      }).map(function(p){
+        var it = {'@type':'MenuItem', name: String(p.producto).trim()};
+        if (p.descripcion) it.description = String(p.descripcion).replace(/\s+/g,' ').trim();
+        if (p.precio !== null && !isNaN(p.precio) && Number(p.precio) > 1)
+          it.offers = {'@type':'Offer', price: String(Number(p.precio)), priceCurrency:'ARS'};
+        if (p.foto && !esVideo(p)) it.image = abs(p.foto);
+        return it;
+      });
+      return {'@type':'MenuSection', name: s.seccion, hasMenuItem: items};
+    }).filter(function(s){ return s.hasMenuItem.length; });
+    var schema = {'@context':'https://schema.org','@type':'Menu','@id':URL_CARTA + '#menu',
+      name:'Carta de El Chiringuito', url:URL_CARTA, inLanguage:'es-AR', hasMenuSection:secciones};
+    var el = document.getElementById('schema-menu');
+    if (!el){ el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'schema-menu'; document.head.appendChild(el); }
+    el.textContent = JSON.stringify(schema);
+  } catch(e) { /* si falla, la carta sigue andando igual */ }
 }
 
 function activarSpyTabs(){

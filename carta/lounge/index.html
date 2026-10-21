@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Carta — Chiringuito Lounge</title>
-<meta name="description" content="La carta de Chiringuito Lounge, Mercado de Maschwitz.">
+<title>Carta Chiringuito Lounge Maschwitz | Bistró, tragos y vinos</title>
+<meta name="description" content="Mirá la carta de Chiringuito Lounge con fotos y precios: desayunos y meriendas, carnes, pastas, sándwiches, tragos y vinos. Mendoza 1731, Mercado de Maschwitz, Ingeniero Maschwitz.">
+<link rel="canonical" href="https://grupochiringuito.com.ar/carta/lounge/">
+<meta property="og:title" content="Carta Chiringuito Lounge Maschwitz | Bistró, tragos y vinos">
+<meta property="og:description" content="Mirá la carta de Chiringuito Lounge con fotos y precios: desayunos y meriendas, carnes, pastas, sándwiches, tragos y vinos. Mendoza 1731, Mercado de Maschwitz, Ingeniero Maschwitz.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://grupochiringuito.com.ar/carta/lounge/">
+<meta property="og:site_name" content="Grupo El Chiringuito">
+<meta property="og:image" content="https://grupochiringuito.com.ar/carta/lounge/fotos/lounge-mesa-compartida.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Restaurant",
+ "@id": "https://grupochiringuito.com.ar/#lounge",
+ "name": "Chiringuito Lounge",
+ "url": "https://grupochiringuito.com.ar/",
+ "telephone": "+5491124635464",
+ "image": "https://grupochiringuito.com.ar/carta/lounge/fotos/lounge-mesa-compartida.jpg",
+ "hasMenu": "https://grupochiringuito.com.ar/carta/lounge/#menu",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "Mendoza 1731, Mercado de Maschwitz",
+  "addressLocality": "Ingeniero Maschwitz",
+  "addressRegion": "Buenos Aires",
+  "addressCountry": "AR"
+ }
+}
+</script>
 <meta name="theme-color" content="#171310">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -275,7 +303,8 @@
 
 <footer hidden id="pie">
   <div class="f-marca">Chiringuito Lounge</div>
-  <p>Mercado de Maschwitz · Ingeniero Maschwitz</p>
+  <p>Mendoza 1731, Mercado de Maschwitz · Ingeniero Maschwitz</p>
+  <p>Desayunos, meriendas, carnes, pastas, tragos y vinos · Miércoles a domingo desde las 9</p>
 </footer>
 
 <div id="barra-comparar" hidden>
@@ -399,6 +428,39 @@ function render(){
   document.getElementById('pie').hidden = false;
   document.getElementById('barra-comparar').hidden = false;
   activarSpyTabs();
+  publicarSchemaMenu();
+}
+
+/* ---------- SEO: carta en formato Google (schema.org/Menu) ----------
+   Se arma solo con los datos del Sheet cada vez que carga la carta.
+   No hay que mantener nada aparte. */
+function publicarSchemaMenu(){
+  try {
+    var URL_CARTA = 'https://grupochiringuito.com.ar/carta/lounge/';
+    var EXCLUIR = [];
+    var abs = function(f){ var s = srcFoto(f); return s ? (s.charAt(0) === '/' ? location.origin + s : s) : null; };
+    var secciones = DATA.secciones.filter(function(s){
+      return EXCLUIR.indexOf(String(s.seccion).trim().toLowerCase()) === -1;
+    }).map(function(s){
+      var items = s.productos.filter(function(p){
+        var t = String(p.tipo || '').trim().toLowerCase();
+        return p.producto && p.activo !== false && t !== 'adicional' && t !== 'opcion' && t !== 'opción';
+      }).map(function(p){
+        var it = {'@type':'MenuItem', name: String(p.producto).trim()};
+        if (p.descripcion) it.description = String(p.descripcion).replace(/\s+/g,' ').trim();
+        if (p.precio !== null && !isNaN(p.precio) && Number(p.precio) > 1)
+          it.offers = {'@type':'Offer', price: String(Number(p.precio)), priceCurrency:'ARS'};
+        if (p.foto && !esVideo(p)) it.image = abs(p.foto);
+        return it;
+      });
+      return {'@type':'MenuSection', name: s.seccion, hasMenuItem: items};
+    }).filter(function(s){ return s.hasMenuItem.length; });
+    var schema = {'@context':'https://schema.org','@type':'Menu','@id':URL_CARTA + '#menu',
+      name:'Carta de Chiringuito Lounge', url:URL_CARTA, inLanguage:'es-AR', hasMenuSection:secciones};
+    var el = document.getElementById('schema-menu');
+    if (!el){ el = document.createElement('script'); el.type = 'application/ld+json'; el.id = 'schema-menu'; document.head.appendChild(el); }
+    el.textContent = JSON.stringify(schema);
+  } catch(e) { /* si falla, la carta sigue andando igual */ }
 }
 
 function activarSpyTabs(){
