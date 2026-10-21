@@ -6,7 +6,7 @@
 <title>El Chiringuito Maschwitz | Restaurantes y bares en Paseo Mendoza</title>
 <meta name="description" content="Cervecería, bistró, focaccias, pizza y pastelería en el Paseo Mendoza, Ingeniero Maschwitz. Mirá las cartas con fotos y precios, los horarios y pedí por WhatsApp.">
 <link rel="canonical" href="https://grupochiringuito.com.ar/">
-<meta name="theme-color" content="#171310">
+<meta name="theme-color" content="#EFE8DA">
 <meta property="og:title" content="El Chiringuito · Paseo Mendoza, Maschwitz">
 <meta property="og:description" content="Cervecería, bistró, focaccias, pizza y pastelería en el Paseo Mendoza. Cartas, horarios y cómo llegar.">
 <meta property="og:type" content="website">
@@ -17,11 +17,11 @@
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1080">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F3A2E'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23F7F4EC'%3EC%3Ctspan fill='%23D96C33'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231E1B18'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23F7F4EC'%3EC%3Ctspan fill='%23D99A2B'%3E.%3C/tspan%3E%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://drive.google.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -37,311 +37,291 @@
 }
 </script>
 <style>
-/* ══ TOKENS ══ */
+/* ══ Grupo El Chiringuito · "Calle Mendoza, ahora" ══
+   Una sola familia (Archivo) en dos anchos: ancha para carteles y números de la calle,
+   normal para leer. Colores de la marca: hueso, carbón, verde botella, ámbar, ladrillo. */
 :root{
-  --verde:#1F3A2E;    /* verde botella: secciones institucionales */
-  --verde-2:#2A4A3C;
-  --carbon:#171310;   /* la barra de noche: "Un día en el Paseo" */
-  --carbon-2:#231D18;
-  --hueso:#F7F4EC;    /* fondo claro cálido */
-  --crema:#E6DCC8;
-  --papel:#EFE7D8;   /* secciones claras: papel cálido con grano */
-  --carta-bg:#FBF8F1;
-  --fade:150px;      /* alto de los degradés entre secciones */
-  --tinta:#22271F;    /* texto principal */
-  --gris:#6B7267;
-  --terra:#D96C33;    /* botones */
-  --ambar:#E0A33E;    /* horarios y "abierto" sobre oscuro */
-  --ok:#2E7D4F;
-  --linea:rgba(31,58,46,.14);
-  --sombra:0 2px 4px rgba(60,40,20,.08),0 22px 48px -18px rgba(60,40,20,.42);
-  --sombra-alta:0 3px 6px rgba(60,40,20,.1),0 34px 70px -22px rgba(60,40,20,.55);
-  --sombra-dark:0 2px 6px rgba(0,0,0,.35),0 36px 70px -24px rgba(0,0,0,.75);
-  --grano:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .27 0 0 0 0 .17 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --f-display:'Cormorant Garamond',Georgia,serif;
-  --f-texto:'Jost',system-ui,sans-serif;
-  --f-cond:'Oswald','Arial Narrow',sans-serif;
+  --hueso:#EFE8DA; --hueso-2:#E4DAC7; --papel:#F7F2E8;
+  --carbon:#1E1B18; --carbon-2:#2A2622;
+  --verde:#1F4A35; --verde-2:#2B5E45;
+  --ambar:#D99A2B; --ladrillo:#8E3B24; --ladrillo-2:#73301D;
+  --tinta:#1E1B18; --gris:#5F5A52; --linea:rgba(30,27,24,.15);
+  --c-lounge:#1F4A35; --c-focacceria:#9A6427; --c-chiringuito:#6B4226; --c-bakery:#7A3B45; --c-unapizza:#B21818;
+  --f:'Archivo',system-ui,-apple-system,sans-serif;
+  --sombra:0 1px 2px rgba(30,27,24,.08),0 18px 40px -20px rgba(30,27,24,.45);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{font-family:var(--f-texto);background:var(--grano),var(--papel);color:var(--tinta);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--f);font-stretch:100%;background:var(--hueso);color:var(--tinta);line-height:1.55;font-size:17px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-h1,h2,h3,h4{font-family:var(--f-display);line-height:1.05;font-weight:600}
-:focus-visible{outline:2px solid var(--ambar);outline-offset:3px}
+h1,h2,h3,h4,h5{font-family:var(--f);font-stretch:125%;font-weight:800;line-height:1;letter-spacing:-.01em}
+:focus-visible{outline:3px solid var(--ambar);outline-offset:3px}
 .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-@media(max-width:640px){:root{--fade:110px}}
 
 /* títulos de sección */
-.s-title{font-size:clamp(38px,5.2vw,64px);color:var(--verde);letter-spacing:-.01em}
-.s-lead{font-size:17px;color:var(--gris);font-weight:300;max-width:52ch;margin-top:14px}
-.s-head{margin-bottom:44px}
+.s-title{font-size:clamp(34px,4.6vw,56px);color:var(--tinta)}
+.s-lead{font-size:18px;color:var(--gris);max-width:54ch;margin-top:12px}
+.s-head{margin-bottom:36px}
 
-/* botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;font-family:var(--f-cond);font-weight:500;font-size:15px;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,color .2s,transform .2s}
-.btn-fill{background:var(--terra);color:#fff}
-.btn-fill:hover{background:#c25a24}
-.btn-line{border:1px solid currentColor}
-.btn-line:hover{background:var(--hueso);color:var(--carbon);border-color:var(--hueso)}
+/* botones: sin mayúsculas forzadas */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;font-family:var(--f);font-weight:700;font-size:16px;border-radius:6px;border:2px solid transparent;transition:background .15s,color .15s,border-color .15s}
+.btn-fill{background:var(--ladrillo);color:var(--papel)}
+.btn-fill:hover{background:var(--ladrillo-2)}
+.btn-line{border-color:currentColor}
+.btn-line:hover{background:var(--carbon);color:var(--hueso);border-color:var(--carbon)}
 
 /* ══ NAV ══ */
-nav{position:fixed;inset:0 0 auto 0;z-index:90;transition:background .3s,box-shadow .3s}
-nav.solid{background:rgba(23,19,16,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(247,244,236,.08)}
-.nav-in{max-width:1200px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.logo{font-family:var(--f-display);font-weight:700;font-size:22px;color:var(--hueso);white-space:nowrap}
-.logo span{color:var(--ambar)}
-.nav-links{display:flex;gap:26px;font-size:14px;color:rgba(247,244,236,.78)}
-.nav-links a:hover{color:#fff}
-.nav-cta{font-family:var(--f-cond);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--carbon);background:var(--ambar);padding:9px 18px;white-space:nowrap}
-.nav-cta:hover{background:#f0b552}
+nav#nav{position:sticky;top:0;z-index:90;background:rgba(239,232,218,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{font-stretch:125%;font-weight:800;font-size:19px;white-space:nowrap;letter-spacing:-.01em}
+.logo span{color:var(--ladrillo)}
+.nav-links{display:flex;gap:24px;font-size:15px;font-weight:500;color:var(--gris)}
+.nav-links a:hover{color:var(--tinta)}
+.nav-cta{font-weight:700;font-size:15px;color:var(--papel);background:var(--carbon);padding:9px 16px;border-radius:6px;white-space:nowrap}
+.nav-cta:hover{background:var(--ladrillo)}
 @media(max-width:920px){.nav-links{display:none}}
-@media(max-width:480px){.nav-in{padding:13px 16px}.logo{font-size:19px}.nav-cta{padding:8px 13px;font-size:13px}}
 
-/* ══ PORTADA ══ */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;color:var(--hueso);overflow:hidden;background:var(--carbon)}
-.hero-bg{position:absolute;inset:0;background:url('https://drive.google.com/thumbnail?id=1GnXUXzeZhfOnX1NzEOZv-TKzXNI6jeKr&sz=w1920') center 35%/cover;transform:scale(1.04);animation:heroZoom 1.6s cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes heroZoom{to{transform:scale(1)}}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(23,19,16,.86) 0%,rgba(23,19,16,.55) 48%,rgba(23,19,16,.15) 100%),linear-gradient(0deg,rgba(23,19,16,.95) 0%,rgba(23,19,16,0) 45%)}
-.hero-in{position:relative;z-index:2;padding:140px 20px 46px;max-width:1200px;margin:0 auto;width:100%}
-.hero-where{font-family:var(--f-cond);font-size:15px;letter-spacing:.08em;color:var(--ambar);text-transform:uppercase}
-.hero h1{font-size:clamp(58px,10vw,138px);font-weight:500;line-height:.92;letter-spacing:-.015em;margin:18px 0 26px;max-width:9.5ch}
-.hero h1 .l{display:block}
-.hero-sub{font-size:18px;font-weight:300;max-width:46ch;color:rgba(247,244,236,.86);margin-bottom:32px}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-.hero .btn-line{color:var(--hueso)}
-/* Compu: título en 2 renglones y todo el bloque visible en la primera pantalla */
-@media(min-width:921px){.hero-in{padding-top:110px}.hero h1{font-size:clamp(52px,min(7vw,12svh),110px);max-width:none;margin:14px 0 22px}.hero h1 .l{white-space:nowrap}.hero-sub{margin-bottom:26px}}
+/* ══ PORTADA: qué hay ahora en la calle ══ */
+.hero{padding:44px 0 0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(36px,min(5.4vw,9.5svh),76px);line-height:.95;text-wrap:balance}
+.ahora{font-size:clamp(19px,1.9vw,24px);line-height:1.4;margin:22px 0 26px;max-width:34ch;color:var(--tinta)}
+.ahora b{font-weight:700}
+.ahora .cuando{display:block;font-stretch:125%;font-weight:800;color:var(--ladrillo);font-size:.82em;margin-bottom:4px}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap}
+.vidriera{position:relative;aspect-ratio:4/5;max-height:62svh;width:100%;justify-self:end;overflow:hidden;border-radius:4px;background:var(--carbon);box-shadow:var(--sombra)}
+.vidriera .show{position:absolute;inset:0;aspect-ratio:auto}
+.vidriera-tag{position:absolute;left:14px;bottom:14px;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:4px;background:var(--carbon);color:var(--papel);font-weight:700;font-size:15px;transition:background .4s}
+.vidriera-tag i{width:9px;height:9px;border-radius:50%;background:var(--ambar)}
 
-/* cinta de abiertos */
-.ticker{position:relative;z-index:2;border-top:1px solid rgba(247,244,236,.12);border-bottom:1px solid rgba(247,244,236,.06);background:rgba(23,19,16,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow:hidden}
-.ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite}
-.ticker:hover .ticker-track{animation-play-state:paused}
-.ticker-group{display:flex}
-.tk{display:flex;align-items:center;gap:10px;padding:15px 30px;white-space:nowrap;font-size:14px;color:rgba(247,244,236,.75);border-right:1px solid rgba(247,244,236,.1)}
-.tk b{font-family:var(--f-cond);font-weight:500;font-size:15px;letter-spacing:.04em;color:var(--hueso)}
-.tk i{width:8px;height:8px;border-radius:50%;background:#7c7a74;flex:none}
-.tk.on i{background:var(--ambar);box-shadow:0 0 0 4px rgba(224,163,62,.18)}
-.tk.on span{color:var(--ambar)}
-@keyframes ticker{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.ticker-track{width:auto;flex-wrap:wrap}.ticker-group[aria-hidden]{display:none}}
+/* la calle: los cinco locales en el orden en que los cruzás */
+.calle{margin-top:40px;border-top:3px solid var(--carbon);border-bottom:1px solid var(--linea);background:var(--papel)}
+.calle-in{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.calle-in::-webkit-scrollbar{display:none}
+.calle-nombre{flex:none;display:flex;align-items:center;padding:0 18px 0 20px;font-stretch:125%;font-weight:800;font-size:15px;color:var(--papel);background:var(--carbon)}
+.tramo{display:flex;align-items:stretch;flex:none}
+.tramo-num{display:flex;align-items:center;padding:0 12px;font-stretch:125%;font-weight:800;font-size:22px;color:var(--gris);border-left:1px solid var(--linea)}
+.parada{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:12px 16px;min-width:150px;border-left:1px solid var(--linea);transition:background .15s}
+.parada:hover{background:var(--hueso)}
+.parada b{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;white-space:nowrap}
+.parada b::before{content:"";width:9px;height:9px;border-radius:50%;background:#B3AB9C;flex:none}
+.parada.on b::before{background:var(--ambar);box-shadow:0 0 0 4px rgba(217,154,43,.22)}
+.parada small{font-size:13px;color:var(--gris);white-space:nowrap;padding-left:17px}
+.parada.on small{color:var(--tinta)}
 
-/* ══ CARTAS ══ */
-.cartas{position:relative;padding:70px 0 90px;color:var(--hueso);background:radial-gradient(55% 45% at 30% 35%,rgba(224,163,62,.11),transparent 70%),radial-gradient(45% 40% at 85% 70%,rgba(217,108,51,.08),transparent 70%),var(--carbon)}
-.cartas .s-title{color:var(--hueso)}
-.c-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px}
-.carta{position:relative;min-height:460px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px;color:var(--hueso);overflow:hidden;background:var(--carbon-2);box-shadow:var(--sombra-dark);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
-.carta:hover{transform:translateY(-4px)}
-.carta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.carta::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,19,16,.92) 0%,rgba(23,19,16,.35) 48%,rgba(23,19,16,.05) 100%)}
-.carta:hover img{transform:scale(1.05)}
-.carta>*:not(img){position:relative;z-index:2}
-.carta .chip{position:absolute;top:22px;left:22px}
-.carta h3{font-size:clamp(40px,4.6vw,58px);font-weight:600}
-.carta p{font-size:16px;color:rgba(247,244,236,.82);margin:8px 0 22px;font-weight:300}
-.carta .btn{align-self:flex-start}
-.otros{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(247,244,236,.1);border:1px solid rgba(247,244,236,.1);margin-top:18px}
-.otro{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--carbon-2);padding:18px 20px;min-height:64px;transition:background .2s}
-.otro:hover{background:#2c251f}
-.otro b{font-family:var(--f-display);font-size:23px;color:var(--hueso);font-weight:600;line-height:1.1}
-.otro small{display:block;font-size:13px;color:rgba(247,244,236,.6)}
-.otro em{font-style:normal;font-family:var(--f-cond);font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--ambar);white-space:nowrap}
-@media(max-width:860px){.c-grid{grid-template-columns:1fr}.carta{min-height:340px;padding:24px}.otros{grid-template-columns:1fr}}
+/* fotos que van pasando */
+.show{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--carbon)}
+.show img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.show img.on{opacity:1;animation:acerca 8s ease-out forwards}
+@keyframes acerca{from{transform:scale(1)}to{transform:scale(1.07)}}
+
+/* ══ LA CUADRA ══ */
+.cuadra{padding:80px 0 60px}
+.recorrido{position:relative;margin-left:8px}
+.recorrido::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;background:var(--carbon)}
+.altura{position:relative;display:flex;align-items:baseline;gap:14px;padding:0 0 26px 30px}
+.altura::before{content:"";position:absolute;left:-7px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--hueso);border:3px solid var(--carbon)}
+.altura b{font-stretch:125%;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:.9}
+.altura span{font-size:16px;color:var(--gris)}
+.local{--c:var(--carbon);position:relative;display:grid;grid-template-columns:minmax(240px,380px) 1fr;gap:34px;align-items:center;margin:0 0 54px 30px;scroll-margin-top:90px}
+.local::before{content:"";position:absolute;left:-36px;top:50%;width:15px;height:15px;margin-top:-7px;border-radius:50%;background:var(--c)}
+.local .show{border-radius:4px;box-shadow:var(--sombra)}
+.local-tag{position:absolute;top:12px;left:12px;z-index:3}
+.local h3{font-size:clamp(30px,3.4vw,46px);color:var(--c)}
+.local .rating{font-size:15px;color:var(--gris);margin:8px 0 12px}
+.local .rating b{color:var(--tinta);font-weight:700}
+.local p.que{font-size:18px;max-width:46ch}
+.local .horario{font-size:16px;color:var(--gris);margin-top:10px}
+.local .extra{display:inline-block;margin-top:12px;font-size:16px;font-weight:600;color:var(--c);border-left:3px solid var(--c);padding-left:10px}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.acts .main{background:var(--c);color:var(--papel)}
+.acts .main:hover{filter:brightness(.88)}
+.acts .sec{border-color:var(--linea);color:var(--tinta)}
+.acts .sec:hover{border-color:var(--c);color:var(--c)}
+.l-lounge{--c:var(--c-lounge)} .l-focacceria{--c:var(--c-focacceria)} .l-chiringuito{--c:var(--c-chiringuito)} .l-bakery{--c:var(--c-bakery)} .l-unapizza{--c:var(--c-unapizza)}
+@media(max-width:760px){
+  .hero{padding-top:26px}
+  .calle-nombre{padding:0 12px;font-size:13px}
+  .tramo-num{font-size:17px;padding:0 9px}
+  .parada{min-width:128px;padding:10px 12px}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  .vidriera{aspect-ratio:5/4;max-height:none}
+  .ahora{margin:16px 0 20px}
+  .cuadra{padding:56px 0 30px}
+  .local{grid-template-columns:1fr;gap:16px;margin-bottom:44px}
+  .local::before{top:22px;margin-top:0}
+  .local .show{aspect-ratio:5/4}
+}
 
 /* chip abierto/cerrado (sobre foto) */
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(23,19,16,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:rgba(247,244,236,.82);font-size:13px;line-height:1.2}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:4px;background:rgba(30,27,24,.82);color:rgba(247,242,232,.85);font-size:14px;line-height:1.2}
 .chip::before{content:"";width:8px;height:8px;border-radius:50%;background:#8a8780;flex:none}
-.chip b{font-family:var(--f-cond);font-weight:500;letter-spacing:.04em;color:var(--hueso);text-transform:uppercase;font-size:13px}
-.chip.is-open::before{background:var(--ambar);box-shadow:0 0 0 4px rgba(224,163,62,.2)}
+.chip b{font-weight:700;color:var(--papel)}
+.chip.is-open::before{background:var(--ambar);box-shadow:0 0 0 4px rgba(217,154,43,.25)}
 .chip.is-open b{color:var(--ambar)}
 .chip.is-soon::before{background:#e07f3e}
 
-/* estado en texto (modales) */
-.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--gris);margin-bottom:18px}
-.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#B9BDB6}
-.status b{font-family:var(--f-cond);font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--tinta)}
-.status.is-open::before{background:var(--ok);box-shadow:0 0 0 4px rgba(46,125,79,.15)}
-.status.is-open b{color:var(--ok)}
+/* estado en texto (ventanas de cada local) */
+.status{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--gris);margin-bottom:16px}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#B3AB9C}
+.status b{font-weight:700;color:var(--tinta)}
+.status.is-open::before{background:#2E7D4F;box-shadow:0 0 0 4px rgba(46,125,79,.15)}
+.status.is-open b{color:#2E7D4F}
 .status.is-soon::before{background:#D69E2E}
 
-/* ══ LOCALES ══ */
-.locales{padding:calc(var(--fade) + 30px) 0 120px;background:linear-gradient(180deg,var(--carbon) 0,rgba(23,19,16,0) var(--fade))}
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
-.card{grid-column:span 2;background:var(--carta-bg);display:flex;flex-direction:column;box-shadow:var(--sombra);transition:box-shadow .35s,transform .35s cubic-bezier(.2,.7,.2,1)}
-.card:hover{box-shadow:var(--sombra-alta);transform:translateY(-4px)}
-.card.big{grid-column:span 3}
-.card-img{position:relative;height:250px;overflow:hidden;background:var(--crema);cursor:pointer;display:block;width:100%;text-align:left}
-.card.big .card-img{height:310px}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.card:hover .card-img img{transform:scale(1.05)}
-.card-img .chip{position:absolute;left:14px;bottom:14px}
-.card-img .addr{position:absolute;top:14px;left:14px;background:var(--hueso);color:var(--verde);font-family:var(--f-cond);font-size:13px;letter-spacing:.06em;padding:5px 10px}
-.card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
-.card-body h3{font-size:32px;color:var(--verde)}
-.rating{font-size:13.5px;color:var(--terra);margin:4px 0 10px}
-.rating span{color:var(--gris)}
-.card-body p{font-size:15px;color:var(--gris);font-weight:300;margin-bottom:16px}
-.more{align-self:flex-start;font-size:14px;color:var(--verde);border-bottom:1px solid var(--terra);padding-bottom:2px;margin-bottom:18px}
-.more:hover{color:var(--terra)}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
-.acts a{flex:1 1 auto;min-height:46px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:var(--f-cond);font-size:14px;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--linea);color:var(--verde);padding:0 12px;transition:.2s}
-.acts a:hover{border-color:var(--terra);color:var(--terra)}
-.acts a.main{background:var(--verde);border-color:var(--verde);color:var(--hueso)}
-.acts a.main:hover{background:var(--terra);border-color:var(--terra);color:#fff}
-@media(max-width:980px){.card,.card.big{grid-column:span 3}}
-@media(max-width:640px){.bento{grid-template-columns:1fr}.card,.card.big{grid-column:span 1}.card-img,.card.big .card-img{height:230px}}
-
-/* ══ UN DÍA EN EL PASEO ══ */
-.dia{background:radial-gradient(50% 35% at 75% 60%,rgba(224,163,62,.08),transparent 70%),linear-gradient(180deg,rgba(23,19,16,0) 0,var(--carbon) var(--fade));color:var(--hueso);padding:calc(var(--fade) + 10px) 0 90px;overflow:hidden}
-.dia .s-title{color:var(--hueso)}
-.dia .s-lead{color:rgba(247,244,236,.68)}
-.dia-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+/* ══ UN DÍA EN LA CALLE MENDOZA ══ */
+.dia{background:var(--carbon);color:var(--papel);padding:80px 0 70px;overflow:hidden}
+.dia .s-title{color:var(--papel)}
+.dia .s-lead{color:rgba(247,242,232,.7)}
+.dia-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
 .dia-nav{display:flex;gap:8px}
-.dia-nav button{width:48px;height:48px;border:1px solid rgba(247,244,236,.3);color:var(--hueso);font-size:20px;transition:.2s}
-.dia-nav button:hover{background:var(--hueso);color:var(--carbon)}
-.rail{--pad:max(20px,calc((100vw - 1200px)/2 + 20px));display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px var(--pad) 18px;scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.dia-nav button{width:48px;height:48px;border-radius:6px;border:2px solid rgba(247,242,232,.3);color:var(--papel);font-size:20px;transition:.15s}
+.dia-nav button:hover{background:var(--papel);color:var(--carbon)}
+.rail{--pad:max(20px,calc((100vw - 1200px)/2 + 20px));display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--pad) 14px;scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .rail::-webkit-scrollbar{display:none}
-.mom{flex:0 0 clamp(270px,26vw,340px);scroll-snap-align:start;background:var(--carbon-2);display:flex;flex-direction:column;cursor:pointer;text-align:left;transition:transform .3s;box-shadow:var(--sombra-dark)}
-.mom:hover{transform:translateY(-4px)}
+.mom{flex:0 0 clamp(260px,25vw,320px);scroll-snap-align:start;background:var(--carbon-2);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-align:left}
 .mom-img{position:relative;aspect-ratio:4/5;overflow:hidden}
-.mom-img img{width:100%;height:100%;object-fit:cover}
-.mom-img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(35,29,24,1) 0%,rgba(35,29,24,0) 55%)}
-.mom-hora{position:absolute;left:18px;bottom:6px;z-index:2;font-family:var(--f-cond);font-weight:500;font-size:68px;line-height:1;color:var(--ambar);letter-spacing:-.01em}
-.mom-body{padding:6px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
-.mom-body h4{font-size:30px;color:var(--hueso)}
-.mom-body p{font-size:14.5px;color:rgba(247,244,236,.7);font-weight:300}
-.mom-hoy{margin-top:auto;padding-top:12px;border-top:1px solid rgba(247,244,236,.12);font-size:13px;color:rgba(247,244,236,.6)}
-.mom-hoy strong{display:block;font-weight:500;color:var(--hueso);font-size:14px;margin-top:2px}
-.mom-hoy.vacio strong{color:rgba(247,244,236,.55);font-weight:400}
+.mom-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.mom:hover .mom-img img{transform:scale(1.04)}
+.mom-hora{position:absolute;left:12px;top:12px;z-index:2;font-stretch:125%;font-weight:900;font-size:30px;line-height:1;color:var(--carbon);background:var(--ambar);padding:6px 10px;border-radius:4px}
+.mom-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mom-body h4{font-size:24px;color:var(--papel)}
+.mom-body p{font-size:15px;color:rgba(247,242,232,.72)}
+.mom-hoy{margin-top:auto;padding-top:10px;border-top:1px solid rgba(247,242,232,.14);font-size:14px;color:rgba(247,242,232,.6)}
+.mom-hoy strong{display:block;font-weight:600;color:var(--papel);font-size:15px;margin-top:2px}
+.mom-hoy.vacio strong{color:rgba(247,242,232,.55);font-weight:400}
 
 /* ══ GALERÍA ══ */
-.galeria{padding:calc(var(--fade) + 30px) 0 40px;background:linear-gradient(180deg,var(--carbon) 0,rgba(23,19,16,0) var(--fade))}
-.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,230px);gap:12px}
-.gal figure{overflow:hidden;background:var(--crema);box-shadow:var(--sombra)}
+.galeria{padding:80px 0 40px}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,230px);gap:8px}
+.gal figure{overflow:hidden;background:var(--hueso-2);border-radius:3px}
 .gal figure:first-child{grid-column:span 2;grid-row:span 2}
 .gal figure:nth-child(6){grid-column:span 2}
-.gal img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
-.gal figure:hover img{transform:scale(1.04)}
+.gal img{width:100%;height:100%;object-fit:cover}
 @media(max-width:720px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:38vw}.gal figure:nth-child(6){grid-column:span 1}}
 
 /* ══ CÓMO LLEGAR ══ */
-.llegar{padding:90px 0 calc(var(--fade) + 40px);background:linear-gradient(180deg,rgba(31,58,46,0) calc(100% - var(--fade)),var(--verde) 100%)}
-.ll-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:start}
-.dir{border-top:1px solid rgba(31,58,46,.2)}
-.dir a{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 0;border-bottom:1px solid var(--linea)}
-.dir b{display:block;font-family:var(--f-display);font-size:26px;color:var(--verde);font-weight:600}
-.dir span{font-size:14px;color:var(--gris)}
-.dir em{font-style:normal;font-family:var(--f-cond);font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--terra);white-space:nowrap}
-.dir a:hover b{color:var(--terra)}
-.ll-nota{font-size:15px;color:var(--gris);margin-top:18px;font-weight:300}
-.map-frame{overflow:hidden;background:var(--crema);box-shadow:var(--sombra)}
-.map-frame iframe{width:100%;height:420px;border:0;display:block;filter:saturate(.8) sepia(.08)}
+.llegar{padding:70px 0 80px}
+.ll-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:30px;align-items:start}
+.dir{border-top:3px solid var(--carbon);margin-top:26px}
+.dir a{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--linea)}
+.dir b{display:block;font-stretch:125%;font-weight:800;font-size:26px}
+.dir span{font-size:15px;color:var(--gris)}
+.dir em{font-style:normal;font-weight:700;font-size:15px;color:var(--ladrillo);white-space:nowrap}
+.dir a:hover b{color:var(--ladrillo)}
+.map-frame{overflow:hidden;background:var(--hueso-2);border-radius:4px;border:2px solid var(--carbon)}
+.map-frame iframe{width:100%;height:420px;border:0;display:block}
 @media(max-width:860px){.ll-grid{grid-template-columns:1fr}.map-frame iframe{height:320px}}
 
 /* ══ VIANDAS ══ */
-.viandas{background:radial-gradient(45% 40% at 20% 20%,rgba(224,163,62,.08),transparent 70%),linear-gradient(180deg,var(--verde) calc(100% - var(--fade)),var(--carbon) 100%);color:var(--hueso);padding:60px 0 calc(var(--fade) + 40px)}
-.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.viandas .s-title{color:var(--hueso)}
-.viandas .s-lead{color:rgba(247,244,236,.75)}
-.pasos{list-style:none;counter-reset:p;margin:34px 0 30px;border-top:1px solid rgba(247,244,236,.14)}
-.pasos li{counter-increment:p;display:grid;grid-template-columns:52px 1fr;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(247,244,236,.14);font-size:16px;color:rgba(247,244,236,.86)}
-.pasos li::before{content:counter(p);font-family:var(--f-cond);font-size:28px;color:var(--ambar);line-height:1}
-.v-wa{display:inline-flex;flex-direction:column;gap:2px;margin-bottom:28px}
-.v-wa small{font-size:13px;color:rgba(247,244,236,.65)}
-.v-wa b{font-family:var(--f-cond);font-weight:500;font-size:34px;letter-spacing:.02em;color:var(--hueso)}
+.viandas{background:var(--verde);color:var(--papel);padding:80px 0}
+.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.viandas .s-title{color:var(--papel)}
+.viandas .s-lead{color:rgba(247,242,232,.8)}
+.pasos{list-style:none;counter-reset:p;margin:30px 0 28px;border-top:1px solid rgba(247,242,232,.2)}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:46px 1fr;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(247,242,232,.2);font-size:17px}
+.pasos li::before{content:counter(p);font-stretch:125%;font-weight:900;font-size:24px;color:var(--ambar);line-height:1}
+.v-wa{display:inline-flex;flex-direction:column;gap:2px;margin-bottom:26px}
+.v-wa small{font-size:14px;color:rgba(247,242,232,.7)}
+.v-wa b{font-stretch:125%;font-weight:800;font-size:34px}
 .v-wa:hover b{color:var(--ambar)}
-.v-empresas{border-left:2px solid var(--ambar);padding:4px 0 4px 18px;margin-bottom:22px}
-.v-empresas b{display:block;font-family:var(--f-display);font-size:24px;font-weight:600}
-.v-empresas span{font-size:15px;color:rgba(247,244,236,.72);font-weight:300}
-.v-zona{font-size:14px;color:rgba(247,244,236,.65);font-weight:300}
-.v-zona b{color:var(--hueso);font-weight:500}
-.form-card{background:var(--hueso);color:var(--tinta);box-shadow:var(--sombra-dark)}
+.v-empresas{border-left:3px solid var(--ambar);padding:4px 0 4px 16px;margin-bottom:20px}
+.v-empresas b{display:block;font-stretch:125%;font-weight:800;font-size:21px;margin-bottom:4px}
+.v-empresas span{font-size:16px;color:rgba(247,242,232,.8)}
+.v-zona{font-size:15px;color:rgba(247,242,232,.75)}
+.v-zona b{color:var(--papel)}
+.form-card{background:var(--papel);color:var(--tinta);border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
 .tabs{display:grid;grid-template-columns:1fr 1fr}
-.tab{min-height:58px;font-family:var(--f-cond);font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--gris);background:var(--crema);border-bottom:2px solid transparent}
-.tab[aria-selected="true"]{background:var(--hueso);color:var(--verde);border-bottom-color:var(--terra)}
-.panel{padding:30px 32px 32px}
+.tab{min-height:56px;font-weight:700;font-size:16px;color:var(--gris);background:var(--hueso-2);border-bottom:3px solid transparent}
+.tab[aria-selected="true"]{background:var(--papel);color:var(--verde);border-bottom-color:var(--ambar)}
+.panel{padding:28px 30px 30px}
 .panel[hidden]{display:none}
-.panel h3{font-size:30px;color:var(--verde);margin-bottom:6px}
-.panel>p{font-size:15px;color:var(--gris);margin-bottom:22px;font-weight:300}
+.panel h3{font-size:28px;color:var(--verde);margin-bottom:8px}
+.panel>p{font-size:16px;color:var(--gris);margin-bottom:20px}
 .f-field{margin-bottom:14px}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.f-field label{display:block;font-size:14px;color:var(--tinta);font-weight:500;margin-bottom:6px}
-.f-field input,.f-field select,.f-field textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid rgba(31,58,46,.25);background:#fff;color:var(--tinta);font-size:16px;font-family:var(--f-texto);outline:none;transition:border-color .2s}
+.f-field label{display:block;font-size:15px;font-weight:600;margin-bottom:6px}
+.f-field input,.f-field select,.f-field textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid rgba(30,27,24,.25);border-radius:6px;background:#fff;color:var(--tinta);font-size:16px;font-family:var(--f);outline:none}
 .f-field textarea{min-height:84px;resize:vertical}
-.f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--terra)}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--verde)}
 .panel .btn{width:100%;margin-top:6px}
-.f-note{font-size:13.5px;color:var(--gris);margin-top:12px;font-weight:300}
-.f-note a{color:var(--terra);text-decoration:underline}
+.f-note{font-size:14px;color:var(--gris);margin-top:12px}
+.f-note a{color:var(--ladrillo);text-decoration:underline}
 @media(max-width:900px){.v-grid{grid-template-columns:1fr;gap:40px}}
-@media(max-width:520px){.panel{padding:24px 20px 26px}.f-row{grid-template-columns:1fr}}
+@media(max-width:520px){.panel{padding:22px 18px 24px}.f-row{grid-template-columns:1fr}}
 
-/* ══ MODAL ══ */
-.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(23,19,16,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center}
-.modal-bg.open{display:flex;animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{background:var(--hueso);width:100%;max-width:880px;max-height:92svh;overflow-y:auto;box-shadow:var(--sombra);animation:slideUp .35s cubic-bezier(.2,.8,.2,1)}
-@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
-@media(min-width:900px){.modal-bg{align-items:center;padding:30px}}
-.modal-close{position:sticky;top:14px;margin:14px 18px 0 auto;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--linea);color:var(--verde);font-size:18px;cursor:pointer;z-index:5}
-.modal-close:hover{background:var(--terra);color:#fff;border-color:var(--terra)}
+/* ══ VENTANA DE CADA LOCAL ══ */
+.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(30,27,24,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex;animation:aparece .2s}
+@keyframes aparece{from{opacity:0}to{opacity:1}}
+.modal{background:var(--papel);width:100%;max-width:880px;max-height:92svh;overflow-y:auto;border-radius:8px 8px 0 0;animation:sube .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes sube{from{transform:translateY(50px);opacity:0}to{transform:none;opacity:1}}
+@media(min-width:900px){.modal-bg{align-items:center;padding:30px}.modal{border-radius:8px}}
+.modal-close{position:sticky;top:14px;margin:14px 18px 0 auto;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--linea);font-size:18px;z-index:5}
+.modal-close:hover{background:var(--carbon);color:#fff}
 .modal-in{padding:0 34px 44px}
 @media(max-width:560px){.modal-in{padding:0 20px 36px}}
-.modal-in .eyebrow{display:block;margin-top:4px;font-family:var(--f-cond);font-size:14px;letter-spacing:.05em;color:var(--terra)}
-.modal-in h3{font-size:clamp(36px,5vw,50px);color:var(--verde);margin:6px 0 2px}
-.m-logo{height:60px;width:auto;margin:12px 0 4px;background:#fff;padding:7px}
-.m-rating{color:var(--terra);font-size:14px;margin-bottom:8px}
-.m-rating span{color:var(--gris)}
-.m-gal{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 32px}
-.m-gal img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--crema)}
+.modal-in .eyebrow{display:block;margin-top:4px;font-size:15px;color:var(--gris)}
+.modal-in h3{font-size:clamp(32px,4.4vw,46px);margin:6px 0 4px}
+.m-logo{height:60px;width:auto;margin:12px 0 4px;background:#fff;padding:7px;border-radius:4px}
+.m-rating{color:var(--gris);font-size:15px;margin-bottom:8px}
+.m-gal{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 30px}
+.m-gal img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--hueso-2);border-radius:3px}
 @media(max-width:640px){.m-gal{grid-template-columns:repeat(2,1fr)}}
 .m-reel{width:100%;max-width:420px;height:520px;border:0;display:block;margin:0 auto 30px}
-.m-sub{font-family:var(--f-display);font-size:26px;font-weight:600;margin:0 0 10px;color:var(--verde)}
-.m-sub small{display:block;font-family:var(--f-cond);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--terra);font-weight:500;margin-bottom:2px}
-.dish{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--linea)}
-.dish b{font-size:16px;font-weight:500}
-.dish small{display:block;font-size:13.5px;color:var(--gris);font-weight:300;margin-top:2px}
-.dish .price{font-family:var(--f-cond);font-weight:500;font-size:17px;color:var(--terra);white-space:nowrap}
-.dishes{margin-bottom:30px}
-.m-promo{background:rgba(217,108,51,.1);border-left:3px solid var(--terra);padding:16px 18px;margin-bottom:30px;font-size:15px}
-.m-promo b{color:var(--terra)}
-.m-info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px;font-size:14.5px}
-.m-info>div{background:#fff;border:1px solid var(--linea);padding:16px 18px}
-.m-info .lbl{font-family:var(--f-cond);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--terra);margin-bottom:4px}
+.m-sub{font-stretch:125%;font-size:24px;font-weight:800;margin:0 0 10px}
+.m-sub small{display:block;font-stretch:100%;font-size:14px;color:var(--gris);font-weight:500;margin-bottom:2px}
+.dish{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--linea)}
+.dish b{font-size:17px;font-weight:600}
+.dish small{display:block;font-size:14.5px;color:var(--gris);margin-top:2px}
+.dish .price{font-weight:700;font-size:17px;white-space:nowrap}
+.dishes{margin-bottom:28px}
+.m-promo{background:rgba(217,154,43,.14);border-left:3px solid var(--ambar);padding:14px 16px;margin-bottom:28px;font-size:16px}
+.m-info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;font-size:15.5px}
+.m-info>div{background:#fff;border:1px solid var(--linea);border-radius:4px;padding:14px 16px}
+.m-info .lbl{font-weight:700;margin-bottom:4px}
 @media(max-width:560px){.m-info{grid-template-columns:1fr}}
-.m-ctas{display:flex;gap:10px;flex-wrap:wrap}
-.m-ctas .btn{padding:0 20px}
-.m-ctas .btn-ghost{border:1px solid var(--verde);color:var(--verde)}
-.m-ctas .btn-ghost:hover{background:var(--verde);color:#fff}
+.m-ctas{display:flex;gap:8px;flex-wrap:wrap}
+.m-ctas .btn{padding:0 18px}
+.m-ctas .btn-ghost{border-color:var(--carbon);color:var(--carbon)}
+.m-ctas .btn-ghost:hover{background:var(--carbon);color:#fff}
 @media(max-width:560px){.m-ctas .btn{flex:1 1 100%}}
 
-/* ══ FOOTER ══ */
-footer{background:var(--carbon);color:var(--hueso);padding:70px 0 30px}
-.logo-strip{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:54px}
-.logo-strip a{background:var(--hueso);padding:10px 14px;cursor:pointer;transition:transform .2s}
-.logo-strip a:hover{transform:translateY(-3px)}
-.logo-strip img{height:50px;width:auto}
-.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px}
-.f-grid h5{font-family:var(--f-display);font-size:22px;font-weight:600;margin-bottom:12px}
-.f-grid p,.f-grid a{font-size:14px;color:rgba(247,244,236,.68);display:block;margin-bottom:9px;font-weight:300}
-.f-grid a b{font-weight:500;color:var(--hueso)}
+/* ══ PIE ══ */
+footer{background:var(--carbon);color:var(--papel);padding:64px 0 30px}
+.logo-strip{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:50px}
+.logo-strip a{background:var(--papel);padding:10px 14px;border-radius:4px;cursor:pointer}
+.logo-strip img{height:48px;width:auto}
+.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:34px;margin-bottom:40px}
+.f-grid h5{font-size:19px;margin-bottom:12px}
+.f-grid p,.f-grid a{font-size:15px;color:rgba(247,242,232,.7);display:block;margin-bottom:8px}
+.f-grid a b{font-weight:600;color:var(--papel)}
 .f-grid a:hover,.f-grid a:hover b{color:var(--ambar)}
-.f-bottom{text-align:center;font-size:13px;color:rgba(247,244,236,.45);padding-top:24px;border-top:1px solid rgba(247,244,236,.1)}
+.f-bottom{text-align:center;font-size:14px;color:rgba(247,242,232,.45);padding-top:22px;border-top:1px solid rgba(247,242,232,.12)}
 @media(max-width:980px){.f-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.f-grid{grid-template-columns:1fr;gap:28px}.f-bottom{padding-bottom:72px}}
+@media(max-width:560px){.f-grid{grid-template-columns:1fr;gap:26px}.f-bottom{padding-bottom:72px}}
 
 /* ══ BOTÓN FLOTANTE ══ */
-.wa-float{position:fixed;bottom:22px;right:22px;z-index:95;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);font-size:26px;color:#fff;transition:transform .2s}
-.wa-float:hover{transform:scale(1.07)}
-.wa-panel{position:fixed;bottom:92px;right:22px;z-index:95;background:#fff;width:min(330px,calc(100vw - 32px));box-shadow:var(--sombra);border-top:3px solid var(--terra);display:none}
-.wa-panel.open{display:block;animation:slideUp .25s}
-.wa-panel h4{font-size:24px;color:var(--verde);padding:18px 20px 4px}
-.wa-panel p{font-size:13.5px;color:var(--gris);padding:0 20px 10px}
-.wa-panel a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 20px;border-top:1px solid var(--linea);font-size:15px;min-height:50px}
+.wa-float{position:fixed;bottom:20px;right:20px;z-index:95;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);font-size:26px;color:#fff}
+.wa-panel{position:fixed;bottom:90px;right:20px;z-index:95;background:#fff;width:min(330px,calc(100vw - 32px));border-radius:8px;overflow:hidden;box-shadow:var(--sombra);border-top:3px solid var(--ladrillo);display:none}
+.wa-panel.open{display:block;animation:sube .2s}
+.wa-panel h4{font-size:21px;padding:18px 20px 4px}
+.wa-panel p{font-size:14.5px;color:var(--gris);padding:0 20px 10px}
+.wa-panel a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 20px;border-top:1px solid var(--linea);font-size:16px;min-height:50px}
 .wa-panel a:hover{background:var(--hueso)}
-.wa-panel a small{font-family:var(--f-cond);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--terra)}
+.wa-panel a small{font-size:14px;font-weight:700;color:var(--ladrillo)}
 body.modal-open{overflow:hidden}
+
+@media(max-width:560px){
+  body{font-size:16px}
+  .s-lead{font-size:16px}
+  .local p.que{font-size:16px}
+  .btn{min-height:44px;font-size:15px;padding:0 16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -350,182 +330,114 @@ body.modal-open{overflow:hidden}
   <div class="nav-in">
     <a href="#" class="logo">Grupo <span>El Chiringuito</span></a>
     <div class="nav-links">
-      <a href="#cartas">Cartas</a>
-      <a href="#locales">Locales</a>
+      <a href="#cuadra">Locales y cartas</a>
       <a href="#dia">Qué comer</a>
       <a href="#llegar">Cómo llegar</a>
       <a href="#viandas">Viandas</a>
     </div>
-    <a href="#cartas" class="nav-cta">Ver cartas</a>
+    <a href="#cuadra" class="nav-cta">Ver cartas</a>
   </div>
 </nav>
 
-<!-- ══════════ PORTADA ══════════ -->
+<!-- ══════════ PORTADA: qué hay ahora en la calle Mendoza ══════════ -->
 <header class="hero">
-  <div class="hero-bg" role="img" aria-label="Cartel de neón de El Chiringuito en el Paseo Mendoza"></div>
-  <div class="hero-in">
-    <p class="hero-where">Paseo Mendoza, Ingeniero Maschwitz</p>
-    <h1><span class="l">Cinco cocinas.</span><span class="l">Un solo paseo.</span></h1>
-    <p class="hero-sub">Cerveza tirada y burgers, bistró de patio, focaccias enormes, pizza a la leña y pastelería artesanal. Todo a metros, sobre la calle Mendoza.</p>
-    <div class="hero-ctas">
-      <a href="#locales" class="btn btn-fill">Conocé los locales</a>
-      <a href="#cartas" class="btn btn-line">Mirá las cartas</a>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Cinco cocinas sobre la calle Mendoza</h1>
+      <p class="ahora" id="ahora">Cerveza tirada y burgers, bistró de patio, focaccias, pizza a la leña y pastelería, a metros una de otra en Ingeniero Maschwitz.</p>
+      <div class="hero-ctas">
+        <a href="#cuadra" class="btn btn-fill">Ver locales y cartas</a>
+        <a href="#viandas" class="btn btn-line">Viandas</a>
+      </div>
+    </div>
+    <div class="vidriera" aria-hidden="true">
+      <div class="show" id="vidriera-show"><img class="on" src="/fotos/locales/chiringuito-4.jpg" alt=""></div>
+      <span class="vidriera-tag" id="vidriera-tag"><i></i><span>Calle Mendoza</span></span>
     </div>
   </div>
-  <div class="ticker" aria-label="Qué está abierto ahora">
-    <div class="ticker-track">
-      <div class="ticker-group" id="tk-a"></div>
-      <div class="ticker-group" id="tk-b" aria-hidden="true"></div>
+  <nav class="calle" aria-label="Los locales sobre la calle Mendoza">
+    <div class="calle-in">
+      <span class="calle-nombre">Mendoza</span>
+      <div class="tramo"><span class="tramo-num">1731</span><a class="parada" href="#l-lounge" data-parada="lounge"><b>Lounge</b><small></small></a></div>
+      <div class="tramo"><span class="tramo-num">1578</span><a class="parada" href="#l-focacceria" data-parada="focacceria"><b>Focacceria</b><small></small></a><a class="parada" href="#l-chiringuito" data-parada="chiringuito"><b>El Chiringuito</b><small></small></a><a class="parada" href="#l-bakery" data-parada="bakery"><b>ChirinBakery</b><small></small></a><a class="parada" href="#l-unapizza" data-parada="unapizza"><b>Una Pizza</b><small></small></a></div>
     </div>
-  </div>
+  </nav>
 </header>
 
-<!-- ══════════ CARTAS ══════════ -->
-<section class="cartas" id="cartas">
+<section class="cuadra" id="cuadra">
   <div class="wrap">
     <div class="s-head">
-      <h2 class="s-title">Mirá la carta antes de venir</h2>
+      <h2 class="s-title">La cuadra</h2>
+      <p class="s-lead">En el orden en que los cruzás caminando por Mendoza. Tocá un local para ver su carta, pedir o llegar.</p>
     </div>
-    <div class="c-grid">
-      <a class="carta" href="/carta/chiringuito/">
-        <img src="/carta/chiringuito/fotos/doble-cheese-bacon-burger.jpg" alt="Hamburguesa doble con cheddar y bacon de El Chiringuito" loading="lazy" width="1080" height="1080">
-        <span class="chip" data-chip="chiringuito"></span>
-        <h3>El Chiringuito</h3>
-        <p>Burgers, ribs, pastas, pescados y tragos.</p>
-        <span class="btn btn-fill">Ver la carta</span>
-      </a>
-      <a class="carta" href="/carta/lounge/">
-        <img src="/carta/lounge/fotos/TremendaNapo.jpg" alt="Tremenda Napolitana con fetuccini del Chiringuito Lounge" loading="lazy">
-        <span class="chip" data-chip="lounge"></span>
-        <h3>Chiringuito Lounge</h3>
-        <p>Desayunos, meriendas, bifes, pastas y picadas.</p>
-        <span class="btn btn-fill">Ver la carta</span>
-      </a>
-      <a class="carta" href="/una-pizza/">
-        <img src="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg" srcset="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg 640w, /una-pizza/fotos/muzzarella-frente-al-horno.jpg 1400w" sizes="(max-width:860px) 100vw, 33vw" alt="Pizza muzzarella frente al horno de Una Pizza" loading="lazy">
-        <span class="chip" data-chip="unapizza"></span>
-        <h3>Una Pizza</h3>
-        <p>Pizza a la piedra, empanadas y fainá.</p>
-        <span class="btn btn-fill">Ver la carta</span>
-      </a>
-    </div>
-    <div class="otros">
-      <a class="otro" href="tel:+5491178196138"><span><b>La Focacceria</b><small>Focaccias de masa propia</small></span><em>Llamar</em></a>
-      <a class="otro" href="https://wa.me/5491144002737" target="_blank" rel="noopener"><span><b>ChirinBakery</b><small>Tortas, tartas y postres</small></span><em>Encargar</em></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ LOCALES ══════════ -->
-<section class="locales" id="locales">
-  <div class="wrap">
-    <div class="s-head">
-      <h2 class="s-title">El Paseo Mendoza es nuestra casa</h2>
-      <p class="s-lead">Cinco propuestas distintas, una misma cocina de barrio hecha con oficio. Tocá un local para ver fotos, platos y promos.</p>
-    </div>
-    <div class="bento">
-
-      <article class="card big">
-        <button class="card-img" onclick="openModal('chiringuito')" aria-label="Ver El Chiringuito">
-          <span class="addr">Mendoza 1578</span>
-          <img src="https://drive.google.com/thumbnail?id=1F1obzziHv2lLRjWWJRgn9qOGfpwuXkOR&sz=w900" alt="Hamburguesa de El Chiringuito" loading="lazy">
-          <span class="chip" data-chip="chiringuito"></span>
-        </button>
-        <div class="card-body">
-          <h3>El Chiringuito</h3>
-          <div class="rating">★★★★☆ 4.3 <span>· 3.600+ reseñas en Google</span></div>
-          <p>El clásico del paseo: restaurante, cervecería y drinks. Cervezas artesanales e importadas, ribs, hamburguesas, pastas y pescados. Con La Terraza en el primer piso para las noches largas.</p>
-          <button class="more" onclick="openModal('chiringuito')">Ver fotos, platos y promos</button>
-          <div class="acts">
-            <a class="main" href="/carta/chiringuito/">Ver carta</a>
-            <a href="tel:+541140857072">Llamar</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">Cómo llegar</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card big">
-        <button class="card-img" onclick="openModal('lounge')" aria-label="Ver Chiringuito Lounge">
-          <span class="addr">Mendoza 1731</span>
-          <img src="https://drive.google.com/thumbnail?id=1Ckfs0B2u9zxUhroFZNnNb-gw-rW4NEqH&sz=w900" alt="Patio del Chiringuito Lounge" loading="lazy">
-          <span class="chip" data-chip="lounge"></span>
-        </button>
-        <div class="card-body">
+    <div class="recorrido">
+      <div class="altura"><b>1731</b><span>Mercado de Maschwitz</span></div>
+      <article class="local l-lounge" id="l-lounge">
+        <div class="show" data-show><img class="on" src="/fotos/locales/lounge-1.jpg" alt="Fachada del Chiringuito Lounge en el Mercado de Maschwitz" loading="lazy"><img data-src="/fotos/locales/lounge-2.jpg" alt="Barra y salón del Chiringuito Lounge"><img data-src="/fotos/locales/lounge-3.jpg" alt="Salmón con vegetales y vino blanco en el Lounge"><img data-src="/fotos/locales/lounge-4.jpg" alt="Plato de rabas en el Lounge"><span class="local-tag"><span class="chip" data-chip="lounge"></span></span></div>
+        <div>
           <h3>Chiringuito Lounge</h3>
-          <div class="rating">★★★★☆ 4.3 <span>· 100+ reseñas en Google</span></div>
-          <p>Bistró de día y de noche: desayunos, meriendas, bifes, pastas y picadas en un patio que invita a quedarse.</p>
-          <button class="more" onclick="openModal('lounge')">Ver fotos, platos y promos</button>
-          <div class="acts">
-            <a class="main" href="/carta/lounge/">Ver carta</a>
-            <a href="https://wa.me/5491124635464" target="_blank" rel="noopener">WhatsApp</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">Cómo llegar</a>
-          </div>
+          <div class="rating"><b>★ 4,3</b> · más de 100 reseñas en Google</div>
+          <p class="que">Bistró de día y de noche: desayunos, meriendas, bifes, pastas y picadas en un patio que invita a quedarse.</p>
+          <p class="horario">Miércoles a domingo, de 9 a 1.</p>
+          
+          <div class="acts"><a class="btn main" href="/carta/lounge/">Ver carta</a><a class="btn btn-line sec" href="https://wa.me/5491124635464" target="_blank" rel="noopener">WhatsApp</a><button class="btn btn-line sec" onclick="openModal('lounge')">Fotos y platos</button><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">Cómo llegar</a></div>
         </div>
       </article>
-
-      <article class="card">
-        <button class="card-img" onclick="openModal('focacceria')" aria-label="Ver La Focacceria">
-          <span class="addr">Mendoza 1578</span>
-          <img src="https://drive.google.com/thumbnail?id=1epA2RAe1cZarsuZMy3kRK1FSp-dJq2T7&sz=w900" alt="Focaccia rellena de La Focacceria" loading="lazy">
-          <span class="chip" data-chip="focacceria"></span>
-        </button>
-        <div class="card-body">
+      <div class="altura"><b>1578</b><span>Paseo Mendoza</span></div>
+      <article class="local l-focacceria" id="l-focacceria">
+        <div class="show" data-show><img class="on" src="/fotos/locales/focacceria-1.jpg" alt="Focaccia rellena de La Focacceria" loading="lazy"><img data-src="/fotos/locales/focacceria-2.jpg" alt="Focaccia de jamón tomada con las manos"><img data-src="/fotos/locales/focacceria-3.jpg" alt="Focaccias con bebida en la mesa"><img data-src="/fotos/locales/focacceria-4.jpg" alt="Focaccia de jamón y queso"><span class="local-tag"><span class="chip" data-chip="focacceria"></span></span></div>
+        <div>
           <h3>La Focacceria</h3>
-          <div class="rating">★★★★★ 4.8 <span>· 285 reseñas en Google</span></div>
-          <p>Focaccias enormes de masa propia con fiambres frescos. La mejor puntuada del grupo, y con razón.</p>
-          <button class="more" onclick="openModal('focacceria')">Ver fotos y platos</button>
-          <div class="acts">
-            <a class="main" href="tel:+5491178196138">Llamar</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Focacceria+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJQX_VsSifvJUR7WaILC2fUBY" target="_blank" rel="noopener">Cómo llegar</a>
-          </div>
+          <div class="rating"><b>★ 4,8</b> · 285 reseñas en Google</div>
+          <p class="que">Focaccias enormes de masa propia con fiambres frescos. La mejor puntuada del grupo, y con razón.</p>
+          <p class="horario">Martes a jueves de 9 a 20. Viernes a domingo de 9 a 1.</p>
+          
+          <div class="acts"><a class="btn main" href="tel:+5491178196138">Llamar</a><button class="btn btn-line sec" onclick="openModal('focacceria')">Fotos y platos</button><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=Focacceria+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJQX_VsSifvJUR7WaILC2fUBY" target="_blank" rel="noopener">Cómo llegar</a></div>
         </div>
       </article>
-
-      <article class="card">
-        <button class="card-img" onclick="openModal('unapizza')" aria-label="Ver Una Pizza">
-          <span class="addr">Mendoza 1578</span>
-          <img src="/una-pizza/fotos/pizza-jamon-y-morrones-640.jpg" alt="Pizza de jamón y morrones de Una Pizza" loading="lazy">
-          <span class="chip" data-chip="unapizza"></span>
-        </button>
-        <div class="card-body">
-          <h3>Una Pizza</h3>
-          <div class="rating">★★★★★ 4.5 <span>· 29 reseñas en Google</span></div>
-          <p>Pizza con el toque de un maestro pizzero: masa trabajada, empanadas y fainá. En el local o para llevar.</p>
-          <a class="more" href="/una-pizza/">Ver carta y fotos</a>
-          <div class="acts">
-            <a class="main" href="https://wa.me/5491126091109" target="_blank" rel="noopener">Pedir</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">Cómo llegar</a>
-          </div>
+      <article class="local l-chiringuito" id="l-chiringuito">
+        <div class="show" data-show><img class="on" src="/fotos/locales/chiringuito-1.jpg" alt="Picada, papas y cerveza en El Chiringuito" loading="lazy"><img data-src="/fotos/locales/chiringuito-2.jpg" alt="Hamburguesa doble con cheddar y bacon"><img data-src="/fotos/locales/chiringuito-3.jpg" alt="Trago tiki en vaso calavera"><img data-src="/fotos/locales/chiringuito-4.jpg" alt="Cartel de neón de El Chiringuito"><img data-src="/fotos/locales/chiringuito-5.jpg" alt="Mesa con costillas y sándwiches en El Chiringuito"><span class="local-tag"><span class="chip" data-chip="chiringuito"></span></span></div>
+        <div>
+          <h3>El Chiringuito</h3>
+          <div class="rating"><b>★ 4,3</b> · más de 3.600 reseñas en Google</div>
+          <p class="que">El clásico del paseo: restaurante, cervecería y drinks. Cervezas artesanales e importadas, ribs, hamburguesas, pastas y pescados. Con La Terraza en el primer piso para las noches largas.</p>
+          <p class="horario">Martes a domingo desde las 10. Cierra a la 1; viernes y sábado, a las 3.</p>
+          <span class="extra">Miércoles: Burga Libre desde las 19</span>
+          <div class="acts"><a class="btn main" href="/carta/chiringuito/">Ver carta</a><a class="btn btn-line sec" href="tel:+541140857072">Llamar</a><button class="btn btn-line sec" onclick="openModal('chiringuito')">Fotos y platos</button><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">Cómo llegar</a></div>
         </div>
       </article>
-
-      <article class="card">
-        <button class="card-img" onclick="openModal('bakery')" aria-label="Ver ChirinBakery">
-          <span class="addr">Mendoza 1578, local 15</span>
-          <img src="https://drive.google.com/thumbnail?id=1_aDxUVHa-1ZQcKmWeFfwBrrAhPI58Qgt&sz=w900" alt="Pastelería de ChirinBakery" loading="lazy">
-          <span class="chip" data-chip="bakery"></span>
-        </button>
-        <div class="card-body">
+      <article class="local l-bakery" id="l-bakery">
+        <div class="show" data-show><img class="on" src="/fotos/locales/bakery-1.jpg" alt="Torta de ChirinBakery con café" loading="lazy"><img data-src="/fotos/locales/bakery-2.jpg" alt="Cheesecake de frutos rojos de ChirinBakery"><img data-src="/fotos/locales/bakery-3.jpg" alt="Torta de chocolate y dulce de leche de ChirinBakery"><img data-src="/fotos/locales/bakery-4.jpg" alt="Lemon pie de ChirinBakery"><span class="local-tag"><span class="chip" data-chip="bakery"></span></span></div>
+        <div>
           <h3>ChirinBakery</h3>
-          <div class="rating">Nuevo <span>en el paseo</span></div>
-          <p>Pastelería artesanal de Vanesa Schual (El Gato Dumas): tortas para eventos, mesas dulces, tartas y postres.</p>
-          <button class="more" onclick="openModal('bakery')">Ver fotos y especialidades</button>
-          <div class="acts">
-            <a class="main" href="https://wa.me/5491144002737" target="_blank" rel="noopener">Encargar</a>
-            <a href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">Instagram</a>
-          </div>
+          <div class="rating">Nueva en el paseo · local 15</div>
+          <p class="que">Pastelería artesanal de Vanesa Schual (El Gato Dumas): tortas para eventos, mesas dulces, tartas y postres.</p>
+          <p class="horario">Martes a domingo de 10 a 21.</p>
+          
+          <div class="acts"><a class="btn main" href="https://wa.me/5491144002737" target="_blank" rel="noopener">Encargar por WhatsApp</a><button class="btn btn-line sec" onclick="openModal('bakery')">Fotos</button><a class="btn btn-line sec" href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">Instagram</a></div>
         </div>
       </article>
-
+      <article class="local l-unapizza" id="l-unapizza">
+        <div class="show" data-show><img class="on" src="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg" alt="Muzzarella frente al horno a leña de mosaico de Una Pizza" loading="lazy"><img data-src="/una-pizza/fotos/pizzero-una-pizza-640.jpg" alt="Pizzero de Una Pizza armando una pizza"><img data-src="/una-pizza/fotos/pizza-jamon-y-morrones-640.jpg" alt="Pizza de jamón y morrones de Una Pizza"><img data-src="/una-pizza/fotos/empanada-al-horno-640.jpg" alt="Empanada al horno de Una Pizza"><span class="local-tag"><span class="chip" data-chip="unapizza"></span></span></div>
+        <div>
+          <h3>Una Pizza</h3>
+          <div class="rating"><b>★ 4,5</b> · 29 reseñas en Google</div>
+          <p class="que">Pizza a la piedra que sale del horno a leña de mosaico, empanadas y fainá. Delivery propio.</p>
+          <p class="horario">Miércoles a domingo desde las 19.</p>
+          
+          <div class="acts"><a class="btn main" href="/una-pizza/">Ver carta</a><a class="btn btn-line sec" href="https://wa.me/5491126091109" target="_blank" rel="noopener">Pedir por WhatsApp</a><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">Cómo llegar</a></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ══════════ UN DÍA EN EL PASEO ══════════ -->
+
+<!-- ══════════ UN DÍA EN LA CALLE MENDOZA ══════════ -->
 <section class="dia" id="dia">
   <div class="wrap dia-top">
     <div>
-      <h2 class="s-title">Un día en el Paseo</h2>
+      <h2 class="s-title">Un día en la calle Mendoza</h2>
       <p class="s-lead">Del café de la mañana a la última ronda. Abajo de cada momento te mostramos qué está abierto hoy a esa hora.</p>
     </div>
     <div class="dia-nav">
@@ -1051,8 +963,7 @@ function pintarHorarios(){
     document.querySelectorAll(`.status[data-local="${id}"]`).forEach(el=>{el.className='status '+cls;el.innerHTML=`<b>${titulo}</b> ${detalle}`});
     tk.push(`<div class="tk ${s.abierto?'on':''}"><i></i><b>${h.nombre}</b><span>${s.abierto?'abierto hasta las '+hhmm(s.cierra):'abre '+cuando(s)}</span></div>`);
   });
-  document.getElementById('tk-a').innerHTML=tk.join('');
-  document.getElementById('tk-b').innerHTML=tk.join('');
+  pintarCalle(now);
   /* "Un día en el Paseo": qué está abierto HOY a cada hora */
   document.querySelectorAll('.mom').forEach(card=>{
     const min=+card.dataset.h;
@@ -1062,6 +973,82 @@ function pintarHorarios(){
     box.innerHTML=`Hoy ${DIAS_LARGO[now.d]} a las ${hhmm(min)}<strong>${abiertos.length?abiertos.join(', '):'Todo cerrado a esa hora'}</strong>`;
   });
 }
+/* ── LA CALLE: cada parada muestra si está abierto ── */
+function pintarCalle(now){
+  document.querySelectorAll('.parada').forEach(p=>{
+    const s=estado(HORARIOS[p.dataset.parada],now);
+    p.classList.toggle('on',s.abierto);
+    p.querySelector('small').textContent=s.abierto?'abierto hasta las '+hhmm(s.cierra):(s.abre!==undefined?'abre '+cuando(s):'');
+  });
+  pintarAhora(now);
+}
+
+/* ── PORTADA: la frase de "ahora" ──
+   Qué hay en cada local según la hora (minutos desde las 00:00). */
+const QUE={
+  lounge:m=>m<720?'café y desayuno':m<960?'almuerzo':m<1200?'merienda':'cena',
+  focacceria:()=>'focaccias',
+  chiringuito:()=>'birra y burgers',
+  bakery:()=>'tortas',
+  unapizza:()=>'pizza a la leña'
+};
+const EN={lounge:'en el Lounge',focacceria:'en La Focacceria',chiringuito:'en El Chiringuito',bakery:'en ChirinBakery',unapizza:'en Una Pizza'};
+const ORDEN=['lounge','focacceria','chiringuito','bakery','unapizza'];
+const lista=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' y '+a[a.length-1];
+let abiertosAhora=[];
+function pintarAhora(now){
+  const el=document.getElementById('ahora'); if(!el) return;
+  const est=ORDEN.map(id=>({id,s:estado(HORARIOS[id],now)}));
+  const abiertos=est.filter(x=>x.s.abierto);
+  const dia=DIAS_LARGO[now.d]; const Dia=dia.charAt(0).toUpperCase()+dia.slice(1);
+  let txt;
+  if(abiertos.length){
+    txt='Ahora hay '+lista(abiertos.map(x=>QUE[x.id](now.m)+' '+EN[x.id]))+'.';
+    const luego=est.filter(x=>!x.s.abierto&&x.s.k===0).sort((a,b)=>a.s.abre-b.s.abre)[0];
+    if(luego) txt+=' '+HORARIOS[luego.id].nombre+' abre a las '+hhmm(luego.s.abre)+'.';
+  }else{
+    const prox=est.filter(x=>x.s.abre!==undefined).sort((a,b)=>(a.s.k*1440+a.s.abre)-(b.s.k*1440+b.s.abre))[0];
+    txt='Ahora está todo cerrado.'+(prox?' Lo primero que abre es '+HORARIOS[prox.id].nombre+', '+(prox.s.k===0?'hoy':prox.s.k===1?'mañana':'el '+DIAS_LARGO[prox.s.dia])+' a las '+hhmm(prox.s.abre)+'.':'');
+  }
+  el.innerHTML='<span class="cuando">'+Dia+', '+hhmm(now.m)+'</span>'+txt;
+  const ids=abiertos.map(x=>x.id).join();
+  if(ids!==abiertosAhora.join()){abiertosAhora=abiertos.map(x=>x.id);armarVidriera()}
+}
+
+/* ── VIDRIERA: pasan las fotos de los locales abiertos ahora (si no hay, de todos) ── */
+const QUIETO=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let vidTimer;
+function armarVidriera(){
+  const box=document.getElementById('vidriera-show'), tag=document.getElementById('vidriera-tag'); if(!box) return;
+  const ids=abiertosAhora.length?abiertosAhora:ORDEN;
+  const fotos=[];
+  ids.forEach(id=>{document.querySelectorAll('#l-'+id+' .show img').forEach((im,i)=>{if(i<2)fotos.push({id,src:im.getAttribute('src')||im.dataset.src})})});
+  box.innerHTML=fotos.map((f,i)=>`<img ${i?'data-src':'src'}="${f.src}" alt="" ${i?'':'class="on"'}>`).join('');
+  const nombre=id=>HORARIOS[id].nombre;
+  const marcar=i=>{const id=fotos[i].id;tag.lastElementChild.textContent=(abiertosAhora.length?'Abierto ahora: ':'')+nombre(id);tag.style.background=getComputedStyle(document.documentElement).getPropertyValue('--c-'+id)};
+  marcar(0);
+  clearInterval(vidTimer);
+  if(QUIETO||fotos.length<2) return;
+  let k=0; const imgs=[...box.querySelectorAll('img')];
+  cargar(imgs[1]);
+  vidTimer=setInterval(()=>{imgs[k].classList.remove('on');k=(k+1)%imgs.length;imgs[k].classList.add('on');marcar(k);cargar(imgs[(k+1)%imgs.length])},4000);
+}
+function cargar(im){if(im&&im.dataset.src){im.src=im.dataset.src;im.removeAttribute('data-src')}}
+
+/* ── LA CUADRA: las fotos de cada local van pasando cuando el local está en pantalla ── */
+function animarLocales(){
+  const shows=[...document.querySelectorAll('.local [data-show]')];
+  shows.forEach((sh,n)=>{
+    const imgs=[...sh.querySelectorAll('img')]; let k=0, t=null;
+    const paso=()=>{imgs[k].classList.remove('on');k=(k+1)%imgs.length;cargar(imgs[k]);imgs[k].classList.add('on');cargar(imgs[(k+1)%imgs.length])};
+    if(QUIETO||imgs.length<2||!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(es=>{es.forEach(en=>{
+      if(en.isIntersecting&&!t){cargar(imgs[1]);t=setInterval(paso,3400+n*420)}
+      else if(!en.isIntersecting&&t){clearInterval(t);t=null}
+    })},{threshold:.35}).observe(sh);
+  });
+}
+animarLocales();
 pintarHorarios(); setInterval(pintarHorarios,60000);
 </script>
 </body>
