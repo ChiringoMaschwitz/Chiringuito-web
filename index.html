@@ -438,6 +438,11 @@ body.modal-open{overflow:hidden}
 
 @media (min-width:901px) and (max-height:700px){.pe .sello{display:none}}
 
+
+/* video frenado por el celular: se ve la foto de abajo y nunca el botón de play */
+.pe .vid video.frenado{opacity:0}
+.pe video::-webkit-media-controls,.pe video::-webkit-media-controls-start-playback-button,.pe video::-webkit-media-controls-overlay-play-button{display:none !important;-webkit-appearance:none;opacity:0}
+
 /* panel "¿con quién querés hablar?" (sale de la franja) */
 .wa-panel{position:fixed;top:64px;right:12px;z-index:95;background:#fff;width:min(330px,calc(100vw - 24px));border-radius:16px;overflow:hidden;box-shadow:var(--sombra);border-top:4px solid #25D366;display:none;font-family:'Archivo',system-ui,sans-serif;color:#15120F}
 .wa-panel.open{display:block;animation:aparece .18s}
@@ -1049,38 +1054,48 @@ function alturaPaneles(){
 alturaPaneles(); addEventListener('resize',alturaPaneles); addEventListener('load',alturaPaneles);
 
 
-/* ── VIDEOS: se cargan recién cuando aparecen en pantalla ──
-   Se reproducen siempre, también con "reducir movimiento" activado en el celular. */
-const QUIETO=false;
-function cargarVideo(v){if(v.dataset.src){const f=v.parentElement.querySelector('img');if(f&&!v.poster)v.poster=f.currentSrc||f.src;v.muted=true;v.src=v.dataset.src;v.removeAttribute('data-src')}}
-if(!QUIETO){
-  const videos=[...document.querySelectorAll('.pe video')];
-  if('IntersectionObserver' in window){
-    const io=new IntersectionObserver(es=>es.forEach(e=>{
-      const v=e.target;
-      if(e.isIntersecting){cargarVideo(v);const p=v.play();if(p&&p.catch)p.catch(()=>{})}
-      else if(!v.paused) v.pause();
-    }),{rootMargin:'300px 0px'});
-    videos.forEach(v=>io.observe(v));
-  }else{
-    videos.forEach(v=>{if(v.offsetParent!==null)cargarVideo(v)});
-  }
+/* ── VIDEOS ──
+   1) Se cargan un poco antes de llegar (para que estén listos).
+   2) Se reproducen recién cuando se ven en pantalla, y se pausan al salir.
+   Si el celular frena la reproducción, se reintenta cuando el video ya está listo,
+   al volver a verse y con cualquier toque; mientras tanto se ve la foto, sin botón de play. */
+function cargarVideo(v){if(v.dataset.src){const f=v.parentElement.querySelector('img');if(f&&!v.poster)v.poster=f.currentSrc||f.src;v.muted=true;v.setAttribute('muted','');v.src=v.dataset.src;v.removeAttribute('data-src');v.load()}}
+const enPantalla=new Set();
+function darPlay(v){
+  if(!v.src||!enPantalla.has(v)) return;
+  v.muted=true;
+  const p=v.play();
+  if(p&&p.catch)p.catch(()=>{v.classList.add('frenado')});
 }
+const videos=[...document.querySelectorAll('.pe video')];
+videos.forEach(v=>{
+  v.addEventListener('playing',()=>v.classList.remove('frenado'));
+  v.addEventListener('canplay',()=>darPlay(v));
+});
+if('IntersectionObserver' in window){
+  const cargador=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cargarVideo(e.target);cargador.unobserve(e.target)}}),{rootMargin:'600px 0px'});
+  const jugador=new IntersectionObserver(es=>es.forEach(e=>{
+    const v=e.target;
+    if(e.isIntersecting){enPantalla.add(v);cargarVideo(v);darPlay(v)}
+    else{enPantalla.delete(v);if(!v.paused)v.pause()}
+  }),{threshold:.15});
+  videos.forEach(v=>{cargador.observe(v);jugador.observe(v)});
+}else{
+  videos.forEach(v=>{if(v.offsetParent!==null){cargarVideo(v);enPantalla.add(v);darPlay(v)}});
+}
+/* reintento con cualquier toque (por ejemplo, con el celular en ahorro de batería) */
+const reintentar=()=>enPantalla.forEach(v=>{if(v.paused)darPlay(v)});
+['touchend','click','keydown'].forEach(ev=>addEventListener(ev,reintentar,{passive:true}));
 
 /* la portada queda fija debajo: cuando ya la tapó todo lo demás, sus videos se pausan */
-if(!QUIETO){
+{
   const heroV=[...document.querySelectorAll('.hero video')];
   let pend=false,quieta=false;
   addEventListener('scroll',()=>{if(pend)return;pend=true;requestAnimationFrame(()=>{pend=false;
     const tapada=scrollY>innerHeight*1.6;
-    if(tapada!==quieta){quieta=tapada;heroV.forEach(v=>{if(v.src){if(tapada)v.pause();else{const p=v.play();if(p&&p.catch)p.catch(()=>{})}}})}
+    if(tapada!==quieta){quieta=tapada;heroV.forEach(v=>{if(tapada){enPantalla.delete(v);v.pause()}else{if(v.offsetParent!==null){enPantalla.add(v);darPlay(v)}}})}
   })},{passive:true});
 }
-
-/* si el celular bloqueó la reproducción automática (por ejemplo, en modo ahorro de batería),
-   los videos visibles arrancan con el primer toque o desplazamiento */
-const reintentar=()=>{document.querySelectorAll('.pe video').forEach(v=>{if(v.src&&v.paused){const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const p=v.play();if(p&&p.catch)p.catch(()=>{})}}})};
-['touchstart','pointerdown','scroll'].forEach(ev=>addEventListener(ev,reintentar,{passive:true,once:true}));
 </script>
 </body>
 </html>
