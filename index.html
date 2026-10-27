@@ -443,6 +443,11 @@ body.modal-open{overflow:hidden}
 .pe .vid video.frenado{opacity:0}
 .pe video::-webkit-media-controls,.pe video::-webkit-media-controls-start-playback-button,.pe video::-webkit-media-controls-overlay-play-button{display:none !important;-webkit-appearance:none;opacity:0}
 
+
+/* rótulos de la portada: legibles sobre cualquier video */
+.pe .rotulos span{padding:7px 13px;border-radius:999px;background:rgba(14,12,10,.42);border:1px solid rgba(246,211,190,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--durazno);text-shadow:0 1px 6px rgba(0,0,0,.5)}
+@media (max-width:900px){.pe .rotulos span{padding:5px 10px}}
+
 /* panel "¿con quién querés hablar?" (sale de la franja) */
 .wa-panel{position:fixed;top:64px;right:12px;z-index:95;background:#fff;width:min(330px,calc(100vw - 24px));border-radius:16px;overflow:hidden;box-shadow:var(--sombra);border-top:4px solid #25D366;display:none;font-family:'Archivo',system-ui,sans-serif;color:#15120F}
 .wa-panel.open{display:block;animation:aparece .18s}
