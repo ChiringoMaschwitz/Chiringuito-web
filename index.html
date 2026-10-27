@@ -6,7 +6,7 @@
 <title>El Chiringuito Maschwitz | Restaurantes y bares en Paseo Mendoza</title>
 <meta name="description" content="Cervecería, bistró, focaccias, pizza y pastelería en el Paseo Mendoza, Ingeniero Maschwitz. Mirá las cartas con fotos y precios, los horarios y pedí por WhatsApp.">
 <link rel="canonical" href="https://grupochiringuito.com.ar/">
-<meta name="theme-color" content="#F6D3BE">
+<meta name="theme-color" content="#15120F">
 <meta property="og:title" content="El Chiringuito · Paseo Mendoza, Maschwitz">
 <meta property="og:description" content="Cervecería, bistró, focaccias, pizza y pastelería en el Paseo Mendoza. Cartas, horarios y cómo llegar.">
 <meta property="og:type" content="website">
@@ -468,6 +468,27 @@ body.modal-open{overflow:hidden}
 }
 @media (prefers-reduced-motion:reduce){
   .modal,.modal-bg.open,.wa-panel.open{animation:none}
+}
+
+/* ── franja de arriba: más fina y en carbón ── */
+:root{--fh:40px}
+@media (max-width:900px){:root{--fh:38px}}
+html{scroll-padding-top:calc(var(--fh) + 8px)}
+.pe .franja{height:var(--fh);background:var(--carbon);color:var(--hueso);border-bottom:1px solid rgba(251,247,240,.1)}
+.pe .franja .calle{background:transparent;color:var(--hueso);font-size:12px;padding:0 18px;border-right:1px solid rgba(251,247,240,.16)}
+.pe .franja .pista span.alt{color:var(--ambar);font-size:14px;padding:0 6px 0 22px}
+.pe .franja .pista a{font-size:13.5px;padding:0 12px;color:var(--hueso)}
+.pe .franja .pista a small{color:var(--suave);font-size:12.5px}
+.pe .franja .pista a.parada::before{width:7px;height:7px;background:#6E665C}
+.pe .franja .pista a.parada.on::before{background:#4CC27F}
+.pe .franja .wa{font-size:13.5px;padding:0 14px;gap:8px}
+.pe .franja .wa svg{width:18px;height:18px}
+.pe .hero{top:var(--fh);height:calc(100svh - var(--fh))}
+.wa-panel{top:calc(var(--fh) + 8px)}
+@media (max-width:900px){
+  .pe .franja .calle{font-size:10.5px;padding:0 10px}
+  .pe .franja .wa{padding:0 12px}
+  .pe .hero{height:calc(100svh - var(--fh))}
 }
 </style>
 </head>
