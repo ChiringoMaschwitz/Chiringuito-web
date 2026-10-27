@@ -6,7 +6,7 @@
 <title>El Chiringuito Maschwitz | Restaurantes y bares en Paseo Mendoza</title>
 <meta name="description" content="Cervecería, bistró, focaccias, pizza y pastelería en el Paseo Mendoza, Ingeniero Maschwitz. Mirá las cartas con fotos y precios, los horarios y pedí por WhatsApp.">
 <link rel="canonical" href="https://grupochiringuito.com.ar/">
-<meta name="theme-color" content="#EFE8DA">
+<meta name="theme-color" content="#F6D3BE">
 <meta property="og:title" content="El Chiringuito · Paseo Mendoza, Maschwitz">
 <meta property="og:description" content="Cervecería, bistró, focaccias, pizza y pastelería en el Paseo Mendoza. Cartas, horarios y cómo llegar.">
 <meta property="og:type" content="website">
@@ -37,442 +37,631 @@
 }
 </script>
 <style>
-/* ══ Grupo El Chiringuito · "Calle Mendoza, ahora" ══
-   Una sola familia (Archivo) en dos anchos: ancha para carteles y números de la calle,
-   normal para leer. Colores de la marca: hueso, carbón, verde botella, ámbar, ladrillo. */
-:root{
-  --hueso:#EFE8DA; --hueso-2:#E4DAC7; --papel:#F7F2E8;
-  --carbon:#1E1B18; --carbon-2:#2A2622;
-  --verde:#1F4A35; --verde-2:#2B5E45;
-  --ambar:#D99A2B; --ladrillo:#8E3B24; --ladrillo-2:#73301D;
-  --tinta:#1E1B18; --gris:#5F5A52; --linea:rgba(30,27,24,.15);
-  --c-lounge:#1F4A35; --c-focacceria:#9A6427; --c-chiringuito:#6B4226; --c-bakery:#7A3B45; --c-unapizza:#B21818;
-  --f:'Archivo',system-ui,-apple-system,sans-serif;
-  --sombra:0 1px 2px rgba(30,27,24,.08),0 18px 40px -20px rgba(30,27,24,.45);
+/* ══ Grupo El Chiringuito · Dirección E "Portada en video" ══ */
+body{margin:0;background:#0E0C0A}
+a{color:inherit}
+:root,.pe{--noche:#0E0C0A;--carbon:#15120F;--carbon-2:#24201B;--papel:#F1EBE0;--hueso:#FBF7F0;--suave:#CFC5B4;--durazno:#F6D3BE;--durazno-t:#6B3A22;--ambar:#D99A2B;--ladrillo:#8E3B24;--verde:#173A2A;--verde-2:#1F4A35;--tinta:#15120F;--gris:#57524A;
+  --lounge:#872D2C;--foca:#518059;--chiri:#0D3935;--chiri-a:#E8B84B;--rosa:#F0B9C2;--pizza:#B21818;--tiza:#EFEDDE;
+  --ease:cubic-bezier(.23,1,.32,1);
+  font-family:'Archivo',system-ui,sans-serif;font-stretch:100%;background:var(--papel);color:var(--tinta);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+.pe *{box-sizing:border-box}
+.pe h1,.pe h2,.pe h3,.pe h4,.pe p,.pe ul,.pe ol,.pe figure,.pe dl,.pe dd{margin:0;padding:0}
+.pe img{display:block;max-width:100%;height:auto}
+.pe .ancha,.pe h1,.pe h2,.pe h3{font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:.88}
+.pe h2{font-size:72px}
+.pe .wrap{max-width:1376px;margin:0 auto;padding:0 32px}
+.pe .chico{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.pe .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;background:var(--durazno);color:var(--tinta);font-family:inherit;font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;transition:transform 160ms var(--ease)}
+.pe .btn:active{transform:scale(.97)}
+.pe .btn.osc{background:var(--tinta);color:var(--hueso)}
+.pe .lnk{font-weight:700;text-decoration:underline;text-underline-offset:5px}
+.pe .vid{position:relative;overflow:hidden;background:var(--carbon)}
+.pe .vid img,.pe .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ── franja durazno: cruza y queda fija ── */
+.pe .franja{position:sticky;top:0;z-index:40;display:flex;align-items:stretch;height:56px;background:var(--durazno);color:var(--tinta);overflow:hidden}
+.pe .franja .calle{flex:none;display:flex;align-items:center;padding:0 20px;background:var(--verde);color:var(--durazno);font-stretch:125%;font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase;z-index:2}
+.pe .cinta{flex:1;min-width:0;overflow:hidden;display:flex}
+.pe .pista{display:flex;flex:none;align-items:center;animation:corre 45s linear infinite}
+.pe .franja:hover .pista{animation-play-state:paused}
+.pe .pista span.alt{font-stretch:125%;font-weight:800;font-size:16px;padding:0 8px 0 28px;color:var(--ladrillo)}
+.pe .pista a{display:flex;align-items:center;gap:8px;padding:0 14px;white-space:nowrap;text-decoration:none;font-weight:700;font-size:15px}
+.pe .pista a::before{content:"";width:9px;height:9px;border-radius:50%;background:#2E7D4F;flex:none}
+.pe .pista a.off::before{background:#9A8F80}
+.pe .pista a small{font-weight:400;font-size:14px;color:var(--durazno-t)}
+@keyframes corre{to{transform:translateX(-50%)}}
+.pe .franja .wa{flex:none;display:flex;align-items:center;gap:10px;padding:0 18px;background:#25D366;color:var(--tinta);font-weight:700;font-size:15px;text-decoration:none;z-index:2}
+
+/* ── portada: tres videos en columnas, letra ancha encima ── */
+.pe .hero{position:sticky;top:56px;z-index:0;height:940px;background:var(--noche);color:var(--hueso);overflow:hidden;isolation:isolate}
+.pe .tri{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 10px;z-index:-1}
+.pe .col{border-radius:6px;animation:alza 1.4s var(--ease) both;animation-delay:calc(var(--n) * 120ms)}
+.pe .col:nth-child(2){margin:-70px 0 70px}
+.pe .col::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,10,.62) 0,rgba(14,12,10,0) 26%,rgba(14,12,10,0) 48%,rgba(14,12,10,.9) 100%)}
+@keyframes alza{from{opacity:0;transform:translateY(120px) scale(1.04)}}
+.pe .tinte{position:absolute;inset:0;z-index:-1;background:var(--ambar);mix-blend-mode:soft-light;opacity:.55;pointer-events:none}
+.pe .marca{position:absolute;top:22px;left:32px;right:32px;display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:600}
+.pe .marca .logo{font-stretch:125%;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.pe .marca nav{display:flex;gap:28px}
+.pe .marca a{text-decoration:none;color:var(--hueso)}
+.pe .rotulos{position:absolute;top:86px;left:32px;right:32px;display:flex;justify-content:space-between;color:var(--durazno)}
+.pe .sello{position:absolute;right:56px;top:170px;width:156px;height:156px;display:grid;place-items:center;text-decoration:none;color:var(--hueso)}
+.pe .sello svg{position:absolute;inset:0;animation:rueda 22s linear infinite}
+.pe .sello svg text{font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:800;font-size:12.6px;letter-spacing:2.2px;fill:var(--durazno)}
+.pe .sello b{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--durazno);color:var(--tinta);font-size:26px;line-height:1}
+@keyframes rueda{to{transform:rotate(360deg)}}
+.pe h1{position:absolute;left:24px;right:24px;bottom:186px;font-size:158px;line-height:.82;white-space:nowrap;color:var(--hueso);display:flex;flex-direction:column;align-items:flex-start}
+.pe h1 .pal{display:flex;overflow:hidden;padding-top:.05em}
+.pe h1 .l{display:inline-block;animation:letra 1.1s var(--ease) both;animation-delay:calc(300ms + var(--i) * 45ms)}
+@keyframes letra{from{transform:translateY(105%)}}
+.pe .pie-hero{position:absolute;left:32px;right:32px;bottom:88px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:32px;align-items:end}
+.pe .bajada{font-size:24px;line-height:1.25;font-weight:500;max-width:26ch}
+.pe .ahora{display:flex;gap:10px;align-items:center;padding:10px 18px;border-radius:999px;background:rgba(14,12,10,.55);border:1px solid rgba(251,247,240,.18);font-size:15px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.pe .ahora::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:#5CB585;animation:late 2.4s ease-in-out infinite}
+@keyframes late{50%{opacity:.35}}
+.pe .ahora b{color:var(--chiri-a)}
+.pe .ctas{display:flex;gap:22px;align-items:center}
+.pe .ctas .lnk{color:var(--hueso)}
+
+/* ── todo lo que sigue a la portada sube como una ventana ── */
+.pe > *:not(.franja):not(.hero){position:relative;z-index:1}
+.pe .ventana{border-radius:28px 28px 0 0;margin-top:-52px;box-shadow:0 -28px 70px rgba(14,12,10,.45)}
+.pe .ventana::before{content:"";position:absolute;top:14px;left:50%;width:64px;height:6px;margin-left:-32px;border-radius:99px;background:rgba(21,18,15,.18)}
+.pe .hero::after{content:"";position:absolute;inset:0;background:#0E0C0A;opacity:0;pointer-events:none}
+
+/* ── la cuadra: se enciende al bajar ── */
+.pe .frase-wrap{background:var(--hueso);color:var(--tinta);z-index:2 !important;height:1100px;position:relative}
+.pe .frase{position:sticky;top:120px;max-width:1300px;margin:0 auto;padding:110px 32px;font-size:76px;line-height:1.06}
+.pe .frase .chico{display:block;margin-bottom:34px;color:var(--ladrillo);font-stretch:100%;letter-spacing:.08em}
+.pe .frase .w{color:#DDD3C3}
+.pe .frase .n{font-size:.42em;vertical-align:.95em;letter-spacing:0;margin-right:.1em}
+.pe .frase .pill{display:inline-block;padding:.02em .2em 0;border-radius:.18em;text-decoration:none;line-height:.98}
+@supports (animation-timeline: view()){
+  .pe .frase-wrap{view-timeline-name:--cuadra}
+  .pe .frase .w{animation:prende linear both;animation-timeline:--cuadra;animation-range:contain calc(var(--i) * 4%) contain calc(var(--i) * 4% + 8%)}
+  @keyframes prende{to{color:var(--f,#15120F);background-color:var(--c,transparent)}}
+  .pe .tri{animation:achica linear both;animation-timeline:scroll(root);animation-range:0 760px}
+  @keyframes achica{to{transform:scale(.9) translateY(60px);opacity:.6}}
+  .pe .hero::after{animation:oscurece linear both;animation-timeline:scroll(root);animation-range:120px 900px}
+  @keyframes oscurece{to{opacity:.7}}
+  .pe .entra > *{animation:sube linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes sube{from{opacity:0;transform:translateY(36px)}}
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{font-family:var(--f);font-stretch:100%;background:var(--hueso);color:var(--tinta);line-height:1.55;font-size:17px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-h1,h2,h3,h4,h5{font-family:var(--f);font-stretch:125%;font-weight:800;line-height:1;letter-spacing:-.01em}
-:focus-visible{outline:3px solid var(--ambar);outline-offset:3px}
-.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@supports not (animation-timeline: view()){ .pe .frase .w{color:var(--f,#15120F);background-color:var(--c,transparent)} }
 
-/* títulos de sección */
-.s-title{font-size:clamp(34px,4.6vw,56px);color:var(--tinta)}
-.s-lead{font-size:18px;color:var(--gris);max-width:54ch;margin-top:12px}
-.s-head{margin-bottom:36px}
+/* ── la hoja impresa ── */
+.pe .cuadra{position:relative;padding:120px 28px;display:flex;justify-content:flex-end}
+.pe .cuadra > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pe .hoja{position:relative;width:640px;max-width:100%;background:var(--hueso);padding:72px 64px;text-align:center;
+  -webkit-mask:radial-gradient(circle at 50% 0,#0000 11px,#000 11.5px) top/26px 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 11px,#000 11.5px) bottom/26px 51% repeat-x;
+  mask:radial-gradient(circle at 50% 0,#0000 11px,#000 11.5px) top/26px 51% repeat-x,radial-gradient(circle at 50% 100%,#0000 11px,#000 11.5px) bottom/26px 51% repeat-x}
+.pe .hoja h2{font-size:56px}
+.pe .hoja .nota{font-size:15px;color:var(--gris);margin-top:12px}
+.pe .hoja h3{font-size:15px;letter-spacing:.06em;margin:44px 0 18px;color:var(--ladrillo)}
+.pe .hoja .it{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:20px;text-align:left;max-width:440px;margin:0 auto 18px}
+.pe .hoja .it b{font-size:17px}
+.pe .hoja .it span{font-size:15px;font-variant-numeric:tabular-nums;text-align:right}
+.pe .hoja .it small{grid-column:1/-1;font-size:15px;color:var(--gris)}
+.pe .hoja .abiertos{margin-top:40px;font-size:17px;font-weight:600;line-height:1.4}
 
-/* botones: sin mayúsculas forzadas */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;font-family:var(--f);font-weight:700;font-size:16px;border-radius:6px;border:2px solid transparent;transition:background .15s,color .15s,border-color .15s}
-.btn-fill{background:var(--ladrillo);color:var(--papel)}
-.btn-fill:hover{background:var(--ladrillo-2)}
-.btn-line{border-color:currentColor}
-.btn-line:hover{background:var(--carbon);color:var(--hueso);border-color:var(--carbon)}
+/* ── los cinco locales: paneles que se apilan ── */
+.pe .panel{position:sticky;top:var(--top,56px);min-height:840px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding:44px 32px 48px;background:var(--bg);color:var(--fg,var(--tinta));overflow:hidden;border-radius:18px 18px 0 0;box-shadow:0 -24px 60px rgba(14,12,10,.18)}
+.pe .panel .txt{grid-column:1/8;display:flex;flex-direction:column;gap:22px}
+.pe .panel .arriba{display:flex;justify-content:space-between;gap:16px}
+.pe .panel h3{font-size:86px;margin-top:auto}
+.pe .panel .que{font-size:22px;line-height:1.4;max-width:34ch}
+.pe .panel .meta{font-size:15px;opacity:.82}
+.pe .panel .meta b{opacity:1}
+.pe .panel .acc{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.pe .panel .firma{font-size:15px;font-weight:700;padding:8px 14px;border:1.5px solid currentColor;border-radius:999px;align-self:flex-start}
+.pe .panel figure{grid-column:8/13;position:relative}
+.pe .panel figure > .vid:not(.extra),.pe .panel figure > img:not(.extra){width:100%;height:100%;min-height:740px;object-fit:cover;border-radius:10px}
+.pe .panel figcaption{position:absolute;left:14px;bottom:12px;font-size:14px;font-weight:600;color:var(--hueso);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.pe .panel .extra{position:absolute;left:-64px;bottom:70px;width:200px;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;transform:rotate(-5deg);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.pe .p-lounge{--bg:var(--lounge);--fg:var(--hueso)}
+.pe .p-foca{--bg:var(--foca);--fg:var(--hueso)}
+.pe .p-chiri{--bg:var(--chiri);--fg:var(--hueso)}
+.pe .p-chiri h3{color:var(--chiri-a)}
+.pe .p-bakery{--bg:var(--rosa)}
+.pe .badge{position:absolute;z-index:2;left:47%;top:150px;width:150px;height:150px;border-radius:50%;transform:rotate(-8deg);box-shadow:0 14px 36px rgba(21,18,15,.3);border:4px solid var(--hueso)}
+.pe .p-pizza{--bg:var(--pizza);--fg:var(--tiza)}
+.pe .p-lounge .btn.osc,.pe .p-foca .btn.osc,.pe .p-pizza .btn.osc{background:var(--hueso);color:var(--tinta)}
+.pe .p-chiri .btn.osc{background:var(--chiri-a);color:var(--tinta)}
 
-/* ══ NAV ══ */
-nav#nav{position:sticky;top:0;z-index:90;background:rgba(239,232,218,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
-.nav-in{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.logo{font-stretch:125%;font-weight:800;font-size:19px;white-space:nowrap;letter-spacing:-.01em}
-.logo span{color:var(--ladrillo)}
-.nav-links{display:flex;gap:24px;font-size:15px;font-weight:500;color:var(--gris)}
-.nav-links a:hover{color:var(--tinta)}
-.nav-cta{font-weight:700;font-size:15px;color:var(--papel);background:var(--carbon);padding:9px 16px;border-radius:6px;white-space:nowrap}
-.nav-cta:hover{background:var(--ladrillo)}
-@media(max-width:920px){.nav-links{display:none}}
+/* ── un día: cinta + horas ── */
+.pe .marquesina{background:var(--ambar);color:var(--tinta);overflow:hidden;display:flex;padding:18px 0}
+.pe .marquesina .pista{animation-duration:30s}
+.pe .marquesina span{font-stretch:125%;font-weight:800;font-size:96px;line-height:1;text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap;padding:0 22px}
+.pe .marquesina i{flex:none;width:42px;height:42px;border-radius:50%;background:var(--c)}
+.pe .marquesina i.cuadro{border-radius:8px;transform:rotate(45deg)}
+.pe .dia{background:var(--noche);color:var(--papel);padding:110px 0 130px}
+.pe .dia-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:48px}
+.pe .dia-head p{max-width:42ch;color:var(--suave);font-size:17px}
+.pe .horas{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.pe .horas article{display:flex;flex-direction:column;gap:12px}
+.pe .horas .h{font-stretch:125%;font-weight:800;font-size:46px;line-height:1;color:var(--ambar);font-variant-numeric:tabular-nums}
+.pe .horas img,.pe .horas .vid{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px}
+.pe .horas h4{font-size:18px;margin:0;font-weight:700}
+.pe .horas p{font-size:15px;color:#EDE6D8}
+.pe .horas .hoy{font-size:14px;color:var(--suave)}
 
-/* ══ PORTADA: qué hay ahora en la calle ══ */
-.hero{padding:44px 0 0}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(36px,min(5.4vw,9.5svh),76px);line-height:.95;text-wrap:balance}
-.ahora{font-size:clamp(19px,1.9vw,24px);line-height:1.4;margin:22px 0 26px;max-width:34ch;color:var(--tinta)}
-.ahora b{font-weight:700}
-.ahora .cuando{display:block;font-stretch:125%;font-weight:800;color:var(--ladrillo);font-size:.82em;margin-bottom:4px}
-.hero-ctas{display:flex;gap:10px;flex-wrap:wrap}
-.vidriera{position:relative;aspect-ratio:4/5;max-height:62svh;width:100%;justify-self:end;overflow:hidden;border-radius:4px;background:var(--carbon);box-shadow:var(--sombra)}
-.vidriera .show{position:absolute;inset:0;aspect-ratio:auto}
-.vidriera-tag{position:absolute;left:14px;bottom:14px;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:4px;background:var(--carbon);color:var(--papel);font-weight:700;font-size:15px;transition:background .4s}
-.vidriera-tag i{width:9px;height:9px;border-radius:50%;background:var(--ambar)}
+/* ── así se vive ── */
+.pe .vive{padding-block:160px 100px}
+.pe .vive h2{margin-bottom:80px}
+.pe .mosaico{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:120px;align-items:start}
+.pe .mosaico figcaption{font-size:14px;color:var(--gris);margin-top:10px}
+.pe .mosaico img,.pe .mosaico .vid{width:100%;object-fit:cover;border-radius:10px}
+.pe .m1{grid-column:1/5}.pe .m1 img{aspect-ratio:3/4}
+.pe .m2{grid-column:7/12;margin-top:160px}.pe .m2 .vid{aspect-ratio:4/5}
+.pe .m3{grid-column:2/8}.pe .m3 img{aspect-ratio:3/2}
+.pe .m4{grid-column:9/13;margin-top:140px}.pe .m4 img{aspect-ratio:4/5}
 
-/* la calle: los cinco locales en el orden en que los cruzás */
-.calle{margin-top:40px;border-top:3px solid var(--carbon);border-bottom:1px solid var(--linea);background:var(--papel)}
-.calle-in{display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
-.calle-in::-webkit-scrollbar{display:none}
-.calle-nombre{flex:none;display:flex;align-items:center;padding:0 18px 0 20px;font-stretch:125%;font-weight:800;font-size:15px;color:var(--papel);background:var(--carbon)}
-.tramo{display:flex;align-items:stretch;flex:none}
-.tramo-num{display:flex;align-items:center;padding:0 12px;font-stretch:125%;font-weight:800;font-size:22px;color:var(--gris);border-left:1px solid var(--linea)}
-.parada{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:12px 16px;min-width:150px;border-left:1px solid var(--linea);transition:background .15s}
-.parada:hover{background:var(--hueso)}
-.parada b{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;white-space:nowrap}
-.parada b::before{content:"";width:9px;height:9px;border-radius:50%;background:#B3AB9C;flex:none}
-.parada.on b::before{background:var(--ambar);box-shadow:0 0 0 4px rgba(217,154,43,.22)}
-.parada small{font-size:13px;color:var(--gris);white-space:nowrap;padding-left:17px}
-.parada.on small{color:var(--tinta)}
+/* ── cómo llegar ── */
+.pe .llegar{position:relative;min-height:860px;padding:60px}
+.pe .llegar > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pe .visita{position:relative;margin-left:auto;width:440px;background:var(--hueso);padding:32px;border-radius:14px;display:flex;flex-direction:column;gap:18px}
+.pe .visita h2{font-size:46px}
+.pe .visita .dir b{display:block;font-stretch:125%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase}
+.pe .visita .dir span{font-size:15px;color:var(--gris)}
+.pe .visita dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;font-size:15px}
+.pe .visita dt{font-weight:600}
+.pe .visita dd{text-align:right;font-variant-numeric:tabular-nums}
+.pe .visita .btn{width:100%}
 
-/* fotos que van pasando */
-.show{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--carbon)}
-.show img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
-.show img.on{opacity:1;animation:acerca 8s ease-out forwards}
-@keyframes acerca{from{transform:scale(1)}to{transform:scale(1.07)}}
+/* ── viandas: ventana que sube, como el "agendemos una call" ── */
+.pe .viandas{background:var(--durazno);color:var(--tinta);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding:110px 32px 120px}
+.pe .viandas .cab{grid-column:1/7;display:flex;flex-direction:column;gap:26px}
+.pe .viandas .cab .chico{color:var(--ladrillo)}
+.pe .viandas h2{font-size:92px;line-height:.84}
+.pe .viandas .sub{font-size:22px;line-height:1.4;max-width:30ch}
+.pe .viandas .tel{font-stretch:125%;font-weight:800;font-size:34px;text-decoration:none;margin-top:auto}
+.pe .pedido{grid-column:8/13;display:flex;flex-direction:column;gap:30px;padding-top:10px}
+.pe .pedido fieldset{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:14px}
+.pe .pedido legend{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;padding:0}
+.pe .chips{display:flex;flex-wrap:wrap;gap:10px}
+.pe .chips label{position:relative;display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border:1.5px solid var(--tinta);border-radius:999px;font-size:16px;font-weight:600;cursor:pointer;transition:background-color 160ms var(--ease),color 160ms var(--ease),transform 140ms var(--ease)}
+.pe .chips label:active{transform:scale(.97)}
+.pe .chips input{position:absolute;opacity:0;pointer-events:none}
+.pe .chips label:has(input:checked){background:var(--tinta);color:var(--durazno)}
+.pe .chips label:has(input:focus-visible){outline:2px solid var(--ladrillo);outline-offset:3px}
+.pe .pedido .fila{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px}
+.pe .pedido .fila label{display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:700}
+.pe .pedido input[type=text],.pe .pedido input[type=number]{width:100%;min-height:54px;border:0;border-bottom:2px solid var(--tinta);border-radius:0;background:transparent;color:var(--tinta);font-family:inherit;font-size:20px;padding:0 2px}
+.pe .enviar{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:0 28px;border:0;border-radius:999px;background:var(--tinta);color:var(--hueso);font-family:inherit;font-stretch:125%;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.02em;cursor:pointer;transition:transform 160ms var(--ease)}
+.pe .enviar:active{transform:scale(.98)}
+.pe .enviar span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--durazno);color:var(--tinta);font-size:22px}
 
-/* ══ LA CUADRA ══ */
-.cuadra{padding:80px 0 60px}
-.recorrido{position:relative;margin-left:8px}
-.recorrido::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;background:var(--carbon)}
-.altura{position:relative;display:flex;align-items:baseline;gap:14px;padding:0 0 26px 30px}
-.altura::before{content:"";position:absolute;left:-7px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--hueso);border:3px solid var(--carbon)}
-.altura b{font-stretch:125%;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:.9}
-.altura span{font-size:16px;color:var(--gris)}
-.local{--c:var(--carbon);position:relative;display:grid;grid-template-columns:minmax(240px,380px) 1fr;gap:34px;align-items:center;margin:0 0 54px 30px;scroll-margin-top:90px}
-.local::before{content:"";position:absolute;left:-36px;top:50%;width:15px;height:15px;margin-top:-7px;border-radius:50%;background:var(--c)}
-.local .show{border-radius:4px;box-shadow:var(--sombra)}
-.local-tag{position:absolute;top:12px;left:12px;z-index:3}
-.local h3{font-size:clamp(30px,3.4vw,46px);color:var(--c)}
-.local .rating{font-size:15px;color:var(--gris);margin:8px 0 12px}
-.local .rating b{color:var(--tinta);font-weight:700}
-.local p.que{font-size:18px;max-width:46ch}
-.local .horario{font-size:16px;color:var(--gris);margin-top:10px}
-.local .extra{display:inline-block;margin-top:12px;font-size:16px;font-weight:600;color:var(--c);border-left:3px solid var(--c);padding-left:10px}
-.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.acts .main{background:var(--c);color:var(--papel)}
-.acts .main:hover{filter:brightness(.88)}
-.acts .sec{border-color:var(--linea);color:var(--tinta)}
-.acts .sec:hover{border-color:var(--c);color:var(--c)}
-.l-lounge{--c:var(--c-lounge)} .l-focacceria{--c:var(--c-focacceria)} .l-chiringuito{--c:var(--c-chiringuito)} .l-bakery{--c:var(--c-bakery)} .l-unapizza{--c:var(--c-unapizza)}
-@media(max-width:760px){
-  .hero{padding-top:26px}
-  .calle-nombre{padding:0 12px;font-size:13px}
-  .tramo-num{font-size:17px;padding:0 9px}
-  .parada{min-width:128px;padding:10px 12px}
-  .hero-grid{grid-template-columns:1fr;gap:24px}
-  .vidriera{aspect-ratio:5/4;max-height:none}
-  .ahora{margin:16px 0 20px}
-  .cuadra{padding:56px 0 30px}
-  .local{grid-template-columns:1fr;gap:16px;margin-bottom:44px}
-  .local::before{top:22px;margin-top:0}
-  .local .show{aspect-ratio:5/4}
+/* ── pie ── */
+.pe .pie{background:var(--carbon);color:var(--hueso);min-height:720px;padding:48px 32px 32px;display:flex;flex-direction:column;justify-content:space-between;gap:56px}
+.pe .pie a{color:var(--hueso)}
+.pe .pie-top{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:24px;font-size:15px}
+.pe .grande{font-stretch:125%;font-weight:800;font-size:110px;line-height:.9;letter-spacing:-.03em;text-decoration:none;display:block;white-space:nowrap;color:var(--durazno) !important}
+.pe .frase-pie{font-size:26px;font-weight:500;line-height:1.3;max-width:34ch;margin-bottom:24px}
+.pe .pie-fin{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--suave)}
+.pe .pie-fin nav{display:flex;gap:20px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){
+  .pe .pista{animation:none}
+  .pe .cinta{overflow-x:auto}
+  .pe .marquesina{overflow-x:auto}
+  .pe .vid video{display:none}
+  .pe .col,.pe h1 .l,.pe .sello svg,.pe .ahora::before{animation:none}
+  .pe .frase .w{animation:none !important;color:var(--f,#15120F);background-color:var(--c,transparent)}
+  .pe .tri,.pe .entra > *{animation:none !important}
 }
 
-/* chip abierto/cerrado (sobre foto) */
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:4px;background:rgba(30,27,24,.82);color:rgba(247,242,232,.85);font-size:14px;line-height:1.2}
-.chip::before{content:"";width:8px;height:8px;border-radius:50%;background:#8a8780;flex:none}
-.chip b{font-weight:700;color:var(--papel)}
-.chip.is-open::before{background:var(--ambar);box-shadow:0 0 0 4px rgba(217,154,43,.25)}
-.chip.is-open b{color:var(--ambar)}
-.chip.is-soon::before{background:#e07f3e}
+@media (max-width:900px){
+  .pe h2{font-size:46px}
+  .pe .wrap{padding:0 20px}
+  .pe .franja{height:52px}
+  .pe .franja .calle{font-size:12px;padding:0 12px}
+  .pe .franja .wa{padding:0 14px}
+  .pe .franja .wa span{display:none}
+  .pe .hero{height:780px}
+  .pe .tri{grid-template-columns:minmax(0,1fr);padding:0;gap:0}
+  .pe .col{grid-area:1/1;border-radius:0;margin:0 !important;animation:cruce 18s linear infinite;animation-delay:calc(var(--n) * -6s - 6s)}
+  @keyframes cruce{0%{opacity:0}4%{opacity:1}33%{opacity:1}37%{opacity:0}100%{opacity:0}}
+  .pe .marca{left:20px;right:20px;top:18px;font-size:14px}
+  .pe .marca nav a:not(:last-child){display:none}
+  .pe .rotulos{top:64px;left:20px;right:20px;font-size:11px}
+  .pe .rotulos span:nth-child(2){display:none}
+  .pe .sello{right:16px;top:auto;bottom:400px;width:108px;height:108px}
+  .pe .sello svg text{font-size:12.6px}
+  .pe .sello b{width:44px;height:44px;font-size:20px}
+  .pe h1{left:16px;right:16px;bottom:272px;font-size:58px;font-stretch:84%;line-height:.86}
+  .pe .pie-hero{left:20px;right:20px;bottom:60px;grid-template-columns:minmax(0,1fr);gap:16px}
+  .pe .bajada{font-size:19px}
+  .pe .ahora{font-size:14px;align-self:start;justify-self:start}
+  .pe .frase-wrap{height:900px}
+  .pe .frase{top:90px;padding:70px 20px;font-size:34px;font-stretch:100%;line-height:1.12}
+  .pe .cuadra{padding:56px 10px}
+  .pe .hoja{padding:48px 24px}
+  .pe .hoja h2{font-size:44px}
+  .pe .panel{min-height:0;grid-template-columns:minmax(0,1fr);row-gap:24px;padding:28px 20px 36px;border-radius:16px 16px 0 0}
+  .pe .panel .txt{grid-column:1/-1;gap:16px}
+  .pe .panel h3{font-size:46px;font-stretch:100%;margin-top:8px}
+  .pe .panel .arriba{font-size:11px}
+  .pe .badge{left:auto;right:20px;top:64px;width:92px;height:92px;border-width:3px}
+  .pe .panel .que{font-size:18px}
+  .pe .panel figure{grid-column:1/-1;grid-row:2}
+  .pe .panel figure > .vid:not(.extra),.pe .panel figure > img:not(.extra){min-height:0;height:auto;aspect-ratio:4/5}
+  .pe .panel .extra{left:auto;right:-10px;bottom:-24px;width:120px}
+  .pe .marquesina{padding:12px 0}
+  .pe .marquesina span{font-size:52px;padding:0 14px}
+  .pe .marquesina i{width:26px;height:26px}
+  .pe .dia{padding:72px 0 96px}
+  .pe .dia-head{flex-direction:column;align-items:start;margin-bottom:28px}
+  .pe .horas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;margin:0 -20px;padding:0 20px;gap:14px;scrollbar-width:none}
+  .pe .horas article{flex:0 0 64%;scroll-snap-align:start}
+  .pe .horas .h{font-size:40px}
+  .pe .vive{padding-block:96px 40px}
+  .pe .vive h2{margin-bottom:44px}
+  .pe .mosaico{grid-template-columns:minmax(0,1fr);row-gap:56px}
+  .pe .mosaico figure{grid-column:1/-1 !important;margin-top:0 !important}
+  .pe .m1{width:72%}
+  .pe .m2{width:86%;margin-left:auto !important}
+  .pe .m4{width:60%}
+  .pe .llegar{min-height:0;padding:0 0 32px}
+  .pe .llegar > img{position:relative;height:auto;aspect-ratio:4/5}
+  .pe .visita{width:auto;margin:-80px 16px 0}
+  .pe .visita h2{font-size:38px}
+  .pe .ventana{border-radius:22px 22px 0 0;margin-top:-36px}
+  .pe .viandas{grid-template-columns:minmax(0,1fr);padding:72px 20px 64px;row-gap:44px}
+  .pe .viandas .cab,.pe .pedido{grid-column:1/-1}
+  .pe .viandas h2{font-size:40px}
+  .pe .viandas .sub{font-size:18px}
+  .pe .viandas .tel{font-size:26px}
+  .pe .chips label{min-height:44px;padding:0 16px;font-size:15px}
+  .pe .pedido .fila{grid-template-columns:minmax(0,1fr)}
+  .pe .enviar{font-size:16px;min-height:62px;padding:0 10px 0 24px}
+  .pe .pie{min-height:0;padding:80px 20px 32px}
+  .pe .pie-top{grid-template-columns:minmax(0,1fr)}
+  .pe .grande{font-size:44px;white-space:normal}
+  .pe .frase-pie{font-size:21px}
+  .pe .pie-fin{flex-direction:column}
+}
 
-/* estado en texto (ventanas de cada local) */
-.status{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--gris);margin-bottom:16px}
-.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#B3AB9C}
-.status b{font-weight:700;color:var(--tinta)}
-.status.is-open::before{background:#2E7D4F;box-shadow:0 0 0 4px rgba(46,125,79,.15)}
-.status.is-open b{color:#2E7D4F}
-.status.is-soon::before{background:#D69E2E}
+/* ══ Ajustes para el sitio real (sobre el diseño E) ══ */
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:root{--linea:#E2D9C8;--hueso-2:#E4DAC7;--sombra:0 24px 60px rgba(14,12,10,.28)}
+.pe .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pe button.lnk{background:none;border:0;padding:0;font:inherit;font-weight:700;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:5px}
+.pe .franja button.wa{border:0;font-family:inherit;cursor:pointer}
+.pe .marca .logo{text-decoration:none}
 
-/* ══ UN DÍA EN LA CALLE MENDOZA ══ */
-.dia{background:var(--carbon);color:var(--papel);padding:80px 0 70px;overflow:hidden}
-.dia .s-title{color:var(--papel)}
-.dia .s-lead{color:rgba(247,242,232,.7)}
-.dia-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
-.dia-nav{display:flex;gap:8px}
-.dia-nav button{width:48px;height:48px;border-radius:6px;border:2px solid rgba(247,242,232,.3);color:var(--papel);font-size:20px;transition:.15s}
-.dia-nav button:hover{background:var(--papel);color:var(--carbon)}
-.rail{--pad:max(20px,calc((100vw - 1200px)/2 + 20px));display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--pad) 14px;scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.rail::-webkit-scrollbar{display:none}
-.mom{flex:0 0 clamp(260px,25vw,320px);scroll-snap-align:start;background:var(--carbon-2);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-align:left}
-.mom-img{position:relative;aspect-ratio:4/5;overflow:hidden}
-.mom-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.mom:hover .mom-img img{transform:scale(1.04)}
-.mom-hora{position:absolute;left:12px;top:12px;z-index:2;font-stretch:125%;font-weight:900;font-size:30px;line-height:1;color:var(--carbon);background:var(--ambar);padding:6px 10px;border-radius:4px}
-.mom-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
-.mom-body h4{font-size:24px;color:var(--papel)}
-.mom-body p{font-size:15px;color:rgba(247,242,232,.72)}
-.mom-hoy{margin-top:auto;padding-top:10px;border-top:1px solid rgba(247,242,232,.14);font-size:14px;color:rgba(247,242,232,.6)}
-.mom-hoy strong{display:block;font-weight:600;color:var(--papel);font-size:15px;margin-top:2px}
-.mom-hoy.vacio strong{color:rgba(247,242,232,.55);font-weight:400}
+/* portada: alto según la pantalla */
+.pe .hero{height:940px;height:calc(100svh - 56px);min-height:640px;max-height:1000px}
 
-/* ══ GALERÍA ══ */
-.galeria{padding:80px 0 40px}
-.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(150px,18vw,230px);gap:8px}
-.gal figure{overflow:hidden;background:var(--hueso-2);border-radius:3px}
-.gal figure:first-child{grid-column:span 2;grid-row:span 2}
-.gal figure:nth-child(6){grid-column:span 2}
-.gal img{width:100%;height:100%;object-fit:cover}
-@media(max-width:720px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:38vw}.gal figure:nth-child(6){grid-column:span 1}}
+/* franja: punto verde si está abierto, gris si no */
+.pe .pista a.parada::before{background:#9A8F80}
+.pe .pista a.parada.on::before{background:#2E7D4F}
 
-/* ══ CÓMO LLEGAR ══ */
-.llegar{padding:70px 0 80px}
-.ll-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:30px;align-items:start}
-.dir{border-top:3px solid var(--carbon);margin-top:26px}
-.dir a{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--linea)}
-.dir b{display:block;font-stretch:125%;font-weight:800;font-size:26px}
-.dir span{font-size:15px;color:var(--gris)}
-.dir em{font-style:normal;font-weight:700;font-size:15px;color:var(--ladrillo);white-space:nowrap}
-.dir a:hover b{color:var(--ladrillo)}
-.map-frame{overflow:hidden;background:var(--hueso-2);border-radius:4px;border:2px solid var(--carbon)}
-.map-frame iframe{width:100%;height:420px;border:0;display:block}
-@media(max-width:860px){.ll-grid{grid-template-columns:1fr}.map-frame iframe{height:320px}}
+/* toda sección que pasa por encima de la portada necesita fondo propio */
+.pe .vive-fondo{background:var(--papel)}
 
-/* ══ VIANDAS ══ */
-.viandas{background:var(--verde);color:var(--papel);padding:80px 0}
-.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.viandas .s-title{color:var(--papel)}
-.viandas .s-lead{color:rgba(247,242,232,.8)}
-.pasos{list-style:none;counter-reset:p;margin:30px 0 28px;border-top:1px solid rgba(247,242,232,.2)}
-.pasos li{counter-increment:p;display:grid;grid-template-columns:46px 1fr;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(247,242,232,.2);font-size:17px}
-.pasos li::before{content:counter(p);font-stretch:125%;font-weight:900;font-size:24px;color:var(--ambar);line-height:1}
-.v-wa{display:inline-flex;flex-direction:column;gap:2px;margin-bottom:26px}
-.v-wa small{font-size:14px;color:rgba(247,242,232,.7)}
-.v-wa b{font-stretch:125%;font-weight:800;font-size:34px}
-.v-wa:hover b{color:var(--ambar)}
-.v-empresas{border-left:3px solid var(--ambar);padding:4px 0 4px 16px;margin-bottom:20px}
-.v-empresas b{display:block;font-stretch:125%;font-weight:800;font-size:21px;margin-bottom:4px}
-.v-empresas span{font-size:16px;color:rgba(247,242,232,.8)}
-.v-zona{font-size:15px;color:rgba(247,242,232,.75)}
-.v-zona b{color:var(--papel)}
-.form-card{background:var(--papel);color:var(--tinta);border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
-.tabs{display:grid;grid-template-columns:1fr 1fr}
-.tab{min-height:56px;font-weight:700;font-size:16px;color:var(--gris);background:var(--hueso-2);border-bottom:3px solid transparent}
-.tab[aria-selected="true"]{background:var(--papel);color:var(--verde);border-bottom-color:var(--ambar)}
-.panel{padding:28px 30px 30px}
-.panel[hidden]{display:none}
-.panel h3{font-size:28px;color:var(--verde);margin-bottom:8px}
-.panel>p{font-size:16px;color:var(--gris);margin-bottom:20px}
-.f-field{margin-bottom:14px}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.f-field label{display:block;font-size:15px;font-weight:600;margin-bottom:6px}
-.f-field input,.f-field select,.f-field textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid rgba(30,27,24,.25);border-radius:6px;background:#fff;color:var(--tinta);font-size:16px;font-family:var(--f);outline:none}
-.f-field textarea{min-height:84px;resize:vertical}
-.f-field input:focus,.f-field select:focus,.f-field textarea:focus{border-color:var(--verde)}
-.panel .btn{width:100%;margin-top:6px}
-.f-note{font-size:14px;color:var(--gris);margin-top:12px}
-.f-note a{color:var(--ladrillo);text-decoration:underline}
-@media(max-width:900px){.v-grid{grid-template-columns:1fr;gap:40px}}
-@media(max-width:520px){.panel{padding:22px 18px 24px}.f-row{grid-template-columns:1fr}}
+/* estado en cada panel */
+.pe .estado{display:inline-flex;align-items:center;gap:7px;font-weight:600}
+.pe .estado::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.45}
+.pe .estado.is-open::before{background:#5CB585;opacity:1}
+.pe .estado.is-soon::before{background:#E0A33E;opacity:1}
+.pe .estado:empty{display:none}
 
-/* ══ VENTANA DE CADA LOCAL ══ */
-.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(30,27,24,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
+/* logos de cada local */
+.pe .panel .logo-l{height:84px;width:auto;max-width:300px;object-fit:contain;object-position:left center;margin-top:auto;align-self:flex-start}
+.pe .panel .logo-l.cuadro{height:96px;border-radius:8px;box-shadow:0 10px 26px rgba(14,12,10,.3)}
+.pe .panel .logo-l + h3{margin-top:0}
+
+/* un día: tarjetas que abren el local */
+.pe .horas .mom{display:flex;flex-direction:column;gap:12px;background:none;border:0;padding:0;margin:0;text-align:left;color:inherit;font:inherit;cursor:pointer}
+.pe .horas .mom img,.pe .horas .mom .vid{display:block;transition:transform .5s var(--ease)}
+.pe .horas .mom:hover img,.pe .horas .mom:hover .vid{transform:scale(1.02)}
+.pe .horas .mom h4{font-size:18px;font-weight:700}
+.pe .horas .mom-hoy{margin-top:auto;padding-top:10px;border-top:1px solid rgba(241,235,224,.16);font-size:14px;color:var(--suave)}
+.pe .horas .mom-hoy strong{display:block;font-weight:600;color:var(--papel);font-size:15px;margin-top:2px}
+.pe .horas .mom-hoy.vacio strong{color:var(--suave);font-weight:400}
+
+/* cómo llegar */
+.pe .visita a.dir{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;text-decoration:none;padding:12px 0;border-bottom:1px solid var(--linea)}
+.pe .visita a.dir b{grid-column:1}
+.pe .visita a.dir span{grid-column:1}
+.pe .visita a.dir em{grid-column:2;grid-row:1/3;font-style:normal;font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px;background:var(--tinta);color:var(--hueso)}
+.pe .visita .nota-l{font-size:15px;color:var(--gris)}
+
+/* viandas: datos extra */
+.pe .viandas .zona{font-size:16px;line-height:1.5;max-width:40ch;color:#4A3427}
+.pe .pedido .ancho{display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:700}
+.pe .pedido .ancho input{width:100%;min-height:54px;border:0;border-bottom:2px solid var(--tinta);border-radius:0;background:transparent;color:var(--tinta);font-family:inherit;font-size:20px;padding:0 2px}
+.pe .pedido input:focus-visible{outline:2px solid var(--ladrillo);outline-offset:2px}
+.pe .pedido input::placeholder{color:#8A6E5E}
+.pe .f-note{font-size:14px;color:#4A3427}
+.pe .f-note a{font-weight:700}
+
+/* modales de cada local (los de siempre, con el estilo nuevo) */
+.modal-bg{position:fixed;inset:0;z-index:100;background:rgba(14,12,10,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;font-family:'Archivo',system-ui,sans-serif;color:#15120F;line-height:1.5}
 .modal-bg.open{display:flex;animation:aparece .2s}
-@keyframes aparece{from{opacity:0}to{opacity:1}}
-.modal{background:var(--papel);width:100%;max-width:880px;max-height:92svh;overflow-y:auto;border-radius:8px 8px 0 0;animation:sube .3s cubic-bezier(.2,.8,.2,1)}
-@keyframes sube{from{transform:translateY(50px);opacity:0}to{transform:none;opacity:1}}
-@media(min-width:900px){.modal-bg{align-items:center;padding:30px}.modal{border-radius:8px}}
-.modal-close{position:sticky;top:14px;margin:14px 18px 0 auto;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--linea);font-size:18px;z-index:5}
-.modal-close:hover{background:var(--carbon);color:#fff}
+@keyframes aparece{from{opacity:0}}
+.modal{background:#FBF7F0;width:100%;max-width:880px;max-height:92svh;overflow-y:auto;border-radius:22px 22px 0 0;animation:subeModal .32s cubic-bezier(.23,1,.32,1)}
+@keyframes subeModal{from{transform:translateY(40px);opacity:0}}
+@media(min-width:900px){.modal-bg{align-items:center;padding:30px}.modal{border-radius:22px}}
+.modal *{box-sizing:border-box}
+.modal-close{position:sticky;top:14px;margin:14px 18px 0 auto;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid var(--linea);font-size:18px;cursor:pointer;z-index:5;color:#15120F}
+.modal-close:hover{background:#15120F;color:#fff}
 .modal-in{padding:0 34px 44px}
 @media(max-width:560px){.modal-in{padding:0 20px 36px}}
-.modal-in .eyebrow{display:block;margin-top:4px;font-size:15px;color:var(--gris)}
-.modal-in h3{font-size:clamp(32px,4.4vw,46px);margin:6px 0 4px}
-.m-logo{height:60px;width:auto;margin:12px 0 4px;background:#fff;padding:7px;border-radius:4px}
-.m-rating{color:var(--gris);font-size:15px;margin-bottom:8px}
+.modal-in .eyebrow{display:block;margin-top:4px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8E3B24}
+.modal-in h3{font-size:clamp(32px,4.4vw,46px);font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:.9;margin:8px 0 6px}
+.m-logo{height:60px;width:auto;margin:12px 0 4px;background:#fff;padding:7px;border-radius:6px}
+.m-rating{color:#57524A;font-size:15px;margin-bottom:8px}
 .m-gal{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 30px}
-.m-gal img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--hueso-2);border-radius:3px}
+.m-gal img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;background:var(--hueso-2);border-radius:6px}
 @media(max-width:640px){.m-gal{grid-template-columns:repeat(2,1fr)}}
 .m-reel{width:100%;max-width:420px;height:520px;border:0;display:block;margin:0 auto 30px}
-.m-sub{font-stretch:125%;font-size:24px;font-weight:800;margin:0 0 10px}
-.m-sub small{display:block;font-stretch:100%;font-size:14px;color:var(--gris);font-weight:500;margin-bottom:2px}
+.m-sub{font-stretch:125%;font-size:24px;font-weight:800;text-transform:uppercase;margin:0 0 10px}
+.m-sub small{display:block;font-stretch:100%;font-size:14px;color:#57524A;font-weight:500;text-transform:none;margin-bottom:2px}
 .dish{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--linea)}
 .dish b{font-size:17px;font-weight:600}
-.dish small{display:block;font-size:14.5px;color:var(--gris);margin-top:2px}
-.dish .price{font-weight:700;font-size:17px;white-space:nowrap}
+.dish small{display:block;font-size:14.5px;color:#57524A;margin-top:2px}
+.dish .price{font-weight:700;font-size:17px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .dishes{margin-bottom:28px}
-.m-promo{background:rgba(217,154,43,.14);border-left:3px solid var(--ambar);padding:14px 16px;margin-bottom:28px;font-size:16px}
+.m-promo{background:rgba(217,154,43,.14);border-left:3px solid #D99A2B;padding:14px 16px;margin:0 0 28px;font-size:16px;border-radius:0 8px 8px 0}
 .m-info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;font-size:15.5px}
-.m-info>div{background:#fff;border:1px solid var(--linea);border-radius:4px;padding:14px 16px}
+.m-info>div{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:14px 16px}
 .m-info .lbl{font-weight:700;margin-bottom:4px}
 @media(max-width:560px){.m-info{grid-template-columns:1fr}}
 .m-ctas{display:flex;gap:8px;flex-wrap:wrap}
-.m-ctas .btn{padding:0 18px}
-.m-ctas .btn-ghost{border-color:var(--carbon);color:var(--carbon)}
-.m-ctas .btn-ghost:hover{background:var(--carbon);color:#fff}
+.m-ctas .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 20px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:1.5px solid #15120F;color:#15120F}
+.m-ctas .btn-fill{background:#15120F;color:#FBF7F0}
+.m-ctas .btn-ghost:hover{background:#15120F;color:#fff}
 @media(max-width:560px){.m-ctas .btn{flex:1 1 100%}}
-
-/* ══ PIE ══ */
-footer{background:var(--carbon);color:var(--papel);padding:64px 0 30px}
-.logo-strip{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:50px}
-.logo-strip a{background:var(--papel);padding:10px 14px;border-radius:4px;cursor:pointer}
-.logo-strip img{height:48px;width:auto}
-.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:34px;margin-bottom:40px}
-.f-grid h5{font-size:19px;margin-bottom:12px}
-.f-grid p,.f-grid a{font-size:15px;color:rgba(247,242,232,.7);display:block;margin-bottom:8px}
-.f-grid a b{font-weight:600;color:var(--papel)}
-.f-grid a:hover,.f-grid a:hover b{color:var(--ambar)}
-.f-bottom{text-align:center;font-size:14px;color:rgba(247,242,232,.45);padding-top:22px;border-top:1px solid rgba(247,242,232,.12)}
-@media(max-width:980px){.f-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.f-grid{grid-template-columns:1fr;gap:26px}.f-bottom{padding-bottom:72px}}
-
-/* ══ BOTÓN FLOTANTE ══ */
-.wa-float{position:fixed;bottom:20px;right:20px;z-index:95;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);font-size:26px;color:#fff}
-.wa-panel{position:fixed;bottom:90px;right:20px;z-index:95;background:#fff;width:min(330px,calc(100vw - 32px));border-radius:8px;overflow:hidden;box-shadow:var(--sombra);border-top:3px solid var(--ladrillo);display:none}
-.wa-panel.open{display:block;animation:sube .2s}
-.wa-panel h4{font-size:21px;padding:18px 20px 4px}
-.wa-panel p{font-size:14.5px;color:var(--gris);padding:0 20px 10px}
-.wa-panel a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 20px;border-top:1px solid var(--linea);font-size:16px;min-height:50px}
-.wa-panel a:hover{background:var(--hueso)}
-.wa-panel a small{font-size:14px;font-weight:700;color:var(--ladrillo)}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:#57524A;margin-bottom:16px}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#B3AB9C}
+.status b{font-weight:700;color:#15120F}
+.status.is-open::before{background:#2E7D4F;box-shadow:0 0 0 4px rgba(46,125,79,.15)}
+.status.is-open b{color:#2E7D4F}
+.status.is-soon::before{background:#D69E2E}
 body.modal-open{overflow:hidden}
 
-@media(max-width:560px){
-  body{font-size:16px}
-  .s-lead{font-size:16px}
-  .local p.que{font-size:16px}
-  .btn{min-height:44px;font-size:15px;padding:0 16px}
+/* panel "¿con quién querés hablar?" (sale de la franja) */
+.wa-panel{position:fixed;top:64px;right:12px;z-index:95;background:#fff;width:min(330px,calc(100vw - 24px));border-radius:16px;overflow:hidden;box-shadow:var(--sombra);border-top:4px solid #25D366;display:none;font-family:'Archivo',system-ui,sans-serif;color:#15120F}
+.wa-panel.open{display:block;animation:aparece .18s}
+.wa-panel h4{margin:0;font-size:20px;font-stretch:125%;font-weight:800;padding:18px 20px 4px}
+.wa-panel p{margin:0;font-size:14.5px;color:#57524A;padding:0 20px 10px}
+.wa-panel a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 20px;border-top:1px solid var(--linea);font-size:16px;min-height:50px;text-decoration:none;color:#15120F}
+.wa-panel a:hover{background:#F1EBE0}
+.wa-panel a small{font-size:14px;font-weight:700;color:#8E3B24}
+
+@media (max-width:900px){
+  .pe .hero{height:calc(100svh - 52px);min-height:600px;max-height:860px}
+  .pe .col:not(.m){display:none}
+  .pe .col.m{grid-area:1/1;border-radius:0;margin:0 !important;animation:none}
+  .pe .panel .logo-l{height:60px;max-width:220px}
+  .pe .panel .logo-l.cuadro{height:72px}
+  .pe .horas .mom{flex:0 0 64%;scroll-snap-align:start}
+  .wa-panel{top:58px;right:8px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){
+  .modal,.modal-bg.open,.wa-panel.open{animation:none}
+}
 </style>
 </head>
-<body>
+<body id="top">
+<div class="pe">
 
-<nav id="nav">
-  <div class="nav-in">
-    <a href="#" class="logo">Grupo <span>El Chiringuito</span></a>
-    <div class="nav-links">
-      <a href="#cuadra">Locales y cartas</a>
-      <a href="#dia">Qué comer</a>
-      <a href="#llegar">Cómo llegar</a>
-      <a href="#viandas">Viandas</a>
-    </div>
-    <a href="#cuadra" class="nav-cta">Ver cartas</a>
+<div class="franja">
+  <span class="calle">Calle Mendoza</span>
+  <div class="cinta">
+    <nav class="pista" aria-label="Los locales sobre la calle Mendoza">
+      <span class="alt">1731</span><a class="parada" href="#l-lounge" data-parada="lounge">Lounge <small></small></a>
+      <span class="alt">1578</span><a class="parada" href="#l-focacceria" data-parada="focacceria">La Focacceria <small></small></a><a class="parada" href="#l-chiringuito" data-parada="chiringuito">El Chiringuito <small></small></a><a class="parada" href="#l-bakery" data-parada="bakery">ChirinBakery <small></small></a><a class="parada" href="#l-unapizza" data-parada="unapizza">Una Pizza <small></small></a>
+      <span class="alt" aria-hidden="true">1731</span><a class="parada" href="#l-lounge" data-parada="lounge" tabindex="-1" aria-hidden="true">Lounge <small></small></a>
+      <span class="alt" aria-hidden="true">1578</span><a class="parada" href="#l-focacceria" data-parada="focacceria" tabindex="-1" aria-hidden="true">La Focacceria <small></small></a><a class="parada" href="#l-chiringuito" data-parada="chiringuito" tabindex="-1" aria-hidden="true">El Chiringuito <small></small></a><a class="parada" href="#l-bakery" data-parada="bakery" tabindex="-1" aria-hidden="true">ChirinBakery <small></small></a><a class="parada" href="#l-unapizza" data-parada="unapizza" tabindex="-1" aria-hidden="true">Una Pizza <small></small></a>
+    </nav>
   </div>
-</nav>
+  <button class="wa" id="wa-float" type="button" onclick="toggleWA()" aria-label="Escribile o llamá a un local" aria-expanded="false" aria-controls="wa-panel"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#15120F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 21l2-5.6A8.4 8.4 0 1 1 21 11.5z"></path></svg><span>WhatsApp</span></button>
+</div>
 
-<!-- ══════════ PORTADA: qué hay ahora en la calle Mendoza ══════════ -->
 <header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <h1>Cinco cocinas sobre la calle Mendoza</h1>
-      <p class="ahora" id="ahora">Cerveza tirada y burgers, bistró de patio, focaccias, pizza a la leña y pastelería, a metros una de otra en Ingeniero Maschwitz.</p>
-      <div class="hero-ctas">
-        <a href="#cuadra" class="btn btn-fill">Ver locales y cartas</a>
-        <a href="#viandas" class="btn btn-line">Viandas</a>
-      </div>
-    </div>
-    <div class="vidriera" aria-hidden="true">
-      <div class="show" id="vidriera-show"><img class="on" src="/fotos/locales/chiringuito-4.jpg" alt=""></div>
-      <span class="vidriera-tag" id="vidriera-tag"><i></i><span>Calle Mendoza</span></span>
-    </div>
+  <div class="tri" aria-hidden="true">
+    <div class="col vid" style="--n: 0"><img src="/videos/tragos.jpg" alt="" width="720" height="1280"><video data-src="/videos/tragos.mp4" poster="/videos/tragos.jpg" autoplay muted loop playsinline preload="none"></video></div>
+    <div class="col vid" style="--n: 1"><img src="/videos/platos.jpg" alt="" width="720" height="1280"><video data-src="/videos/platos.mp4" poster="/videos/platos.jpg" autoplay muted loop playsinline preload="none"></video></div>
+    <div class="col vid m" style="--n: 2"><img src="/videos/tragos3.jpg" alt="" width="720" height="1280" fetchpriority="high"><video data-src="/videos/tragos3.mp4" poster="/videos/tragos3.jpg" autoplay muted loop playsinline preload="none"></video></div>
   </div>
-  <nav class="calle" aria-label="Los locales sobre la calle Mendoza">
-    <div class="calle-in">
-      <span class="calle-nombre">Mendoza</span>
-      <div class="tramo"><span class="tramo-num">1731</span><a class="parada" href="#l-lounge" data-parada="lounge"><b>Lounge</b><small></small></a></div>
-      <div class="tramo"><span class="tramo-num">1578</span><a class="parada" href="#l-focacceria" data-parada="focacceria"><b>Focacceria</b><small></small></a><a class="parada" href="#l-chiringuito" data-parada="chiringuito"><b>El Chiringuito</b><small></small></a><a class="parada" href="#l-bakery" data-parada="bakery"><b>ChirinBakery</b><small></small></a><a class="parada" href="#l-unapizza" data-parada="unapizza"><b>Una Pizza</b><small></small></a></div>
-    </div>
-  </nav>
+  <div class="tinte" aria-hidden="true"></div>
+  <div class="marca"><a class="logo" href="/">Grupo El Chiringuito</a><nav aria-label="Principal"><a href="#cuadra">Locales y cartas</a><a href="#dia">Qué comer</a><a href="#llegar">Cómo llegar</a><a href="#viandas">Viandas</a></nav></div>
+  <div class="rotulos chico"><span>Ingeniero Maschwitz</span><span>Cinco locales, una cuadra</span><span>Mendoza 1578 · 1731</span></div>
+  <a class="sello" href="#cuadra" aria-label="Bajar a la cuadra">
+    <svg viewBox="0 0 156 156" aria-hidden="true"><defs><path id="circ" d="M78,78 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"></path></defs><text><textPath href="#circ">CALLE MENDOZA · INGENIERO MASCHWITZ ·</textPath></text></svg>
+    <b aria-hidden="true">↓</b>
+  </a>
+  <h1 aria-label="El Chiringuito"><span class="pal" aria-hidden="true"><span class="l" style="--i: 0">E</span><span class="l" style="--i: 1">L</span></span><span class="pal" aria-hidden="true"><span class="l" style="--i: 2">C</span><span class="l" style="--i: 3">H</span><span class="l" style="--i: 4">I</span><span class="l" style="--i: 5">R</span><span class="l" style="--i: 6">I</span><span class="l" style="--i: 7">N</span><span class="l" style="--i: 8">G</span><span class="l" style="--i: 9">U</span><span class="l" style="--i: 10">I</span><span class="l" style="--i: 11">T</span><span class="l" style="--i: 12">O</span></span></h1>
+  <div class="pie-hero">
+    <p class="bajada">Un clásico de la calle Mendoza, desde 2013.</p>
+    <p class="ahora" id="ahora"><span>Cinco locales sobre la calle Mendoza, en Ingeniero Maschwitz.</span></p>
+    <div class="ctas"><a class="btn" href="#cuadra">Ver locales y cartas</a><a class="lnk" href="#viandas">Viandas</a></div>
+  </div>
 </header>
 
+<section class="frase-wrap ventana" aria-label="La cuadra">
+  <p class="frase ancha"><span class="chico">La cuadra, caminando por Mendoza</span><span class="w" style="--i: 0">Al</span> <span class="w" style="--i: 1">fondo,</span> <span class="w" style="--i: 2">en</span> <span class="w" style="--i: 3">el</span> <span class="w" style="--i: 4">mercado,</span> <a class="w pill" href="#l-lounge" style="--i: 5; --c: #872D2C; --f: #FBF7F0"><span class="n">1731</span>Lounge.</a> <span class="w" style="--i: 6">Y</span> <span class="w" style="--i: 7">en</span> <span class="w" style="--i: 8">el</span> <span class="w" style="--i: 9; --f: #B8892A">1578,</span> <a class="w pill" href="#l-focacceria" style="--i: 10; --c: #518059; --f: #FBF7F0">La Focacceria,</a> <a class="w pill" href="#l-chiringuito" style="--i: 11; --c: #0D3935; --f: #E8B84B">El Chiringuito,</a> <a class="w pill" href="#l-bakery" style="--i: 12; --c: #F0B9C2; --f: #15120F">ChirinBakery</a> <span class="w" style="--i: 13">y</span> <a class="w pill" href="#l-unapizza" style="--i: 14; --c: #B21818; --f: #EFEDDE">Una Pizza.</a> <span class="w" style="--i: 15">Una</span> <span class="w" style="--i: 16">sola</span> <span class="w" style="--i: 17">cuadra.</span></p>
+</section>
+
 <section class="cuadra" id="cuadra">
+  <img src="/fotos/locales/lounge-2.jpg" srcset="/fotos/locales/lounge-2-520.jpg 520w, /fotos/locales/lounge-2.jpg 960w" sizes="100vw" alt="El salón del Chiringuito Lounge con luz cálida" width="960" height="1200" loading="lazy">
+  <div class="hoja">
+    <h2>La cuadra</h2>
+    <p class="nota">En el orden en que los cruzás caminando por Mendoza</p>
+    <h3>1731 · Mercado de Maschwitz</h3>
+    <div class="it"><b>Chiringuito Lounge</b><span>mié a dom · 9 a 1</span><small>Bistró: desayunos, meriendas, bifes, pastas y picadas</small></div>
+    <h3>1578 · Paseo Mendoza</h3>
+    <div class="it"><b>La Focacceria</b><span>mar a dom · desde las 9</span><small>Focaccias enormes y Menú Ejecutivo, $19.500</small></div>
+    <div class="it"><b>El Chiringuito</b><span>mar a dom · desde las 10</span><small>Cervecería, ribs, burgers y La Terraza</small></div>
+    <div class="it"><b>ChirinBakery</b><span>mar a dom · 10 a 21</span><small>Pastelería artesanal, tortas por encargo</small></div>
+    <div class="it"><b>Una Pizza</b><span>mié a dom · desde las 19</span><small>Pizza del horno a leña de mosaico, delivery propio</small></div>
+    <p class="abiertos" id="abiertos-hoja"></p>
+  </div>
+</section>
+
+<section aria-label="Los cinco locales">
+  <article class="panel p-lounge" id="l-lounge">
+    <div class="txt">
+      <div class="arriba chico"><span>01 / 05</span><span>Mendoza 1731 · Mercado de Maschwitz</span></div>
+      <img class="logo-l" src="/fotos/logos/lounge.png" alt="Chiringuito Lounge" width="420" height="223" loading="lazy">
+      <h3>Chiringuito<br>Lounge</h3>
+      <p class="que">Bistró de día y de noche: desayunos, meriendas, bifes, pastas y picadas en un patio que invita a quedarse.</p>
+      <p class="meta">Miércoles a domingo, de 9 a 1 · <span class="estado" data-chip="lounge"></span></p>
+      <div class="acc"><a class="btn osc" href="/carta/lounge/">Ver carta</a><a class="lnk" href="https://wa.me/5491124635464" target="_blank" rel="noopener">WhatsApp</a><button class="lnk" type="button" onclick="openModal('lounge')">Fotos y platos</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&amp;query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">Cómo llegar</a></div>
+      <p class="firma">Jueves de Chicas: 20% en mesas de mujeres</p>
+    </div>
+    <figure><img src="/carta/lounge/fotos/lounge-mesa-compartida.jpg" alt="Mesa compartida con platos y vino en el Lounge" width="1137" height="1400" loading="lazy"><img class="extra" src="/fotos/locales/lounge-1-520.jpg" alt="La fachada del Lounge en el Mercado de Maschwitz" width="520" height="650" loading="lazy"><figcaption>Una mesa larga en el Lounge</figcaption></figure>
+  </article>
+  <article class="panel p-foca" id="l-focacceria">
+    <div class="txt">
+      <div class="arriba chico"><span>02 / 05</span><span>Mendoza 1578 · Paseo Mendoza</span></div>
+      <img class="logo-l" src="/fotos/logos/focacceria.png" alt="La Focacceria" width="520" height="97" loading="lazy">
+      <h3>La<br>Focacceria</h3>
+      <p class="que">Focaccias enormes de masa propia con fiambres frescos. Menú Ejecutivo de martes a domingo, $19.500.</p>
+      <p class="meta">Martes a jueves de 9 a 20, viernes a domingo de 9 a 1 · <span class="estado" data-chip="focacceria"></span></p>
+      <div class="acc"><a class="btn osc" href="tel:+5491178196138">Llamar</a><button class="lnk" type="button" onclick="openModal('focacceria')">Fotos y platos</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Focacceria+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&amp;query_place_id=ChIJQX_VsSifvJUR7WaILC2fUBY" target="_blank" rel="noopener">Cómo llegar</a></div>
+      <p class="firma">Focaccia Mortadela, $20.500</p>
+    </div>
+    <figure><div class="vid"><img src="/videos/foca.jpg" alt="" width="720" height="1280" loading="lazy"><video data-src="/videos/foca.mp4" autoplay muted loop playsinline preload="none" aria-label="Focaccia de jamón, queso y rúcula en la vitrina de La Focacceria"></video></div><img class="extra" src="/fotos/locales/focacceria-2-520.jpg" alt="Focaccia de jamón tomada con las manos" width="520" height="650" loading="lazy"><figcaption>Una focaccia, tal como sale</figcaption></figure>
+  </article>
+  <article class="panel p-chiri" id="l-chiringuito">
+    <div class="txt">
+      <div class="arriba chico"><span>03 / 05</span><span>Mendoza 1578 · desde 2013</span></div>
+      <img class="logo-l" src="/fotos/logos/chiringuito.png" alt="El Chiringuito" width="520" height="343" loading="lazy">
+      <h3>El<br>Chiringuito</h3>
+      <p class="que">El clásico del paseo: restaurante, cervecería y drinks. Ribs, hamburguesas, pastas y pescados, y La Terraza en el primer piso para las noches largas.</p>
+      <p class="meta">Martes a domingo desde las 10; cierra a la 1, viernes y sábado a las 3 · <span class="estado" data-chip="chiringuito"></span></p>
+      <div class="acc"><a class="btn osc" href="/carta/chiringuito/">Ver carta</a><a class="lnk" href="tel:+541140857072">Llamar</a><button class="lnk" type="button" onclick="openModal('chiringuito')">Fotos y platos</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&amp;query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">Cómo llegar</a></div>
+      <p class="firma">Miércoles: Burga Libre desde las 19</p>
+    </div>
+    <figure><div class="vid"><img src="/videos/platos.jpg" alt="" width="720" height="1280" loading="lazy"><video data-src="/videos/platos.mp4" autoplay muted loop playsinline preload="none" aria-label="Platos y vino en las mesas de El Chiringuito"></video></div><img class="extra" src="/fotos/locales/chiringuito-4-520.jpg" alt="El cartel de neón de El Chiringuito" width="520" height="650" loading="lazy"><figcaption>En las mesas de El Chiringuito</figcaption></figure>
+  </article>
+  <article class="panel p-bakery" id="l-bakery">
+    <div class="badge vid"><img src="/videos/bakery-cartel.jpg" alt="" width="360" height="360" loading="lazy"><video data-src="/videos/bakery-cartel.mp4" autoplay muted loop playsinline preload="none" aria-label="El cartel iluminado de ChirinBakery"></video></div>
+    <div class="txt">
+      <div class="arriba chico"><span>04 / 05</span><span>Mendoza 1578 · local 15</span></div>
+      <h3>Chirin<br>Bakery</h3>
+      <p class="que">Pastelería artesanal de Vanesa Schual (El Gato Dumas): tortas para eventos, mesas dulces, tartas y postres.</p>
+      <p class="meta">Martes a domingo de 10 a 21 · <span class="estado" data-chip="bakery"></span></p>
+      <div class="acc"><a class="btn osc" href="https://wa.me/5491144002737" target="_blank" rel="noopener">Encargar por WhatsApp</a><button class="lnk" type="button" onclick="openModal('bakery')">Fotos</button><a class="lnk" href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+    <figure><div class="vid"><img src="/videos/bakery-roscas.jpg" alt="" width="720" height="1280" loading="lazy"><video data-src="/videos/bakery-roscas.mp4" autoplay muted loop playsinline preload="none" aria-label="Roscas recién hechas en ChirinBakery"></video></div><div class="extra vid"><img src="/videos/bakery-medialunas.jpg" alt="" width="720" height="1280" loading="lazy"><video data-src="/videos/bakery-medialunas.mp4" autoplay muted loop playsinline preload="none" aria-label="Medialunas en bandejas de ChirinBakery"></video></div><figcaption>De la vitrina de ChirinBakery</figcaption></figure>
+  </article>
+  <article class="panel p-pizza" id="l-unapizza">
+    <div class="txt">
+      <div class="arriba chico"><span>05 / 05</span><span>Mendoza 1578 · horno a leña</span></div>
+      <img class="logo-l cuadro" src="/una-pizza/fotos/logo-una-pizza.jpg" alt="Una Pizza" width="720" height="569" loading="lazy">
+      <h3>Una<br>Pizza</h3>
+      <p class="que">Pizza a la piedra que sale del horno a leña de mosaico, empanadas y fainá. Delivery propio.</p>
+      <p class="meta">Miércoles a domingo desde las 19 · <span class="estado" data-chip="unapizza"></span></p>
+      <div class="acc"><a class="btn osc" href="/una-pizza/">Ver carta</a><a class="lnk" href="https://wa.me/5491126091109" target="_blank" rel="noopener">Pedir por WhatsApp</a><button class="lnk" type="button" onclick="openModal('unapizza')">Fotos y platos</button><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&amp;query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">Cómo llegar</a></div>
+    </div>
+    <figure><div class="vid"><img src="/videos/pizza.jpg" alt="" width="592" height="1296" loading="lazy"><video data-src="/videos/pizza.mp4" autoplay muted loop playsinline preload="none" aria-label="Una pizza recién salida en Una Pizza"></video></div><img class="extra" src="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg" alt="Muzzarella frente al horno a leña de mosaico" width="640" height="1137" loading="lazy"><figcaption>Recién salida, en Una Pizza</figcaption></figure>
+  </article>
+</section>
+
+<div class="marquesina" aria-hidden="true">
+  <div class="pista">
+    <span>Un día en la calle Mendoza</span><i style="--c: #872D2C"></i><span>Café</span><i class="cuadro" style="--c: #518059"></i><span>Focaccia</span><i style="--c: #F0B9C2"></i><span>Birra</span><i class="cuadro" style="--c: #B21818"></i><span>Pizza</span><i style="--c: #0D3935"></i><span>Tragos</span><i class="cuadro" style="--c: #FBF7F0"></i>
+    <span>Un día en la calle Mendoza</span><i style="--c: #872D2C"></i><span>Café</span><i class="cuadro" style="--c: #518059"></i><span>Focaccia</span><i style="--c: #F0B9C2"></i><span>Birra</span><i class="cuadro" style="--c: #B21818"></i><span>Pizza</span><i style="--c: #0D3935"></i><span>Tragos</span><i class="cuadro" style="--c: #FBF7F0"></i>
+  </div>
+</div>
+<section class="dia" id="dia" aria-labelledby="dia-t">
   <div class="wrap">
-    <div class="s-head">
-      <h2 class="s-title">La cuadra</h2>
-      <p class="s-lead">En el orden en que los cruzás caminando por Mendoza. Tocá un local para ver su carta, pedir o llegar.</p>
-    </div>
-    <div class="recorrido">
-      <div class="altura"><b>1731</b><span>Mercado de Maschwitz</span></div>
-      <article class="local l-lounge" id="l-lounge">
-        <div class="show" data-show><img class="on" src="/fotos/locales/lounge-1.jpg" alt="Fachada del Chiringuito Lounge en el Mercado de Maschwitz" loading="lazy"><img data-src="/fotos/locales/lounge-2.jpg" alt="Barra y salón del Chiringuito Lounge"><img data-src="/fotos/locales/lounge-3.jpg" alt="Salmón con vegetales y vino blanco en el Lounge"><img data-src="/fotos/locales/lounge-4.jpg" alt="Plato de rabas en el Lounge"><span class="local-tag"><span class="chip" data-chip="lounge"></span></span></div>
-        <div>
-          <h3>Chiringuito Lounge</h3>
-          <div class="rating"><b>★ 4,3</b> · más de 100 reseñas en Google</div>
-          <p class="que">Bistró de día y de noche: desayunos, meriendas, bifes, pastas y picadas en un patio que invita a quedarse.</p>
-          <p class="horario">Miércoles a domingo, de 9 a 1.</p>
-          
-          <div class="acts"><a class="btn main" href="/carta/lounge/">Ver carta</a><a class="btn btn-line sec" href="https://wa.me/5491124635464" target="_blank" rel="noopener">WhatsApp</a><button class="btn btn-line sec" onclick="openModal('lounge')">Fotos y platos</button><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">Cómo llegar</a></div>
-        </div>
-      </article>
-      <div class="altura"><b>1578</b><span>Paseo Mendoza</span></div>
-      <article class="local l-focacceria" id="l-focacceria">
-        <div class="show" data-show><img class="on" src="/fotos/locales/focacceria-1.jpg" alt="Focaccia rellena de La Focacceria" loading="lazy"><img data-src="/fotos/locales/focacceria-2.jpg" alt="Focaccia de jamón tomada con las manos"><img data-src="/fotos/locales/focacceria-3.jpg" alt="Focaccias con bebida en la mesa"><img data-src="/fotos/locales/focacceria-4.jpg" alt="Focaccia de jamón y queso"><span class="local-tag"><span class="chip" data-chip="focacceria"></span></span></div>
-        <div>
-          <h3>La Focacceria</h3>
-          <div class="rating"><b>★ 4,8</b> · 285 reseñas en Google</div>
-          <p class="que">Focaccias enormes de masa propia con fiambres frescos. La mejor puntuada del grupo, y con razón.</p>
-          <p class="horario">Martes a jueves de 9 a 20. Viernes a domingo de 9 a 1.</p>
-          
-          <div class="acts"><a class="btn main" href="tel:+5491178196138">Llamar</a><button class="btn btn-line sec" onclick="openModal('focacceria')">Fotos y platos</button><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=Focacceria+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJQX_VsSifvJUR7WaILC2fUBY" target="_blank" rel="noopener">Cómo llegar</a></div>
-        </div>
-      </article>
-      <article class="local l-chiringuito" id="l-chiringuito">
-        <div class="show" data-show><img class="on" src="/fotos/locales/chiringuito-1.jpg" alt="Picada, papas y cerveza en El Chiringuito" loading="lazy"><img data-src="/fotos/locales/chiringuito-2.jpg" alt="Hamburguesa doble con cheddar y bacon"><img data-src="/fotos/locales/chiringuito-3.jpg" alt="Trago tiki en vaso calavera"><img data-src="/fotos/locales/chiringuito-4.jpg" alt="Cartel de neón de El Chiringuito"><img data-src="/fotos/locales/chiringuito-5.jpg" alt="Mesa con costillas y sándwiches en El Chiringuito"><span class="local-tag"><span class="chip" data-chip="chiringuito"></span></span></div>
-        <div>
-          <h3>El Chiringuito</h3>
-          <div class="rating"><b>★ 4,3</b> · más de 3.600 reseñas en Google</div>
-          <p class="que">El clásico del paseo: restaurante, cervecería y drinks. Cervezas artesanales e importadas, ribs, hamburguesas, pastas y pescados. Con La Terraza en el primer piso para las noches largas.</p>
-          <p class="horario">Martes a domingo desde las 10. Cierra a la 1; viernes y sábado, a las 3.</p>
-          <span class="extra">Miércoles: Burga Libre desde las 19</span>
-          <div class="acts"><a class="btn main" href="/carta/chiringuito/">Ver carta</a><a class="btn btn-line sec" href="tel:+541140857072">Llamar</a><button class="btn btn-line sec" onclick="openModal('chiringuito')">Fotos y platos</button><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">Cómo llegar</a></div>
-        </div>
-      </article>
-      <article class="local l-bakery" id="l-bakery">
-        <div class="show" data-show><img class="on" src="/fotos/locales/bakery-1.jpg" alt="Torta de ChirinBakery con café" loading="lazy"><img data-src="/fotos/locales/bakery-2.jpg" alt="Cheesecake de frutos rojos de ChirinBakery"><img data-src="/fotos/locales/bakery-3.jpg" alt="Torta de chocolate y dulce de leche de ChirinBakery"><img data-src="/fotos/locales/bakery-4.jpg" alt="Lemon pie de ChirinBakery"><span class="local-tag"><span class="chip" data-chip="bakery"></span></span></div>
-        <div>
-          <h3>ChirinBakery</h3>
-          <div class="rating">Nueva en el paseo · local 15</div>
-          <p class="que">Pastelería artesanal de Vanesa Schual (El Gato Dumas): tortas para eventos, mesas dulces, tartas y postres.</p>
-          <p class="horario">Martes a domingo de 10 a 21.</p>
-          
-          <div class="acts"><a class="btn main" href="https://wa.me/5491144002737" target="_blank" rel="noopener">Encargar por WhatsApp</a><button class="btn btn-line sec" onclick="openModal('bakery')">Fotos</button><a class="btn btn-line sec" href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">Instagram</a></div>
-        </div>
-      </article>
-      <article class="local l-unapizza" id="l-unapizza">
-        <div class="show" data-show><img class="on" src="/una-pizza/fotos/muzzarella-frente-al-horno-640.jpg" alt="Muzzarella frente al horno a leña de mosaico de Una Pizza" loading="lazy"><img data-src="/una-pizza/fotos/pizzero-una-pizza-640.jpg" alt="Pizzero de Una Pizza armando una pizza"><img data-src="/una-pizza/fotos/pizza-jamon-y-morrones-640.jpg" alt="Pizza de jamón y morrones de Una Pizza"><img data-src="/una-pizza/fotos/empanada-al-horno-640.jpg" alt="Empanada al horno de Una Pizza"><span class="local-tag"><span class="chip" data-chip="unapizza"></span></span></div>
-        <div>
-          <h3>Una Pizza</h3>
-          <div class="rating"><b>★ 4,5</b> · 29 reseñas en Google</div>
-          <p class="que">Pizza a la piedra que sale del horno a leña de mosaico, empanadas y fainá. Delivery propio.</p>
-          <p class="horario">Miércoles a domingo desde las 19.</p>
-          
-          <div class="acts"><a class="btn main" href="/una-pizza/">Ver carta</a><a class="btn btn-line sec" href="https://wa.me/5491126091109" target="_blank" rel="noopener">Pedir por WhatsApp</a><a class="btn btn-line sec" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Una+Pizza+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJwRbxXQCfvJURKEn1wUjQrXE" target="_blank" rel="noopener">Cómo llegar</a></div>
-        </div>
-      </article>
+    <div class="dia-head"><h2 id="dia-t" class="sr">Un día en la calle Mendoza</h2><p>Del café de la mañana a la última ronda. Abajo de cada momento te mostramos qué está abierto hoy a esa hora.</p></div>
+    <div class="horas entra">
+      <button class="mom" type="button" data-h="540" onclick="openModal('lounge')"><span class="h">09:00</span><img src="/carta/lounge/fotos/cafe_medialunas-f2no.jpg" alt="Café con medialunas" loading="lazy"><h4>Desayuno</h4><p>Café, medialunas y tostados en el patio del bistró.</p><p class="hoy mom-hoy"></p></button>
+      <button class="mom" type="button" data-h="780" onclick="openModal('focacceria')"><span class="h">13:00</span><img src="/carta/chiringuito/fotos/foca3.jpeg" alt="Focaccia rellena" loading="lazy"><h4>Almuerzo</h4><p>Focaccias enormes o el Menú Ejecutivo.</p><p class="hoy mom-hoy"></p></button>
+      <button class="mom" type="button" data-h="1020" onclick="openModal('bakery')"><span class="h">17:00</span><img src="/carta/lounge/fotos/TORRE_BAKERY-m62wnd.jpeg" alt="Torre de merienda dulce y salada" loading="lazy"><h4>Merienda</h4><p>Tortas, tartas y torres de merienda para compartir.</p><p class="hoy mom-hoy"></p></button>
+      <button class="mom" type="button" data-h="1200" onclick="openModal('chiringuito')"><span class="h">20:00</span><span class="vid"><img src="/videos/pinta.jpg" alt="" loading="lazy"><video data-src="/videos/pinta.mp4" autoplay muted loop playsinline preload="none" aria-label="Una pinta de cerveza tirada"></video></span><h4>Birra</h4><p>Cerveza tirada, papas y burgers. Los miércoles, Burga Libre.</p><p class="hoy mom-hoy"></p></button>
+      <button class="mom" type="button" data-h="1260" onclick="openModal('unapizza')"><span class="h">21:00</span><img src="/carta/chiringuito/fotos/pizza-panceta-y-verdeo.jpg" alt="Pizza de panceta y verdeo" loading="lazy"><h4>Pizza</h4><p>Muzza al horno a leña, fugazzeta rellena, empanadas y fainá.</p><p class="hoy mom-hoy"></p></button>
+      <button class="mom" type="button" data-h="1440" onclick="openModal('chiringuito')"><span class="h">00:00</span><span class="vid"><img src="/videos/tragos.jpg" alt="" loading="lazy"><video data-src="/videos/tragos.mp4" autoplay muted loop playsinline preload="none" aria-label="Tragos tiki y un espresso martini en la barra"></video></span><h4>Noche larga</h4><p>Tragos y La Terraza en el primer piso. Viernes y sábado, hasta las 3.</p><p class="hoy mom-hoy"></p></button>
     </div>
   </div>
 </section>
 
-
-<!-- ══════════ UN DÍA EN LA CALLE MENDOZA ══════════ -->
-<section class="dia" id="dia">
-  <div class="wrap dia-top">
-    <div>
-      <h2 class="s-title">Un día en la calle Mendoza</h2>
-      <p class="s-lead">Del café de la mañana a la última ronda. Abajo de cada momento te mostramos qué está abierto hoy a esa hora.</p>
-    </div>
-    <div class="dia-nav">
-      <button onclick="railMove(-1)" aria-label="Momento anterior">←</button>
-      <button onclick="railMove(1)" aria-label="Momento siguiente">→</button>
-    </div>
+<section class="vive-fondo" id="galeria" aria-labelledby="vive-t">
+<div class="vive wrap">
+  <h2 id="vive-t">Así se vive<br>el paseo</h2>
+  <div class="mosaico entra">
+    <figure class="m1"><img src="/fotos/locales/lounge-2.jpg" srcset="/fotos/locales/lounge-2-520.jpg 520w, /fotos/locales/lounge-2.jpg 960w" sizes="(max-width: 900px) 72vw, 30vw" alt="La barra del Lounge" width="960" height="1200" loading="lazy"><figcaption>La barra del Lounge, en el Mercado</figcaption></figure>
+    <figure class="m2"><div class="vid"><img src="/videos/barra.jpg" alt="" loading="lazy"><video data-src="/videos/barra.mp4" autoplay muted loop playsinline preload="none" aria-label="Un Ramazzotti Rosato armado en la barra"></video></div><figcaption>Un Ramazzotti Rosato, armado en la barra</figcaption></figure>
+    <figure class="m3"><img src="/fotos/locales/chiringuito-1.jpg" srcset="/fotos/locales/chiringuito-1-520.jpg 520w, /fotos/locales/chiringuito-1.jpg 960w" sizes="(max-width: 900px) 100vw, 45vw" alt="Picada, papas y cerveza en El Chiringuito" width="960" height="1200" loading="lazy"><figcaption>Picada, papas y cerveza</figcaption></figure>
+    <figure class="m4"><img src="/una-pizza/fotos/local-una-pizza-640.jpg" alt="Los azulejos de Una Pizza con su logo" width="640" height="960" loading="lazy"><figcaption>Los azulejos de Una Pizza</figcaption></figure>
   </div>
-  <div class="rail" id="rail">
-    <button class="mom" data-h="540" onclick="openModal('lounge')">
-      <div class="mom-img"><img src="/carta/lounge/fotos/cafe_medialunas-f2no.jpg" alt="Café con medialunas" loading="lazy"><span class="mom-hora">09:00</span></div>
-      <div class="mom-body"><h4>Desayuno</h4><p>Café, medialunas y tostados en el patio del bistró.</p><div class="mom-hoy"></div></div>
-    </button>
-    <button class="mom" data-h="780" onclick="openModal('focacceria')">
-      <div class="mom-img"><img src="/carta/chiringuito/fotos/foca3.jpeg" alt="Focaccia rellena" loading="lazy"><span class="mom-hora">13:00</span></div>
-      <div class="mom-body"><h4>Almuerzo</h4><p>Focaccias enormes de masa propia, para comer en el paseo.</p><div class="mom-hoy"></div></div>
-    </button>
-    <button class="mom" data-h="1020" onclick="openModal('bakery')">
-      <div class="mom-img"><img src="/carta/lounge/fotos/TORRE_BAKERY-m62wnd.jpeg" alt="Torre de merienda dulce y salada" loading="lazy"><span class="mom-hora">17:00</span></div>
-      <div class="mom-body"><h4>Merienda</h4><p>Tortas, tartas y torres de merienda para compartir.</p><div class="mom-hoy"></div></div>
-    </button>
-    <button class="mom" data-h="1200" onclick="openModal('chiringuito')">
-      <div class="mom-img"><img src="/carta/chiringuito/fotos/calientetable.jpeg" alt="Picada con cerveza tirada" loading="lazy"><span class="mom-hora">20:00</span></div>
-      <div class="mom-body"><h4>Birra y picada</h4><p>Cerveza tirada, papas, burgers. Los miércoles, Burga Libre.</p><div class="mom-hoy"></div></div>
-    </button>
-    <button class="mom" data-h="1260" onclick="openModal('unapizza')">
-      <div class="mom-img"><img src="/carta/chiringuito/fotos/pizza-panceta-y-verdeo.jpg" alt="Pizza de panceta y verdeo" loading="lazy"><span class="mom-hora">21:00</span></div>
-      <div class="mom-body"><h4>Pizza</h4><p>Muzza al horno a leña, fugazzeta rellena, empanadas y fainá.</p><div class="mom-hoy"></div></div>
-    </button>
-    <button class="mom" data-h="1440" onclick="openModal('chiringuito')">
-      <div class="mom-img"><img src="/carta/chiringuito/fotos/13-ultimo-negroni.jpg" alt="Negroni en la barra" loading="lazy"><span class="mom-hora">00:00</span></div>
-      <div class="mom-body"><h4>Noche larga</h4><p>Tragos y La Terraza en el primer piso. Viernes y sábado, hasta las 3.</p><div class="mom-hoy"></div></div>
-    </button>
+</div>
+</section>
+
+<section class="llegar" id="llegar">
+  <img src="/fotos/locales/lounge-1.jpg" srcset="/fotos/locales/lounge-1-520.jpg 520w, /fotos/locales/lounge-1.jpg 960w" sizes="100vw" alt="La fachada del Lounge en el Mercado de Maschwitz al atardecer" width="960" height="1200" loading="lazy">
+  <div class="visita">
+    <h2>Cómo llegar</h2>
+    <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&amp;query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener"><b>Mendoza 1578</b><span>El Chiringuito, La Focacceria, ChirinBakery y Una Pizza</span><em>Abrir mapa</em></a>
+    <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&amp;query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener"><b>Mendoza 1731</b><span>Chiringuito Lounge, en el Mercado de Maschwitz</span><em>Abrir mapa</em></a>
+    <dl>
+      <dt>Lounge</dt><dd>mié a dom · 9 a 1</dd>
+      <dt>Focacceria</dt><dd>mar a dom · desde las 9</dd>
+      <dt>El Chiringuito</dt><dd>mar a dom · desde las 10</dd>
+      <dt>ChirinBakery</dt><dd>mar a dom · 10 a 21</dd>
+      <dt>Una Pizza</dt><dd>mié a dom · desde las 19</dd>
+    </dl>
+    <p class="nota-l">Paseo Mendoza, Ingeniero Maschwitz. A minutos de Panamericana, ramal Escobar, salida Maschwitz.</p>
   </div>
 </section>
 
+<section class="viandas ventana" id="viandas">
+  <div class="cab">
+    <p class="chico">Viandas, catering y eventos</p>
+    <h2>Agendemos<br>tus viandas</h2>
+    <p class="sub">La misma cocina del paseo, en viandas: menú rotativo con milanesas, pastas, guisos, ensaladas, tartas y opciones vegetarianas. Para vos, para tu familia o para todo tu equipo.</p>
+    <p class="zona"><b>Entregamos en</b> Ing. Maschwitz, Belén de Escobar, Garín y parques industriales, Matheu y Loma Verde. Zona norte GBA, consultanos.</p>
+    <a class="tel" href="https://wa.me/5491122721108?text=Hola!%20Quiero%20consultar%20por%20viandas." target="_blank" rel="noopener">11 2272-1108</a>
+  </div>
+  <form class="pedido" aria-label="Pedido de viandas" onsubmit="event.preventDefault();pedirViandas()">
+    <fieldset><legend>¿Qué necesitás?</legend><div class="chips">
+      <label><input type="checkbox" name="nec" value="Viandas para mí" checked>Viandas para mí</label><label><input type="checkbox" name="nec" value="Viandas para mi equipo">Viandas para mi equipo</label><label><input type="checkbox" name="nec" value="Catering para una reunión">Catering para una reunión</label><label><input type="checkbox" name="nec" value="Un evento en el salón">Un evento en el salón</label>
+    </div></fieldset>
+    <fieldset><legend>¿Qué días?</legend><div class="chips">
+      <label><input type="radio" name="dias" value="Semana completa" checked>Semana completa</label><label><input type="radio" name="dias" value="Algunos días">Algunos días</label><label><input type="radio" name="dias" value="Una vez, para probar">Una vez, para probar</label>
+    </div></fieldset>
+    <div class="fila">
+      <label>Tu nombre<input type="text" id="v-nombre" placeholder="Nombre y apellido" autocomplete="name"></label>
+      <label>¿Para cuántos?<input type="number" id="v-cant" min="1" inputmode="numeric" placeholder="1"></label>
+    </div>
+    <div class="fila">
+      <label>Localidad<input type="text" id="v-loc" placeholder="Ej.: Maschwitz, Escobar, Garín" autocomplete="address-level2"></label>
+      <label>Empresa (opcional)<input type="text" id="v-emp" placeholder="Si es para tu equipo" autocomplete="organization"></label>
+    </div>
+    <label class="ancho">Comentarios (opcional)<input type="text" id="v-com" placeholder="Algo que no comas, horarios, preferencias"></label>
+    <button class="enviar" type="submit">Pedir por WhatsApp <span aria-hidden="true">→</span></button>
+    <p class="f-note">Te contestamos en el día. Para empresas también: <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a></p>
+  </form>
+</section>
+
+<footer class="pie">
+  <div class="pie-top">
+    <p>Mendoza 1578 y 1731<br>Ingeniero Maschwitz (B1623)<br>Escobar, Buenos Aires</p>
+    <p><a href="tel:+541140857072">El Chiringuito · 11 4085-7072</a><br><a href="https://wa.me/5491124635464" target="_blank" rel="noopener">Lounge · 11 2463-5464</a><br><a href="tel:+5491178196138">Focacceria · 11 7819-6138</a><br><a href="https://wa.me/5491126091109" target="_blank" rel="noopener">Una Pizza · 11 2609-1109</a><br><a href="https://wa.me/5491144002737" target="_blank" rel="noopener">ChirinBakery · 11 4400-2737</a></p>
+    <p><a href="https://www.instagram.com/elchiringuitook" target="_blank" rel="noopener">@elchiringuitook</a><br><a href="https://www.instagram.com/chiringuito.lounge" target="_blank" rel="noopener">@chiringuito.lounge</a><br><a href="https://www.instagram.com/lafocacceria.elchiringuito" target="_blank" rel="noopener">@lafocacceria.elchiringuito</a><br><a href="https://www.instagram.com/unapizza.maschwitz" target="_blank" rel="noopener">@unapizza.maschwitz</a><br><a href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">@chirinbakery</a></p>
+    <a href="#top">Volver arriba</a>
+  </div>
+  <div>
+    <p class="frase-pie">Cinco cocinas en la calle Mendoza que nacieron de un clásico.</p>
+    <a class="grande" href="#llegar">Mendoza 1578 · 1731</a>
+  </div>
+  <div class="pie-fin">
+    <nav aria-label="Pie"><a href="/carta/chiringuito/">Carta El Chiringuito</a><a href="/carta/lounge/">Carta Lounge</a><a href="/una-pizza/">Carta Una Pizza</a><a href="#viandas">Viandas</a><a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a></nav>
+    <span>© Grupo El Chiringuito · Calle Mendoza desde 2013 · Ingeniero Maschwitz</span>
+  </div>
+</footer>
+
+</div>
+
+
+<!-- ══════════ MODALES DE CADA LOCAL ══════════ -->
 <!-- MODAL: EL CHIRINGUITO -->
 <div class="modal-bg" id="m-chiringuito" onclick="bgClose(event,this)" role="dialog" aria-modal="true" aria-label="El Chiringuito">
   <div class="modal">
@@ -599,10 +788,10 @@ body.modal-open{overflow:hidden}
         <p class="m-sub"><small>Las que más salen</small>Focaccias destacadas</p>
         <div class="dish"><div><b>Focaccia Calentita</b><small>Colchón de albóndigas con salsa de tomate, muzza gratinada, tomates confitados y rúcula</small></div><span class="price">$ 19.500</span></div>
         <div class="dish"><div><b>Focaccia Jamón Crudo</b><small>Jamón crudo, suave stracciatella, higos y queso crema</small></div><span class="price">$ 18.600</span></div>
-        <div class="dish"><div><b>Focaccia Mortadela</b><small>Mortadela con nuez, queso brie y ajos confitados</small></div><span class="price">$ Consultar</span></div>
+        <div class="dish"><div><b>Focaccia Mortadela</b><small>Mortadela con nuez, queso brie y ajos confitados</small></div><span class="price">$ 20.500</span></div>
       </div>
 
-      <div class="m-promo">👷 <b>Menú Worker:</b> menú ejecutivo por $19.500, todos los días.</div>
+      <div class="m-promo">🍽️ <b>Menú Ejecutivo:</b> $19.500, de martes a domingo.</div>
 
       <div class="m-info">
         <div><div class="lbl">Horarios</div>Mar–Jue 9 a 20<br>Vie–Dom 9 a 01 · Lun cerrado</div>
@@ -642,7 +831,7 @@ body.modal-open{overflow:hidden}
       <div class="dishes">
         <p class="m-sub"><small>Las que más salen</small>Pizzas destacadas</p>
         <div class="dish"><div><b>Fugazzeta rellena</b><small>Pizza rellena de muzzarella y cebolla</small></div><span class="price">$ 35.500</span></div>
-        <div class="dish"><div><b>Empanadas de carne cortada a cuchillo</b><small>Carne braseada al horno de barro</small></div><span class="price">$ 3.000 c/u</span></div>
+        <div class="dish"><div><b>Empanadas de carne cortada a cuchillo</b><small>Carne braseada al horno a leña</small></div><span class="price">$ 3.000 c/u</span></div>
         <div class="dish"><div><b>Muzza a la piedra</b><small>Clásica muzza al horno a leña · individual / 8 porciones</small></div><span class="price">$ 20.000 / $ 24.000</span></div>
       </div>
 
@@ -700,162 +889,7 @@ body.modal-open{overflow:hidden}
   </div>
 </div>
 
-
-
-<!-- ══════════ GALERÍA ══════════ -->
-<section class="galeria" id="galeria">
-  <div class="wrap">
-    <div class="s-head">
-      <h2 class="s-title">Así se vive el paseo</h2>
-    </div>
-    <div class="gal">
-      <figure><img src="https://drive.google.com/thumbnail?id=1IMPcRnBobpt0MR8G8gBMXTQ9zGVDgEIV&sz=w1200" alt="Paseo Mendoza de noche" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=1HFhWNtlDuY7_T2z8UQ-f2v9rw1S2yv7S&sz=w700" alt="Paseo Mendoza" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=1lgMdxjkOw3YKF-tc7ALtgA0Lhn8SXLVi&sz=w700" alt="Paseo Mendoza" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=1suRXaXBqCrqdQRK1RP6KdUlcEeknXs6Q&sz=w700" alt="Paseo Mendoza" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=1Fi_vYI19l8LZ2eDh9KNyxenY9CI_guSl&sz=w700" alt="Paseo Mendoza" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=18cpADKJQAUdS-8vM-qwYjzSe8BPKaUws&sz=w1000" alt="Paseo Mendoza" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=10Yb2FrNH5kzi9PcB4M6n47hiWAhiF-yI&sz=w700" alt="Paseo Mendoza" loading="lazy"></figure>
-      <figure><img src="https://drive.google.com/thumbnail?id=1kJv72heiWNP0I1pNf8USgmoj0O2Cr_kF&sz=w700" alt="Paseo Mendoza" loading="lazy"></figure>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ CÓMO LLEGAR ══════════ -->
-<section class="llegar" id="llegar">
-  <div class="wrap ll-grid">
-    <div>
-      <h2 class="s-title">Cómo llegar</h2>
-      <p class="s-lead">Paseo Mendoza, Ingeniero Maschwitz. A minutos de Panamericana ramal Escobar, salida Maschwitz.</p>
-      <div class="dir" style="margin-top:28px">
-        <a href="https://www.google.com/maps/search/?api=1&query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener">
-          <span><b>Mendoza 1578</b><span>El Chiringuito, La Focacceria, Una Pizza y ChirinBakery</span></span><em>Abrir mapa</em>
-        </a>
-        <a href="https://www.google.com/maps/search/?api=1&query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">
-          <span><b>Mendoza 1731</b><span>Chiringuito Lounge</span></span><em>Abrir mapa</em>
-        </a>
-      </div>
-    </div>
-    <div class="map-frame">
-      <iframe src="https://maps.google.com/maps?q=Mendoza%201578%2C%20Ingeniero%20Maschwitz%2C%20Buenos%20Aires&z=17&output=embed" loading="lazy" title="Mapa del Paseo Mendoza"></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ VIANDAS ══════════ -->
-<section class="viandas" id="viandas">
-  <div class="wrap v-grid">
-    <div>
-      <h2 class="s-title">Viandas caseras para tu semana</h2>
-      <p class="s-lead">La misma cocina del Paseo, en viandas: menú rotativo con milanesas, pastas, guisos, ensaladas, tartas y opciones vegetarianas. Para vos, para tu familia o para todo tu equipo.</p>
-      <ol class="pasos">
-        <li>Escribinos por WhatsApp.</li>
-        <li>Te pasamos el menú de la semana y los precios.</li>
-        <li>Elegís los días y cuántas viandas querés.</li>
-        <li>Coordinamos la entrega.</li>
-      </ol>
-      <a class="v-wa" href="https://wa.me/5491122721108?text=Hola!%20Quiero%20consultar%20por%20viandas." target="_blank" rel="noopener"><small>WhatsApp de viandas</small><b>11 2272-1108</b></a>
-      <div class="v-empresas">
-        <b>Las empresas de la zona nos eligen</b>
-        <span>Viandas diarias para el personal, catering para reuniones y eventos, y pastelería de ChirinBakery para los festejos del equipo.</span>
-      </div>
-      <p class="v-zona"><b>Zona de entrega:</b> Ing. Maschwitz, Belén de Escobar, Garín y parques industriales, Matheu, Loma Verde. Zona norte GBA, consultanos.</p>
-    </div>
-
-    <div class="form-card">
-      <div class="tabs" role="tablist" aria-label="Tipo de pedido">
-        <button class="tab" role="tab" id="t-vos" aria-controls="p-vos" aria-selected="true" onclick="setTab('vos')">Para vos</button>
-        <button class="tab" role="tab" id="t-emp" aria-controls="p-emp" aria-selected="false" onclick="setTab('emp')">Para tu empresa</button>
-      </div>
-
-      <div class="panel" role="tabpanel" id="p-vos" aria-labelledby="t-vos">
-        <h3>Pedí tu semana</h3>
-        <p>Completá esto y se abre WhatsApp con tu pedido listo para mandar.</p>
-        <div class="f-field"><label for="v-nombre">Tu nombre</label><input type="text" id="v-nombre" autocomplete="name" placeholder="Nombre y apellido"></div>
-        <div class="f-row">
-          <div class="f-field"><label for="v-dias">¿Qué días?</label>
-            <select id="v-dias"><option>Semana completa (lun a vie)</option><option>Algunos días de la semana</option><option>Solo una vez, para probar</option></select>
-          </div>
-          <div class="f-field"><label for="v-cant">Viandas por día</label>
-            <select id="v-cant"><option>1</option><option>2</option><option>3</option><option>4 o más</option></select>
-          </div>
-        </div>
-        <div class="f-field"><label for="v-loc">Localidad</label><input type="text" id="v-loc" autocomplete="address-level2" placeholder="Ej.: Maschwitz, Escobar, Garín"></div>
-        <div class="f-field"><label for="v-com">Comentarios (opcional)</label><textarea id="v-com" placeholder="Algo que no comas, preferencias, horarios"></textarea></div>
-        <button class="btn btn-fill" onclick="sendVos()">Pedir por WhatsApp</button>
-        <p class="f-note">Te contestamos en el día al <a href="https://wa.me/5491122721108" target="_blank" rel="noopener">11 2272-1108</a>.</p>
-      </div>
-
-      <div class="panel" role="tabpanel" id="p-emp" aria-labelledby="t-emp" hidden>
-        <h3>Cotizá para tu empresa</h3>
-        <p>Viandas para el personal, catering o eventos. Te mandamos menú de ejemplo y precios por volumen.</p>
-        <div class="f-row">
-          <div class="f-field"><label for="f-nombre">Tu nombre</label><input type="text" id="f-nombre" autocomplete="name" placeholder="Nombre y apellido"></div>
-          <div class="f-field"><label for="f-empresa">Empresa</label><input type="text" id="f-empresa" autocomplete="organization" placeholder="Nombre de la empresa"></div>
-        </div>
-        <div class="f-row">
-          <div class="f-field"><label for="f-cant">Viandas por día</label>
-            <select id="f-cant"><option>5 a 15</option><option>15 a 30</option><option>30 a 60</option><option>Más de 60</option><option>Evento puntual / catering</option></select>
-          </div>
-          <div class="f-field"><label for="f-frec">Frecuencia</label>
-            <select id="f-frec"><option>Todos los días (lun a vie)</option><option>Algunos días por semana</option><option>Evento único</option><option>Todavía no lo sé</option></select>
-          </div>
-        </div>
-        <div class="f-field"><label for="f-com">Comentarios (opcional)</label><textarea id="f-com" placeholder="Contanos lo que necesitás"></textarea></div>
-        <button class="btn btn-fill" onclick="sendEmp()">Cotizar por WhatsApp</button>
-        <p class="f-note">O escribinos a <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ FOOTER ══════════ -->
-<footer>
-  <div class="wrap">
-    <div class="logo-strip">
-      <a onclick="openModal('chiringuito')" aria-label="El Chiringuito"><img src="https://drive.google.com/thumbnail?id=1Q1ncH09ZDaiwkCRizY6pV9EMHhk7oH69&sz=w300" alt="El Chiringuito" loading="lazy"></a>
-      <a onclick="openModal('lounge')" aria-label="Chiringuito Lounge"><img src="https://drive.google.com/thumbnail?id=1pbLumuk8-DGDDi--hklD0gPkPpLaAjUy&sz=w300" alt="Chiringuito Lounge" loading="lazy"></a>
-      <a onclick="openModal('focacceria')" aria-label="La Focacceria"><img src="https://drive.google.com/thumbnail?id=1aRPKAqI8-dMjsNQBG2Mu8pimwryoyc-d&sz=w300" alt="La Focacceria" loading="lazy"></a>
-      <a href="/una-pizza/" aria-label="Una Pizza"><img src="https://drive.google.com/thumbnail?id=1Utv_JCtr1k6WvBbTmII4pmQnwCit4n6c&sz=w300" alt="Una Pizza" loading="lazy"></a>
-      <a onclick="openModal('bakery')" aria-label="ChirinBakery"><img src="https://drive.google.com/thumbnail?id=1H_bX1GjPmWcOgMuixrKc0V0SGH4XXeM2&sz=w300" alt="ChirinBakery" loading="lazy"></a>
-    </div>
-    <div class="f-grid">
-      <div>
-        <h5>Grupo El Chiringuito</h5>
-        <p>Cinco cocinas en el Paseo Mendoza de Ingeniero Maschwitz. Gastronomía de barrio hecha con oficio.</p>
-        <p>Mendoza 1578 y 1731<br>Ingeniero Maschwitz (B1623)<br>Escobar, Buenos Aires</p>
-      </div>
-      <div>
-        <h5>Teléfonos</h5>
-        <a href="tel:+541140857072"><b>El Chiringuito</b> · 11 4085-7072</a>
-        <a href="https://wa.me/5491124635464" target="_blank" rel="noopener"><b>Lounge</b> · 11 2463-5464</a>
-        <a href="tel:+5491178196138"><b>Focacceria</b> · 11 7819-6138</a>
-        <a href="https://wa.me/5491126091109" target="_blank" rel="noopener"><b>Una Pizza</b> · 11 2609-1109</a>
-        <a href="https://wa.me/5491144002737" target="_blank" rel="noopener"><b>ChirinBakery</b> · 11 4400-2737</a>
-      </div>
-      <div>
-        <h5>Instagram</h5>
-        <a href="https://www.instagram.com/elchiringuitook" target="_blank" rel="noopener">@elchiringuitook</a>
-        <a href="https://www.instagram.com/chiringuito.lounge" target="_blank" rel="noopener">@chiringuito.lounge</a>
-        <a href="https://www.instagram.com/lafocacceria.elchiringuito" target="_blank" rel="noopener">@lafocacceria.elchiringuito</a>
-        <a href="https://www.instagram.com/unapizza.maschwitz" target="_blank" rel="noopener">@unapizza.maschwitz</a>
-        <a href="https://www.instagram.com/chirinbakery" target="_blank" rel="noopener">@chirinbakery</a>
-      </div>
-      <div>
-        <h5>Más</h5>
-        <a href="/carta/chiringuito/">Carta El Chiringuito</a>
-        <a href="/carta/lounge/">Carta Chiringuito Lounge</a>
-        <a href="/una-pizza/">Carta Una Pizza</a>
-        <a href="#viandas">Viandas caseras</a>
-        <a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a>
-      </div>
-    </div>
-    <div class="f-bottom">© Grupo El Chiringuito — Paseo Mendoza · Desde el corazón de Maschwitz</div>
-  </div>
-</footer>
-
-
-
+<!-- ══════════ PANEL DE CONTACTO ══════════ -->
 <!-- BOTÓN FLOTANTE: elegir local -->
 <div class="wa-panel" id="wa-panel" role="dialog" aria-label="Contactar a un local">
   <h4>¿Con quién querés hablar?</h4>
@@ -867,69 +901,55 @@ body.modal-open{overflow:hidden}
   <a href="https://wa.me/5491144002737" target="_blank" rel="noopener">ChirinBakery <small>WhatsApp</small></a>
   <a href="https://wa.me/5491122721108?text=Hola!%20Quiero%20consultar%20por%20viandas." target="_blank" rel="noopener">Viandas <small>WhatsApp</small></a>
 </div>
-<button class="wa-float" id="wa-float" onclick="toggleWA()" aria-label="Contactar a un local" aria-expanded="false" aria-controls="wa-panel">💬</button>
 
 <script>
-/* ── NAV: se oscurece al bajar ── */
-const nav=document.getElementById('nav');
-const onScroll=()=>nav.classList.toggle('solid',scrollY>40);
-addEventListener('scroll',onScroll,{passive:true});onScroll();
-
 /* ── MODALES ── */
 function openModal(id){
-  const m=document.getElementById('m-'+id);
+  const m=document.getElementById('m-'+id); if(!m) return;
   m.querySelectorAll('iframe[data-src]').forEach(f=>{f.src=f.dataset.src;f.removeAttribute('data-src')});
   m.classList.add('open');document.body.classList.add('modal-open');
+  const b=m.querySelector('.modal-close'); if(b) b.focus({preventScroll:true});
 }
 function closeModal(id){document.getElementById('m-'+id).classList.remove('open');document.body.classList.remove('modal-open')}
 function bgClose(e,el){if(e.target===el){el.classList.remove('open');document.body.classList.remove('modal-open')}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-bg.open').forEach(m=>m.classList.remove('open'));document.body.classList.remove('modal-open');toggleWA(false)}});
 
-/* ── PANEL DE CONTACTO ── */
+/* ── PANEL DE CONTACTO (botón de WhatsApp de la franja) ── */
 function toggleWA(force){
   const p=document.getElementById('wa-panel'),b=document.getElementById('wa-float');
   const open=typeof force==='boolean'?force:!p.classList.contains('open');
-  p.classList.toggle('open',open);b.setAttribute('aria-expanded',open);b.textContent=open?'✕':'💬';
+  p.classList.toggle('open',open);b.setAttribute('aria-expanded',open);
 }
 document.addEventListener('click',e=>{if(!e.target.closest('#wa-panel,#wa-float'))toggleWA(false)});
 
-/* ── RECORRIDO HORIZONTAL ── */
-function railMove(dir){const r=document.getElementById('rail');const c=r.querySelector('.mom');r.scrollBy({left:dir*(c.offsetWidth+16),behavior:'smooth'})}
-
-/* ── VIANDAS ── */
-function setTab(t){
-  ['vos','emp'].forEach(k=>{document.getElementById('t-'+k).setAttribute('aria-selected',k===t);document.getElementById('p-'+k).hidden=k!==t});
-}
+/* ── VIANDAS: arma el mensaje y abre WhatsApp ── */
 const val=id=>document.getElementById(id).value.trim();
-function abrirWA(lineas){window.open('https://wa.me/5491122721108?text='+encodeURIComponent(lineas.join('\n')),'_blank')}
-function sendVos(){
-  abrirWA(['Hola! Quiero viandas para mí.','',
+function pedirViandas(){
+  const nec=[...document.querySelectorAll('input[name="nec"]:checked')].map(i=>i.value);
+  const dias=(document.querySelector('input[name="dias"]:checked')||{}).value||'-';
+  const lineas=['Hola! Quiero consultar por viandas.','',
+    '🍱 Necesito: '+(nec.length?nec.join(', '):'-'),
+    '📅 Días: '+dias,
     '👤 Nombre: '+(val('v-nombre')||'-'),
-    '📅 Días: '+val('v-dias'),
-    '🍱 Viandas por día: '+val('v-cant'),
-    '📍 Localidad: '+(val('v-loc')||'-'),
-    '💬 Comentarios: '+(val('v-com')||'-')]);
-}
-function sendEmp(){
-  abrirWA(['Hola! Quiero cotizar viandas para mi empresa.','',
-    '👤 Nombre: '+(val('f-nombre')||'-'),
-    '🏢 Empresa: '+(val('f-empresa')||'-'),
-    '🍱 Cantidad por día: '+val('f-cant'),
-    '📅 Frecuencia: '+val('f-frec'),
-    '💬 Comentarios: '+(val('f-com')||'-')]);
+    '👥 Para cuántos: '+(val('v-cant')||'-'),
+    '📍 Localidad: '+(val('v-loc')||'-')];
+  if(val('v-emp')) lineas.push('🏢 Empresa: '+val('v-emp'));
+  lineas.push('💬 Comentarios: '+(val('v-com')||'-'));
+  window.open('https://wa.me/5491122721108?text='+encodeURIComponent(lineas.join('\n')),'_blank');
 }
 
 /* ── HORARIOS Y "ABIERTO AHORA" ──
-   Si cambia un horario, editarlo acá Y en el texto del modal de ese local.
+   Si cambia un horario, editarlo acá, en el texto del panel del local y en el modal.
    Minutos desde las 00:00. Si cierra después de medianoche, sumar 1440 (ej. 02:00 = 1560).
    Días: 0 domingo, 1 lunes, 2 martes, 3 miércoles, 4 jueves, 5 viernes, 6 sábado. */
 const HORARIOS={
   chiringuito:{nombre:'El Chiringuito',2:[[600,1500]],3:[[600,1500]],4:[[600,1500]],5:[[600,1620]],6:[[600,1620]],0:[[600,1500]]},
-  lounge:     {nombre:'Chiringuito Lounge',3:[[540,1500]],4:[[540,1500]],5:[[540,1500]],6:[[540,1500]],0:[[540,1500]]},
-  focacceria: {nombre:'La Focacceria',2:[[540,1200]],3:[[540,1200]],4:[[540,1200]],5:[[540,1500]],6:[[540,1500]],0:[[540,1500]]},
+  lounge:     {nombre:'Chiringuito Lounge',corto:'Lounge',3:[[540,1500]],4:[[540,1500]],5:[[540,1500]],6:[[540,1500]],0:[[540,1500]]},
+  focacceria: {nombre:'La Focacceria',corto:'Focacceria',2:[[540,1200]],3:[[540,1200]],4:[[540,1200]],5:[[540,1500]],6:[[540,1500]],0:[[540,1500]]},
   unapizza:   {nombre:'Una Pizza',3:[[1140,1440]],4:[[1140,1440]],5:[[1140,1500]],6:[[1140,1500]],0:[[1140,1440]]},
   bakery:     {nombre:'ChirinBakery',2:[[600,1260]],3:[[600,1260]],4:[[600,1260]],5:[[600,1260]],6:[[600,1260]],0:[[600,1260]]}
 };
+const ORDEN=['lounge','focacceria','chiringuito','bakery','unapizza'];
 const DIAS=['dom','lun','mar','mié','jue','vie','sáb'];
 const DIAS_LARGO=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 function ahoraBA(){
@@ -951,105 +971,93 @@ function estado(h,now){
   }
   return{abierto:false};
 }
-const cuando=s=>(s.k===0?'hoy':s.k===1?'mañana':DIAS[s.dia])+' '+hhmm(s.abre);
-function pintarHorarios(){
-  const now=ahoraBA(), tk=[];
-  Object.entries(HORARIOS).forEach(([id,h])=>{
-    const s=estado(h,now);
-    let cls='', titulo, detalle;
-    if(s.abierto){cls=s.resta<=45?'is-soon':'is-open';titulo=s.resta<=45?'Cierra pronto':'Abierto';detalle='hasta las '+hhmm(s.cierra)}
-    else{titulo='Cerrado';detalle=s.abre!==undefined?'abre '+cuando(s):''}
-    document.querySelectorAll(`[data-chip="${id}"]`).forEach(el=>{el.className='chip '+cls;el.innerHTML=`<b>${titulo}</b> ${detalle}`});
-    document.querySelectorAll(`.status[data-local="${id}"]`).forEach(el=>{el.className='status '+cls;el.innerHTML=`<b>${titulo}</b> ${detalle}`});
-    tk.push(`<div class="tk ${s.abierto?'on':''}"><i></i><b>${h.nombre}</b><span>${s.abierto?'abierto hasta las '+hhmm(s.cierra):'abre '+cuando(s)}</span></div>`);
-  });
-  pintarCalle(now);
-  /* "Un día en el Paseo": qué está abierto HOY a cada hora */
-  document.querySelectorAll('.mom').forEach(card=>{
-    const min=+card.dataset.h;
-    const abiertos=Object.values(HORARIOS).filter(h=>estado(h,{d:now.d,m:min%1440===0&&min>0?1439:min}).abierto).map(h=>h.nombre);
-    const box=card.querySelector('.mom-hoy');
-    box.classList.toggle('vacio',!abiertos.length);
-    box.innerHTML=`Hoy ${DIAS_LARGO[now.d]} a las ${hhmm(min)}<strong>${abiertos.length?abiertos.join(', '):'Todo cerrado a esa hora'}</strong>`;
-  });
-}
-/* ── LA CALLE: cada parada muestra si está abierto ── */
-function pintarCalle(now){
-  document.querySelectorAll('.parada').forEach(p=>{
-    const s=estado(HORARIOS[p.dataset.parada],now);
-    p.classList.toggle('on',s.abierto);
-    p.querySelector('small').textContent=s.abierto?'abierto hasta las '+hhmm(s.cierra):(s.abre!==undefined?'abre '+cuando(s):'');
-  });
-  pintarAhora(now);
-}
-
-/* ── PORTADA: la frase de "ahora" ──
-   Qué hay en cada local según la hora (minutos desde las 00:00). */
-const QUE={
-  lounge:m=>m<720?'café y desayuno':m<960?'almuerzo':m<1200?'merienda':'cena',
-  focacceria:()=>'focaccias',
-  chiringuito:()=>'birra y burgers',
-  bakery:()=>'tortas',
-  unapizza:()=>'pizza a la leña'
-};
-const EN={lounge:'en el Lounge',focacceria:'en La Focacceria',chiringuito:'en El Chiringuito',bakery:'en ChirinBakery',unapizza:'en Una Pizza'};
-const ORDEN=['lounge','focacceria','chiringuito','bakery','unapizza'];
+const cuando=s=>(s.k===0?'hoy':s.k===1?'mañana':DIAS[s.dia])+' a las '+hhmm(s.abre);
 const lista=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' y '+a[a.length-1];
-let abiertosAhora=[];
-function pintarAhora(now){
-  const el=document.getElementById('ahora'); if(!el) return;
+const corto=id=>HORARIOS[id].corto||HORARIOS[id].nombre;
+
+function pintarHorarios(){
+  const now=ahoraBA();
   const est=ORDEN.map(id=>({id,s:estado(HORARIOS[id],now)}));
   const abiertos=est.filter(x=>x.s.abierto);
-  const dia=DIAS_LARGO[now.d]; const Dia=dia.charAt(0).toUpperCase()+dia.slice(1);
-  let txt;
+
+  est.forEach(({id,s})=>{
+    let cls='',titulo,detalle;
+    if(s.abierto){cls=s.resta<=45?'is-soon':'is-open';titulo=s.resta<=45?'Cierra pronto':'Abierto';detalle='hasta las '+hhmm(s.cierra)}
+    else{titulo='Cerrado';detalle=s.abre!==undefined?'abre '+cuando(s):''}
+    /* panel de cada local */
+    document.querySelectorAll(`[data-chip="${id}"]`).forEach(el=>{el.className='estado '+cls;el.innerHTML=`<b>${titulo}</b> ${detalle}`});
+    /* modal */
+    document.querySelectorAll(`.status[data-local="${id}"]`).forEach(el=>{el.className='status '+cls;el.innerHTML=`<b>${titulo}</b> ${detalle}`});
+    /* franja */
+    document.querySelectorAll(`.parada[data-parada="${id}"]`).forEach(p=>{
+      p.classList.toggle('on',s.abierto);
+      p.querySelector('small').textContent=s.abierto?'hasta las '+hhmm(s.cierra):(s.abre!==undefined?'abre '+cuando(s):'');
+    });
+  });
+
+  /* portada y hoja de la cuadra */
+  const dia=DIAS_LARGO[now.d], Dia=dia.charAt(0).toUpperCase()+dia.slice(1);
+  let txt, hoja;
   if(abiertos.length){
-    txt='Ahora hay '+lista(abiertos.map(x=>QUE[x.id](now.m)+' '+EN[x.id]))+'.';
-    const luego=est.filter(x=>!x.s.abierto&&x.s.k===0).sort((a,b)=>a.s.abre-b.s.abre)[0];
-    if(luego) txt+=' '+HORARIOS[luego.id].nombre+' abre a las '+hhmm(luego.s.abre)+'.';
+    txt=`<b>${Dia}, ${hhmm(now.m)}.</b> Abiertos: ${lista(abiertos.map(x=>corto(x.id)))}`;
+    hoja='Abiertos ahora: '+lista(abiertos.map(x=>HORARIOS[x.id].nombre));
   }else{
     const prox=est.filter(x=>x.s.abre!==undefined).sort((a,b)=>(a.s.k*1440+a.s.abre)-(b.s.k*1440+b.s.abre))[0];
-    txt='Ahora está todo cerrado.'+(prox?' Lo primero que abre es '+HORARIOS[prox.id].nombre+', '+(prox.s.k===0?'hoy':prox.s.k===1?'mañana':'el '+DIAS_LARGO[prox.s.dia])+' a las '+hhmm(prox.s.abre)+'.':'');
+    const p=prox?`Abre primero ${HORARIOS[prox.id].nombre}, ${cuando(prox.s)}.`:'';
+    txt=`<b>${Dia}, ${hhmm(now.m)}.</b> Ahora está todo cerrado. ${p}`;
+    hoja='Ahora está todo cerrado. '+p;
   }
-  el.innerHTML='<span class="cuando">'+Dia+', '+hhmm(now.m)+'</span>'+txt;
-  const ids=abiertos.map(x=>x.id).join();
-  if(ids!==abiertosAhora.join()){abiertosAhora=abiertos.map(x=>x.id);armarVidriera()}
-}
+  const a=document.getElementById('ahora'); if(a) a.innerHTML='<span>'+txt+'</span>';
+  const h=document.getElementById('abiertos-hoja'); if(h) h.textContent=hoja;
 
-/* ── VIDRIERA: pasan las fotos de los locales abiertos ahora (si no hay, de todos) ── */
-const QUIETO=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let vidTimer;
-function armarVidriera(){
-  const box=document.getElementById('vidriera-show'), tag=document.getElementById('vidriera-tag'); if(!box) return;
-  const ids=abiertosAhora.length?abiertosAhora:ORDEN;
-  const fotos=[];
-  ids.forEach(id=>{document.querySelectorAll('#l-'+id+' .show img').forEach((im,i)=>{if(i<2)fotos.push({id,src:im.getAttribute('src')||im.dataset.src})})});
-  box.innerHTML=fotos.map((f,i)=>`<img ${i?'data-src':'src'}="${f.src}" alt="" ${i?'':'class="on"'}>`).join('');
-  const nombre=id=>HORARIOS[id].nombre;
-  const marcar=i=>{const id=fotos[i].id;tag.lastElementChild.textContent=(abiertosAhora.length?'Abierto ahora: ':'')+nombre(id);tag.style.background=getComputedStyle(document.documentElement).getPropertyValue('--c-'+id)};
-  marcar(0);
-  clearInterval(vidTimer);
-  if(QUIETO||fotos.length<2) return;
-  let k=0; const imgs=[...box.querySelectorAll('img')];
-  cargar(imgs[1]);
-  vidTimer=setInterval(()=>{imgs[k].classList.remove('on');k=(k+1)%imgs.length;imgs[k].classList.add('on');marcar(k);cargar(imgs[(k+1)%imgs.length])},4000);
-}
-function cargar(im){if(im&&im.dataset.src){im.src=im.dataset.src;im.removeAttribute('data-src')}}
-
-/* ── LA CUADRA: las fotos de cada local van pasando cuando el local está en pantalla ── */
-function animarLocales(){
-  const shows=[...document.querySelectorAll('.local [data-show]')];
-  shows.forEach((sh,n)=>{
-    const imgs=[...sh.querySelectorAll('img')]; let k=0, t=null;
-    const paso=()=>{imgs[k].classList.remove('on');k=(k+1)%imgs.length;cargar(imgs[k]);imgs[k].classList.add('on');cargar(imgs[(k+1)%imgs.length])};
-    if(QUIETO||imgs.length<2||!('IntersectionObserver' in window)) return;
-    new IntersectionObserver(es=>{es.forEach(en=>{
-      if(en.isIntersecting&&!t){cargar(imgs[1]);t=setInterval(paso,3400+n*420)}
-      else if(!en.isIntersecting&&t){clearInterval(t);t=null}
-    })},{threshold:.35}).observe(sh);
+  /* un día en la calle Mendoza: qué está abierto HOY a cada hora */
+  document.querySelectorAll('.mom').forEach(card=>{
+    const min=+card.dataset.h;
+    const ab=Object.values(HORARIOS).filter(x=>estado(x,{d:now.d,m:min%1440===0&&min>0?1439:min}).abierto).map(x=>x.nombre);
+    const box=card.querySelector('.mom-hoy');
+    box.classList.toggle('vacio',!ab.length);
+    box.innerHTML=`Hoy ${DIAS_LARGO[now.d]} a las ${hhmm(min)}<strong>${ab.length?ab.join(', '):'Todo cerrado a esa hora'}</strong>`;
   });
 }
-animarLocales();
 pintarHorarios(); setInterval(pintarHorarios,60000);
+
+/* ── PANELES DE LOS LOCALES: se apilan como ventanas ──
+   Si un panel es más alto que la pantalla, se queda fijo recién cuando se vio entero,
+   así nunca se tapa contenido que no se llegó a ver. */
+function alturaPaneles(){
+  const franja=document.querySelector('.franja').offsetHeight;
+  document.querySelectorAll('.panel').forEach(p=>p.style.setProperty('--top',Math.min(franja,innerHeight-p.offsetHeight)+'px'));
+}
+alturaPaneles(); addEventListener('resize',alturaPaneles); addEventListener('load',alturaPaneles);
+
+
+/* ── VIDEOS: se cargan recién cuando aparecen en pantalla ──
+   Con "reducir movimiento" activado no se cargan: quedan las fotos fijas. */
+const QUIETO=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function cargarVideo(v){if(v.dataset.src){const f=v.parentElement.querySelector('img');if(f&&!v.poster)v.poster=f.currentSrc||f.src;v.muted=true;v.src=v.dataset.src;v.removeAttribute('data-src')}}
+if(!QUIETO){
+  const videos=[...document.querySelectorAll('.pe video')];
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      const v=e.target;
+      if(e.isIntersecting){cargarVideo(v);const p=v.play();if(p&&p.catch)p.catch(()=>{})}
+      else if(!v.paused) v.pause();
+    }),{rootMargin:'300px 0px'});
+    videos.forEach(v=>io.observe(v));
+  }else{
+    videos.forEach(v=>{if(v.offsetParent!==null)cargarVideo(v)});
+  }
+}
+
+/* la portada queda fija debajo: cuando ya la tapó todo lo demás, sus videos se pausan */
+if(!QUIETO){
+  const heroV=[...document.querySelectorAll('.hero video')];
+  let pend=false,quieta=false;
+  addEventListener('scroll',()=>{if(pend)return;pend=true;requestAnimationFrame(()=>{pend=false;
+    const tapada=scrollY>innerHeight*1.6;
+    if(tapada!==quieta){quieta=tapada;heroV.forEach(v=>{if(v.src){if(tapada)v.pause();else{const p=v.play();if(p&&p.catch)p.catch(()=>{})}}})}
+  })},{passive:true});
+}
 </script>
 </body>
 </html>
