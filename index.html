@@ -490,6 +490,25 @@ html{scroll-padding-top:calc(var(--fh) + 8px)}
   .pe .franja .wa{padding:0 12px}
   .pe .hero{height:calc(100svh - var(--fh))}
 }
+
+/* así se vive: mosaico parejo, sin huecos */
+.pe .vive{padding-block:120px 90px}
+.pe .vive h2{margin-bottom:48px}
+.pe .mosaico{display:block;columns:3;column-gap:24px}
+.pe .mosaico figure{break-inside:avoid;margin:0 0 28px !important;width:auto !important;display:block}
+.pe .mosaico img,.pe .mosaico .vid{display:block;width:100%;border-radius:10px}
+.pe .mosaico .alto img,.pe .mosaico .alto .vid{aspect-ratio:3/4}
+.pe .mosaico .ancho img{aspect-ratio:4/3}
+.pe .mosaico .cuad img{aspect-ratio:1}
+.pe .mosaico img{object-fit:cover;height:auto}
+@media (max-width:900px){
+  .pe .vive{padding-block:72px 40px}
+  .pe .vive h2{margin-bottom:28px}
+  .pe .mosaico{columns:2;column-gap:12px}
+  .pe .mosaico figure{margin:0 0 16px !important}
+  .pe .mosaico figcaption{font-size:12px;margin-top:6px}
+  .pe .mosaico img,.pe .mosaico .vid{border-radius:8px}
+}
 </style>
 </head>
 <body id="top">
@@ -636,10 +655,16 @@ html{scroll-padding-top:calc(var(--fh) + 8px)}
 <div class="vive wrap">
   <h2 id="vive-t">Así se vive<br>el paseo</h2>
   <div class="mosaico entra">
-    <figure class="m1"><img src="/fotos/locales/lounge-2.jpg" srcset="/fotos/locales/lounge-2-520.jpg 520w, /fotos/locales/lounge-2.jpg 960w" sizes="(max-width: 900px) 72vw, 30vw" alt="La barra del Lounge" width="960" height="1200" loading="lazy"><figcaption>La barra del Lounge, en el Mercado</figcaption></figure>
-    <figure class="m2"><div class="vid"><img src="/videos/barra.jpg" alt="" loading="lazy"><video data-src="/videos/barra.mp4" autoplay muted loop playsinline preload="none" aria-label="Un Ramazzotti Rosato armado en la barra"></video></div><figcaption>Un Ramazzotti Rosato, armado en la barra</figcaption></figure>
-    <figure class="m3"><img src="/fotos/locales/chiringuito-1.jpg" srcset="/fotos/locales/chiringuito-1-520.jpg 520w, /fotos/locales/chiringuito-1.jpg 960w" sizes="(max-width: 900px) 100vw, 45vw" alt="Picada, papas y cerveza en El Chiringuito" width="960" height="1200" loading="lazy"><figcaption>Picada, papas y cerveza</figcaption></figure>
-    <figure class="m4"><img src="/una-pizza/fotos/local-una-pizza-640.jpg" alt="Los azulejos de Una Pizza con su logo" width="640" height="960" loading="lazy"><figcaption>Los azulejos de Una Pizza</figcaption></figure>
+    <figure class="alto"><img src="/fotos/locales/lounge-2.jpg" srcset="/fotos/locales/lounge-2-520.jpg 520w, /fotos/locales/lounge-2.jpg 960w" sizes="(max-width: 900px) 50vw, 33vw" alt="La barra del Lounge" width="960" height="1200" loading="lazy"><figcaption>La barra del Lounge, en el Mercado</figcaption></figure>
+    <figure class="alto"><div class="vid"><img src="/videos/barra.jpg" alt="" loading="lazy"><video data-src="/videos/barra.mp4" autoplay muted loop playsinline preload="none" aria-label="Un Ramazzotti Rosato armado en la barra"></video></div><figcaption>Un Ramazzotti Rosato, armado en la barra</figcaption></figure>
+    <figure class="alto"><img src="/fotos/locales/chiringuito-3.jpg" srcset="/fotos/locales/chiringuito-3-520.jpg 520w, /fotos/locales/chiringuito-3.jpg 960w" sizes="(max-width: 900px) 50vw, 33vw" alt="Trago tiki en vaso calavera en El Chiringuito" width="960" height="1200" loading="lazy"><figcaption>Un tiki en El Chiringuito</figcaption></figure>
+    <figure class="ancho"><img src="/fotos/locales/chiringuito-1.jpg" srcset="/fotos/locales/chiringuito-1-520.jpg 520w, /fotos/locales/chiringuito-1.jpg 960w" sizes="(max-width: 900px) 50vw, 33vw" alt="Picada, papas y cerveza en El Chiringuito" width="960" height="1200" loading="lazy"><figcaption>Picada, papas y cerveza</figcaption></figure>
+    <figure class="alto"><img src="/una-pizza/fotos/muzzarella-con-cerveza-640.jpg" alt="Muzzarella con cerveza en Una Pizza" width="640" height="960" loading="lazy"><figcaption>Muzza y birra en Una Pizza</figcaption></figure>
+    <figure class="alto"><img src="/fotos/locales/bakery-1.jpg" srcset="/fotos/locales/bakery-1-520.jpg 520w, /fotos/locales/bakery-1.jpg 960w" sizes="(max-width: 900px) 50vw, 33vw" alt="Torta de ChirinBakery con café" width="960" height="1200" loading="lazy"><figcaption>Una torta de ChirinBakery con café</figcaption></figure>
+    <figure class="ancho"><img src="/fotos/locales/chiringuito-5.jpg" srcset="/fotos/locales/chiringuito-5-520.jpg 520w, /fotos/locales/chiringuito-5.jpg 960w" sizes="(max-width: 900px) 50vw, 33vw" alt="Mesa con costillas y sándwiches en El Chiringuito" width="960" height="1200" loading="lazy"><figcaption>La mesa llena en El Chiringuito</figcaption></figure>
+    <figure class="alto"><img src="/una-pizza/fotos/pizza-horno-a-lena-640.jpg" alt="Pizza entrando al horno a leña de Una Pizza" width="640" height="960" loading="lazy"><figcaption>Al horno a leña</figcaption></figure>
+    <figure class="cuad"><img src="/fotos/locales/lounge-3.jpg" srcset="/fotos/locales/lounge-3-520.jpg 520w, /fotos/locales/lounge-3.jpg 960w" sizes="(max-width: 900px) 50vw, 33vw" alt="Salmón con vegetales y vino blanco en el Lounge" width="960" height="1200" loading="lazy"><figcaption>Salmón y vino blanco en el Lounge</figcaption></figure>
+    <figure class="alto"><img src="/una-pizza/fotos/local-una-pizza-640.jpg" alt="Los azulejos de Una Pizza con su logo" width="640" height="960" loading="lazy"><figcaption>Los azulejos de Una Pizza</figcaption></figure>
   </div>
 </div>
 </section>
