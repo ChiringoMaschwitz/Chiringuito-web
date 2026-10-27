@@ -169,10 +169,10 @@ a{color:inherit}
 .pe .p-chiri .btn.osc{background:var(--chiri-a);color:var(--tinta)}
 
 /* ── un día: cinta + horas ── */
-.pe .marquesina{background:var(--ambar);color:var(--tinta);overflow:hidden;display:flex;padding:18px 0}
+.pe .marquesina{background:var(--hueso);color:var(--tinta);border-block:2px solid var(--tinta);overflow:hidden;display:flex;padding:18px 0}
 .pe .marquesina .pista{animation-duration:30s}
 .pe .marquesina span{font-stretch:125%;font-weight:800;font-size:96px;line-height:1;text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap;padding:0 22px}
-.pe .marquesina i{flex:none;width:42px;height:42px;border-radius:50%;background:var(--c)}
+.pe .marquesina i{flex:none;width:30px;height:30px;border-radius:50%;background:var(--tinta)}
 .pe .marquesina i.cuadro{border-radius:8px;transform:rotate(45deg)}
 .pe .dia{background:var(--noche);color:var(--papel);padding:110px 0 130px}
 .pe .dia-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:48px}
@@ -241,10 +241,8 @@ a{color:inherit}
 .pe .pie-fin nav{display:flex;gap:20px;flex-wrap:wrap}
 
 @media (prefers-reduced-motion:reduce){
-  .pe .pista{animation:none}
-  .pe .cinta{overflow-x:auto}
-  .pe .marquesina{overflow-x:auto}
-  .pe .vid video{display:none}
+  .pe .franja .pista{animation-duration:80s}
+  .pe .marquesina .pista{animation-duration:60s}
   .pe .col,.pe h1 .l,.pe .sello svg,.pe .ahora::before{animation:none}
   .pe .frase .w{animation:none !important;color:var(--f,#15120F);background-color:var(--c,transparent)}
   .pe .tri,.pe .entra > *{animation:none !important}
@@ -288,7 +286,7 @@ a{color:inherit}
   .pe .panel .extra{left:auto;right:-10px;bottom:-24px;width:120px}
   .pe .marquesina{padding:12px 0}
   .pe .marquesina span{font-size:52px;padding:0 14px}
-  .pe .marquesina i{width:26px;height:26px}
+  .pe .marquesina i{width:18px;height:18px}
   .pe .dia{padding:72px 0 96px}
   .pe .dia-head{flex-direction:column;align-items:start;margin-bottom:28px}
   .pe .horas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;margin:0 -20px;padding:0 20px;gap:14px;scrollbar-width:none}
@@ -585,8 +583,8 @@ body.modal-open{overflow:hidden}
 
 <div class="marquesina" aria-hidden="true">
   <div class="pista">
-    <span>Un día en la calle Mendoza</span><i style="--c: #872D2C"></i><span>Café</span><i class="cuadro" style="--c: #518059"></i><span>Focaccia</span><i style="--c: #F0B9C2"></i><span>Birra</span><i class="cuadro" style="--c: #B21818"></i><span>Pizza</span><i style="--c: #0D3935"></i><span>Tragos</span><i class="cuadro" style="--c: #FBF7F0"></i>
-    <span>Un día en la calle Mendoza</span><i style="--c: #872D2C"></i><span>Café</span><i class="cuadro" style="--c: #518059"></i><span>Focaccia</span><i style="--c: #F0B9C2"></i><span>Birra</span><i class="cuadro" style="--c: #B21818"></i><span>Pizza</span><i style="--c: #0D3935"></i><span>Tragos</span><i class="cuadro" style="--c: #FBF7F0"></i>
+    <span>Un día en la calle Mendoza</span><i></i><span>Café</span><i class="cuadro"></i><span>Focaccia</span><i></i><span>Birra</span><i class="cuadro"></i><span>Pizza</span><i></i><span>Tragos</span><i class="cuadro"></i>
+    <span>Un día en la calle Mendoza</span><i></i><span>Café</span><i class="cuadro"></i><span>Focaccia</span><i></i><span>Birra</span><i class="cuadro"></i><span>Pizza</span><i></i><span>Tragos</span><i class="cuadro"></i>
   </div>
 </div>
 <section class="dia" id="dia" aria-labelledby="dia-t">
@@ -1052,8 +1050,8 @@ alturaPaneles(); addEventListener('resize',alturaPaneles); addEventListener('loa
 
 
 /* ── VIDEOS: se cargan recién cuando aparecen en pantalla ──
-   Con "reducir movimiento" activado no se cargan: quedan las fotos fijas. */
-const QUIETO=matchMedia('(prefers-reduced-motion: reduce)').matches;
+   Se reproducen siempre, también con "reducir movimiento" activado en el celular. */
+const QUIETO=false;
 function cargarVideo(v){if(v.dataset.src){const f=v.parentElement.querySelector('img');if(f&&!v.poster)v.poster=f.currentSrc||f.src;v.muted=true;v.src=v.dataset.src;v.removeAttribute('data-src')}}
 if(!QUIETO){
   const videos=[...document.querySelectorAll('.pe video')];
@@ -1078,6 +1076,11 @@ if(!QUIETO){
     if(tapada!==quieta){quieta=tapada;heroV.forEach(v=>{if(v.src){if(tapada)v.pause();else{const p=v.play();if(p&&p.catch)p.catch(()=>{})}}})}
   })},{passive:true});
 }
+
+/* si el celular bloqueó la reproducción automática (por ejemplo, en modo ahorro de batería),
+   los videos visibles arrancan con el primer toque o desplazamiento */
+const reintentar=()=>{document.querySelectorAll('.pe video').forEach(v=>{if(v.src&&v.paused){const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const p=v.play();if(p&&p.catch)p.catch(()=>{})}}})};
+['touchstart','pointerdown','scroll'].forEach(ev=>addEventListener(ev,reintentar,{passive:true,once:true}));
 </script>
 </body>
 </html>
