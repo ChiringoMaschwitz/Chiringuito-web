@@ -112,6 +112,8 @@
   .foto-actual{width:100%;max-width:220px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#EDE6D8;margin-bottom:8px;display:flex;align-items:center;justify-content:center}
   .foto-actual img{width:100%;height:100%;object-fit:cover}
   .foto-actual span{font-size:13px;color:var(--tinta-dim)}
+  [hidden]{display:none !important}
+  #n-seccion-nueva{margin-top:8px}
   details.avanzado{margin:4px 0 16px}
   details.avanzado summary{cursor:pointer;font-size:13px;font-weight:500;color:var(--tinta-dim);padding:8px 0}
   .precio small{font-weight:500;color:var(--tinta-dim)}
@@ -595,9 +597,13 @@ function guardarEdicion(id){
 function abrirCrear(){
   var secs = secciones();
   document.getElementById('modal-contenido').innerHTML =
-    '<div class="campo"><label>Sección</label><select id="n-seccion">'+
+    '<div class="campo"><label>Sección</label><select id="n-seccion" onchange="alternarSeccionNueva()">'+
       secs.map(function(s){ return '<option value="'+escAttr(s)+'"'+(s===SECCION_ACTIVA?' selected':'')+'>'+esc(s)+'</option>'; }).join('')+
-    '</select></div>'+
+      '<option value="__nueva__">+ Nueva sección…</option>'+
+    '</select>'+
+    '<input id="n-seccion-nueva" placeholder="Ej: Vinos" maxlength="40" hidden>'+
+    '<div class="aviso-foto" id="n-seccion-aviso" hidden>Aparece en la carta como una solapa nueva, al final. Si casi todo va sin foto, se muestra como lista con precios.</div>'+
+    '</div>'+
     '<div class="campo"><label>Nombre del producto</label><input id="n-nombre" placeholder="Ej: Milanesa napolitana"></div>'+
     '<div class="campo"><label>Descripción</label><textarea id="n-desc" placeholder="Con papas fritas y ensalada"></textarea></div>'+
     '<div class="fila2">'+
@@ -617,8 +623,27 @@ function abrirCrear(){
   document.getElementById('modal').classList.add('abierto');
 }
 
+function alternarSeccionNueva(){
+  var nueva = document.getElementById('n-seccion').value === '__nueva__';
+  var inp = document.getElementById('n-seccion-nueva');
+  inp.hidden = !nueva; document.getElementById('n-seccion-aviso').hidden = !nueva;
+  if (nueva) inp.focus();
+}
+
+/* Devuelve el nombre de la sección elegida. Si es nueva y ya existe con otra mayúscula, usa la existente. */
+function seccionElegida(){
+  var v = document.getElementById('n-seccion').value;
+  if (v !== '__nueva__') return v;
+  var nombre = document.getElementById('n-seccion-nueva').value.replace(/\s+/g,' ').trim();
+  if (!nombre) return '';
+  nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+  var igual = secciones().filter(function(x){ return x.toLowerCase() === nombre.toLowerCase(); })[0];
+  return igual || nombre;
+}
+
 function guardarNuevo(){
-  var seccion = document.getElementById('n-seccion').value;
+  var seccion = seccionElegida();
+  if (!seccion){ alert('Escribí el nombre de la sección nueva'); return; }
   var nombre = document.getElementById('n-nombre').value.trim();
   var desc = document.getElementById('n-desc').value.trim();
   var precioVal = document.getElementById('n-precio').value;
@@ -641,6 +666,10 @@ function guardarNuevo(){
       if (res.ok){
         PRODUCTOS.push({id:res.id, seccion:seccion, orden:9999, producto:nombre, descripcion:desc,
           precio: precio===''?null:precio, precio_media: precioMedia===''?null:precioMedia, grupo:grupo, foto:nombreFoto||'', tipo:tipo, activo:true});
+        if (SECCIONES.length && !SECCIONES.some(function(x){ return x.seccion === seccion; })){
+          var maxOrd = SECCIONES.reduce(function(m, x){ return Math.max(m, Number(x.orden) || 0); }, 0);
+          SECCIONES.push({seccion:seccion, orden:maxOrd + 1, activa:true});
+        }
         SECCION_ACTIVA = seccion;
         cerrarModal(); render();
       } else {
