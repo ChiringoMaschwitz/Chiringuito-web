@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Carta · La Focacceria by Chiringuito</title>
+<meta name="description" content="La carta de La Focacceria by Chiringuito, Mendoza 1578, Ingeniero Maschwitz: focaccias enormes de masa propia, entradas, picadas, vermouth, meriendas y bebidas.">
+<meta name="theme-color" content="#1F4A35">
+<meta property="og:title" content="Carta · La Focacceria by Chiringuito">
+<meta property="og:description" content="Focaccias enormes de masa propia, enteras o mitad. Mendoza 1578, Maschwitz.">
+<meta property="og:image" content="https://grupochiringuito.com.ar/carta/focacceria/img/focaccia-mostrador.jpg">
+<link rel="preload" href="fuentes/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  /* Archivo variable (ancho 62–125 %, peso 100–900), la misma letra de grupochiringuito.com.ar */
+  @font-face{font-family:'Archivo';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(fuentes/archivo-latin-wdth-normal.woff2) format('woff2')}
+
+  /* Solapas que se apilan: cada sección es una hoja que sube y tapa a la anterior */
+  :root{
+    color-scheme:light;
+    /* sistema del grupo */
+    --papel:#F1EBE0; --hueso:#FBF7F0; --tinta:#15120F; --gris:#57524A; --suave:#CFC5B4;
+    --durazno:#F6D3BE; --durazno-t:#6B3A22; --ambar:#D99A2B;
+    /* identidad Focacceria: el salvia del grupo + el verde botella del azulejo + la menta de las sillas */
+    --foca:#518059; --foca-2:#5E9066; --botella:#1F4A35; --botella-2:#173A2A; --menta:#A9D9CC;
+    --vermut:#6A2430; --vermut-2:#7C2C39;
+    --wa:#25D366;
+
+    --textura:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 0 64 32 32 64 0 32Z' fill='none' stroke='%23FBF7F0' stroke-opacity='.22' stroke-width='2'/%3E%3Cpath d='M5 32 32 5 59 32' fill='none' stroke='%23fff' stroke-opacity='.12' stroke-width='2.5'/%3E%3Cpath d='M59 32 32 59 5 32' fill='none' stroke='%23000' stroke-opacity='.26' stroke-width='2.5'/%3E%3C/svg%3E");
+    --textura-suave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 0 64 32 32 64 0 32Z' fill='none' stroke='%2315120F' stroke-opacity='.06' stroke-width='2'/%3E%3C/svg%3E");
+
+    --letra:'Archivo',system-ui,sans-serif;
+    --s-chico:14px; --s-cuerpo:17px; --s-lead:20px; --s-sub:30px;
+
+    --franja:56px;
+    --radio-hoja:26px; --radio:16px;
+    --sombra-hoja:0 -26px 60px rgba(14,12,10,.28);
+    --sombra-flota:0 18px 44px rgba(14,12,10,.32);
+
+    --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out:cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer:cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--botella);color:var(--tinta);font-family:var(--letra);font-size:var(--s-cuerpo);line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+  img{display:block;max-width:100%;height:auto}
+  button{font:inherit;color:inherit}
+  a{color:inherit}
+  [hidden]{display:none !important}
+  :focus-visible{outline:3px solid var(--ambar);outline-offset:3px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .num{font-variant-numeric:tabular-nums}
+  .ico{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+  .ancho{font-stretch:125%;font-weight:800;text-transform:uppercase;letter-spacing:.01em}
+  .angosto{font-stretch:68%;font-weight:800;text-transform:uppercase;line-height:.88}
+
+  /* ---------- franja fija ---------- */
+  .franja{position:sticky;top:0;z-index:60;height:var(--franja);display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;background:var(--botella-2);color:var(--hueso)}
+  .franja .logo{display:flex;align-items:center;padding:0 16px;justify-self:start}
+  .franja .logo img{width:104px;height:auto}
+  .franja .donde{min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:none;padding:0 8px;cursor:pointer;font-size:15px;font-weight:600;white-space:nowrap}
+  .franja .donde .ico{width:16px;height:16px;transition:transform 200ms var(--ease-out)}
+  .franja .donde[aria-expanded="true"] .ico{transform:rotate(180deg)}
+  .franja .wa{width:var(--franja);justify-self:end;display:grid;place-items:center;background:var(--wa);color:var(--tinta)}
+  .franja .wa svg{width:24px;height:24px}
+  .indice{position:fixed;top:calc(var(--franja) + 8px);left:50%;z-index:70;width:min(320px,calc(100vw - 32px));background:var(--hueso);color:var(--tinta);border-radius:20px;padding:8px;box-shadow:var(--sombra-flota);
+    transform-origin:50% 0;transform:translateX(-50%) scale(.96);opacity:0;visibility:hidden;pointer-events:none;transition:transform 200ms var(--ease-out),opacity 200ms var(--ease-out),visibility 0s 200ms}
+  .indice.abierto{transform:translateX(-50%);opacity:1;visibility:visible;pointer-events:auto;transition:transform 200ms var(--ease-out),opacity 200ms var(--ease-out),visibility 0s}
+  .indice button{display:flex;width:100%;justify-content:space-between;align-items:center;min-height:48px;padding:0 14px;border:0;border-radius:12px;background:none;cursor:pointer;font-size:var(--s-cuerpo);font-weight:600;text-align:left}
+  .indice button span{font-size:var(--s-chico);font-weight:500;color:var(--gris)}
+  .indice button.actual{background:var(--papel)}
+  @media (hover:hover) and (pointer:fine){.indice button:hover{background:var(--papel)}}
+
+  /* ---------- portada ---------- */
+  .portada{position:sticky;top:var(--franja);z-index:0;height:calc(100svh - var(--franja) - 64px);min-height:560px;overflow:clip;color:var(--hueso);background:var(--botella);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 20px 52px}
+  .carrusel{position:absolute;inset:0;touch-action:pan-y}
+  .carrusel img,.carrusel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1200ms ease}
+  .carrusel img.on,.carrusel video.on{opacity:1}
+  .puntos{position:absolute;left:0;right:0;bottom:18px;z-index:2;display:flex;justify-content:center;gap:2px}
+  .puntos button{width:28px;height:28px;border:0;background:none;padding:0;cursor:pointer;display:grid;place-items:center}
+  .puntos button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--hueso);opacity:.45;transition:opacity 200ms ease,transform 200ms var(--ease-out)}
+  .puntos button[aria-current="true"]::before{opacity:1;transform:scale(1.3)}
+  .portada::after{content:"";position:absolute;inset:0;background:rgba(15,32,24,.52)}
+  .portada > *:not(.carrusel):not(.puntos){position:relative;z-index:1}
+  .portada .logo-grande{width:min(78%,420px);height:auto;margin:36px auto auto}
+  .portada h1{margin:0;width:100%;font-size:min(132px, calc((100vw - 48px) / 8));font-stretch:68%;font-weight:800;text-transform:uppercase;line-height:.86}
+  .portada h1 span{display:block;white-space:nowrap}
+  .portada .estado{display:flex;justify-content:center;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 0;font-size:var(--s-chico);font-weight:500}
+  .punto{width:9px;height:9px;border-radius:50%;background:var(--suave);flex:0 0 auto}
+  .abierto .punto{background:var(--menta)}
+  .menu-dia{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;width:100%;max-width:520px;margin-top:20px;padding:16px 18px;border:0;border-radius:20px;background:var(--hueso);color:var(--tinta);text-align:left;cursor:pointer;box-shadow:var(--sombra-flota);transition:transform 160ms var(--ease-out)}
+  .menu-dia:active{transform:scale(.98)}
+  .menu-dia .que{font-size:var(--s-chico);font-weight:600;color:var(--foca)}
+  .menu-dia .cuanto{font-size:var(--s-lead);font-weight:700;line-height:1.25}
+  .menu-dia .ir{grid-row:1/3;grid-column:2;width:44px;height:44px;border-radius:50%;background:var(--botella);color:var(--hueso);display:grid;place-items:center}
+
+  /* ---------- solapas ---------- */
+  main{position:relative}
+  .ancla{height:0}
+  .solapa{position:sticky;top:var(--franja);z-index:1;min-height:calc(100svh - var(--franja));margin-top:calc(-1 * var(--radio-hoja));border-radius:var(--radio-hoja) var(--radio-hoja) 0 0;box-shadow:var(--sombra-hoja);
+    padding:12px 16px 72px;background:var(--fondo);color:var(--texto);transform-origin:50% 0}
+  .solapa > .velo{position:absolute;inset:0;border-radius:inherit;background:#0b1510;opacity:0;pointer-events:none;z-index:5}
+  .solapa .dentro{max-width:1240px;margin:0 auto}
+  .solapa .manija{display:block;width:44px;height:5px;border-radius:3px;background:currentColor;opacity:.32;margin:0 auto 22px}
+  .cab{margin-bottom:28px}
+  .cab h2{margin:0;font-size:clamp(56px,17vw,190px);line-height:.84;white-space:nowrap}
+  .cab .bajada{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:14px 0 0;font-size:var(--s-lead);line-height:1.35}
+  .cab .bajada .cuenta{font-size:var(--s-chico);font-weight:600;padding:4px 12px;border-radius:999px;background:var(--chip);color:var(--chip-t)}
+
+  .t-hueso{--fondo:var(--hueso);--texto:var(--tinta);--suave-t:var(--gris);--chip:var(--papel);--chip-t:var(--tinta);--card:var(--papel);--acento:var(--foca)}
+  .t-papel{--fondo:var(--papel);--texto:var(--tinta);--suave-t:var(--gris);--chip:var(--hueso);--chip-t:var(--tinta);--card:var(--hueso);--acento:var(--durazno-t)}
+  .t-foca{--fondo:var(--foca);--texto:var(--hueso);--suave-t:#E4EEE3;--chip:var(--hueso);--chip-t:var(--botella);--card:var(--foca-2);--acento:var(--durazno)}
+  .t-botella{--fondo:var(--botella);--texto:var(--hueso);--suave-t:#CFE0D3;--chip:var(--menta);--chip-t:var(--botella);--card:#285841;--acento:var(--menta)}
+  .t-durazno{--fondo:var(--durazno);--texto:var(--tinta);--suave-t:#5B4436;--chip:var(--hueso);--chip-t:var(--durazno-t);--card:#F9DECD;--acento:var(--durazno-t)}
+  .t-vermut{--fondo:var(--vermut);--texto:var(--hueso);--suave-t:#F0D4D0;--chip:#F2C9C4;--chip-t:var(--vermut);--card:var(--vermut-2);--acento:#F2C9C4}
+  .t-tinta{--fondo:var(--tinta);--texto:var(--hueso);--suave-t:var(--suave);--chip:var(--durazno);--chip-t:var(--tinta);--card:#24201B;--acento:var(--durazno)}
+  .t-ambar{--fondo:#F3DFB4;--texto:var(--tinta);--suave-t:#5B4A2E;--chip:var(--hueso);--chip-t:#6B4A12;--card:#F8E9C9;--acento:#6B4A12}
+  .t-foca,.t-botella{background-image:var(--textura);background-size:64px 64px}
+  .t-hueso,.t-papel,.t-durazno,.t-ambar{background-image:var(--textura-suave);background-size:64px 64px}
+  .t-papel{--textura-suave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 0 64 32 32 64 0 32Z' fill='none' stroke='%2315120F' stroke-opacity='.09' stroke-width='2'/%3E%3Cpath d='M6 32 32 6 58 32' fill='none' stroke='%23fff' stroke-opacity='.7' stroke-width='2'/%3E%3C/svg%3E")}
+
+  /* grilla de platos con foto */
+  .grilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;gap:20px 12px;list-style:none;margin:0;padding:0}
+  .plato{position:relative;min-width:0}
+  .plato .abrir{display:block;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:inherit}
+  .plato .marco{display:block;position:relative;aspect-ratio:4/5;border-radius:var(--radio);overflow:clip;background:var(--card);transition:transform 160ms var(--ease-out)}
+  .plato .abrir:active .marco{transform:scale(.98)}
+  .plato .marco img{width:100%;height:100%;object-fit:cover;transition:transform 500ms var(--ease-out)}
+  @media (hover:hover) and (pointer:fine){.plato .abrir:hover .marco img{transform:scale(1.04)}}
+  .baldosa{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;background:var(--botella) var(--textura) 0 0/64px 64px;color:var(--hueso)}
+  .t-botella .baldosa{background-color:var(--foca)}
+  .t-durazno .baldosa,.t-hueso .baldosa,.t-papel .baldosa,.t-ambar .baldosa{background-color:var(--foca)}
+  .baldosa b{font-size:clamp(20px,5.6vw,30px);font-stretch:68%;font-weight:800;text-transform:uppercase;line-height:.9;overflow-wrap:anywhere}
+  .t-durazno .baldosa{background-color:var(--botella)}
+  .baldosa .cifra{font-size:clamp(64px,22vw,120px);font-stretch:68%;font-weight:800;line-height:.8;margin-bottom:auto;color:var(--menta)}
+  .plato h3{margin:10px 0 0;font-size:var(--s-cuerpo);font-weight:650;line-height:1.25}
+  .plato .desc{margin:4px 0 0;font-size:15px;line-height:1.4;color:var(--suave-t);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .precios{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .precio{display:inline-flex;align-items:baseline;gap:6px;padding:5px 11px;border-radius:999px;background:var(--chip);color:var(--chip-t);font-size:15px;font-weight:700;text-decoration:none}
+  .precio small{font-size:12.5px;font-weight:600;opacity:.8}
+  .plato.destacado{grid-column:1 / -1;order:-1}
+  .plato.destacado .marco{aspect-ratio:16/11}
+  .plato.destacado h3{font-size:var(--s-lead)}
+  .like{position:absolute;top:8px;right:8px;z-index:2;display:grid;place-items:center;min-width:44px;height:44px;padding:0 10px;border:0;border-radius:999px;background:rgba(21,18,15,.5);color:var(--hueso);cursor:pointer;gap:4px;grid-auto-flow:column;font-size:13px;font-weight:700}
+  .like svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;transition:transform 140ms var(--ease-out)}
+  .like:active svg{transform:scale(.85)}
+  .like.dado svg{fill:#F2A99E;stroke:#F2A99E}
+  .like.pop svg{animation:latido 520ms var(--ease-out)}
+  @keyframes latido{30%{transform:scale(1.3)}}
+  .like .n:empty{display:none}
+
+  /* fila de fotos que se arrastra (así salen del horno) */
+  .tira{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px 32px;padding:0 16px;scrollbar-width:none;list-style:none}
+  .tira::-webkit-scrollbar{display:none}
+  .tira li{flex:0 0 72%;max-width:340px;scroll-snap-align:start}
+  .tira img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radio)}
+  .tira-cab{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 12px;font-size:var(--s-chico);font-weight:600}
+  .tira-cab .desliza{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+  .tira-cab .desliza .ico{width:18px;height:18px}
+  .tira-envuelve{position:relative}
+  .tira-sig{position:absolute;right:4px;top:calc(50% - 50px);z-index:2;width:48px;height:48px;border:0;border-radius:50%;background:var(--hueso);color:var(--tinta);display:grid;place-items:center;cursor:pointer;box-shadow:var(--sombra-flota);transition:transform 140ms var(--ease-out),opacity 200ms ease}
+  .tira-sig:active{transform:scale(.94)}
+  .tira-sig[hidden]{display:none}
+
+  /* listas sin foto */
+  .sub{margin:44px 0 14px;font-size:var(--s-sub);line-height:1}
+  .lista{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .fila{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;align-items:baseline;padding:12px 16px;border-radius:14px;background:var(--card)}
+  .fila h4{margin:0;font-size:var(--s-cuerpo);font-weight:650;line-height:1.3}
+  .fila .p{font-weight:700;white-space:nowrap}
+  .fila .desc{grid-column:1/-1;margin:0;font-size:15px;line-height:1.4;color:var(--suave-t)}
+  .lista.grande .fila{padding:16px 18px}
+  .lista.grande h4{font-size:26px;font-stretch:72%;font-weight:800;text-transform:uppercase;line-height:1}
+  .lista.grande .p{font-size:20px}
+
+  /* armala: el anzuelo dentro de Focaccias */
+  .anzuelo{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 16px;width:100%;margin-top:40px;padding:22px 20px;border:0;border-radius:22px;background:var(--durazno);color:var(--tinta);text-align:left;cursor:pointer;box-shadow:var(--sombra-flota);transition:transform 160ms var(--ease-out)}
+  .anzuelo:active{transform:scale(.98)}
+  .anzuelo b{font-size:clamp(32px,9vw,56px);line-height:.88}
+  .anzuelo span{grid-column:1;font-size:var(--s-chico);font-weight:500}
+  .anzuelo .ir{grid-row:1/3;grid-column:2;width:52px;height:52px;border-radius:50%;background:var(--tinta);color:var(--hueso);display:grid;place-items:center}
+
+  .vacia{padding:28px 22px;border-radius:22px;background:var(--card);font-size:var(--s-lead);line-height:1.4}
+  .vacia small{display:block;margin-top:8px;font-size:var(--s-chico)}
+  .nota-demo{font-size:var(--s-chico);margin:16px 0 0;padding:10px 14px;border-radius:12px;background:rgba(0,0,0,.18);display:inline-block}
+
+  /* ---------- placa flotante del vermouth ---------- */
+  .placa-vermut{position:fixed;right:max(12px, env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;width:62px;padding:12px 0 14px;border:0;border-radius:18px;background:var(--vermut);color:var(--hueso);
+    display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;box-shadow:var(--sombra-flota);
+    transform:translateX(140%);transition:transform 320ms var(--ease-out)}
+  .placa-vermut.visible{transform:none}
+  .placa-vermut.visible:active{transform:scale(.96)}
+  .placa-vermut svg{width:26px;height:30px}
+  .placa-vermut span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-stretch:110%}
+  .pop-vermut{position:fixed;right:max(12px, env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:55;width:min(310px,calc(100vw - 24px));padding:20px 20px 16px;border-radius:22px;background:var(--vermut);color:var(--hueso);box-shadow:var(--sombra-flota);
+    transform-origin:100% 100%;transform:scale(.95);opacity:0;pointer-events:none;transition:transform 220ms var(--ease-out),opacity 220ms var(--ease-out)}
+  .pop-vermut.abierto{transform:none;opacity:1;pointer-events:auto}
+  .pop-vermut h3{margin:0;font-size:28px;line-height:.9}
+  .pop-vermut p{margin:8px 0 12px;font-size:var(--s-chico);color:#F0D4D0}
+  .pop-vermut ul{list-style:none;margin:0;padding:0}
+  .pop-vermut li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;font-weight:600}
+  .pop-vermut .acciones{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+  .pop-vermut .acciones button{min-height:44px;border:0;background:none;color:inherit;cursor:pointer;font-weight:600;text-decoration:underline;text-underline-offset:.2em;padding:0}
+  .pop-vermut .acciones .cerrar-pop{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;text-decoration:none}
+
+  /* ---------- pestaña para descubrir Armala ---------- */
+  .pestana{position:fixed;left:max(12px, env(safe-area-inset-left));bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 20px 0 14px;border:0;border-radius:999px;background:var(--durazno);color:var(--tinta);cursor:pointer;box-shadow:var(--sombra-flota);
+    transform:translateY(calc(100% + 32px));transition:transform 320ms var(--ease-out)}
+  .pestana.visible{transform:none}
+  .pestana.visible:active{transform:scale(.97)}
+  .pestana .mas{width:30px;height:30px;border-radius:50%;background:var(--tinta);color:var(--hueso);display:grid;place-items:center}
+  .pestana .mas .ico{width:16px;height:16px}
+  .pestana span{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;font-stretch:90%}
+
+  /* ---------- cajón que sube (armala, menú del día) ---------- */
+  .cajon{position:fixed;inset:0;z-index:90}
+  .cajon .fondo{position:absolute;inset:0;background:rgba(14,12,10,.55);opacity:0;transition:opacity 400ms var(--ease-drawer)}
+  .cajon .hoja{position:absolute;left:0;right:0;bottom:0;margin:0 auto;width:min(720px,100%);max-height:calc(100svh - 40px);display:flex;flex-direction:column;border-radius:var(--radio-hoja) var(--radio-hoja) 0 0;background:var(--hueso);color:var(--tinta);
+    transform:translateY(100%);transition:transform 500ms var(--ease-drawer);box-shadow:var(--sombra-hoja)}
+  .cajon.abierto .fondo{opacity:1}
+  .cajon.abierto .hoja{transform:none}
+  .cajon .tirador{flex:0 0 auto;padding:12px 20px 4px;touch-action:none;cursor:grab;position:relative}
+  .cajon .tirador .manija{display:block;width:44px;height:5px;border-radius:3px;background:var(--tinta);opacity:.25;margin:0 auto 14px}
+  .cajon .tirador h2{margin:0;font-size:clamp(40px,11vw,72px);line-height:.86;padding-right:52px}
+  .cajon .cerrar{position:absolute;top:22px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:var(--papel);display:grid;place-items:center;cursor:pointer}
+  .cajon .cuerpo{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:8px 20px 0}
+  .cajon .bajada{margin:6px 0 0;font-size:var(--s-cuerpo);color:var(--gris)}
+
+  /* armador */
+  .grupo{border:0;margin:28px 0 0;padding:0;min-width:0}
+  .grupo legend{padding:0;font-size:var(--s-sub);line-height:1}
+  .grupo .ayuda{margin:4px 0 0;font-size:var(--s-chico);color:var(--gris)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+  .chip span{display:flex;align-items:center;gap:8px;min-height:46px;padding:10px 16px;border-radius:999px;background:var(--papel);font-size:15px;font-weight:600;cursor:pointer;transition:background-color 180ms ease,color 180ms ease,transform 140ms var(--ease-out)}
+  .chip span em{font-style:normal;font-size:13px;color:var(--durazno-t)}
+  .chip input:checked + span{background:var(--foca);color:var(--hueso)}
+  .chip input:checked + span em{color:var(--durazno)}
+  .chip input:focus-visible + span{outline:3px solid var(--ambar);outline-offset:2px}
+  .chip:active span{transform:scale(.96)}
+  .ticket{position:sticky;bottom:0;margin:28px -20px 0;padding:14px 20px calc(14px + env(safe-area-inset-bottom));background:var(--botella);color:var(--hueso);border-radius:22px 22px 0 0}
+  .ticket .arriba{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+  .tamano{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.12)}
+  .tamano button{min-height:40px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--hueso);font-weight:600;cursor:pointer;transition:background-color 180ms ease,color 180ms ease}
+  .tamano button[aria-pressed="true"]{background:var(--hueso);color:var(--botella)}
+  .total{text-align:right;line-height:1.1}
+  .total small{display:block;font-size:13px;color:#CFE0D3}
+  .total strong{font-size:30px;font-stretch:80%;font-weight:800;display:inline-block}
+  .total strong.cambio{animation:sube 300ms var(--ease-out)}
+  @keyframes sube{from{transform:translateY(8px);opacity:.4}}
+  .ticket .detalle{margin:10px 0 0;font-size:var(--s-chico);color:#CFE0D3}
+  .ticket .detalle b{color:var(--hueso);font-weight:600}
+  .ticket .reiniciar{border:0;background:none;color:var(--hueso);text-decoration:underline;text-underline-offset:.2em;cursor:pointer;min-height:40px;padding:0;font-size:var(--s-chico)}
+
+  /* menú del día */
+  .semana{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:20px 0 0}
+  .semana button{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:62px;padding:8px 0;border:0;border-radius:14px;background:var(--papel);cursor:pointer;font-weight:700;transition:background-color 180ms ease,color 180ms ease,transform 140ms var(--ease-out)}
+  .semana button small{font-size:11.5px;font-weight:500}
+  .semana button:active{transform:scale(.96)}
+  .semana button[aria-pressed="true"]{background:var(--botella);color:var(--hueso)}
+  .semana button:disabled{opacity:.45;cursor:default}
+  .menu-precio{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 4px}
+  .menu-precio b{font-size:44px;font-stretch:80%;font-weight:800;line-height:1}
+  .opciones{list-style:none;margin:14px 0 24px;padding:0;display:grid;gap:8px}
+  .opciones li{padding:16px 18px;border-radius:16px;background:var(--foca) var(--textura) 0 0/64px 64px;color:var(--hueso)}
+  .opciones li b{display:block;font-size:24px;font-stretch:72%;font-weight:800;text-transform:uppercase;line-height:1}
+  .opciones li span{display:block;margin-top:4px;font-size:var(--s-chico)}
+
+  /* ---------- visor vertical (TikTok) ---------- */
+  #visor{position:fixed;inset:0;z-index:100;background:rgba(9,18,13,.94);display:flex;justify-content:center}
+  #visor .feed{position:relative;width:min(460px,100%);height:100%;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;background:var(--botella-2);scrollbar-width:none;color:var(--hueso)}
+  #visor .feed::-webkit-scrollbar{display:none}
+  #visor:not([hidden]) .feed{animation:entra 300ms var(--ease-out)}
+  @keyframes entra{from{opacity:0;transform:translateY(16px)}}
+  .slide{height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative}
+  .slide .media{flex:1 1 0;min-height:0;position:relative;overflow:clip}
+  .slide .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .slide .media .baldosa{padding:24px}
+  .slide .ficha{padding:18px 22px calc(22px + env(safe-area-inset-bottom));background:var(--botella-2) var(--textura) 0 0/64px 64px}
+  .slide .sec{margin:0;font-size:var(--s-chico);font-weight:600;color:var(--menta)}
+  .slide h2{margin:6px 0 0;font-size:34px;line-height:.9}
+  .slide .desc{margin:8px 0 0;font-size:15px;color:#CFE0D3}
+  .slide .renglon{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px}
+  .slide .renglon .like{position:static;background:rgba(255,255,255,.12)}
+  .slide .precio{background:var(--hueso);color:var(--botella);font-size:17px}
+  .pista{position:absolute;right:14px;bottom:14px;display:flex;flex-direction:column;align-items:center;padding:8px 10px;border-radius:14px;background:rgba(21,18,15,.6);color:var(--hueso);font-size:13px;font-weight:600}
+  .cerrar-visor{position:fixed;top:calc(10px + env(safe-area-inset-top));right:max(10px, calc((100vw - 460px) / 2 + 10px));z-index:3;width:46px;height:46px;border:0;border-radius:50%;background:rgba(21,18,15,.6);color:var(--hueso);display:grid;place-items:center;cursor:pointer}
+
+  /* promo */
+  #promo{width:min(420px,calc(100vw - 32px));margin:auto;border:0;padding:0;background:transparent;max-height:none}
+  #promo::backdrop{background:rgba(14,12,10,.6)}
+  #promo .caja{position:relative;background:var(--hueso);border-radius:24px;overflow:clip}
+  #promo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+  #promo .ficha{padding:20px 22px 24px}
+  #promo h2{margin:0;font-size:34px;line-height:.9}
+  #promo p{margin:10px 0 0;font-size:15px;color:var(--gris)}
+  #promo .precio{margin-top:14px;font-size:20px;background:var(--botella);color:var(--hueso)}
+  #promo .cerrar{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:50%;background:var(--hueso);display:grid;place-items:center;cursor:pointer}
+  #promo[open] .caja{animation:entra 320ms var(--ease-out)}
+
+  footer.pie{position:relative;z-index:2;background:var(--tinta);color:var(--suave);padding:40px 20px calc(40px + env(safe-area-inset-bottom));font-size:var(--s-chico);display:grid;gap:6px}
+  footer.pie a{color:var(--hueso)}
+  footer.pie b{color:var(--hueso);font-size:var(--s-cuerpo)}
+
+  #estado-carga{padding:80px 20px;color:var(--hueso);background:var(--botella);position:relative;z-index:1;margin:0}
+
+  /* ---------- compu ---------- */
+  @media (min-width: 700px){
+    .grilla{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 16px}
+    .solapa{padding:14px 32px 96px}
+    .tira{margin:0 -32px 40px;padding:0 32px}
+    .tira li{flex-basis:300px}
+    .lista.dos{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .portada{padding:0 40px 56px}
+  }
+  @media (min-width: 1100px){
+    .grilla{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .plato.destacado{grid-column:span 2}
+    .portada h1{max-width:1000px}
+  }
+
+  /* ---------- movimiento ---------- */
+  @media (prefers-reduced-motion: no-preference){
+    .js .carrusel .on{animation:acerca 7000ms linear forwards}
+    .js .portada h1,.js .portada .estado,.js .portada .menu-dia{opacity:0;transform:translateY(16px);animation:aparece 600ms var(--ease-out) forwards}
+    .js .portada .estado{animation-delay:120ms}
+    .js .portada .menu-dia{animation-delay:220ms}
+    .js .solapa .plato{opacity:0;transform:translateY(18px);transition:opacity 500ms var(--ease-out),transform 600ms var(--ease-out);transition-delay:calc(var(--i,0) * 50ms)}
+    .js .solapa.vista .plato{opacity:1;transform:none}
+    .js .solapa .cab h2{transform:translateY(24px);opacity:0;transition:transform 700ms var(--ease-out),opacity 500ms var(--ease-out)}
+    .js .solapa.vista .cab h2{transform:none;opacity:1}
+    .js .solapa.vista .tira-cab .desliza .ico{animation:empuja 900ms var(--ease-in-out) 500ms 3}
+  }
+  @keyframes acerca{from{transform:scale(1.08)}to{transform:none}}
+  @keyframes aparece{to{opacity:1;transform:none}}
+  @keyframes empuja{50%{transform:translateX(6px)}}
+  @media (prefers-reduced-motion: reduce){
+    .cajon .hoja{transition:none}
+    .placa-vermut,.pestana{transition:opacity 200ms ease}
+  }
+</style>
+</head>
+<body>
+<header class="franja">
+  <a class="logo" href="#arriba" aria-label="La Focacceria, volver arriba"><img src="img/logo-foca-hueso.png" alt="" width="1100" height="207"></a>
+  <button class="donde" id="donde" type="button" aria-expanded="false" aria-controls="indice"><span id="donde-txt">La carta</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  <a class="wa" href="https://wa.me/5491178196138" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp al 11 7819-6138"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
+</header>
+<nav class="indice" id="indice" aria-label="Solapas de la carta"></nav>
+
+<main id="arriba">
+  <section class="portada" aria-labelledby="titulo">
+    <div class="carrusel" id="carrusel" aria-label="Fotos de nuestras focaccias"></div>
+    <div class="puntos" id="puntos" role="group" aria-label="Elegir foto"></div>
+    <img class="logo-grande" src="img/logo-foca-hueso.png" alt="Focacceria by Chiringuito" width="1100" height="207">
+    <h1 id="titulo"><span>Focaccias</span> <span>enormes de</span> <span>masa propia</span></h1>
+    <p class="estado" id="estado-hoy"><span class="punto" aria-hidden="true"></span><span class="txt">Martes a domingo desde las 9 h</span><span aria-hidden="true">·</span><span>Mendoza 1578</span></p>
+    <button class="menu-dia" id="btn-menu-dia" type="button" hidden>
+      <span class="que" id="md-que">Menú del día</span>
+      <span class="cuanto" id="md-cuanto"></span>
+      <span class="ir" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
+    </button>
+  </section>
+  <div id="solapas"><p id="estado-carga" role="status">Cargando la carta…</p></div>
+</main>
+
+<footer class="pie">
+  <b>La Focacceria by Chiringuito</b>
+  <span>Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz</span>
+  <span>Martes a jueves de 9 a 20 h · Viernes a domingo de 9 a 1 h · Lunes cerrado</span>
+  <span>WhatsApp <a href="https://wa.me/5491178196138" target="_blank" rel="noopener">11 7819-6138</a> · <a href="https://www.instagram.com/lafocacceria.elchiringuito/" target="_blank" rel="noopener">@lafocacceria.elchiringuito</a> · <a href="https://grupochiringuito.com.ar/">Grupo Chiringuito</a></span>
+</footer>
+
+<button class="placa-vermut" id="placa-vermut" type="button" aria-label="Acompañala con un vermut" aria-expanded="false" aria-controls="pop-vermut" hidden>
+  <svg viewBox="0 0 26 30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h20l-4 13a6 6 0 0 1-12 0z"/><path d="M13 21v6M8 28h10"/><path d="M6 8h14" stroke-opacity=".6"/><circle cx="19" cy="5" r="2.2" fill="currentColor" stroke="none" opacity=".8"/></svg>
+  <span>Con un vermut</span>
+</button>
+<div class="pop-vermut" id="pop-vermut" role="dialog" aria-label="Vermouth" hidden></div>
+
+<button class="pestana" id="pestana" type="button" aria-controls="cajon-armala" hidden>
+  <i class="mas" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></i><span>Armala a tu gusto</span>
+</button>
+
+<div class="cajon" id="cajon-armala" role="dialog" aria-modal="true" aria-labelledby="armala-t" hidden></div>
+<div class="cajon" id="cajon-menu" role="dialog" aria-modal="true" aria-labelledby="menu-t" hidden></div>
+
+<div id="visor" role="dialog" aria-modal="true" aria-label="Platos de la carta" hidden><div class="feed" id="feed" tabindex="-1"></div><button class="cerrar-visor" id="cerrar-visor" aria-label="Cerrar"></button></div>
+<dialog id="promo" aria-label="Promoción"></dialog>
+
+<noscript><p style="padding:24px;background:#FBF7F0">Para ver la carta activá JavaScript, o escribinos al WhatsApp 11 7819-6138.</p></noscript>
+
+<script>
+/* ================= CONFIG ================= */
+var API_URL = 'https://script.google.com/macros/s/AKfycbwwh2wNmw3i1Wx7v6r1QMt8yfLIkXtENxqXkfa_nFKFZioQsC-tJjOSEGBZbBzz1jxf/exec';                 /* URL del Web App del Apps Script de la Foca. Vacío = datos de prueba */
+var MODO_DEMO = !API_URL;
+var RAIZ_REL = !/\/carta\/focacceria\//.test(location.pathname);   /* vista previa fuera del sitio: rutas relativas */
+var FOTOS_BASE = '/carta/focacceria/fotos/';
+var CLAVE_LOCAL = 'foca';
+var UMBRAL_LIKES = 5;
+var HORA_CORTE_DIA = 6;
+var DEMORA_PROMO = 900;
+/* Solapas, en orden. Cada una junta una o más secciones del Sheet. Una sección nueva que no figure acá sale como solapa propia al final. */
+var SOLAPAS = [
+  {id:'entradas',  titulo:'Entradas',  secciones:['Entradas','Entraditas'], tema:'hueso',   bajada:'Para arrancar o para compartir.'},
+  {id:'focaccias', titulo:'Focaccias', secciones:['Creaciones'],            tema:'papel',   bajada:'Enormes, de masa propia. Enteras o mitad.', tira:true, armala:true, vermut:true},
+  {id:'picadas',   titulo:'Picadas',   secciones:['Picadas'],               tema:'durazno', bajada:'Tablas para compartir.', vermut:true},
+  {id:'pastas',    titulo:'Pastas',    secciones:['Pastas','Salsas'],       tema:'ambar', bajada:'', listas:['Salsas']},
+  {id:'vermouth',  titulo:'Vermouth',  secciones:['Vermouth','Vermut'],     tema:'vermut',  bajada:'Con sifón, hielo y naranja.'},
+  {id:'meriendas', titulo:'Meriendas', secciones:['Desayunos y meriendas','Calentitos','Panadería','Brunch','Pastelería'], tema:'hueso', bajada:'Café y algo rico, desde las 9.'},
+  {id:'bebidas',   titulo:'Bebidas',   secciones:['Bebidas'],               tema:'tinta',   bajada:''}
+];
+var SECCION_ARMALA = 'Armala a gusto';
+var SECCION_MENU = 'Menú del día';
+var SECCION_FOTOS = 'Fotos de la carta';   /* Grupo = Portada (carrusel de arriba) u Horno (tira "Así salen del horno") */
+var VIDEO_PORTADA = '';          /* si hay un video (mp4) de las focaccias, va acá y reemplaza al carrusel */
+var FOTOS_PORTADA = ['/carta/chiringuito/fotos/foca1.jpeg','/carta/chiringuito/fotos/asaditofoca.jpeg','/carta/chiringuito/fotos/303-focaccia-ii.jpg','/carta/chiringuito/fotos/focaqueso.jpeg','/carta/chiringuito/fotos/300-focaccia-con-fiambre.jpg'];
+var FOTOS_TIRA = ['/fotos/locales/focacceria-1.jpg','/fotos/locales/focacceria-4.jpg','/carta/chiringuito/fotos/302-focaccia-i.jpg','/fotos/locales/focacceria-2.jpg','/carta/chiringuito/fotos/300-focaccia-con-fiambre.jpg','/fotos/locales/focacceria-3.jpg'];
+/* Horario: 0 = domingo; null = cerrado; cierre > 24 = pasada la medianoche */
+var HORARIOS = {0:[9,25],1:null,2:[9,20],3:[9,20],4:[9,20],5:[9,25],6:[9,25]};
+var DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+var DIAS_COD = ['DO','LU','MA','MI','JU','VI','SA'];
+/* =========================================== */
+
+var ICO = {
+  x:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  der:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
+  arriba:'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg>',
+  corazon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
+};
+var DATA = null, PLANOS = [], LIKES = {}, SOLAPAS_DOM = [], VERMUT = [], MENU = null;
+
+function fmt(p){ if (p === null || p === '' || isNaN(p)) return ''; return '$' + Number(p).toLocaleString('es-AR'); }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function ruta(n){ if (!n) return null; if (/^https?:\/\//.test(n)) return n; if (n.charAt(0) === '/') return RAIZ_REL ? n.slice(1) : n; return (RAIZ_REL ? FOTOS_BASE.slice(1) : FOTOS_BASE) + encodeURIComponent(n); }
+function tipo(p){ return String(p.tipo || '').trim().toLowerCase(); }
+function esOpcion(p){ var t = tipo(p); return t === 'opcion' || t === 'opción' || t === 'adicional' || t === 'base'; }
+function hayPrecio(p){ return p !== null && p !== '' && !isNaN(p) && Number(p) > 0; }
+function reducido(){ return matchMedia('(prefers-reduced-motion: reduce)').matches; }
+function $(id){ return document.getElementById(id); }
+
+/* ---------- carrusel (o video) de la portada ---------- */
+var CARRUSEL = {i:0, timer:null};
+function armarCarrusel(fotos){
+  var c = $('carrusel'), pts = $('puntos');
+  clearInterval(CARRUSEL.timer); CARRUSEL.timer = null; CARRUSEL.i = 0;
+  if (VIDEO_PORTADA){
+    c.innerHTML = '<video class="on" src="' + ruta(VIDEO_PORTADA) + '" muted autoplay loop playsinline poster="' + ruta(fotos[0]) + '"></video>';
+    pts.hidden = true; return;
+  }
+  c.innerHTML = fotos.map(function(f, i){ return '<img src="' + ruta(f) + '" alt="' + (i ? '' : 'Focaccia de la casa') + '"' + (i ? ' loading="lazy"' : ' fetchpriority="high" class="on"') + ' width="1200" height="1300">'; }).join('');
+  pts.hidden = fotos.length < 2;
+  pts.innerHTML = fotos.map(function(f, k){ return '<button type="button" aria-label="Foto ' + (k + 1) + ' de ' + fotos.length + '"' + (k ? '' : ' aria-current="true"') + '></button>'; }).join('');
+  Array.prototype.forEach.call(pts.children, function(b, k){ b.onclick = function(){ pararCarrusel(); irCarrusel(k); arrancarCarrusel(); }; });
+  arrancarCarrusel();
+}
+function irCarrusel(k){
+  var imgs = $('carrusel').querySelectorAll('img'), pts = $('puntos'); if (imgs.length < 2) return;
+  imgs[CARRUSEL.i].classList.remove('on'); pts.children[CARRUSEL.i].removeAttribute('aria-current');
+  CARRUSEL.i = (k + imgs.length) % imgs.length;
+  imgs[CARRUSEL.i].classList.add('on'); pts.children[CARRUSEL.i].setAttribute('aria-current', 'true');
+}
+function arrancarCarrusel(){ if (!CARRUSEL.timer && !reducido()) CARRUSEL.timer = setInterval(function(){ irCarrusel(CARRUSEL.i + 1); }, 5000); }
+function pararCarrusel(){ clearInterval(CARRUSEL.timer); CARRUSEL.timer = null; }
+(function(){
+  var c = $('carrusel'), x0 = null;
+  c.addEventListener('pointerdown', function(e){ x0 = e.clientX; });
+  c.addEventListener('pointerup', function(e){ if (x0 === null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40){ pararCarrusel(); irCarrusel(CARRUSEL.i + (dx < 0 ? 1 : -1)); arrancarCarrusel(); } });
+  document.addEventListener('visibilitychange', function(){ document.hidden ? pararCarrusel() : arrancarCarrusel(); });
+  armarCarrusel(FOTOS_PORTADA);
+})();
+
+/* ---------- el título de la portada siempre entra entero ---------- */
+function ajustarPortada(){
+  var h1 = $('titulo'); if (!h1) return;
+  var lineas = h1.querySelectorAll('span'), ancho = h1.clientWidth, max = 0;
+  h1.style.fontSize = '100px';
+  lineas.forEach(function(l){ l.style.display = 'inline-block'; max = Math.max(max, l.getBoundingClientRect().width); l.style.display = ''; });
+  if (max > 0) h1.style.fontSize = Math.min(Math.floor(100 * ancho / max * 0.97), innerWidth > 1100 ? 150 : 132) + 'px';
+}
+ajustarPortada();
+(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(ajustarPortada);
+addEventListener('resize', ajustarPortada);
+
+/* ---------- flecha de la tira de fotos ---------- */
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('.tira-sig'); if (!b) return;
+  var t = b.parentElement.querySelector('.tira'), li = t.querySelector('li');
+  t.scrollBy({left:li ? li.offsetWidth + 10 : 280, behavior:reducido() ? 'auto' : 'smooth'});
+});
+document.addEventListener('scroll', function(e){
+  var t = e.target; if (!t.classList || !t.classList.contains('tira')) return;
+  var b = t.parentElement.querySelector('.tira-sig');
+  if (b) b.hidden = t.scrollLeft + t.clientWidth >= t.scrollWidth - 8;
+}, true);
+
+/* ---------- carga ---------- */
+if (RAIZ_REL) document.querySelectorAll('img[src^="/"]').forEach(function(i){ i.src = i.getAttribute('src').slice(1); });
+function cargar(){
+  fetch(MODO_DEMO ? 'datos-demo.json' : API_URL)
+    .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){ DATA = j; render(); })
+    .catch(function(){ $('estado-carga').innerHTML = 'No pudimos cargar la carta. Revisá la conexión y <a href="">probá de nuevo</a>.'; });
+}
+
+function render(){
+  PLANOS = []; LIKES = {};
+  var porSeccion = {};
+  DATA.secciones.forEach(function(s){
+    var prods = s.productos.filter(function(p){ return p.activo !== false && p.producto; });
+    prods.forEach(function(p){ if (p.id) LIKES[p.id] = Number(p.likes) || 0; });
+    porSeccion[s.seccion] = prods;
+  });
+  if (porSeccion[SECCION_ARMALA]) armarCajonArmala(porSeccion[SECCION_ARMALA]);
+  if (porSeccion[SECCION_MENU]) prepararMenu(porSeccion[SECCION_MENU]);
+  VERMUT = (porSeccion['Vermouth'] || porSeccion['Vermut'] || []).filter(function(p){ return !esOpcion(p); });
+  if (porSeccion[SECCION_FOTOS]){
+    var deGrupo = function(g){ return porSeccion[SECCION_FOTOS].filter(function(p){ return p.foto && String(p.grupo || '').trim().toLowerCase() === g; }).map(function(p){ return p.foto; }); };
+    var port = deGrupo('portada'), horno = deGrupo('horno');
+    if (port.length) armarCarrusel(port);
+    if (horno.length) FOTOS_TIRA = horno;
+  }
+
+  var usadas = {}; usadas[SECCION_ARMALA] = true; usadas[SECCION_MENU] = true; usadas[SECCION_FOTOS] = true;
+  var lista = SOLAPAS.map(function(cfg){
+    var secs = cfg.secciones.filter(function(n){ return porSeccion[n] && porSeccion[n].length; });
+    secs.forEach(function(n){ usadas[n] = true; });
+    return {cfg:cfg, secs:secs};
+  });
+  Object.keys(porSeccion).forEach(function(n){
+    if (!usadas[n] && porSeccion[n].length) lista.push({cfg:{id:'s-' + lista.length, titulo:n, tema:'hueso', bajada:''}, secs:[n]});
+  });
+
+  var cont = $('solapas'); cont.innerHTML = ''; SOLAPAS_DOM = [];
+  lista.forEach(function(x){
+    if (!x.secs.length && !(MODO_DEMO && x.cfg.id === 'pastas')) return;
+    var anc = document.createElement('div'); anc.className = 'ancla'; anc.id = x.cfg.id;
+    cont.appendChild(anc);
+    var el = construirSolapa(x.cfg, x.secs, porSeccion);
+    cont.appendChild(el);
+    SOLAPAS_DOM.push({cfg:x.cfg, el:el, ancla:anc, top:56});
+  });
+  armarIndice();
+  armarVermut();
+  ajustarTitulos();
+  ubicarSolapas();
+  activarScroll();
+  programarPromo();
+  publicarSchemaMenu(porSeccion);
+}
+
+/* ---------- una solapa ---------- */
+function construirSolapa(cfg, secs, porSeccion){
+  var el = document.createElement('section');
+  el.className = 'solapa t-' + cfg.tema;
+  el.setAttribute('aria-labelledby', cfg.id + '-t');
+  var total = 0;
+  secs.forEach(function(n){ total += porSeccion[n].filter(function(p){ return !esOpcion(p); }).length; });
+  var h = '<div class="velo" aria-hidden="true"></div><div class="dentro"><span class="manija" aria-hidden="true"></span>' +
+    '<header class="cab"><h2 class="ancho" id="' + cfg.id + '-t" data-ajustar>' + esc(cfg.titulo) + '</h2>' +
+    '<p class="bajada">' + (cfg.bajada ? '<span>' + esc(cfg.bajada) + '</span>' : '') + (total ? '<span class="cuenta num">' + total + (total === 1 ? ' opción' : ' opciones') + '</span>' : '') + '</p></header>';
+  if (cfg.tira) h += tiraFotos();
+  el.innerHTML = h + '</div>';
+  var dentro = el.querySelector('.dentro');
+
+  if (!secs.length){
+    dentro.insertAdjacentHTML('beforeend', '<div class="vacia">Acá van las pastas: falta cargar cuáles son y sus precios.<small>Se cargan desde el panel, en una sección llamada "Pastas".</small></div>');
+    return el;
+  }
+  secs.forEach(function(n){
+    var platos = porSeccion[n].filter(function(p){ return !esOpcion(p); });
+    if (secs.length > 1 && n !== cfg.titulo) dentro.insertAdjacentHTML('beforeend', '<h3 class="sub ancho">' + esc(n) + '</h3>');
+    var conFoto = platos.filter(function(p){ return p.foto; }).length;
+    var esGrilla = ['entradas','focaccias','picadas','pastas'].indexOf(cfg.id) > -1 || conFoto / Math.max(platos.length,1) >= 0.5;
+    if (cfg.listas && cfg.listas.indexOf(n) > -1) esGrilla = false;
+    if (cfg.id === 'bebidas' || cfg.id === 'vermouth') esGrilla = false;
+    dentro.appendChild(esGrilla ? grilla(platos, n) : listaSimple(platos, cfg));
+  });
+  if (cfg.id === 'vermouth' && MODO_DEMO && VERMUT.some(function(p){ return tipo(p) === 'ejemplo'; }))
+    dentro.insertAdjacentHTML('beforeend', '<p class="nota-demo">Lista de ejemplo: faltan los vermouth reales y sus precios.</p>');
+  if (cfg.armala && $('cajon-armala').dataset.listo)
+    dentro.insertAdjacentHTML('beforeend', '<button class="anzuelo" type="button" data-cajon="cajon-armala"><b class="angosto">Armala a tu gusto</b><span>Elegí queso, fiambre, extra y alioli. Te sumamos el precio.</span><span class="ir" aria-hidden="true">' + ICO.der + '</span></button>');
+  return el;
+}
+
+function tiraFotos(){
+  return '<div class="tira-cab"><span>Así salen del horno</span><span class="desliza">Deslizá ' + ICO.der + '</span></div><div class="tira-envuelve"><ul class="tira">' +
+    FOTOS_TIRA.map(function(f){ return '<li><img src="' + ruta(f) + '" alt="Focaccia recién hecha de la Focacceria" loading="lazy" width="600" height="750"></li>'; }).join('') + '</ul>' +
+    '<button class="tira-sig" type="button" aria-label="Ver la foto siguiente">' + ICO.der + '</button></div>';
+}
+
+function grilla(platos, nombreSec){
+  var ul = document.createElement('ul'); ul.className = 'grilla';
+  var destacadoPuesto = false;
+  platos.forEach(function(p, i){
+    var idx = registrar(p, nombreSec);
+    var li = document.createElement('li');
+    li.className = 'plato';
+    li.style.setProperty('--i', Math.min(i, 8));
+    if (!destacadoPuesto && p.foto){ li.classList.add('destacado'); destacadoPuesto = true; }
+    var m = String(p.producto).match(/\sx\s?(\d+)$/i);
+    var nombre = m ? p.producto.replace(/\sx\s?\d+$/i, '') : p.producto;
+    var marco = p.foto
+      ? '<img src="' + ruta(p.foto) + '" alt="" loading="lazy" width="600" height="750">'
+      : '<span class="baldosa" aria-hidden="true">' + (m ? '<span class="cifra num">x' + m[1] + '</span>' : '') + '<b>' + esc(nombre) + '</b></span>';
+    li.innerHTML = '<button class="abrir" type="button" data-visor="' + idx + '" aria-label="Ver ' + esc(p.producto) + ' en grande">' +
+        '<span class="marco">' + marco + '</span></button>' + htmlLike(p) +
+      '<h3>' + esc(nombre) + (m ? ' <span class="num">x' + m[1] + '</span>' : '') + '</h3>' +
+      (p.descripcion ? '<p class="desc">' + esc(p.descripcion) + '</p>' : '') +
+      '<div class="precios">' + chipsPrecio(p) + '</div>';
+    ul.appendChild(li);
+  });
+  return ul;
+}
+function chipsPrecio(p){
+  var h = '';
+  if (hayPrecio(p.precio)) h += '<span class="precio num">' + (hayPrecio(p.precio_media) ? '<small>Entera</small>' : '') + fmt(p.precio) + '</span>';
+  if (hayPrecio(p.precio_media)) h += '<span class="precio num"><small>Mitad</small>' + fmt(p.precio_media) + '</span>';
+  return h;
+}
+function listaSimple(platos, cfg){
+  var ul = document.createElement('ul');
+  ul.className = 'lista' + (cfg.id === 'bebidas' || cfg.id === 'vermouth' ? ' grande' : ' dos');
+  platos.forEach(function(p){
+    var li = document.createElement('li'); li.className = 'fila';
+    li.innerHTML = '<h4>' + esc(p.producto) + '</h4><span class="p num">' + fmt(p.precio) + '</span>' +
+      (p.descripcion && cfg.id !== 'vermouth' ? '<p class="desc">' + esc(p.descripcion) + '</p>' : '');
+    ul.appendChild(li);
+  });
+  return ul;
+}
+function registrar(p, sec){ p._sec = sec; PLANOS.push(p); return PLANOS.length - 1; }
+
+/* ---------- títulos que llenan el ancho ---------- */
+function ajustarTitulos(){
+  document.querySelectorAll('[data-ajustar]').forEach(function(el){
+    var ancho = el.parentElement.clientWidth;
+    el.style.fontSize = '100px'; el.style.display = 'inline-block';
+    var w = el.getBoundingClientRect().width;
+    el.style.display = '';
+    if (w > 0) el.style.fontSize = Math.min(Math.floor(100 * ancho / w * 0.99), 220) + 'px';
+  });
+}
+
+/* ---------- solapas pegajosas: las altas bajan enteras y recién ahí se quedan ---------- */
+function ubicarSolapas(){
+  SOLAPAS_DOM.forEach(function(s){
+    var alto = s.el.offsetHeight;
+    var top = Math.min(56, innerHeight - alto);
+    s.el.style.top = top + 'px';
+    s.top = top;
+    s.el.style.transformOrigin = '50% ' + Math.round(innerHeight * 0.5 - top) + 'px';
+  });
+}
+
+/* ---------- scroll: la hoja de abajo se achica y se oscurece; se sabe en qué solapa estás ---------- */
+var ACTUAL = null;
+function activarScroll(){
+  var portada = document.querySelector('.portada');
+  var pedido = false;
+  function cuadro(){
+    pedido = false;
+    var vh = innerHeight;
+    var capas = [portada].concat(SOLAPAS_DOM.map(function(s){ return s.el; }));
+    if (!reducido()){
+      for (var i = 0; i < capas.length - 1; i++){
+        var sig = capas[i + 1].getBoundingClientRect().top;
+        var p = Math.max(0, Math.min(1, (vh - sig) / (vh - 56)));
+        var el = capas[i];
+        el.style.transform = p > 0.001 ? 'scale(' + (1 - 0.06 * p).toFixed(4) + ')' : '';
+        var velo = el.querySelector(':scope > .velo');
+        if (velo) velo.style.opacity = (p * 0.45).toFixed(3);
+        else el.style.filter = p > 0.001 ? 'brightness(' + (1 - 0.4 * p).toFixed(3) + ')' : '';
+      }
+    }
+    var actual = null;
+    SOLAPAS_DOM.forEach(function(s){ if (s.el.getBoundingClientRect().top <= vh * 0.45) actual = s; });
+    if (actual !== ACTUAL){ ACTUAL = actual; cambioSolapa(); }
+    SOLAPAS_DOM.forEach(function(s){ if (!s.vista && s.el.getBoundingClientRect().top < vh * 0.85){ s.vista = true; s.el.classList.add('vista'); } });
+  }
+  addEventListener('scroll', function(){ if (!pedido){ pedido = true; requestAnimationFrame(cuadro); } }, {passive:true});
+  var t; addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(function(){ ajustarTitulos(); ubicarSolapas(); cuadro(); }, 120); });
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function(){ ajustarTitulos(); ubicarSolapas(); cuadro(); });
+  addEventListener('load', function(){ ubicarSolapas(); cuadro(); });
+  cuadro();
+}
+function cambioSolapa(){
+  var c = ACTUAL ? ACTUAL.cfg : null;
+  $('donde-txt').textContent = c ? c.titulo : 'La carta';
+  document.querySelectorAll('#indice button').forEach(function(b){ b.classList.toggle('actual', !!c && b.dataset.ir === c.id); });
+  mostrarFlotante($('placa-vermut'), !!c && !!c.vermut && VERMUT.length > 0);
+  if (!(c && c.vermut)) cerrarPopVermut();
+  mostrarFlotante($('pestana'), !!c && !!c.armala && !!$('cajon-armala').dataset.listo);
+}
+function mostrarFlotante(el, ver){
+  if (ver){ el.hidden = false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('visible'); }); }); }
+  else el.classList.remove('visible');
+}
+function irA(id){
+  var a = $(id); if (!a) return;
+  var y = a.getBoundingClientRect().top + scrollY - 56 + 26;
+  scrollTo({top:y, behavior:reducido() ? 'auto' : 'smooth'});
+}
+
+/* ---------- índice desde la franja ---------- */
+function armarIndice(){
+  var ind = $('indice');
+  ind.innerHTML = SOLAPAS_DOM.map(function(s){
+    var n = s.el.querySelectorAll('.plato, .fila').length;
+    return '<button type="button" data-ir="' + s.cfg.id + '">' + esc(s.cfg.titulo) + (n ? '<span class="num">' + n + '</span>' : '') + '</button>';
+  }).join('') + (MENU ? '<button type="button" data-cajon="cajon-menu">Menú del día<span class="num">' + fmt(MENU.precio) + '</span></button>' : '');
+  ind.querySelectorAll('[data-ir]').forEach(function(b){ b.onclick = function(){ cerrarIndice(); irA(b.dataset.ir); }; });
+}
+function abrirIndice(){ var i = $('indice'); i.classList.add('abierto'); $('donde').setAttribute('aria-expanded','true'); var b = i.querySelector('button'); if (b) b.focus({preventScroll:true}); }
+function cerrarIndice(){ $('indice').classList.remove('abierto'); $('donde').setAttribute('aria-expanded','false'); }
+$('donde').onclick = function(e){ e.stopPropagation(); $('indice').classList.contains('abierto') ? cerrarIndice() : abrirIndice(); };
+document.addEventListener('click', function(e){
+  if (!e.target.closest('#indice')) cerrarIndice();
+  if (!e.target.closest('#pop-vermut, #placa-vermut')) cerrarPopVermut();
+});
+
+/* ---------- placa flotante del vermouth ---------- */
+function armarVermut(){
+  var pop = $('pop-vermut');
+  if (!VERMUT.length) return;
+  pop.innerHTML = '<h3 class="ancho">Acompañala con un vermut</h3><p>Con sifón, hielo y naranja.</p><ul>' +
+    VERMUT.slice(0, 6).map(function(v){ return '<li><span>' + esc(v.producto) + '</span><span class="num">' + fmt(v.precio) + '</span></li>'; }).join('') + '</ul>' +
+    '<div class="acciones"><button type="button" id="ver-vermut">Ver la solapa Vermouth</button><button type="button" class="cerrar-pop" aria-label="Cerrar">' + ICO.x + '</button></div>';
+  $('placa-vermut').onclick = function(e){
+    e.stopPropagation();
+    pop.hidden = false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ pop.classList.add('abierto'); }); });
+    this.setAttribute('aria-expanded','true');
+  };
+  pop.querySelector('.cerrar-pop').onclick = function(){ cerrarPopVermut(); };
+  $('ver-vermut').onclick = function(){ cerrarPopVermut(); irA('vermouth'); };
+}
+function cerrarPopVermut(){
+  var p = $('pop-vermut'); if (!p.classList.contains('abierto')) return;
+  p.classList.remove('abierto'); $('placa-vermut').setAttribute('aria-expanded','false');
+  setTimeout(function(){ if (!p.classList.contains('abierto')) p.hidden = true; }, 230);
+}
+
+/* ---------- cajones que suben y se cierran arrastrando ---------- */
+var CAJON_ABIERTO = null, FOCO_ANTES = null;
+function abrirCajon(id){
+  var c = $(id); if (!c || !c.innerHTML) return;
+  FOCO_ANTES = document.activeElement;
+  c.hidden = false; document.body.style.overflow = 'hidden';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.classList.add('abierto'); }); });
+  CAJON_ABIERTO = c;
+  history.pushState({cajon:id}, '');
+  setTimeout(function(){ var b = c.querySelector('.cerrar'); if (b) b.focus({preventScroll:true}); }, 60);
+}
+function cerrarCajon(desdePop){
+  var c = CAJON_ABIERTO; if (!c) return;
+  var hoja = c.querySelector('.hoja');
+  hoja.style.transition = ''; hoja.style.transform = '';
+  c.classList.remove('abierto'); CAJON_ABIERTO = null;
+  setTimeout(function(){ if (!c.classList.contains('abierto')){ c.hidden = true; document.body.style.overflow = ''; } }, reducido() ? 0 : 420);
+  if (FOCO_ANTES && FOCO_ANTES.focus) FOCO_ANTES.focus({preventScroll:true});
+  if (!desdePop && history.state && history.state.cajon) history.back();
+}
+function esqueletoCajon(c, idTitulo, titulo, bajada){
+  c.innerHTML = '<div class="fondo"></div><div class="hoja"><div class="tirador"><span class="manija" aria-hidden="true"></span>' +
+    '<h2 class="angosto" id="' + idTitulo + '">' + titulo + '</h2>' + (bajada ? '<p class="bajada">' + bajada + '</p>' : '') +
+    '<button class="cerrar" type="button" aria-label="Cerrar">' + ICO.x + '</button></div><div class="cuerpo"></div></div>';
+  c.querySelector('.fondo').onclick = function(){ cerrarCajon(); };
+  c.querySelector('.cerrar').onclick = function(){ cerrarCajon(); };
+  arrastre(c);
+  return c.querySelector('.cuerpo');
+}
+function arrastre(c){
+  var hoja = c.querySelector('.hoja'), tir = c.querySelector('.tirador');
+  var y0 = 0, t0 = 0, dy = 0, id = null;
+  tir.addEventListener('pointerdown', function(e){
+    if (id !== null || e.target.closest('.cerrar')) return;   /* un solo dedo */
+    id = e.pointerId; y0 = e.clientY; t0 = Date.now(); dy = 0;
+    tir.setPointerCapture(id); hoja.style.transition = 'none';
+  });
+  tir.addEventListener('pointermove', function(e){
+    if (e.pointerId !== id) return;
+    dy = e.clientY - y0;
+    var y = dy > 0 ? dy : -Math.sqrt(-dy) * 2;   /* para arriba, con resistencia */
+    hoja.style.transform = 'translateY(' + y + 'px)';
+  });
+  function soltar(e){
+    if (e.pointerId !== id) return;
+    id = null;
+    var vel = Math.abs(dy) / Math.max(1, Date.now() - t0);
+    hoja.style.transition = '';
+    if (dy > 120 || (dy > 20 && vel > 0.11)) cerrarCajon();
+    else hoja.style.transform = '';
+  }
+  tir.addEventListener('pointerup', soltar);
+  tir.addEventListener('pointercancel', soltar);
+}
+document.addEventListener('click', function(e){
+  var b = e.target.closest && e.target.closest('[data-cajon]');
+  if (b){ cerrarIndice(); abrirCajon(b.dataset.cajon); }
+});
+$('pestana').onclick = function(){ abrirCajon('cajon-armala'); };
+$('btn-menu-dia').onclick = function(){ abrirCajon('cajon-menu'); };
+
+/* ---------- ARMALA A GUSTO ---------- */
+var ARMA = {tam:'entera', elegidos:{}, extras:{}};
+function armarCajonArmala(prods){
+  var bases = prods.filter(function(p){ return tipo(p) === 'base'; });
+  if (!bases.length) return;
+  var baseCon = bases.filter(function(p){ return /fiambre/i.test(p.producto); })[0] || bases[0];
+  var baseSin = bases.filter(function(p){ return p !== baseCon; })[0] || baseCon;
+  var grupos = [], porGrupo = {};
+  prods.filter(function(p){ var t = tipo(p); return t === 'opcion' || t === 'opción' || t === 'adicional'; }).forEach(function(p){
+    var g = p.grupo || (tipo(p) === 'adicional' ? 'Sumale' : 'Opciones');
+    if (!porGrupo[g]){ porGrupo[g] = {nombre:g, multi:tipo(p) === 'adicional', items:[]}; grupos.push(porGrupo[g]); }
+    porGrupo[g].items.push(p);
+  });
+  ARMA.baseCon = baseCon; ARMA.baseSin = baseSin; ARMA.grupos = grupos;
+  var c = $('cajon-armala');
+  var cuerpo = esqueletoCajon(c, 'armala-t', 'Armala a tu gusto', 'Un queso, un fiambre, un extra y un alioli. Entera o mitad.');
+  var h = '';
+  grupos.forEach(function(g, gi){
+    var esF = /fiambre/i.test(g.nombre), nom = 'arma-' + gi;
+    h += '<fieldset class="grupo" aria-describedby="ay-' + gi + '"><legend class="ancho">' + esc(g.nombre) + '</legend>' +
+      '<p class="ayuda" id="ay-' + gi + '">' + (g.multi ? 'Opcional, con recargo.' : (esF ? 'Elegí uno, o pedila sin fiambre.' : 'Elegí uno.')) + '</p><div class="chips">';
+    g.items.forEach(function(p){
+      h += '<label class="chip"><input type="' + (g.multi ? 'checkbox' : 'radio') + '" name="' + nom + '" value="' + p.id + '" data-grupo="' + esc(g.nombre) + '"><span>' + esc(p.producto) + (hayPrecio(p.precio) ? ' <em class="num">+' + fmt(p.precio) + '</em>' : '') + '</span></label>';
+    });
+    if (esF) h += '<label class="chip"><input type="radio" name="' + nom + '" value="sin" data-grupo="' + esc(g.nombre) + '"><span>Sin fiambre</span></label>';
+    h += '</div></fieldset>';
+  });
+  h += '<div class="ticket"><div class="arriba"><div class="tamano" role="group" aria-label="Tamaño"><button type="button" data-tam="entera" aria-pressed="true">Entera</button><button type="button" data-tam="media" aria-pressed="false">Mitad</button></div>' +
+    '<div class="total" aria-live="polite"><small id="total-txt"></small><strong class="num" id="total"></strong></div></div>' +
+    '<p class="detalle" id="detalle"></p><button type="button" class="reiniciar" id="reiniciar">Empezar de nuevo</button></div>';
+  cuerpo.innerHTML = h;
+  cuerpo.addEventListener('change', function(e){
+    var inp = e.target; if (!inp.dataset.grupo) return;
+    if (inp.type === 'checkbox'){ if (inp.checked) ARMA.extras[inp.value] = true; else delete ARMA.extras[inp.value]; }
+    else ARMA.elegidos[inp.dataset.grupo] = inp.value;
+    ticket(true);
+  });
+  cuerpo.querySelectorAll('[data-tam]').forEach(function(b){
+    b.onclick = function(){ ARMA.tam = b.dataset.tam; cuerpo.querySelectorAll('[data-tam]').forEach(function(x){ x.setAttribute('aria-pressed', x === b); }); ticket(true); };
+  });
+  $('reiniciar').onclick = function(){ ARMA.elegidos = {}; ARMA.extras = {}; cuerpo.querySelectorAll('input').forEach(function(i){ i.checked = false; }); ticket(true); };
+  c.dataset.listo = '1';
+  ticket(false);
+}
+function buscarOpcion(id){
+  for (var i = 0; i < ARMA.grupos.length; i++) for (var j = 0; j < ARMA.grupos[i].items.length; j++)
+    if (String(ARMA.grupos[i].items[j].id) === String(id)) return ARMA.grupos[i].items[j];
+  return null;
+}
+function ticket(animar){
+  var sin = false, rec = 0, partes = [], faltan = 0;
+  ARMA.grupos.forEach(function(g){
+    if (g.multi) return;
+    var v = ARMA.elegidos[g.nombre];
+    if (v === 'sin'){ sin = true; partes.push('sin fiambre'); return; }
+    var p = v ? buscarOpcion(v) : null;
+    if (!p){ faltan++; return; }
+    if (hayPrecio(p.precio)) rec += Number(p.precio);
+    partes.push(p.producto);
+  });
+  Object.keys(ARMA.extras).forEach(function(id){ var p = buscarOpcion(id); if (p){ rec += Number(p.precio) || 0; partes.push(p.producto); } });
+  var base = sin ? ARMA.baseSin : ARMA.baseCon;
+  var pb = Number(ARMA.tam === 'media' ? base.precio_media : base.precio) || 0;
+  $('total').textContent = fmt(pb + rec);
+  $('total-txt').textContent = faltan ? (faltan === 1 ? 'Falta elegir 1' : 'Faltan elegir ' + faltan) : (ARMA.tam === 'media' ? 'Total mitad' : 'Total entera');
+  $('detalle').innerHTML = partes.length ? '<b>' + esc(partes.join(' · ')) + '</b>' + (rec ? ' · recargos +' + fmt(rec) : '') : 'Mostrale esta pantalla a quien te atienda.';
+  if (animar && !reducido()){ var t = $('total'); t.classList.remove('cambio'); void t.offsetWidth; t.classList.add('cambio'); }
+}
+
+/* ---------- MENÚ DEL DÍA ---------- */
+function prepararMenu(prods){
+  var base = prods.filter(function(p){ return tipo(p) === 'menu'; })[0];
+  if (!base) return;
+  MENU = {precio:base.precio, opciones:prods.filter(function(p){ return tipo(p) === 'opcion' || tipo(p) === 'opción'; })};
+  var hoy = horaAR().dia;
+  var diaVer = HORARIOS[hoy] ? hoy : siguienteAbierto(hoy);
+  $('btn-menu-dia').hidden = false;
+  $('md-que').textContent = (diaVer === hoy ? 'Hoy ' + DIAS[hoy] : 'Hoy cerrado · el ' + DIAS[diaVer]) + ' · ' + base.producto;
+  $('md-cuanto').textContent = (base.descripcion ? base.descripcion.split('.')[0] + ' · ' : '') + fmt(base.precio);
+  var cuerpo = esqueletoCajon($('cajon-menu'), 'menu-t', esc(base.producto), esc(base.descripcion || ''));
+  var orden = [2,3,4,5,6,0,1];
+  cuerpo.innerHTML = '<div class="semana" role="group" aria-label="Día">' + orden.map(function(d){
+    return '<button type="button" data-dia="' + d + '"' + (HORARIOS[d] ? '' : ' disabled') + ' aria-pressed="' + (d === diaVer) + '">' + DIAS[d].slice(0,3) + '<small>' + (d === hoy ? 'hoy' : (HORARIOS[d] ? '' : 'cerrado')) + '</small></button>';
+  }).join('') + '</div><div class="menu-precio"><span id="md-dia"></span><b class="num">' + fmt(base.precio) + '</b></div><ul class="opciones" id="md-opciones"></ul>';
+  function pintar(d){
+    $('md-dia').textContent = d === hoy ? 'Hoy, ' + DIAS[d] : 'El ' + DIAS[d];
+    var ops = MENU.opciones.filter(function(o){ return !o.grupo || String(o.grupo).toUpperCase().split(/[,\s]+/).indexOf(DIAS_COD[d]) > -1; });
+    $('md-opciones').innerHTML = ops.length ? ops.map(function(o){ return '<li><b>' + esc(o.producto) + '</b>' + (o.descripcion ? '<span>' + esc(o.descripcion) + '</span>' : '') + '</li>'; }).join('') : '<li><b>Ese día no hay menú</b></li>';
+    cuerpo.querySelectorAll('[data-dia]').forEach(function(b){ b.setAttribute('aria-pressed', Number(b.dataset.dia) === d); });
+  }
+  cuerpo.querySelectorAll('[data-dia]').forEach(function(b){ b.onclick = function(){ pintar(Number(b.dataset.dia)); }; });
+  pintar(diaVer);
+}
+function siguienteAbierto(d){ for (var k = 1; k <= 7; k++){ var x = (d + k) % 7; if (HORARIOS[x]) return x; } return d; }
+
+/* ---------- abierto / cerrado ahora ---------- */
+function horaAR(){
+  var s = new Date().toLocaleString('en-US', {timeZone:'America/Argentina/Buenos_Aires', hour12:false, weekday:'short', hour:'2-digit', minute:'2-digit'});
+  var m = s.match(/(\w{3}),?\s+(\d{1,2}):(\d{2})/);
+  return {dia:{Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[m[1]], h:Number(m[2]) % 24 + Number(m[3]) / 60};
+}
+function hs(n){ n = n % 24; return (n === 1 ? 'la 1' : 'las ' + n) + ' h'; }
+function estadoHoy(){
+  var t = horaAR(), d = t.dia, h = t.h, ayer = HORARIOS[(d + 6) % 7], hoy = HORARIOS[d];
+  if (ayer && ayer[1] > 24 && h < ayer[1] - 24) return {abierto:true, txt:'Abierta hasta ' + hs(ayer[1])};
+  if (hoy && h >= hoy[0] && h < hoy[1]) return {abierto:true, txt:'Abierta hasta ' + hs(hoy[1])};
+  if (hoy && h < hoy[0]) return {abierto:false, txt:'Abrimos hoy a ' + hs(hoy[0])};
+  var x = siguienteAbierto(d);
+  return {abierto:false, txt:'Cerrada. Abrimos ' + ((x - d + 7) % 7 === 1 ? 'mañana' : 'el ' + DIAS[x]) + ' a ' + hs(HORARIOS[x][0])};
+}
+function pintarHorario(){ try { var e = estadoHoy(), el = $('estado-hoy'); el.classList.toggle('abierto', e.abierto); el.querySelector('.txt').textContent = e.txt; } catch(e){} }
+pintarHorario(); setInterval(pintarHorario, 60000);
+
+/* ---------- visor vertical (TikTok) ---------- */
+$('cerrar-visor').innerHTML = ICO.x;
+function abrirVisor(idx){
+  var v = $('visor'), f = $('feed'); f.innerHTML = '';
+  PLANOS.forEach(function(p, i){
+    var d = document.createElement('article'); d.className = 'slide'; d.setAttribute('aria-label', p.producto);
+    var m = String(p.producto).match(/\sx\s?(\d+)$/i);
+    var nombre = m ? p.producto.replace(/\sx\s?\d+$/i, '') : p.producto;
+    d.innerHTML = '<div class="media">' + (p.foto ? '<img src="' + ruta(p.foto) + '" alt="' + esc(p.producto) + '" loading="lazy" decoding="async">' : '<span class="baldosa" aria-hidden="true">' + (m ? '<span class="cifra num">x' + m[1] + '</span>' : '') + '<b>' + esc(nombre) + '</b></span>') +
+      (i < PLANOS.length - 1 ? '<span class="pista" aria-hidden="true">' + ICO.arriba + 'Deslizá</span>' : '') + '</div>' +
+      '<div class="ficha"><p class="sec">' + esc(p._sec) + '</p><h2 class="angosto">' + esc(p.producto) + '</h2>' + (p.descripcion ? '<p class="desc">' + esc(p.descripcion) + '</p>' : '') +
+      '<div class="renglon"><div class="precios">' + chipsPrecio(p) + '</div>' + htmlLike(p) + '</div></div>';
+    f.appendChild(d);
+  });
+  FOCO_ANTES = document.activeElement;
+  v.hidden = false; document.body.style.overflow = 'hidden';
+  f.scrollTop = f.children[idx].offsetTop;
+  $('cerrar-visor').focus({preventScroll:true});
+  history.pushState({visor:true}, '');
+}
+function cerrarVisor(desdePop){
+  var v = $('visor'); if (v.hidden) return;
+  v.hidden = true; document.body.style.overflow = ''; $('feed').innerHTML = '';
+  if (FOCO_ANTES && FOCO_ANTES.focus) FOCO_ANTES.focus({preventScroll:true});
+  if (!desdePop && history.state && history.state.visor) history.back();
+}
+$('cerrar-visor').onclick = function(){ cerrarVisor(); };
+document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-visor]'); if (b) abrirVisor(Number(b.dataset.visor)); });
+$('visor').addEventListener('click', function(e){ if (e.target === this) cerrarVisor(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){ if (!$('visor').hidden) cerrarVisor(); else if (CAJON_ABIERTO) cerrarCajon(); else { cerrarIndice(); cerrarPopVermut(); } return; }
+  if ($('visor').hidden) return;
+  var f = $('feed');
+  if (e.key === 'ArrowDown' || e.key === 'PageDown'){ e.preventDefault(); f.scrollBy({top:f.clientHeight, behavior:reducido() ? 'auto' : 'smooth'}); }
+  else if (e.key === 'ArrowUp' || e.key === 'PageUp'){ e.preventDefault(); f.scrollBy({top:-f.clientHeight, behavior:reducido() ? 'auto' : 'smooth'}); }
+  else if (e.key === 'Tab'){ e.preventDefault(); $('cerrar-visor').focus(); }
+});
+addEventListener('popstate', function(){ cerrarVisor(true); cerrarCajon(true); var pr = $('promo'); if (pr.open) pr.close(); });
+
+/* ---------- likes (mismo sistema que el Chiringuito) ---------- */
+function claveLike(id){ return 'like_' + CLAVE_LOCAL + '_' + id; }
+function yaDioLike(id){ try { return localStorage.getItem(claveLike(id)) === '1'; } catch(e){ return false; } }
+function marcarLike(id){ try { localStorage.setItem(claveLike(id), '1'); } catch(e){} }
+function textoLikes(n){ return n >= UMBRAL_LIKES ? String(n) : ''; }
+function htmlLike(p){
+  if (!p.id) return '';
+  var dado = yaDioLike(p.id);
+  return '<button type="button" class="like' + (dado ? ' dado' : '') + '" aria-label="Me gusta ' + esc(p.producto) + '" aria-pressed="' + dado + '" data-like-id="' + p.id + '">' + ICO.corazon + '<span class="n num">' + textoLikes(LIKES[p.id] || 0) + '</span></button>';
+}
+function refrescarLike(id, animar){
+  var dado = yaDioLike(id);
+  document.querySelectorAll('[data-like-id="' + id + '"]').forEach(function(el){
+    el.classList.toggle('dado', dado); el.setAttribute('aria-pressed', dado);
+    el.querySelector('.n').textContent = textoLikes(LIKES[id] || 0);
+    if (animar && !reducido()){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+  });
+}
+function darLike(id){
+  if (yaDioLike(id)){ refrescarLike(id, true); return; }
+  marcarLike(id); LIKES[id] = (LIKES[id] || 0) + 1; refrescarLike(id, true);
+  try { if (navigator.vibrate) navigator.vibrate(12); } catch(e){}
+  if (MODO_DEMO) return;
+  fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({accion:'like', id:id})})
+    .then(function(r){ return r.json(); }).then(function(res){ if (res && res.ok && typeof res.likes === 'number'){ LIKES[id] = res.likes; refrescarLike(id, false); } }).catch(function(){});
+}
+document.addEventListener('click', function(e){ var el = e.target.closest && e.target.closest('[data-like-id]'); if (!el) return; e.stopPropagation(); e.preventDefault(); darLike(Number(el.dataset.likeId)); }, true);
+
+/* ---------- placa de promo al entrar (misma lógica que el Chiringuito) ---------- */
+function dos(n){ return (n < 10 ? '0' : '') + n; }
+function fechaOperativa(){ var d = new Date(Date.now() - HORA_CORTE_DIA * 3600 * 1000); return d.getFullYear() + '-' + dos(d.getMonth() + 1) + '-' + dos(d.getDate()); }
+function enIframe(){ try { return window.self !== window.top; } catch(e){ return true; } }
+function programarPromo(){
+  var p = DATA && DATA.promo;
+  if (!p || !p.foto) return;
+  if ((enIframe() && !MODO_DEMO) || /[?&]nopromo\b/.test(location.search)) return;
+  var marca = fechaOperativa() + '|' + p.version;
+  if (!/[?&]verpromo\b/.test(location.search)){ try { if (localStorage.getItem('promo_' + CLAVE_LOCAL) === marca) return; } catch(e){} }
+  var img = new Image(); img.onload = function(){ setTimeout(function(){ mostrarPromo(p, marca); }, DEMORA_PROMO); }; img.src = ruta(p.foto);
+}
+function mostrarPromo(p, marca){
+  if (!$('visor').hidden || CAJON_ABIERTO) return;
+  var d = $('promo'), boton = '';
+  if (p.botonTipo === 'link' && /^https?:\/\//i.test(p.botonDestino || '')) boton = '<a class="precio" href="' + esc(p.botonDestino) + '" target="_blank" rel="noopener">' + esc(p.botonTexto || 'Ver más') + '</a>';
+  d.innerHTML = '<div class="caja"><button class="cerrar" aria-label="Cerrar promoción">' + ICO.x + '</button><img src="' + ruta(p.foto) + '" alt="">' +
+    (p.titulo ? '<div class="ficha"><h2 class="angosto">' + esc(p.titulo) + '</h2>' + (p.descripcion ? '<p>' + esc(p.descripcion) + '</p>' : '') + (hayPrecio(p.precio) ? '<span class="precio num">' + fmt(p.precio) + '</span>' : '') + boton + '</div>' : '') + '</div>';
+  d.showModal(); history.pushState({promo:true}, '');
+  try { localStorage.setItem('promo_' + CLAVE_LOCAL, marca); } catch(e){}
+  eventoPromo(p.id, 'vista');
+  var cerrar = function(){ if (d.open){ d.close(); if (history.state && history.state.promo) history.back(); } };
+  d.querySelector('.cerrar').onclick = cerrar;
+  d.onclick = function(e){ if (e.target === d) cerrar(); };
+  d.oncancel = function(e){ e.preventDefault(); cerrar(); };
+  var acc = d.querySelector('a.precio'); if (acc) acc.addEventListener('click', function(){ eventoPromo(p.id, 'clic'); });
+}
+function eventoPromo(id, t){ if (MODO_DEMO) return; fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({accion:'promo_evento', id:id, tipo:t})}).catch(function(){}); }
+
+/* ---------- visitas (una por celular por día) ---------- */
+function registrarVisita(){
+  if (MODO_DEMO || enIframe() || /[?&]nocount\b/.test(location.search)) return;
+  var hoy = fechaOperativa(), clave = 'visita_' + CLAVE_LOCAL;
+  try { if (localStorage.getItem(clave) === hoy) return; } catch(e){}
+  fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({accion:'visita'})})
+    .then(function(r){ return r.json(); }).then(function(res){ if (res && res.ok){ try { localStorage.setItem(clave, hoy); } catch(e){} } }).catch(function(){});
+}
+
+/* ---------- SEO: la carta en formato Google ---------- */
+function publicarSchemaMenu(porSeccion){
+  try {
+    var URL_CARTA = 'https://grupochiringuito.com.ar/carta/focacceria/';
+    var secs = Object.keys(porSeccion).filter(function(n){ return n !== SECCION_ARMALA && n !== SECCION_FOTOS; }).map(function(n){
+      return {'@type':'MenuSection', name:n, hasMenuItem:porSeccion[n].filter(function(p){ return !esOpcion(p) && tipo(p) !== 'ejemplo'; }).map(function(p){
+        var it = {'@type':'MenuItem', name:String(p.producto).trim()};
+        if (p.descripcion) it.description = String(p.descripcion).trim();
+        if (hayPrecio(p.precio)) it.offers = {'@type':'Offer', price:String(Number(p.precio)), priceCurrency:'ARS'};
+        if (p.foto){ var s = ruta(p.foto); it.image = s.charAt(0) === '/' ? location.origin + s : s; }
+        return it;
+      })};
+    }).filter(function(s){ return s.hasMenuItem.length; });
+    var el = document.createElement('script'); el.type = 'application/ld+json';
+    el.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Menu','@id':URL_CARTA + '#menu', name:'Carta de La Focacceria by Chiringuito', url:URL_CARTA, inLanguage:'es-AR', hasMenuSection:secs});
+    document.head.appendChild(el);
+  } catch(e){}
+}
+
+cargar();
+setTimeout(registrarVisita, 1500);
+</script>
+</body>
+</html>

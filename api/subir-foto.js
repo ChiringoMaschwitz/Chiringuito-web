@@ -14,7 +14,9 @@ const CARPETAS_PERMITIDAS = [
   'carta/chiringuito/fotos',
   'carta/chiringuito/promos',
   'carta/lounge/fotos',
-  'carta/lounge/promos'
+  'carta/lounge/promos',
+  'carta/focacceria/fotos',
+  'carta/focacceria/promos'
 ];
 const PESO_MAXIMO = 3 * 1024 * 1024; // 3 MB ya decodificado (una foto comprimida por el panel pesa mucho menos)
 
