@@ -1,16 +1,22 @@
-# Grupo El Chiringuito — Paseo Mendoza, Ingeniero Maschwitz
+# El Chiringuito — Paseo Mendoza, Ingeniero Maschwitz
 
-> Grupo gastronómico con cinco locales en el Paseo Mendoza de Ingeniero Maschwitz
-> (partido de Escobar, provincia de Buenos Aires, Argentina): El Chiringuito,
-> Chiringuito Lounge, La Focacceria, Una Pizza y ChirinBakery.
-> También hace viandas y catering para empresas.
+> Cinco locales gastronómicos sobre la calle Mendoza de Ingeniero Maschwitz
+> (partido de Escobar, provincia de Buenos Aires, Argentina), todos nacidos de
+> El Chiringuito, un clásico de la calle Mendoza desde 2013.
+> En el Paseo Mendoza (Mendoza 1578): El Chiringuito, La Focacceria, ChirinBakery y Una Pizza.
+> A una cuadra, en el Mercado de Maschwitz (Mendoza 1731): Chiringuito Lounge.
+> También hacen viandas y catering para empresas.
 
 Sitio: https://grupochiringuito.com.ar/
 
 ## Locales
 
 ### El Chiringuito
-Restaurante, cervecería y tragos, con La Terraza en el primer piso.
+Cervecería, cocina todo el día y barra de alta coctelería: más de 60 tragos, negronis de la casa
+y tragos de autor. Con La Terraza en el primer piso.
+Para probar: Hamburguesa Chiringuera (doble medallón, bacon, cheddar, barbacoa, lechuga y cebolla,
+con papas fritas), BBQ Ribs y un trago de autor.
+Happy Hour todos los días de 17 a 20 (Golden y Honey). Miércoles: Burga Libre desde las 19.
 - Dirección: Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz.
 - Horario: martes a jueves y domingo de 10 a 1 h; viernes y sábado de 10 a 3 h. Lunes cerrado.
 - Teléfono: 11 4085-7072
@@ -19,35 +25,45 @@ Restaurante, cervecería y tragos, con La Terraza en el primer piso.
 - Facebook: https://www.facebook.com/ElChiringuitok
 
 ### Chiringuito Lounge
-Bistró de día y de noche: desayunos, meriendas, carnes, pastas, sándwiches, tragos y vinos.
-- Dirección: Mendoza 1731, Mercado de Maschwitz, Ingeniero Maschwitz.
+Bistró de día y de noche con cocina de autor, brunch y una carta de vinos de más de 30 etiquetas.
+Para probar: risotto de osobuco, trucha patagónica y un buen vino de la carta.
+Domingos en familia: la Tremenda Napolitana, para compartir. Jueves de Chicas: 20% en mesas de mujeres.
+- Dirección: Mendoza 1731, Mercado de Maschwitz, Ingeniero Maschwitz (a una cuadra del Paseo Mendoza).
 - Horario: miércoles a domingo de 9 a 1 h. Lunes y martes cerrado.
 - WhatsApp: 11 2463-5464
 - Carta con fotos y precios: https://grupochiringuito.com.ar/carta/lounge/
 - Instagram: https://www.instagram.com/chiringuito.lounge
 
+### La Focacceria
+Focaccias enormes de masa propia con fiambres de verdad, desayunos con medialunas hechas en el local,
+Menú Ejecutivo de martes a domingo (focaccia + bebida) y opciones veganas.
+Para probar: mortadela con nuez y brie; higo, crudo y stracciatella; calentita de albóndigas.
+- Dirección: Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz.
+- Horario: martes a jueves de 9 a 20 h; viernes, sábado y domingo de 9 a 1 h. Lunes cerrado.
+- Teléfono y WhatsApp: 11 7819-6138
+- Instagram: https://www.instagram.com/lafocacceria.elchiringuito
+
+### ChirinBakery
+Pastelería artesanal de Vanesa Schual (egresada de El Gato Dumas): tortas buttercream personalizadas,
+mesas dulces, desayunos para regalar y lunch y brunch para eventos.
+- Dirección: Mendoza 1578, Local 15, Paseo Mendoza, Ingeniero Maschwitz.
+- Horario: martes a domingo de 10 a 21 h. Lunes cerrado.
+- WhatsApp: 11 4400-2737
+- Instagram: https://www.instagram.com/chirinbakery
+
 ### Una Pizza
-Pizzería a la piedra con horno a leña: pizzas individuales y de 8 porciones, empanadas y fainá.
-Delivery propio, retiro en el local y salón. No tiene opciones sin TACC.
+Pizzería a la piedra con horno a leña: pizzas individuales y de 8 porciones, fugazzetta rellena,
+empanadas de carne cortada a cuchillo y fainá. Delivery propio, retiro en el local y salón.
+No tiene opciones sin TACC.
 - Dirección: Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz.
 - Horario: miércoles, jueves y domingo de 19 a 24 h; viernes y sábado de 19 a 1 h. Lunes y martes cerrado.
 - Pedidos: WhatsApp 11 2609-1109 · Teléfono 348 462-5434
 - Carta completa con precios: https://grupochiringuito.com.ar/una-pizza/
 - Instagram: https://www.instagram.com/unapizza.maschwitz
 
-### La Focacceria
-Focaccias de masa propia.
-- Dirección: Mendoza 1578, Paseo Mendoza, Ingeniero Maschwitz.
-- Horario: martes a jueves de 9 a 20 h; viernes, sábado y domingo de 9 a 1 h. Lunes cerrado.
-- Teléfono: 11 7819-6138
-- Instagram: https://www.instagram.com/lafocacceria.elchiringuito
-
-### ChirinBakery
-Pastelería artesanal: tortas, tartas y postres.
-- Dirección: Mendoza 1578, Local 15, Paseo Mendoza, Ingeniero Maschwitz.
-- Horario: martes a domingo de 10 a 21 h. Lunes cerrado.
-- WhatsApp: 11 4400-2737
-- Instagram: https://www.instagram.com/chirinbakery
+## Cómo llegar
+Paseo Mendoza: Mendoza 1578, Ingeniero Maschwitz, a minutos de Panamericana (ramal Escobar, salida Maschwitz).
+Chiringuito Lounge: Mendoza 1731, en el Mercado de Maschwitz, a una cuadra.
 
 ## Viandas y catering para empresas
 - WhatsApp: 11 2272-1108
