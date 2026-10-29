@@ -90,11 +90,13 @@
   .portada .estado{display:flex;justify-content:center;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 0;font-size:var(--s-chico);font-weight:500}
   .punto{width:9px;height:9px;border-radius:50%;background:var(--suave);flex:0 0 auto}
   .abierto .punto{background:var(--menta)}
-  .menu-dia{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;width:100%;max-width:520px;margin-top:20px;padding:16px 18px;border:0;border-radius:20px;background:var(--hueso);color:var(--tinta);text-align:left;cursor:pointer;box-shadow:var(--sombra-flota);transition:transform 160ms var(--ease-out)}
-  .menu-dia:active{transform:scale(.98)}
-  .menu-dia .que{font-size:var(--s-chico);font-weight:600;color:var(--foca)}
-  .menu-dia .cuanto{font-size:var(--s-lead);font-weight:700;line-height:1.25}
-  .menu-dia .ir{grid-row:1/3;grid-column:2;width:44px;height:44px;border-radius:50%;background:var(--botella);color:var(--hueso);display:grid;place-items:center}
+  /* aviso del menú del día: una sola línea compacta; su lugar queda reservado desde el principio para que el título no salte */
+  .menu-dia{display:flex;align-items:center;gap:10px;max-width:100%;min-height:48px;margin-top:14px;padding:6px 6px 6px 18px;border:0;border-radius:999px;background:var(--hueso);color:var(--tinta);text-align:left;cursor:pointer;box-shadow:0 10px 28px rgba(14,12,10,.28);transition:transform 160ms var(--ease-out)}
+  .menu-dia.pendiente{visibility:hidden;animation:none !important}
+  .menu-dia:active{transform:scale(.97)}
+  .menu-dia .que{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--s-chico);font-weight:600;color:var(--foca)}
+  .menu-dia .cuanto{flex:0 0 auto;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+  .menu-dia .ir{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--botella);color:var(--hueso);display:grid;place-items:center}
 
   /* ---------- solapas ---------- */
   main{position:relative}
@@ -371,7 +373,7 @@ document.addEventListener('error', function(e){
     <img class="logo-grande" src="img/logo-foca-hueso.png" alt="Focacceria by Chiringuito" width="1100" height="207">
     <h1 id="titulo"><span>Focaccias</span> <span>enormes de</span> <span>masa propia</span></h1>
     <p class="estado" id="estado-hoy"><span class="punto" aria-hidden="true"></span><span class="txt">Martes a domingo desde las 9 h</span><span aria-hidden="true">·</span><span>Mendoza 1578</span></p>
-    <button class="menu-dia" id="btn-menu-dia" type="button" hidden>
+    <button class="menu-dia pendiente" id="btn-menu-dia" type="button" aria-hidden="true" tabindex="-1">
       <span class="que" id="md-que">Menú del día</span>
       <span class="cuanto" id="md-cuanto"></span>
       <span class="ir" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
@@ -511,9 +513,33 @@ document.addEventListener('scroll', function(e){
 
 /* ---------- carga ---------- */
 if (RAIZ_REL) document.querySelectorAll('img[src^="/"]').forEach(function(i){ i.src = i.getAttribute('src').slice(1); });
+/* ---------- traer la carta: copia en Vercel (rápida) → directo al Sheet → última copia del celu ---------- */
+var URL_CARTA_RAPIDA = '/api/carta?local=focacceria';
+var CLAVE_COPIA = 'carta-copia-focacceria';
+function pedirCarta_(u){
+  return fetch(u).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){ if (!j || !Array.isArray(j.secciones)) throw new Error('datos'); return j; });
+}
+function traerCarta_(){
+  var copia = null;
+  try { copia = JSON.parse(localStorage.getItem(CLAVE_COPIA) || 'null'); } catch(e){}
+  return new Promise(function(ok, mal){
+    var listo = false, reloj = null;
+    function guardar(j){ try { localStorage.setItem(CLAVE_COPIA, JSON.stringify(j)); } catch(e){} }
+    function entregar(j){ if (listo) return; listo = true; clearTimeout(reloj); ok(j); }
+    /* si internet viene lento, a los 3 s se muestra la última carta que vio este celu; la nueva queda para la próxima */
+    if (copia && Array.isArray(copia.secciones)) reloj = setTimeout(function(){ entregar(copia); }, 3000);
+    pedirCarta_(URL_CARTA_RAPIDA)
+      .catch(function(){ return pedirCarta_(API_URL); })
+      .then(function(j){ guardar(j); entregar(j); })
+      .catch(function(e){
+        if (copia && Array.isArray(copia.secciones)) entregar(copia);
+        else if (!listo){ listo = true; clearTimeout(reloj); mal(e); }
+      });
+  });
+}
 function cargar(){
-  fetch(MODO_DEMO ? 'datos-demo.json' : API_URL)
-    .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+  (MODO_DEMO ? pedirCarta_('datos-demo.json') : traerCarta_())
     .then(function(j){ DATA = j; render(); })
     .catch(function(){ $('estado-carga').innerHTML = 'No pudimos cargar la carta. Revisá la conexión y <a href="">probá de nuevo</a>.'; });
 }
@@ -892,9 +918,10 @@ function prepararMenu(prods){
   MENU = {precio:base.precio, opciones:prods.filter(function(p){ return tipo(p) === 'opcion' || tipo(p) === 'opción'; })};
   var hoy = horaAR().dia;
   var diaVer = HORARIOS[hoy] ? hoy : siguienteAbierto(hoy);
-  $('btn-menu-dia').hidden = false;
+  var bmd = $('btn-menu-dia'); bmd.classList.remove('pendiente'); bmd.removeAttribute('aria-hidden'); bmd.removeAttribute('tabindex');
   $('md-que').textContent = (diaVer === hoy ? 'Hoy ' + DIAS[hoy] : 'Hoy cerrado · el ' + DIAS[diaVer]) + ' · ' + base.producto;
-  $('md-cuanto').textContent = (base.descripcion ? base.descripcion.split('.')[0] + ' · ' : '') + fmt(base.precio);
+  $('md-cuanto').textContent = fmt(base.precio);
+  bmd.setAttribute('aria-label', $('md-que').textContent + ', ' + (base.descripcion ? base.descripcion.split('.')[0] + ', ' : '') + fmt(base.precio) + '. Ver opciones');
   var cuerpo = esqueletoCajon($('cajon-menu'), 'menu-t', esc(base.producto), esc(base.descripcion || ''));
   var orden = [2,3,4,5,6,0,1];
   cuerpo.innerHTML = '<div class="semana" role="group" aria-label="Día">' + orden.map(function(d){

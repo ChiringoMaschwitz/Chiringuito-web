@@ -514,11 +514,35 @@ function esAdicional(prod){
   return t === 'adicional' || t === 'opcion' || t === 'opción';
 }
 
+/* ---------- traer la carta: copia en Vercel (rápida) → directo al Sheet → última copia del celu ---------- */
+var URL_CARTA_RAPIDA = '/api/carta?local=chiringuito';
+var CLAVE_COPIA = 'carta-copia-chiringuito';
+function pedirCarta_(u){
+  return fetch(u).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){ if (!j || !Array.isArray(j.secciones)) throw new Error('datos'); return j; });
+}
+function traerCarta_(){
+  var copia = null;
+  try { copia = JSON.parse(localStorage.getItem(CLAVE_COPIA) || 'null'); } catch(e){}
+  return new Promise(function(ok, mal){
+    var listo = false, reloj = null;
+    function guardar(j){ try { localStorage.setItem(CLAVE_COPIA, JSON.stringify(j)); } catch(e){} }
+    function entregar(j){ if (listo) return; listo = true; clearTimeout(reloj); ok(j); }
+    /* si internet viene lento, a los 3 s se muestra la última carta que vio este celu; la nueva queda para la próxima */
+    if (copia && Array.isArray(copia.secciones)) reloj = setTimeout(function(){ entregar(copia); }, 3000);
+    pedirCarta_(URL_CARTA_RAPIDA)
+      .catch(function(){ return pedirCarta_(API_URL); })
+      .then(function(j){ guardar(j); entregar(j); })
+      .catch(function(e){
+        if (copia && Array.isArray(copia.secciones)) entregar(copia);
+        else if (!listo){ listo = true; clearTimeout(reloj); mal(e); }
+      });
+  });
+}
 function cargar(){
   document.getElementById('error').style.display = 'none';
   document.getElementById('cargando').style.display = 'flex';
-  fetch(API_URL)
-    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+  traerCarta_()
     .then(function(json){ DATA = json; render(); })
     .catch(function(){
       document.getElementById('cargando').style.display = 'none';
