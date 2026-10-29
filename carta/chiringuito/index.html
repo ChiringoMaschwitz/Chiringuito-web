@@ -438,6 +438,19 @@
     html{scroll-behavior:auto}
   }
 </style>
+<script>
+/* Si una foto de la carta falla (por ejemplo, el navegador guardó un "no existe" de cuando recién se subía),
+   la pide una vez más salteando lo guardado. Si vuelve a fallar, sigue el comportamiento normal. */
+document.addEventListener('error', function(e){
+  var el = e.target;
+  if (!el || el.tagName !== 'IMG' || el.getAttribute('data-reintento')) return;
+  var src = el.currentSrc || el.src || '';
+  if (!/\/fotos\//.test(src) || /^(data|blob):/.test(src)) return;
+  e.stopImmediatePropagation();
+  el.setAttribute('data-reintento', '1');
+  el.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'r=' + Date.now();
+}, true);
+</script>
 </head>
 <body>
 
