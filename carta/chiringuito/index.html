@@ -393,6 +393,44 @@
     box-shadow:0 6px 16px rgba(0,0,0,.5);
   }
   .promo-caja.solo-imagen .promo-btn{margin-top:12px}
+  /* carrusel: cada placa es una "hoja" deslizable (con una sola placa se ve igual que siempre) */
+  .promo-pista{
+    display:flex;flex:0 1 auto;min-height:0;
+    overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+    scrollbar-width:none;
+  }
+  .promo-pista::-webkit-scrollbar{display:none}
+  .promo-slide{
+    flex:0 0 100%;min-width:0;min-height:0;
+    scroll-snap-align:center;scroll-snap-stop:always;
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .promo-slide.solo img{max-height:calc(100dvh - 140px);object-fit:contain;border-radius:14px}
+  .promo-slide.solo .promo-btn{margin-top:12px}
+  /* con carrusel: cada placa arma su propia tarjeta y el cuadro toma la altura de la que se está viendo */
+  .promo-caja.multi{background:transparent;border:none;box-shadow:none;border-radius:0;overflow:visible}
+  .promo-caja.multi .promo-pista{align-items:flex-start;transition:height .25s ease}
+  .promo-caja.multi .promo-slide{max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 90px)}
+  .promo-caja.multi .promo-slide:not(.solo){background:var(--carbon-2);border:1px solid var(--linea-osc);border-radius:18px}
+  .promo-caja.multi .promo-slide.solo img{max-height:calc(100dvh - 195px)}
+  .promo-cont{
+    position:absolute;top:14px;left:12px;z-index:2;
+    font-family:var(--texto);font-weight:600;font-size:12px;letter-spacing:.08em;color:var(--hueso);
+    background:rgba(23,19,16,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(244,238,227,.25);border-radius:999px;padding:6px 11px;
+    box-shadow:0 4px 14px rgba(0,0,0,.45);
+  }
+  .promo-puntos{display:flex;justify-content:center;align-items:center;gap:2px;padding:6px 0 10px;flex:0 0 auto}
+  .promo-punto{
+    width:26px;height:26px;border:none;background:none;cursor:pointer;padding:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .promo-punto::before{
+    content:'';display:block;width:8px;height:8px;border-radius:50%;
+    background:rgba(244,238,227,.35);transition:all .25s ease;
+  }
+  .promo-punto.on::before{width:22px;border-radius:4px;background:var(--ambar)}
   #promo-cerrar{
     position:absolute;top:10px;right:10px;z-index:2;
     width:40px;height:40px;border-radius:50%;cursor:pointer;
@@ -823,62 +861,109 @@ function srcPromo(nombre){
 function clavePromo(){ return 'promo_' + CLAVE_LOCAL; }
 function enIframe(){ try { return window.self !== window.top; } catch(e){ return true; } }
 
+/* Placas que salen ahora: la lista nueva (DATA.promos) o, si el script es viejo, la única de siempre (DATA.promo) */
+function promosDeHoy(){
+  var lista = (DATA && DATA.promos && DATA.promos.length) ? DATA.promos : ((DATA && DATA.promo) ? [DATA.promo] : []);
+  return lista.filter(function(p){ return p && p.foto; });
+}
+
 function programarPromo(){
-  var p = DATA && DATA.promo;
-  if (!p || !p.foto) return;
+  var lista = promosDeHoy();
+  if (!lista.length) return;
   if (enIframe()) return;
+  if (document.getElementById('promo').classList.contains('abierta')) return;
   var forzar = /[?&]verpromo\b/.test(location.search);   /* ?verpromo para probar sin esperar al día siguiente */
-  var marca = fechaOperativa() + '|' + p.version;
+  var marca = fechaOperativa() + '|' + lista.map(function(p){ return p.version; }).join(',');
   if (!forzar){
     try { if (localStorage.getItem(clavePromo()) === marca) return; } catch(e){}
   }
-  /* se precarga la imagen: si todavía no está publicada o falla, la placa no se muestra */
-  var img = new Image();
-  img.onload = function(){ setTimeout(function(){ mostrarPromo(p, marca); }, DEMORA_PROMO); };
-  img.src = srcPromo(p.foto);
+  /* se precargan las imágenes: las que no cargan se descartan; si no carga ninguna, la placa no se muestra */
+  var cargada = [], pendientes = lista.length, hecho = false, vencido = false;
+  function terminar(){
+    if (hecho) return;
+    var ok = lista.filter(function(p, i){ return cargada[i]; });
+    if (!ok.length) return;
+    hecho = true;
+    setTimeout(function(){ mostrarPromo(ok, marca); }, DEMORA_PROMO);
+  }
+  lista.forEach(function(p, i){
+    var img = new Image();
+    img.onload = function(){ cargada[i] = true; pendientes--; if (pendientes === 0 || vencido) terminar(); };
+    img.onerror = function(){ pendientes--; if (pendientes === 0 || vencido) terminar(); };
+    img.src = srcPromo(p.foto);
+  });
+  setTimeout(function(){ vencido = true; terminar(); }, 4000);   /* no esperar de más a una imagen lenta */
 }
 
-function mostrarPromo(p, marca){
+function mostrarPromo(lista, marca){
   if (document.getElementById('visor').classList.contains('abierto')) return; /* ya está mirando platos */
-  PROMO_ACTUAL = p;
-  var soloImagen = !p.titulo;
-  var precio = fmtPrecio(p.precio);
-  var boton = '';
-  if (p.botonTipo === 'plato' && indicePlato(p.botonDestino) > -1){
-    boton = '<button class="promo-btn" id="promo-accion">' + esc(p.botonTexto || 'Ver en la carta') + '</button>';
-  } else if (p.botonTipo === 'link' && /^https?:\/\//i.test(p.botonDestino || '')){
-    boton = '<a class="promo-btn" id="promo-accion" href="' + esc(p.botonDestino) + '" target="_blank" rel="noopener">' + esc(p.botonTexto || 'Ver más') + '</a>';
-  }
-
-  var html = '<div class="promo-caja' + (soloImagen ? ' solo-imagen' : '') + '">' +
-    '<button id="promo-cerrar" aria-label="Cerrar promoción">✕</button>' +
-    '<img src="' + srcPromo(p.foto) + '" alt="' + esc(p.titulo || 'Promoción') + '">';
-  if (soloImagen){
-    html += boton;
-  } else {
-    html += '<div class="promo-ficha">' +
-      '<div class="etiqueta-promo">Promo</div>' +
-      '<h3>' + esc(p.titulo) + '</h3>' +
-      (p.descripcion ? '<div class="p-desc">' + esc(p.descripcion) + '</div>' : '') +
-      (precio ? '<div class="p-precio">' + precio + '</div>' : '') +
-      boton +
-    '</div>';
-  }
-  html += '</div>';
-
   var cont = document.getElementById('promo');
+  if (cont.classList.contains('abierta')) return;
+  PROMO_ACTUAL = lista[0];
+  var multi = lista.length > 1;
+  var todasSolo = lista.every(function(p){ return !p.titulo; });
+
+  var slides = lista.map(function(p, i){
+    var soloImagen = !p.titulo;
+    var precio = fmtPrecio(p.precio);
+    var boton = '';
+    if (p.botonTipo === 'plato' && indicePlato(p.botonDestino) > -1){
+      boton = '<button class="promo-btn promo-accion" data-i="' + i + '">' + esc(p.botonTexto || 'Ver en la carta') + '</button>';
+    } else if (p.botonTipo === 'link' && /^https?:\/\//i.test(p.botonDestino || '')){
+      boton = '<a class="promo-btn promo-accion" data-i="' + i + '" href="' + esc(p.botonDestino) + '" target="_blank" rel="noopener">' + esc(p.botonTexto || 'Ver más') + '</a>';
+    }
+    var h = '<div class="promo-slide' + (soloImagen ? ' solo' : '') + '"' +
+      (multi ? ' role="group" aria-label="Promoción ' + (i + 1) + ' de ' + lista.length + '"' : '') + '>' +
+      '<img src="' + srcPromo(p.foto) + '" alt="' + esc(p.titulo || 'Promoción') + '">';
+    if (soloImagen){
+      h += boton;
+    } else {
+      h += '<div class="promo-ficha">' +
+        '<div class="etiqueta-promo">Promo</div>' +
+        '<h3>' + esc(p.titulo) + '</h3>' +
+        (p.descripcion ? '<div class="p-desc">' + esc(p.descripcion) + '</div>' : '') +
+        (precio ? '<div class="p-precio">' + precio + '</div>' : '') +
+        boton +
+      '</div>';
+    }
+    return h + '</div>';
+  }).join('');
+
+  var puntos = '';
+  if (multi){
+    puntos = '<div class="promo-puntos" id="promo-puntos">' + lista.map(function(p, i){
+      return '<button class="promo-punto' + (i === 0 ? ' on' : '') + '" aria-label="Ir a la promoción ' + (i + 1) + '"></button>';
+    }).join('') + '</div>';
+  }
+
+  var html = '<div class="promo-caja' + (todasSolo ? ' solo-imagen' : '') + (multi ? ' multi' : '') + '">' +
+    '<button id="promo-cerrar" aria-label="Cerrar promoción">✕</button>' +
+    (multi ? '<div class="promo-cont" id="promo-cont">1/' + lista.length + '</div>' : '') +
+    '<div class="promo-pista" id="promo-pista">' + slides + '</div>' +
+    puntos +
+  '</div>';
+
   cont.innerHTML = html;
   cont.classList.add('abierta');
   document.body.style.overflow = 'hidden';
   history.pushState({promo:true}, '');
 
   try { localStorage.setItem(clavePromo(), marca); } catch(e){}
-  eventoPromo(p.id, 'vista');
+
+  /* una "vista" por placa, la primera vez que aparece en pantalla */
+  var vistos = {};
+  function marcarVista(i){
+    if (vistos[i]) return;
+    vistos[i] = true;
+    eventoPromo(lista[i].id, 'vista');
+  }
+  marcarVista(0);
 
   document.getElementById('promo-cerrar').onclick = function(e){ e.stopPropagation(); cerrarPromo(false); };
   cont.onclick = function(e){ if (e.target === cont) cerrarPromo(false); };   /* tocar afuera cierra */
-  var acc = document.getElementById('promo-accion');
-  if (acc){
+
+  Array.prototype.forEach.call(cont.querySelectorAll('.promo-accion'), function(acc){
+    var p = lista[Number(acc.getAttribute('data-i'))];
     acc.onclick = function(e){
       eventoPromo(p.id, 'clic');
       if (p.botonTipo === 'plato'){
@@ -891,6 +976,71 @@ function mostrarPromo(p, marca){
         cerrarPromo(false);   /* el link abre en otra pestaña; la carta queda abierta debajo */
       }
     };
+  });
+
+  if (multi) iniciarCarrusel(lista.length, marcarVista);
+}
+
+/* ---------- CARRUSEL de placas ---------- */
+var CARRUSEL_MS = 5000;
+var CARRUSEL_TIMER = null;
+
+function detenerCarrusel(){
+  if (CARRUSEL_TIMER){ clearInterval(CARRUSEL_TIMER); CARRUSEL_TIMER = null; }
+}
+
+function irASlide(i){
+  var pista = document.getElementById('promo-pista');
+  if (pista) pista.scrollTo({left: i * pista.clientWidth, behavior:'smooth'});
+}
+
+function iniciarCarrusel(n, marcarVista){
+  var pista = document.getElementById('promo-pista');
+  var puntos = document.querySelectorAll('#promo-puntos .promo-punto');
+  var contador = document.getElementById('promo-cont');
+  var actual = 0, raf = 0;
+
+  /* alto del cuadro = alto de la placa que se está viendo */
+  function ajustarAlto(){
+    var sl = pista.children[actual];
+    if (sl) pista.style.height = sl.offsetHeight + 'px';
+  }
+  Array.prototype.forEach.call(pista.querySelectorAll('img'), function(im){
+    if (!im.complete) im.addEventListener('load', ajustarAlto);
+  });
+  window.addEventListener('resize', ajustarAlto);
+  requestAnimationFrame(ajustarAlto);
+
+  function marcarActivo(i){
+    actual = i;
+    ajustarAlto();
+    Array.prototype.forEach.call(puntos, function(pt, k){ pt.classList.toggle('on', k === i); });
+    if (contador) contador.textContent = (i + 1) + '/' + n;
+    marcarVista(i);
+  }
+
+  pista.addEventListener('scroll', function(){
+    if (raf) return;
+    raf = requestAnimationFrame(function(){
+      raf = 0;
+      var i = Math.round(pista.scrollLeft / (pista.clientWidth || 1));
+      i = Math.max(0, Math.min(n - 1, i));
+      if (i !== actual) marcarActivo(i);
+    });
+  }, {passive:true});
+
+  /* apenas el cliente toca o desliza, el carrusel deja de avanzar solo */
+  ['touchstart', 'pointerdown', 'wheel'].forEach(function(ev){
+    pista.addEventListener(ev, detenerCarrusel, {passive:true});
+  });
+  Array.prototype.forEach.call(puntos, function(pt, k){
+    pt.onclick = function(e){ e.stopPropagation(); detenerCarrusel(); irASlide(k); };
+  });
+
+  var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reducido){
+    detenerCarrusel();
+    CARRUSEL_TIMER = setInterval(function(){ irASlide((actual + 1) % n); }, CARRUSEL_MS);
   }
 }
 
@@ -908,6 +1058,7 @@ function ocultarPromo(){
   document.body.style.overflow = '';
   setTimeout(function(){ if (!cont.classList.contains('abierta')) cont.innerHTML = ''; }, 300);
   PROMO_ACTUAL = null;
+  detenerCarrusel();
   return true;
 }
 function cerrarPromo(desdePop){

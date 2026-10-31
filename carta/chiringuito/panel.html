@@ -190,6 +190,7 @@
   .chip-estado{display:inline-block;margin-top:5px;font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:rgba(28,27,24,.07);color:var(--tinta-dim)}
   .chip-estado.hoy{background:var(--verde);color:var(--hueso)}
   .chip-estado.prog{background:rgba(232,184,75,.25);color:var(--ambar-2)}
+  .chip-estado.carrusel{background:rgba(31,60,56,.12);color:var(--verde)}
   .chip-estado.alerta{background:rgba(179,38,30,.1);color:var(--peligro)}
 
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--tarjeta);border:1px solid var(--linea);border-radius:999px}
@@ -838,6 +839,7 @@ var PROMOS = [];
 var HOY_OP = '';
 var AHORA_MIN = 0;
 var EN_AIRE = null;
+var EN_AIRE_IDS = [];   /* placas al aire ahora (más de una si hay carrusel) */
 var CORTE = 6;
 var SEMANA_OFFSET = 0;
 var EDIT = null;   /* placa que se está editando */
@@ -889,6 +891,7 @@ function cargarPromos(){
     HOY_OP = res.hoy || '';
     AHORA_MIN = res.ahoraMin || 0;
     EN_AIRE = res.enAire || null;
+    EN_AIRE_IDS = res.enAireIds || (res.enAire ? [res.enAire] : []);
     if (res.corteDia != null) CORTE = res.corteDia;
     renderPromos();
   }).catch(function(){
@@ -939,7 +942,7 @@ function resumenBloques(p){
 
 function estadoPromo(p){
   if (!p.activa) return {txt:'Pausada', cls:''};
-  if (EN_AIRE === p.id) return {txt:'Al aire ahora', cls:'hoy'};
+  if (EN_AIRE === p.id || EN_AIRE_IDS.indexOf(p.id) > -1) return {txt:'Al aire ahora', cls:'hoy'};
   var bl = p.bloques || [];
   if (!bl.length) return {txt:'Sin programar', cls:'alerta'};
   var futuro = bl.some(function(b){
@@ -962,7 +965,7 @@ function itemsDelDia(f){
   var carriles = [];
   items.forEach(function(it){
     it.choque = it.p.activa && items.some(function(o){
-      return o !== it && o.p.activa && o.p.id !== it.p.id && seSolapan(o.r, it.r);
+      return o !== it && o.p.activa && o.p.id !== it.p.id && seSolapan(o.r, it.r) && !(o.p.carrusel && it.p.carrusel);
     });
     var c = 0;
     while (carriles[c] !== undefined && carriles[c] > it.r[0]) c++;
@@ -1012,7 +1015,7 @@ function renderCalendario(){
   }
   html += '</div>';
   html += '<div class="ayuda">El día arranca a las ' + ('0' + CORTE).slice(-2) + ':00. Tocá un bloque para editar la placa. ' +
-    (hayChoques ? '<b style="color:var(--peligro)">Los bloques en rojo se pisan</b>: sale la de fecha puntual o, si empatan, la más nueva.' : 'Sin choques esta semana ✓') +
+    (hayChoques ? '<b style="color:var(--peligro)">Los bloques en rojo se pisan</b>: sale la de fecha puntual o, si empatan, la más nueva. (Si querés que salgan juntas, prendé "Carrusel" en las dos.)' : 'Sin choques esta semana ✓') +
     '</div></div>';
   return html;
 }
@@ -1034,6 +1037,7 @@ function renderPromos(){
           '<div class="p-nom">' + esc(nombreDe(p)) + '</div>' +
           '<div class="p-prog">' + esc(resumenBloques(p)) + '</div>' +
           '<span class="chip-estado ' + est.cls + '">' + est.txt + '</span>' +
+          (p.carrusel ? ' <span class="chip-estado carrusel">Carrusel</span>' : '') +
         '</div>' +
         '<div class="toggle' + (p.activa ? '' : ' off') + '" onclick="togglePromo(' + p.id + ')"><div class="bola"></div></div>' +
         '<div class="lapiz" onclick="abrirEditorPromo(' + p.id + ')">✎</div>' +
@@ -1211,6 +1215,8 @@ function pintarEditor(){
   }
 
   html +=
+    '<div class="campo"><label class="fila-check"><input type="checkbox" id="ed-carrusel"' + (e.carrusel ? ' checked' : '') + '> Mostrar en carrusel con otras placas</label>' +
+      '<div class="ayuda">Prendido: si hay otras placas con "Carrusel" prendido al mismo tiempo, salen todas juntas y el cliente las desliza (máx. 6). Apagado: sale una sola, la que gana.</div></div>' +
     '<div class="campo"><label class="fila-check"><input type="checkbox" id="ed-activa"' + (e.activa ? ' checked' : '') + '> Placa activa</label></div>' +
     '<button class="btn-guardar" id="ed-guardar" onclick="guardarPromo()">Guardar</button>' +
     '<button class="btn-secundario" onclick="abrirPreview()">Vista previa</button>' +
@@ -1235,6 +1241,8 @@ function leerFormulario(){
   if (val('ed-btn-texto') !== undefined) e.botonTexto = val('ed-btn-texto').trim();
   var act = document.getElementById('ed-activa');
   if (act) e.activa = act.checked;
+  var car = document.getElementById('ed-carrusel');
+  if (car) e.carrusel = car.checked;
   if (val('n-fecha') !== undefined) e.nuevo.fecha = val('n-fecha');
   if (val('n-desde') !== undefined) e.nuevo.desde = val('n-desde');
   if (val('n-hasta') !== undefined) e.nuevo.hasta = val('n-hasta');
@@ -1322,6 +1330,7 @@ function conflictosDe(e){
   var lista = [];
   PROMOS.forEach(function(q){
     if (q.id === e.id || !q.activa) return;
+    if (e.carrusel && q.carrusel) return;   /* las dos van en carrusel: salen juntas, no se pisan */
     e.bloques.forEach(function(b){
       (q.bloques || []).forEach(function(c){
         var rb = rango(b), rc = rango(c);
@@ -1386,7 +1395,7 @@ function enviarGuardado(){
     botonTipo: e.botonTipo || 'ninguno',
     botonDestino: e.botonTipo === 'ninguno' ? '' : e.botonDestino,
     bloques: e.bloques, vigDesde: e.vigDesde || '', vigHasta: e.vigHasta || '',
-    activa: e.activa
+    activa: e.activa, carrusel: !!e.carrusel
   }).then(function(res){
     if (res && res.ok){ cerrarModal(); cargarPromos(); }
     else { alert('No se pudo guardar: ' + ((res && res.error) || '')); btn.textContent = 'Guardar'; btn.disabled = false; }
