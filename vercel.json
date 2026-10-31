@@ -9,5 +9,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/reservas",
+      "destination": "https://reservas.grupochiringuito.com.ar/reservas"
+    },
+    {
+      "source": "/reservas/:path*",
+      "destination": "https://reservas.grupochiringuito.com.ar/reservas/:path*"
+    }
   ]
 }
