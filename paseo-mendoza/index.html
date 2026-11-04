@@ -44,6 +44,10 @@
 .comer .resultado .local p{color:inherit}
 .comer .resultado .local .estado{color:inherit;opacity:.9}
 .portada .pie-foto{position:absolute;top:14px;right:16px;left:16px;text-align:right;font-size:12.5px;font-weight:600;color:rgba(251,247,240,.88);text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.galeria{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.galeria img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px}
+.galeria figcaption{font-size:14px;color:var(--suave);margin-top:8px}
+@media (max-width:900px){.galeria{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.galeria figcaption{font-size:12.5px}}
 /* qué hacer */
 .hacer{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .hacer article{background:var(--hueso);border:1px solid var(--linea);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px}
@@ -179,6 +183,18 @@
     <div class="llegar-ctas">
       <a class="btn osc" href="https://www.google.com/maps/search/?api=1&amp;query=El+Chiringuito+Mendoza+1578+Ingeniero+Maschwitz&amp;query_place_id=ChIJEQoNyPKfvJURVYuNHd5OyAo" target="_blank" rel="noopener" data-local="paseo">Mapa: Mendoza 1578 (Paseo Mendoza)</a>
       <a class="btn borde" href="https://www.google.com/maps/search/?api=1&amp;query=Chiringuito+Lounge+Mendoza+1731+Ingeniero+Maschwitz&amp;query_place_id=ChIJNZFaVwCfvJURWEmqMPee-RM" target="_blank" rel="noopener">Mapa: Mendoza 1731 (Lounge)</a>
+    </div>
+  </div>
+</section>
+
+<section class="seccion oscura" aria-labelledby="vive-t">
+  <div class="wrap">
+    <div class="cab"><span class="chico">De noche en la calle Mendoza</span><h2 id="vive-t">Así se vive<br>el paseo</h2></div>
+    <div class="galeria">
+      <figure><img src="/fotos/ambiente/paseo-barra-chiringuito.jpg" srcset="/fotos/ambiente/paseo-barra-chiringuito-560.jpg 560w, /fotos/ambiente/paseo-barra-chiringuito.jpg 936w" sizes="(max-width: 900px) 50vw, 25vw" alt="El salón de El Chiringuito lleno de gente, con el cartel de neón" width="936" height="1400" loading="lazy"><figcaption>El salón de El Chiringuito</figcaption></figure>
+      <figure><img src="/fotos/ambiente/paseo-terraza-chiringuito.jpg" srcset="/fotos/ambiente/paseo-terraza-chiringuito-560.jpg 560w, /fotos/ambiente/paseo-terraza-chiringuito.jpg 936w" sizes="(max-width: 900px) 50vw, 25vw" alt="Mesas de El Chiringuito con luz roja, de noche" width="936" height="1400" loading="lazy"><figcaption>Las mesas de El Chiringuito, de noche</figcaption></figure>
+      <figure><img src="/fotos/ambiente/cumple-patio-lounge.jpg" srcset="/fotos/ambiente/cumple-patio-lounge-560.jpg 560w, /fotos/ambiente/cumple-patio-lounge.jpg 933w" sizes="(max-width: 900px) 50vw, 25vw" alt="El patio del Chiringuito Lounge lleno de gente bajo las luces" width="933" height="1400" loading="lazy"><figcaption>El patio del Lounge, en el Mercado de Maschwitz</figcaption></figure>
+      <figure><img src="/fotos/ambiente/cumple-mesa-lounge-1.jpg" srcset="/fotos/ambiente/cumple-mesa-lounge-1-560.jpg 560w, /fotos/ambiente/cumple-mesa-lounge-1.jpg 933w" sizes="(max-width: 900px) 50vw, 25vw" alt="Una pareja comiendo en una mesa del patio del Lounge" width="933" height="1400" loading="lazy"><figcaption>Una mesa en el patio del Lounge</figcaption></figure>
     </div>
   </div>
 </section>
