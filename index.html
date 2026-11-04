@@ -22,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://drive.google.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<script src="/js/medicion.js" defer></script>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -96,6 +97,14 @@
    "acceptedAnswer": {
     "@type": "Answer",
     "text": "El Paseo Mendoza está en Mendoza 1578, Ingeniero Maschwitz, a minutos de Panamericana (ramal Escobar, salida Maschwitz). El Chiringuito Lounge está a una cuadra, en Mendoza 1731, dentro del Mercado de Maschwitz."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Dónde festejar un cumpleaños en el Paseo Mendoza?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "En El Chiringuito y en el Chiringuito Lounge el cumpleañero no paga: desde 10 personas, todos los días (los sábados, hasta las 21), con reserva y DNI. En El Chiringuito también hay Menú Cumple para 10 a 25 personas."
    }
   }
  ]
@@ -655,7 +664,7 @@ html{scroll-padding-top:calc(var(--fh) + 8px)}
     <div class="col vid m" style="--n: 2"><img src="/videos/tragos3.jpg" alt="" width="720" height="1280" fetchpriority="high"><video data-src="/videos/tragos3.mp4" poster="/videos/tragos3.jpg" autoplay muted loop playsinline preload="none"></video></div>
   </div>
   <div class="tinte" aria-hidden="true"></div>
-  <div class="marca"><a class="logo" href="/">en el Paseo Mendoza<small>Ingeniero Maschwitz</small></a><nav aria-label="Principal"><a href="#cuadra">Locales y cartas</a><a href="#dia">Qué comer</a><a href="#llegar">Cómo llegar</a><a href="#viandas">Viandas</a></nav></div>
+  <div class="marca"><a class="logo" href="/">en el Paseo Mendoza<small>Ingeniero Maschwitz</small></a><nav aria-label="Principal"><a href="#cuadra">Locales y cartas</a><a href="/paseo-mendoza/">Qué hacer</a><a href="/cumpleanos/">Cumpleaños</a><a href="#viandas">Viandas</a></nav></div>
   <div class="rotulos chico"><span>Mendoza 1578 · 1731</span><span>Cinco cocinas, una cuadra</span><span>Desde 2013</span></div>
   <a class="sello" href="#cuadra" aria-label="Bajar a la cuadra">
     <svg viewBox="0 0 156 156" aria-hidden="true"><defs><path id="circ" d="M78,78 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"></path></defs><text><textPath href="#circ">PASEO MENDOZA · INGENIERO MASCHWITZ ·</textPath></text></svg>
@@ -666,7 +675,7 @@ html{scroll-padding-top:calc(var(--fh) + 8px)}
   <div class="pie-hero">
     <p class="bajada">Cinco cocinas que nacen de <b>El Chiringuito</b>, un clásico de la calle Mendoza desde 2013.</p>
     <p class="ahora" id="ahora"><span>Cinco locales sobre la calle Mendoza, en Ingeniero Maschwitz.</span></p>
-    <div class="ctas"><a class="btn" href="#cuadra">Ver locales y cartas</a><a class="lnk" href="#viandas">Viandas</a></div>
+    <div class="ctas"><a class="btn" href="#cuadra">Ver locales y cartas</a><a class="lnk" href="/paseo-mendoza/#comer">¿Qué querés comer hoy?</a></div>
   </div>
   </div>
 </header>
@@ -849,7 +858,8 @@ html{scroll-padding-top:calc(var(--fh) + 8px)}
     <details><summary>¿Hay pizza con delivery en Maschwitz?</summary><p>Sí. <a href="/una-pizza/">Una Pizza</a> hace pizza a la piedra en horno a leña, empanadas y fainá, con delivery propio. Abre de miércoles a domingo desde las 19. Pedidos por WhatsApp al <a href="https://wa.me/5491126091109" target="_blank" rel="noopener">11 2609-1109</a>.</p></details>
     <details><summary>¿Qué queda abierto hasta tarde en el Paseo Mendoza?</summary><p>El Chiringuito cierra a la 1 de martes a jueves y los domingos, y a las 3 los viernes y sábados. El Chiringuito Lounge, de miércoles a domingo hasta la 1. Una Pizza, viernes y sábado hasta la 1.</p></details>
     <details><summary>¿Se puede reservar mesa?</summary><p>En <a href="/reservas/chiringuito">El Chiringuito</a> y en el <a href="/reservas/lounge">Chiringuito Lounge</a> reservás online, con confirmación al instante: mediodía de 12 a 15 y noche de 19 a 22, hasta 30 días antes. Para grupos de más de 15 personas, por WhatsApp.</p></details>
-    <details><summary>¿Cómo llego al Paseo Mendoza?</summary><p>El Paseo Mendoza está en Mendoza 1578, Ingeniero Maschwitz, a minutos de Panamericana (ramal Escobar, salida Maschwitz). El Chiringuito Lounge está a una cuadra, en Mendoza 1731, dentro del Mercado de Maschwitz. <a href="#llegar">Ver el mapa</a>.</p></details>
+    <details><summary>¿Cómo llego al Paseo Mendoza?</summary><p>El Paseo Mendoza está en Mendoza 1578, Ingeniero Maschwitz, a minutos de Panamericana (ramal Escobar, salida Maschwitz). El Chiringuito Lounge está a una cuadra, en Mendoza 1731, dentro del Mercado de Maschwitz. <a href="#llegar">Ver el mapa</a> o mirá <a href="/paseo-mendoza/">qué hacer en el Paseo Mendoza</a>.</p></details>
+    <details><summary>¿Dónde festejar un cumpleaños en el Paseo Mendoza?</summary><p>En El Chiringuito y en el Chiringuito Lounge el cumpleañero no paga: desde 10 personas, todos los días (los sábados, hasta las 21), con reserva y DNI. En El Chiringuito también hay Menú Cumple para 10 a 25 personas. <a href="/cumpleanos/">Ver cómo funciona</a>.</p></details>
     </div>
   </div>
 </section>
@@ -895,7 +905,7 @@ html{scroll-padding-top:calc(var(--fh) + 8px)}
     <a class="grande" href="#llegar">Mendoza 1578 · 1731</a>
   </div>
   <div class="pie-fin">
-    <nav aria-label="Pie"><a href="/carta/chiringuito/">Carta El Chiringuito</a><a href="/carta/lounge/">Carta Lounge</a><a href="/una-pizza/">Carta Una Pizza</a><a href="/reservas">Reservas</a><a href="#viandas">Viandas</a><a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a></nav>
+    <nav aria-label="Pie"><a href="/paseo-mendoza/">Qué hacer en el Paseo Mendoza</a><a href="/cumpleanos/">Cumpleaños</a><a href="/carta/chiringuito/">Carta El Chiringuito</a><a href="/carta/lounge/">Carta Lounge</a><a href="/una-pizza/">Carta Una Pizza</a><a href="/reservas">Reservas</a><a href="#viandas">Viandas</a><a href="mailto:elchiringuitomaschwitz@gmail.com">elchiringuitomaschwitz@gmail.com</a></nav>
     <span>© El Chiringuito · Paseo Mendoza, Ingeniero Maschwitz · Calle Mendoza desde 2013</span>
   </div>
 </footer>
@@ -1190,7 +1200,8 @@ function pedirViandas(){
 }
 
 /* ── HORARIOS Y "ABIERTO AHORA" ──
-   Si cambia un horario, editarlo acá, en el texto del panel del local y en el modal.
+   Si cambia un horario, editarlo acá, en el texto del panel del local, en el modal
+   y en /js/horarios.js (lo usan /paseo-mendoza/ y /cumpleanos/).
    Minutos desde las 00:00. Si cierra después de medianoche, sumar 1440 (ej. 02:00 = 1560).
    Días: 0 domingo, 1 lunes, 2 martes, 3 miércoles, 4 jueves, 5 viernes, 6 sábado. */
 const HORARIOS={
