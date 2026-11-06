@@ -8,6 +8,24 @@
           "value": "public, max-age=60, stale-while-revalidate=2592000"
         }
       ]
+    },
+    {
+      "source": "/mapa/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/mapa/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
     }
   ],
   "rewrites": [

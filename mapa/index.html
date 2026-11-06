@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapa del Grupo</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0E0C0A">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mapa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mapa del Grupo — una columna de 960px: buscador fijo, "De todos los días", áreas como listas */
+:root{
+  --bg:#F1EBE0; --surface:#FBF7F0; --fg:#15120F; --muted:#6E6357; --line:#DDD2C1;
+  --accent:#A86A0E; --accent-soft:#F3DDB2; --danger:#9B2F1F; --warn-bg:#F6E2B8;
+  --c-grupo:#C88A1C; --c-chiringuito:#1F5A3E; --c-lounge:#872D2C; --c-focacceria:#3C8C6E; --c-pizza:#C2412F; --c-bakery:#C9708A; --c-otro:#8C8073;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0E0C0A; --surface:#17130F; --fg:#F1EBE0; --muted:#A3978A; --line:#2B241D;
+    --accent:#E3A83F; --accent-soft:#3A2A10; --danger:#E0715F; --warn-bg:#33260F;
+    --c-grupo:#E3A83F; --c-chiringuito:#4FA77A; --c-lounge:#D0665A; --c-focacceria:#6CC29F; --c-pizza:#E8705C; --c-bakery:#E59DB2; --c-otro:#8C8073;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--display);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;margin-bottom:16px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1{font-weight:800;font-stretch:112%;font-size:clamp(34px,7vw,52px);line-height:.95;letter-spacing:-.02em;margin:6px 0 0}
+.status{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.notice{font-size:13.5px;background:var(--warn-bg);border-radius:10px;padding:9px 12px;margin-bottom:12px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px 12px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.search-row{display:flex;gap:8px}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);outline:none;-webkit-appearance:none;appearance:none}
+.search input:focus-visible{border-color:var(--accent)}
+.btn{font:inherit;font-weight:600;font-size:14px;border-radius:10px;padding:11px 14px;border:1.5px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer;white-space:nowrap;touch-action:manipulation}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.chip:focus-visible,.row a:focus-visible,.tile:focus-visible,.edit:focus-visible,.linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+.btn.danger.armed{background:var(--danger);color:var(--bg)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;margin-inline:-2px;padding-inline:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{font:inherit;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;white-space:nowrap;touch-action:manipulation}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip .n{font-family:var(--mono);font-size:11px;opacity:.65}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--c,var(--c-otro));flex:none}
+
+section{margin-top:32px}
+.sec-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+h2{font-weight:700;font-size:20px;letter-spacing:-.01em;margin:0}
+.sec-head .count{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.sec-head p{flex-basis:100%;margin:0;color:var(--muted);font-size:14px}
+
+.daily{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+@media (max-width:440px){.daily{grid-template-columns:1fr 1fr}}
+.tile{display:flex;flex-direction:column;gap:6px;text-decoration:none;padding:13px 13px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);min-width:0;transition:border-color .15s,transform .15s}
+.tile:hover{border-color:var(--accent);transform:translateY(-1px)}
+.tile .loc{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);min-width:0}
+.tile .loc span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile .t{font-weight:700;font-size:16px;line-height:1.2}
+.tile .host{font-family:var(--mono);font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}
+.row a{flex:1;min-width:0;display:grid;grid-template-columns:9px minmax(0,1fr) auto;align-items:center;gap:4px 12px;padding:11px 4px;text-decoration:none}
+.row a:hover .t{color:var(--accent)}
+.row .main{min-width:0;display:flex;flex-direction:column}
+.row .t{font-weight:600}
+.row .n{color:var(--muted);font-size:13.5px}
+.row .host{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .tag{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px;font-weight:400}
+.edit{font:inherit;font-size:12px;color:var(--muted);background:none;border:none;padding:0 6px 0 10px;cursor:pointer;touch-action:manipulation}
+.edit:hover{color:var(--fg)}
+@media (max-width:560px){
+  .row a{grid-template-columns:9px minmax(0,1fr)}
+  .row .host{grid-column:2;text-align:left;max-width:100%}
+}
+details.archive>summary{cursor:pointer;list-style:none}
+details.archive>summary::-webkit-details-marker{display:none}
+details.archive>summary h2::after{content:" +";color:var(--muted)}
+details.archive[open]>summary h2::after{content:" −"}
+.empty{padding:22px 4px;color:var(--muted)}
+mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px}
+
+/* PIN */
+.gate{min-height:70vh;display:flex;align-items:center;justify-content:center}
+.gate form{width:min(340px,100%);display:flex;flex-direction:column;gap:14px}
+.gate h1{margin-bottom:6px}
+.gate p{margin:0;color:var(--muted)}
+.pin{font-family:var(--mono);font-size:28px;letter-spacing:.4em;text-align:center;padding:14px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);width:100%;outline:none}
+.pin:focus-visible{border-color:var(--accent)}
+
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--fg);padding:0;width:min(520px,calc(100vw - 32px));max-height:calc(100vh - 32px)}
+dialog::backdrop{background:rgba(14,12,10,.55)}
+dialog form{display:flex;flex-direction:column;gap:14px;padding:20px}
+dialog h3{margin:0;font-size:20px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:13px;font-weight:600}
+.field input,.field select{font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--fg)}
+.field input:focus-visible,.field select:focus-visible{outline:none;border-color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:440px){.two{grid-template-columns:1fr}}
+.check{display:flex;gap:9px;align-items:center;font-size:14px}
+.check input{width:18px;height:18px;accent-color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.actions .spacer{flex:1}
+.err{color:var(--danger);font-size:13.5px;margin:0}
+footer{margin-top:48px;display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+footer p{flex-basis:100%;margin:0}
+.linkbtn{font:inherit;background:none;border:none;padding:0;color:var(--muted);text-decoration:underline;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}.tile:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<!-- Entrada con PIN -->
+<div class="wrap gate" id="gate" hidden>
+  <form id="gate-form" novalidate>
+    <div>
+      <div class="eyebrow">Grupo El Chiringuito</div>
+      <h1>Mapa del Grupo</h1>
+    </div>
+    <p>Ingresá el PIN. Queda guardado en este equipo.</p>
+    <input class="pin" id="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" maxlength="8" aria-label="PIN">
+    <p class="err" id="gate-err" hidden></p>
+    <button class="btn" id="gate-btn" type="submit">Entrar</button>
+  </form>
+</div>
+
+<!-- App -->
+<div class="wrap" id="app" hidden>
+  <header class="top">
+    <div>
+      <div class="eyebrow">Grupo El Chiringuito · calle Mendoza, Maschwitz</div>
+      <h1>Mapa del Grupo</h1>
+    </div>
+    <div class="status" id="status">Cargando…</div>
+  </header>
+
+  <div class="notice" id="notice" hidden></div>
+
+  <div class="bar">
+    <div class="search-row">
+      <div class="search">
+        <input id="q" type="search" placeholder="Buscar: sueldos, panel, carta, trello…" autocomplete="off" aria-label="Buscar un link">
+      </div>
+      <button class="btn" id="add" type="button">+ Agregar</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por local"></div>
+  </div>
+
+  <main id="content"><p class="empty">Cargando los links del grupo…</p></main>
+
+  <footer>
+    <p>Un link nuevo entra al mapa el mismo día que nace. Claves y PINs van al gestor de contraseñas, nunca acá.</p>
+    <a id="sheet-link" href="#" target="_blank" rel="noopener" hidden>Abrir la planilla</a>
+    <button class="linkbtn" id="install" type="button" hidden>Instalar como app</button>
+    <button class="linkbtn" id="logout" type="button">Salir de este equipo</button>
+  </footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <form id="form" novalidate>
+    <h3 id="dlg-title">Agregar link</h3>
+    <div class="field"><label for="f-t">Nombre</label><input id="f-t" required maxlength="80" placeholder="Ej: Sueldos Chiringuito"></div>
+    <div class="field"><label for="f-u">Link</label><input id="f-u" type="url" required placeholder="https://…" autocapitalize="off"></div>
+    <div class="two">
+      <div class="field"><label for="f-a">Área</label><select id="f-a"></select></div>
+      <div class="field"><label for="f-l">Local</label><select id="f-l"></select></div>
+    </div>
+    <div class="field"><label for="f-n">Nota (opcional)</label><input id="f-n" maxlength="140" placeholder="Para qué sirve o quién lo usa"></div>
+    <label class="check"><input id="f-d" type="checkbox"> Lo uso todos los días (va arriba de todo)</label>
+    <p class="err" id="f-err" hidden></p>
+    <div class="actions">
+      <button class="btn danger" id="f-del" type="button" hidden>Borrar</button>
+      <span class="spacer"></span>
+      <button class="btn ghost" id="f-cancel" type="button">Cancelar</button>
+      <button class="btn" id="f-save" type="submit">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+/* URL de la Aplicación web del Apps Script "Mapa del Grupo" (termina en /exec) */
+var API_URL = 'https://script.google.com/macros/s/AKfycby4iFzuMqgc7PlG46GVu406loHRJhxxd8RoJupq2S8HcQcDph58AjKXYIKZE9dBnAbH/exec';
+
+var AREAS = [
+  {name:'Administración', desc:'Sueldos, alquileres, cheques y fichajes.'},
+  {name:'Operación', desc:'Paneles y herramientas que usa el personal.'},
+  {name:'Lo que ve el cliente', desc:'Web, cartas y reservas en grupochiringuito.com.ar.'},
+  {name:'Planillas de las cartas', desc:'Los Sheets que alimentan cada carta digital.'},
+  {name:'Marketing y Google', desc:'Search Console, Analytics, Maps, Meta e Instagram.'},
+  {name:'Trello y Drive', desc:'Tableros de cada local y carpetas compartidas.'},
+  {name:'Infraestructura', desc:'Dónde vive el código y las bases de datos.'},
+  {name:'Archivo', desc:'Ya no se usa. Queda para referencia.'}
+];
+var LOCALES = [
+  {name:'Grupo', key:'grupo'}, {name:'El Chiringuito', key:'chiringuito'}, {name:'Lounge', key:'lounge'},
+  {name:'Focacceria', key:'focacceria'}, {name:'Una Pizza', key:'pizza'}, {name:'ChirinBakery', key:'bakery'}
+];
+var K_PIN = 'mapa_pin', K_CACHE = 'mapa_cache';
+
+var links = [], q = '', loc = 'todos', editing = null, sheetUrl = '';
+var $ = function(s){ return document.querySelector(s); };
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function norm(s){ return String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim(); }
+function store(k, v){ try{ if(v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); }catch(e){} }
+function load(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+
+function localKey(name){ var n = norm(name); for(var i=0;i<LOCALES.length;i++){ if(norm(LOCALES[i].name) === n) return LOCALES[i].key; } return 'otro'; }
+function isArchive(l){ return norm(l.a) === 'archivo'; }
+
+function hostLabel(u){
+  try{
+    var x = new URL(u), h = x.host.replace(/^www\./,'');
+    if(h === 'docs.google.com') return x.pathname.indexOf('/document/') > -1 ? 'Google Docs' : 'Google Sheets';
+    if(h === 'script.google.com') return 'Apps Script';
+    if(h === 'drive.google.com') return 'Google Drive';
+    if(h === 'instagram.com') return '@' + x.pathname.replace(/\//g,'');
+    if(h === 'trello.com') return 'Trello';
+    if(h === 'claude.ai') return 'Claude';
+    var p = (x.pathname + x.hash).replace(/\/$/,'');
+    return h + (p && p !== '/' ? p : '');
+  }catch(e){ return u; }
+}
+function hl(text){
+  var t = esc(text); if(!q) return t;
+  var raw = String(text == null ? '' : text), n = raw.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''), i = n.indexOf(norm(q));
+  if(i < 0 || n.length !== raw.length) return t;
+  return esc(raw.slice(0,i)) + '<mark>' + esc(raw.slice(i, i+q.length)) + '</mark>' + esc(raw.slice(i+q.length));
+}
+function matches(l){
+  if(loc !== 'todos' && localKey(l.l) !== loc) return false;
+  if(!q) return true;
+  var hay = norm([l.t, l.n, hostLabel(l.u), l.l, l.a].join(' '));
+  return norm(q).split(/\s+/).filter(Boolean).every(function(w){ return hay.indexOf(w) > -1; });
+}
+function byOrder(a,b){ return ((a.o||999) - (b.o||999)) || String(a.t).localeCompare(String(b.t), 'es'); }
+
+/* ---------- API ---------- */
+function api(body){
+  body.pin = load(K_PIN) || body.pin;
+  return fetch(API_URL, {method:'POST', body: JSON.stringify(body), redirect:'follow'})
+    .then(function(r){ if(!r.ok) throw {net:true}; return r.json(); })
+    .catch(function(e){ if(e && e.net) throw e; throw {net:true}; });
+}
+var ERRORES = {
+  pin:'El PIN no es correcto.', bloqueado:'Demasiados intentos con PIN equivocado. Esperá 15 minutos.',
+  sin_pin:'Falta cargar PIN_MAPA en las propiedades del Apps Script.', falta_nombre:'Ponele un nombre al link.',
+  link_invalido:'El link tiene que empezar con https://', no_existe:'Ese link ya no está en la planilla. Recargá la página.'
+};
+function msg(code){ return ERRORES[code] || 'Algo falló del lado de la planilla. Probá de nuevo en un rato.'; }
+
+/* ---------- pantalla ---------- */
+function renderChips(){
+  var counts = {}, total = 0;
+  links.forEach(function(l){ if(isArchive(l)) return; var k = localKey(l.l); counts[k] = (counts[k]||0) + 1; total++; });
+  var h = '<button class="chip" type="button" data-loc="todos" aria-pressed="' + (loc==='todos') + '">Todos <span class="n">' + total + '</span></button>';
+  LOCALES.forEach(function(L){
+    if(!counts[L.key]) return;
+    h += '<button class="chip" type="button" data-loc="' + L.key + '" aria-pressed="' + (loc===L.key) + '"><span class="dot" style="--c:var(--c-' + L.key + ')"></span>' + esc(L.name) + ' <span class="n">' + counts[L.key] + '</span></button>';
+  });
+  $('#chips').innerHTML = h;
+}
+function rowHTML(l){
+  var k = localKey(l.l);
+  return '<li class="row"><a href="' + esc(l.u) + '" target="_blank" rel="noopener">' +
+    '<span class="dot" style="--c:var(--c-' + k + ')"></span>' +
+    '<span class="main"><span class="t">' + hl(l.t) + '<span class="tag">' + esc(l.l) + '</span></span>' + (l.n ? '<span class="n">' + hl(l.n) + '</span>' : '') + '</span>' +
+    '<span class="host">' + hl(hostLabel(l.u)) + '</span></a>' +
+    '<button class="edit" type="button" data-id="' + esc(l.id) + '" aria-label="Editar ' + esc(l.t) + '">Editar</button></li>';
+}
+function render(){
+  renderChips();
+  var filtering = !!q || loc !== 'todos';
+  var vis = links.filter(matches);
+  var h = '';
+  if(!links.length){
+    $('#content').innerHTML = '<p class="empty">El mapa está vacío. Tocá “+ Agregar” para cargar el primer link.</p>';
+    $('#status').textContent = '0 links';
+    return;
+  }
+  var daily = links.filter(function(l){ return l.d && !isArchive(l) && matches(l); }).sort(byOrder);
+  if(daily.length && !q){
+    h += '<section aria-labelledby="h-daily"><div class="sec-head"><h2 id="h-daily">De todos los días</h2><span class="count">' + daily.length + '</span></div><div class="daily">';
+    daily.forEach(function(l){
+      var k = localKey(l.l);
+      h += '<a class="tile" href="' + esc(l.u) + '" target="_blank" rel="noopener"><span class="loc"><span class="dot" style="--c:var(--c-' + k + ')"></span><span>' + esc(l.l) + '</span></span>' +
+        '<span class="t">' + esc(l.t) + '</span><span class="host">' + esc(hostLabel(l.u)) + '</span></a>';
+    });
+    h += '</div></section>';
+  }
+  // áreas conocidas en orden, después cualquier área nueva escrita a mano en la planilla
+  var areas = AREAS.slice(), known = AREAS.map(function(a){ return norm(a.name); });
+  links.forEach(function(l){ var n = norm(l.a); if(n && known.indexOf(n) < 0){ known.push(n); areas.splice(areas.length - 1, 0, {name:l.a, desc:''}); } });
+  areas.forEach(function(a, idx){
+    var items = vis.filter(function(l){ return norm(l.a) === norm(a.name); }).sort(byOrder);
+    if(!items.length) return;
+    var id = 'h-a' + idx;
+    var head = '<h2 id="' + id + '">' + esc(a.name) + '</h2><span class="count">' + items.length + '</span>' + (a.desc ? '<p>' + esc(a.desc) + '</p>' : '');
+    var list = '<ul class="list">' + items.map(rowHTML).join('') + '</ul>';
+    if(norm(a.name) === 'archivo') h += '<section aria-labelledby="' + id + '"><details class="archive"' + (filtering ? ' open' : '') + '><summary class="sec-head">' + head + '</summary>' + list + '</details></section>';
+    else h += '<section aria-labelledby="' + id + '"><div class="sec-head">' + head + '</div>' + list + '</section>';
+  });
+  var sinArea = vis.filter(function(l){ return !norm(l.a); });
+  if(sinArea.length) h += '<section><div class="sec-head"><h2>Sin área</h2><span class="count">' + sinArea.length + '</span></div><ul class="list">' + sinArea.map(rowHTML).join('') + '</ul></section>';
+  if(!vis.length) h += '<p class="empty">No hay links que coincidan con “' + esc(q) + '”. Probá con otra palabra o agregalo con “+ Agregar”.</p>';
+  $('#content').innerHTML = h;
+  var active = links.filter(function(l){ return !isArchive(l); }).length;
+  $('#status').textContent = filtering ? (vis.length + ' de ' + links.length + ' links') : (active + ' links activos · ' + (links.length - active) + ' en archivo');
+}
+function showNotice(t){ var n = $('#notice'); if(t){ n.textContent = t; n.hidden = false; } else n.hidden = true; }
+
+/* ---------- datos ---------- */
+function setLinks(list, fresh){
+  links = list || [];
+  if(fresh) store(K_CACHE, JSON.stringify({links:links, at:Date.now(), sheet:sheetUrl}));
+  render();
+}
+function refresh(){
+  return api({action:'list'}).then(function(r){
+    if(!r.ok){
+      if(r.error === 'pin'){ logout('El PIN cambió. Ingresalo de nuevo.'); return; }
+      showNotice(msg(r.error)); return;
+    }
+    sheetUrl = r.sheet || '';
+    if(sheetUrl){ $('#sheet-link').href = sheetUrl; $('#sheet-link').hidden = false; }
+    showNotice('');
+    setLinks(r.links, true);
+  }).catch(function(){
+    var c = readCache();
+    showNotice(c ? 'Sin conexión: estás viendo la copia del ' + new Date(c.at).toLocaleString('es-AR', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'}) + '.' : 'No se pudo conectar. Revisá internet y recargá.');
+  });
+}
+function readCache(){ try{ return JSON.parse(load(K_CACHE) || 'null'); }catch(e){ return null; } }
+
+/* ---------- entrada ---------- */
+function showGate(err){
+  $('#app').hidden = true; $('#gate').hidden = false;
+  var e = $('#gate-err'); if(err){ e.textContent = err; e.hidden = false; } else e.hidden = true;
+  setTimeout(function(){ $('#pin').focus(); }, 50);
+}
+function showApp(){
+  $('#gate').hidden = true; $('#app').hidden = false;
+  var c = readCache();
+  if(c && c.links){ sheetUrl = c.sheet || ''; if(sheetUrl){ $('#sheet-link').href = sheetUrl; $('#sheet-link').hidden = false; } setLinks(c.links, false); }
+  refresh();
+}
+function logout(err){ store(K_PIN, null); store(K_CACHE, null); links = []; $('#pin').value = ''; showGate(err); }
+
+$('#gate-form').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var pin = $('#pin').value.trim();
+  if(!/^\d{4,8}$/.test(pin)){ showGate('El PIN tiene entre 4 y 8 números.'); return; }
+  if(!API_URL){ showGate('Falta conectar la planilla (API_URL vacía).'); return; }
+  $('#gate-btn').disabled = true; $('#gate-btn').textContent = 'Entrando…';
+  api({action:'list', pin:pin}).then(function(r){
+    if(!r.ok){ showGate(msg(r.error)); return; }
+    store(K_PIN, pin);
+    sheetUrl = r.sheet || '';
+    $('#gate').hidden = true; $('#app').hidden = false;
+    if(sheetUrl){ $('#sheet-link').href = sheetUrl; $('#sheet-link').hidden = false; }
+    setLinks(r.links, true);
+  }).catch(function(){ showGate('No se pudo conectar. Revisá internet.'); })
+    .then(function(){ $('#gate-btn').disabled = false; $('#gate-btn').textContent = 'Entrar'; });
+});
+$('#logout').addEventListener('click', function(){ logout(''); });
+
+/* ---------- formulario ---------- */
+$('#f-a').innerHTML = AREAS.map(function(a){ return '<option>' + esc(a.name) + '</option>'; }).join('');
+$('#f-l').innerHTML = LOCALES.map(function(L){ return '<option>' + esc(L.name) + '</option>'; }).join('');
+function ensureOption(sel, val){ if(val && !Array.prototype.some.call(sel.options, function(o){ return o.value === val; })){ var o = document.createElement('option'); o.textContent = val; sel.appendChild(o); } }
+function openForm(l){
+  editing = l || null;
+  $('#dlg-title').textContent = l ? 'Editar link' : 'Agregar link';
+  $('#f-t').value = l ? l.t : ''; $('#f-u').value = l ? l.u : '';
+  ensureOption($('#f-a'), l && l.a); ensureOption($('#f-l'), l && l.l);
+  $('#f-a').value = l && l.a ? l.a : 'Operación'; $('#f-l').value = l && l.l ? l.l : 'Grupo';
+  $('#f-n').value = l ? (l.n || '') : ''; $('#f-d').checked = !!(l && l.d);
+  $('#f-del').hidden = !l; $('#f-del').classList.remove('armed'); $('#f-del').textContent = 'Borrar';
+  $('#f-err').hidden = true;
+  $('#dlg').showModal(); $('#f-t').focus();
+}
+function showErr(m){ var e = $('#f-err'); e.textContent = m; e.hidden = false; }
+$('#form').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var t = $('#f-t').value.trim(), u = $('#f-u').value.trim();
+  if(!t) return showErr('Ponele un nombre al link.');
+  if(!/^https?:\/\/\S+$/i.test(u)) return showErr('El link tiene que empezar con https://');
+  var link = {id: editing ? editing.id : '', t:t, u:u, a:$('#f-a').value, l:$('#f-l').value, n:$('#f-n').value.trim(), d:$('#f-d').checked};
+  $('#f-save').disabled = true; $('#f-save').textContent = 'Guardando…';
+  api({action:'save', link:link}).then(function(r){
+    if(!r.ok) return showErr(msg(r.error));
+    var i = links.findIndex(function(x){ return x.id === r.link.id; });
+    var next = links.slice(); if(i > -1) next[i] = r.link; else next.push(r.link);
+    setLinks(next, true);
+    $('#dlg').close();
+  }).catch(function(){ showErr('Sin conexión: no se guardó. Probá de nuevo.'); })
+    .then(function(){ $('#f-save').disabled = false; $('#f-save').textContent = 'Guardar'; });
+});
+$('#f-del').addEventListener('click', function(){
+  var b = $('#f-del');
+  if(!b.classList.contains('armed')){ b.classList.add('armed'); b.textContent = 'Tocá de nuevo para borrar'; return; }
+  b.disabled = true;
+  api({action:'delete', id:editing.id}).then(function(r){
+    if(!r.ok) return showErr(msg(r.error));
+    setLinks(links.filter(function(x){ return x.id !== editing.id; }), true);
+    $('#dlg').close();
+  }).catch(function(){ showErr('Sin conexión: no se borró. Probá de nuevo.'); })
+    .then(function(){ b.disabled = false; });
+});
+$('#f-cancel').addEventListener('click', function(){ $('#dlg').close(); });
+$('#add').addEventListener('click', function(){ openForm(null); });
+$('#content').addEventListener('click', function(e){
+  var b = e.target.closest('.edit'); if(!b) return;
+  var l = links.find(function(x){ return x.id === b.dataset.id; }); if(l) openForm(l);
+});
+$('#chips').addEventListener('click', function(e){
+  var c = e.target.closest('.chip'); if(!c) return;
+  loc = c.dataset.loc; render();
+});
+$('#q').addEventListener('input', function(e){ q = e.target.value.trim(); render(); });
+document.addEventListener('keydown', function(e){
+  if(e.key === '/' && document.activeElement.tagName !== 'INPUT' && !$('#dlg').open && !$('#app').hidden){ e.preventDefault(); $('#q').focus(); }
+});
+document.addEventListener('visibilitychange', function(){ if(!document.hidden && load(K_PIN) && !$('#app').hidden) refresh(); });
+
+/* ---------- instalar ---------- */
+var installEvt = null;
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); installEvt = e; $('#install').hidden = false; });
+$('#install').addEventListener('click', function(){ if(!installEvt) return; installEvt.prompt(); installEvt = null; $('#install').hidden = true; });
+if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+
+/* ---------- arranque ---------- */
+if(load(K_PIN)) showApp(); else showGate('');
+</script>
+</body>
+</html>
