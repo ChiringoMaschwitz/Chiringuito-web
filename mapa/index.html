@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mapa del Grupo</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/mapa/manifest.json">
 <meta name="theme-color" content="#0E0C0A">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="/mapa/icon-192.png">
+<link rel="apple-touch-icon" href="/mapa/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -451,7 +451,7 @@ document.addEventListener('visibilitychange', function(){ if(!document.hidden &&
 var installEvt = null;
 window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); installEvt = e; $('#install').hidden = false; });
 $('#install').addEventListener('click', function(){ if(!installEvt) return; installEvt.prompt(); installEvt = null; $('#install').hidden = true; });
-if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register("/mapa/sw.js", {scope:"/mapa/"}).catch(function(){}); }); }
 
 /* ---------- arranque ---------- */
 if(load(K_PIN)) showApp(); else showGate('');

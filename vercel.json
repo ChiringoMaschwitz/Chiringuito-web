@@ -37,5 +37,12 @@
       "source": "/reservas/:path*",
       "destination": "https://reservas.grupochiringuito.com.ar/reservas/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/mapa",
+      "destination": "/mapa/",
+      "permanent": true
+    }
   ]
 }
