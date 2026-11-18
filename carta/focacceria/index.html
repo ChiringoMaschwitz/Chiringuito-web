@@ -123,6 +123,43 @@
   .t-hueso,.t-papel,.t-durazno,.t-ambar{background-image:var(--textura-suave);background-size:64px 64px}
   .t-papel{--textura-suave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 0 64 32 32 64 0 32Z' fill='none' stroke='%2315120F' stroke-opacity='.09' stroke-width='2'/%3E%3Cpath d='M6 32 32 6 58 32' fill='none' stroke='%23fff' stroke-opacity='.7' stroke-width='2'/%3E%3C/svg%3E")}
 
+
+  /* ---------- solapa de colaboración: Foca × Vardo (estética de ellos: papel negro arrugado, lima, violeta) ---------- */
+  .t-vardo{--fondo:#121311;--texto:#F4F4EE;--suave-t:#B9BCB2;--chip:#9BCB4C;--chip-t:#101110;--card:#1E201C;--acento:#9BCB4C;--lima:#9BCB4C;--violeta:#8A2BE2;
+    background:#121311 url(img/vardo-papel.jpg) 0 0/520px 520px}
+  .t-vardo .manija{background:var(--lima);opacity:.6}
+  .vardo-marcas{display:flex;align-items:center;gap:12px;margin:0 0 18px}
+  .vardo-marcas .foca{height:26px;width:auto}
+  .vardo-marcas .por{font-stretch:68%;font-weight:800;font-size:30px;line-height:1;color:var(--violeta)}
+  .vardo-marcas .vardo-logo{height:64px;width:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.45))}
+  .vardo-marcas .vardo-txt{font-stretch:62%;font-weight:900;font-size:28px;letter-spacing:.02em;text-transform:uppercase;color:#101110;background:var(--lima);padding:2px 8px 0;transform:rotate(-2deg)}
+  .vardo-titulo{margin:0;display:flex;flex-direction:column;align-items:flex-start;font-stretch:62%;font-weight:900;text-transform:uppercase;line-height:.86;color:#101110}
+  .vardo-bloque{display:inline-block;background:var(--lima);padding:.08em .14em .02em;font-size:clamp(60px,19vw,160px);
+    -webkit-mask:url(img/vardo-grunge.png) 0 0/300px 300px;mask:url(img/vardo-grunge.png) 0 0/300px 300px}
+  .vardo-bloque:first-child{transform:rotate(1deg)}
+  .vardo-bloque + .vardo-bloque{margin:-.04em 0 0 .4em;transform:rotate(-2deg)}
+  .vardo-sellos{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+  .vardo-sello{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+  .vardo-sello.v{background:var(--violeta);color:#fff}
+  .vardo-sello.f{border:2px solid var(--lima);color:var(--lima)}
+  .t-vardo .cab .bajada{font-size:18px}
+  .t-vardo .cab .bajada .cuenta{background:transparent;color:var(--suave-t);padding:0}
+  .t-vardo .plato h3{font-stretch:68%;font-weight:800;text-transform:uppercase;font-size:24px;line-height:.95;letter-spacing:.01em}
+  .t-vardo .plato.destacado h3{font-size:34px}
+  .t-vardo .plato .marco{overflow:visible;border-radius:6px;box-shadow:6px 6px 0 var(--violeta)}
+  .t-vardo .plato .marco img{border-radius:6px}
+  .t-vardo .plato .desc{-webkit-line-clamp:5}
+  .t-vardo .precio{font-size:18px;font-weight:900;border-radius:3px;transform:rotate(-1.5deg)}
+  .t-vardo .baldosa{background:var(--lima);color:#101110;padding:16px;border-radius:6px;-webkit-mask:url(img/vardo-grunge.png) 0 0/300px 300px;mask:url(img/vardo-grunge.png) 0 0/300px 300px}
+  .t-vardo .baldosa .cifra{color:var(--violeta)}
+  .t-vardo .baldosa b{font-size:clamp(30px,8.5vw,48px);font-stretch:62%;font-weight:900}
+  .ilustrativa{position:absolute;left:8px;bottom:8px;z-index:2;padding:3px 9px;border-radius:999px;background:rgba(18,19,17,.72);color:#F4F4EE;font-size:11.5px;font-weight:600}
+  #promo .caja.t-vardo{background:#121311 url(img/vardo-papel.jpg) 0 0/420px 420px;color:#F4F4EE}
+  #promo .caja.t-vardo h2{color:#9BCB4C;font-stretch:62%;font-weight:900}
+  #promo .caja.t-vardo p{color:#C9CCC2}
+  #promo .caja.t-vardo .precio{background:#9BCB4C;color:#101110;border:0;cursor:pointer;font-weight:900;text-transform:uppercase;border-radius:3px}
+  #promo .caja.t-vardo .cerrar{background:#9BCB4C;color:#101110}
+
   /* grilla de platos con foto */
   .grilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;gap:20px 12px;list-style:none;margin:0;padding:0}
   .plato{position:relative;min-width:0}
@@ -419,6 +456,7 @@ var HORA_CORTE_DIA = 6;
 var DEMORA_PROMO = 900;
 /* Solapas, en orden. Cada una junta una o más secciones del Sheet. Una sección nueva que no figure acá sale como solapa propia al final. */
 var SOLAPAS = [
+  {id:'vardo',     titulo:'Foca × Vardo', secciones:['Vardo'],          tema:'vardo',   bajada:'', colab:true},   /* colaboración: sale primera y solo mientras la sección "Vardo" tenga productos activos */
   {id:'entradas',  titulo:'Entradas',  secciones:['Entradas','Entraditas'], tema:'hueso',   bajada:'Para arrancar o para compartir.'},
   {id:'focaccias', titulo:'Focaccias', secciones:['Creaciones'],            tema:'papel',   bajada:'Enormes, de masa propia. Enteras o mitad.', tira:true, armala:true, vermut:true},
   {id:'picadas',   titulo:'Picadas',   secciones:['Picadas'],               tema:'durazno', bajada:'Tablas para compartir.', vermut:true},
@@ -451,7 +489,7 @@ function fmt(p){ if (p === null || p === '' || isNaN(p)) return ''; return '$' +
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function ruta(n){ if (!n) return null; if (/^https?:\/\//.test(n)) return n; if (n.charAt(0) === '/') return RAIZ_REL ? n.slice(1) : n; return (RAIZ_REL ? FOTOS_BASE.slice(1) : FOTOS_BASE) + encodeURIComponent(n); }
 function tipo(p){ return String(p.tipo || '').trim().toLowerCase(); }
-function esOpcion(p){ var t = tipo(p); return t === 'opcion' || t === 'opción' || t === 'adicional' || t === 'base'; }
+function esOpcion(p){ var t = tipo(p); return t === 'opcion' || t === 'opción' || t === 'adicional' || t === 'base' || t === 'bajada'; }
 function hayPrecio(p){ return p !== null && p !== '' && !isNaN(p) && Number(p) > 0; }
 function reducido(){ return matchMedia('(prefers-reduced-motion: reduce)').matches; }
 function $(id){ return document.getElementById(id); }
@@ -579,7 +617,7 @@ function render(){
     cont.appendChild(anc);
     var el = construirSolapa(x.cfg, x.secs, porSeccion);
     cont.appendChild(el);
-    SOLAPAS_DOM.push({cfg:x.cfg, el:el, ancla:anc, top:56});
+    SOLAPAS_DOM.push({cfg:x.cfg, secs:x.secs, el:el, ancla:anc, top:56});
   });
   armarIndice();
   armarVermut();
@@ -597,9 +635,14 @@ function construirSolapa(cfg, secs, porSeccion){
   el.setAttribute('aria-labelledby', cfg.id + '-t');
   var total = 0;
   secs.forEach(function(n){ total += porSeccion[n].filter(function(p){ return !esOpcion(p); }).length; });
-  var h = '<div class="velo" aria-hidden="true"></div><div class="dentro"><span class="manija" aria-hidden="true"></span>' +
-    '<header class="cab"><h2 class="ancho" id="' + cfg.id + '-t" data-ajustar>' + esc(cfg.titulo) + '</h2>' +
-    '<p class="bajada">' + (cfg.bajada ? '<span>' + esc(cfg.bajada) + '</span>' : '') + (total ? '<span class="cuenta num">' + total + (total === 1 ? ' opción' : ' opciones') + '</span>' : '') + '</p></header>';
+  /* una fila con Tipo = "bajada" en la sección reemplaza la bajada fija (así se edita desde el panel) */
+  var bajada = cfg.bajada;
+  secs.forEach(function(n){ porSeccion[n].forEach(function(p){ if (tipo(p) === 'bajada' && p.descripcion) bajada = p.descripcion; }); });
+  var cuenta = total ? '<span class="cuenta num">' + total + (total === 1 ? ' opción' : ' opciones') + '</span>' : '';
+  var h = '<div class="velo" aria-hidden="true"></div><div class="dentro"><span class="manija" aria-hidden="true"></span>';
+  if (cfg.colab) h += cabColab(cfg, bajada, cuenta);
+  else h += '<header class="cab"><h2 class="ancho" id="' + cfg.id + '-t" data-ajustar>' + esc(cfg.titulo) + '</h2>' +
+    '<p class="bajada">' + (bajada ? '<span>' + esc(bajada) + '</span>' : '') + cuenta + '</p></header>';
   if (cfg.tira) h += tiraFotos();
   el.innerHTML = h + '</div>';
   var dentro = el.querySelector('.dentro');
@@ -612,7 +655,7 @@ function construirSolapa(cfg, secs, porSeccion){
     var platos = porSeccion[n].filter(function(p){ return !esOpcion(p); });
     if (secs.length > 1 && n !== cfg.titulo) dentro.insertAdjacentHTML('beforeend', '<h3 class="sub ancho">' + esc(n) + '</h3>');
     var conFoto = platos.filter(function(p){ return p.foto; }).length;
-    var esGrilla = ['entradas','focaccias','picadas','pastas'].indexOf(cfg.id) > -1 || conFoto / Math.max(platos.length,1) >= 0.5;
+    var esGrilla = ['entradas','focaccias','picadas','pastas','vardo'].indexOf(cfg.id) > -1 || conFoto / Math.max(platos.length,1) >= 0.5;
     if (cfg.listas && cfg.listas.indexOf(n) > -1) esGrilla = false;
     if (cfg.id === 'bebidas' || cfg.id === 'vermouth') esGrilla = false;
     dentro.appendChild(esGrilla ? grilla(platos, n) : listaSimple(platos, cfg));
@@ -622,6 +665,16 @@ function construirSolapa(cfg, secs, porSeccion){
   if (cfg.armala && $('cajon-armala').dataset.listo)
     dentro.insertAdjacentHTML('beforeend', '<button class="anzuelo" type="button" data-cajon="cajon-armala"><b class="angosto">Armala a tu gusto</b><span>Elegí queso, fiambre, extra y alioli. Te sumamos el precio.</span><span class="ir" aria-hidden="true">' + ICO.der + '</span></button>');
   return el;
+}
+
+/* cabecera de la solapa de colaboración: logos, título en bloques y sellos */
+function cabColab(cfg, bajada, cuenta){
+  return '<header class="cab">' +
+    '<div class="vardo-marcas"><img class="foca" src="img/logo-foca-hueso.png" alt="La Focacceria" width="1100" height="207"><span class="por" aria-hidden="true">×</span>' +
+      '<img class="vardo-logo" src="img/logo-vardo.png" alt="Vardo" width="421" height="480" onerror="this.outerHTML=\'<span class=vardo-txt>Vardo</span>\'"></div>' +
+    '<h2 class="vardo-titulo" id="' + cfg.id + '-t"><span class="sr-only">' + esc(cfg.titulo) + '</span><span class="vardo-bloque" aria-hidden="true">Foca</span><span class="vardo-bloque" aria-hidden="true">× Vardo</span></h2>' +
+    '<div class="vardo-sellos"><span class="vardo-sello v">100% vegano</span><span class="vardo-sello f">Edición especial</span></div>' +
+    '<p class="bajada">' + (bajada ? '<span>' + esc(bajada) + '</span>' : '') + cuenta + '</p></header>';
 }
 
 function tiraFotos(){
@@ -642,7 +695,7 @@ function grilla(platos, nombreSec){
     var m = String(p.producto).match(/\sx\s?(\d+)$/i);
     var nombre = m ? p.producto.replace(/\sx\s?\d+$/i, '') : p.producto;
     var marco = p.foto
-      ? '<img src="' + ruta(p.foto) + '" alt="" loading="lazy" width="600" height="750">'
+      ? '<img src="' + ruta(p.foto) + '" alt="" loading="lazy" width="600" height="750">' + (/ilustrativa/i.test(p.grupo || '') ? '<span class="ilustrativa">Foto ilustrativa</span>' : '')
       : '<span class="baldosa" aria-hidden="true">' + (m ? '<span class="cifra num">x' + m[1] + '</span>' : '') + '<b>' + esc(nombre) + '</b></span>';
     li.innerHTML = '<button class="abrir" type="button" data-visor="' + idx + '" aria-label="Ver ' + esc(p.producto) + ' en grande">' +
         '<span class="marco">' + marco + '</span></button>' + htmlLike(p) +
@@ -1039,7 +1092,14 @@ function mostrarPromo(p, marca){
   if (!$('visor').hidden || CAJON_ABIERTO) return;
   var d = $('promo'), boton = '';
   if (p.botonTipo === 'link' && /^https?:\/\//i.test(p.botonDestino || '')) boton = '<a class="precio" href="' + esc(p.botonDestino) + '" target="_blank" rel="noopener">' + esc(p.botonTexto || 'Ver más') + '</a>';
-  d.innerHTML = '<div class="caja"><button class="cerrar" aria-label="Cerrar promoción">' + ICO.x + '</button><img src="' + ruta(p.foto) + '" alt="">' +
+  /* "Ver un plato de la carta" (opción del panel): lleva a la solapa de ese plato; si es una colaboración, la placa toma sus colores */
+  var solapaDestino = null;
+  if (p.botonTipo === 'plato'){
+    var plato = PLANOS.filter(function(x){ return Number(x.id) === Number(p.botonDestino); })[0];
+    if (plato) solapaDestino = SOLAPAS_DOM.filter(function(s){ return (s.secs || []).indexOf(plato._sec) > -1; })[0] || null;
+    if (solapaDestino) boton = '<button class="precio ir-solapa" type="button">' + esc(p.botonTexto || 'Ver en la carta') + '</button>';
+  }
+  d.innerHTML = '<div class="caja' + (solapaDestino && solapaDestino.cfg.colab ? ' t-' + solapaDestino.cfg.tema : '') + '"><button class="cerrar" aria-label="Cerrar promoción">' + ICO.x + '</button><img src="' + ruta(p.foto) + '" alt="">' +
     (p.titulo ? '<div class="ficha"><h2 class="angosto">' + esc(p.titulo) + '</h2>' + (p.descripcion ? '<p>' + esc(p.descripcion) + '</p>' : '') + (hayPrecio(p.precio) ? '<span class="precio num">' + fmt(p.precio) + '</span>' : '') + boton + '</div>' : '') + '</div>';
   d.showModal(); history.pushState({promo:true}, '');
   try { localStorage.setItem('promo_' + CLAVE_LOCAL, marca); } catch(e){}
@@ -1049,6 +1109,7 @@ function mostrarPromo(p, marca){
   d.onclick = function(e){ if (e.target === d) cerrar(); };
   d.oncancel = function(e){ e.preventDefault(); cerrar(); };
   var acc = d.querySelector('a.precio'); if (acc) acc.addEventListener('click', function(){ eventoPromo(p.id, 'clic'); });
+  var irS = d.querySelector('.ir-solapa'); if (irS) irS.onclick = function(){ eventoPromo(p.id, 'clic'); cerrar(); setTimeout(function(){ irA(solapaDestino.cfg.id); }, 120); };
 }
 function eventoPromo(id, t){ if (MODO_DEMO) return; fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({accion:'promo_evento', id:id, tipo:t})}).catch(function(){}); }
 
