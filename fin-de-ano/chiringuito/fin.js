@@ -78,9 +78,11 @@
     var s = String(Math.round(v)); while (s.length < 3) s = '0' + s;
     for (var i = 0; i < 3; i++) if (digs[i].textContent !== s[i]) digs[i].textContent = s[i];
   }
+  var alTerminar = [];
   function finCuenta() {
     if (terminado) return;
     terminado = true;
+    alTerminar.forEach(function (f) { f(); });
     pintarNum(365);
     cargaBarra.style.transform = 'scaleX(1)';
     contadorLabel.textContent = 'Días del año';
@@ -167,6 +169,31 @@
   var pista = $('#pista'), declaraPals = $$('#declara .pal'), declaraSub = $('.declara-sub');
   var cards = $$('.card', pista), caras = cards.map(function (c) { return $('figure', c); }), medios = cards.map(function (c) { return $('figure img, figure video', c); });
   videosCard = cards.map(function (c) { return $('figure video', c); });
+
+  /* precarga escalonada: cuando termina el contador, los videos se bajan de a uno
+     (primero los del torbellino, después los de las propuestas, en orden), así cuando
+     aparecen ya están listos y no se ve la portada quieta. En iOS el atributo preload
+     no alcanza: cada video se "calienta" con un play mudo corto y se pausa. */
+  var colaVideos = $$('.flota-video').filter(function (v) { return getComputedStyle(v).display !== 'none'; })
+    .concat(videosCard.filter(Boolean));
+  function calentar(i) {
+    if (i >= colaVideos.length) return;
+    var v = colaVideos[i], hecho = false;
+    function siguiente() {
+      if (hecho) return;
+      hecho = true;
+      if (!v._quiero) v.pause();
+      setTimeout(function () { calentar(i + 1); }, 120);
+    }
+    v.preload = 'auto';
+    if (v.readyState >= 3) { siguiente(); return; }
+    v.addEventListener('canplaythrough', siguiente, { once: true });
+    setTimeout(siguiente, 4000);
+    var pr = v.play();
+    if (pr && pr.catch) pr.catch(function () { try { v.load(); } catch (e) {} });   // sin autoplay (ahorro de batería): al menos que baje
+  }
+  function arrancarPrecarga() { setTimeout(function () { calentar(0); }, 500); }
+  if (terminado) arrancarPrecarga(); else alTerminar.push(arrancarPrecarga);
   var rielPie = $('#rielPie'), rielBarra = $('#rielBarra'), rielCuenta = $('#rielCuenta');
   var espacio = $('#espacio'), flotas = $$('.flota'), franjasBox = $('#franjas');
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -468,6 +495,7 @@
 
   /* play/pause sin repetir llamadas */
   function tocar(v, k, si) {
+    v._quiero = si;
     if (sonando[k] === si) return;
     sonando[k] = si;
     if (si) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
@@ -544,7 +572,7 @@
     for (i = 0; i < videosCard.length; i++) {
       if (!videosCard[i]) continue;
       var xp = offsets[i] + tx;
-      tocar(videosCard[i], 'k' + i, xp < vw * 0.95 && xp > -cardW && S.franja < 0.5 && activo);
+      tocar(videosCard[i], 'k' + i, xp < vw * 1.3 && xp > -cardW && S.franja < 0.5 && activo);   // arranca antes de entrar
     }
     poner('rp', 'opacity', rielPie, (S.pie * (1 - ss(0.2, 0.45, S.franja))).toFixed(3));
     poner('rb', 'transform', rielBarra, 'scaleX(' + S.x.toFixed(4) + ')');
