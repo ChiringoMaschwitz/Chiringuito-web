@@ -164,35 +164,33 @@
      Todo lo que se mueve acá lo maneja el scroll (no hay tiempos fijos), salvo el polvo de fondo. */
   var noche = $('#noche'), pin = $('#nochePin');
   var ambiente = $('#ambiente'), ambCerca = $('#ambCerca'), ambSombra = $('#ambSombra'), ambBrillo = $('#ambBrillo');
-  var videosCard = [], sonando = [];
+  var videosCard = [];
   var copa = $('#copa'), canvas = $('#polvo'), ctx = canvas.getContext('2d');
   var pista = $('#pista'), declaraPals = $$('#declara .pal'), declaraSub = $('.declara-sub');
   var cards = $$('.card', pista), caras = cards.map(function (c) { return $('figure', c); }), medios = cards.map(function (c) { return $('figure img, figure video', c); });
   videosCard = cards.map(function (c) { return $('figure video', c); });
 
-  /* precarga escalonada: cuando termina el contador, los videos se bajan de a uno
-     (primero los del torbellino, después los de las propuestas, en orden), así cuando
-     aparecen ya están listos y no se ve la portada quieta. En iOS el atributo preload
-     no alcanza: cada video se "calienta" con un play mudo corto y se pausa. */
+  /* precarga: cuando termina el contador, cada video se baja completo en segundo plano
+     (de a uno: primero el torbellino, después las propuestas) y queda en memoria.
+     Safari de iPhone no baja ni reproduce videos fuera de pantalla, así que precalentarlos
+     con play no sirve; con el archivo ya en memoria arrancan al instante cuando aparecen. */
   var colaVideos = $$('.flota-video').filter(function (v) { return getComputedStyle(v).display !== 'none'; })
     .concat(videosCard.filter(Boolean));
-  function calentar(i) {
+  function precargar(i) {
     if (i >= colaVideos.length) return;
-    var v = colaVideos[i], hecho = false;
-    function siguiente() {
-      if (hecho) return;
-      hecho = true;
-      if (!v._quiero) v.pause();
-      setTimeout(function () { calentar(i + 1); }, 120);
-    }
-    v.preload = 'auto';
-    if (v.readyState >= 3) { siguiente(); return; }
-    v.addEventListener('canplaythrough', siguiente, { once: true });
-    setTimeout(siguiente, 4000);
-    var pr = v.play();
-    if (pr && pr.catch) pr.catch(function () { try { v.load(); } catch (e) {} });   // sin autoplay (ahorro de batería): al menos que baje
+    var v = colaVideos[i], fuente = $('source', v), url = fuente ? fuente.src : v.currentSrc;
+    var sig = function () { setTimeout(function () { precargar(i + 1); }, 60); };
+    if (!url || !window.fetch || !window.URL || !window.Blob || v._blob) { sig(); return; }
+    fetch(url).then(function (r) { if (!r.ok) throw new Error('video'); return r.blob(); }).then(function (b) {
+      var u = URL.createObjectURL(new Blob([b], { type: 'video/mp4' }));
+      v._blob = u;
+      v.src = u;                       // el atributo src manda sobre el <source>
+      v.load();
+      if (v._quiero) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      sig();
+    }).catch(sig);
   }
-  function arrancarPrecarga() { setTimeout(function () { calentar(0); }, 500); }
+  function arrancarPrecarga() { setTimeout(function () { precargar(0); }, 300); }
   if (terminado) arrancarPrecarga(); else alTerminar.push(arrancarPrecarga);
   var rielPie = $('#rielPie'), rielBarra = $('#rielBarra'), rielCuenta = $('#rielCuenta');
   var espacio = $('#espacio'), flotas = $$('.flota'), franjasBox = $('#franjas');
@@ -490,15 +488,25 @@
 
   /* bucle de dibujo: solo mientras la escena está a la vista */
   var activo = false;
-  function bucle(ts) { if (!activo) return; dibujar(ts); requestAnimationFrame(bucle); }
+  function bucle(ts) { if (!activo) return; dibujar(ts); revisarVideos(); requestAnimationFrame(bucle); }
   function encender(v) { if (v === activo) return; activo = v; if (v) requestAnimationFrame(bucle); else { dibujar(0); render(); } }
 
   /* play/pause sin repetir llamadas */
+  /* play/pause con reintento: si Safari rechaza o frena un video que tiene que correr,
+     se le vuelve a dar play (como mucho cada 0,6 s) hasta que arranque */
+  var todosVideos = [];
   function tocar(v, k, si) {
     v._quiero = si;
-    if (sonando[k] === si) return;
-    sonando[k] = si;
-    if (si) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause();
+    if (todosVideos.indexOf(v) < 0) todosVideos.push(v);
+    if (!si) { if (!v.paused) v.pause(); return; }
+    if (!v.paused) return;
+    var ahora = performance.now();
+    if (v._intento && ahora - v._intento < 600) return;
+    v._intento = ahora;
+    var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  }
+  function revisarVideos() {
+    for (var i = 0; i < todosVideos.length; i++) { var v = todosVideos[i]; if (v._quiero && v.paused) tocar(v, null, true); }
   }
 
   function poner(k, prop, el, v) {
@@ -571,8 +579,8 @@
     /* los videos de las tarjetas corren solo mientras su tarjeta está a la vista */
     for (i = 0; i < videosCard.length; i++) {
       if (!videosCard[i]) continue;
-      var xp = offsets[i] + tx;
-      tocar(videosCard[i], 'k' + i, xp < vw * 1.3 && xp > -cardW && S.franja < 0.5 && activo);   // arranca antes de entrar
+      var xp = offsets[i] + tx, emv = 1 - ss(desde, hasta, xp);
+      tocar(videosCard[i], 'k' + i, emv > 0.3 && xp > -cardW * 0.85 && S.franja < 0.5 && activo);   // corre cuando la tarjeta ya se ve
     }
     poner('rp', 'opacity', rielPie, (S.pie * (1 - ss(0.2, 0.45, S.franja))).toFixed(3));
     poner('rb', 'transform', rielBarra, 'scaleX(' + S.x.toFixed(4) + ')');
