@@ -193,7 +193,7 @@ html:not(.motion) .barra{background:rgba(18,15,12,.94)}
 .cotizador{padding:20svh 0 12svh;position:relative}
 .cot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,110px);align-items:end}
 .kick{color:var(--ambar);margin-bottom:18px}
-.cotizador h2,.distinto h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(68px,9vw,164px);line-height:.84}
+.cotizador h2,.distinto h2,.preguntas h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(68px,9vw,164px);line-height:.84}
 .cant{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap}
 .cant-b{
   width:clamp(68px,7vw,92px);aspect-ratio:1;border-radius:16px;border:1px solid rgba(243,239,231,.22);
@@ -215,6 +215,19 @@ html:not(.motion) .barra{background:rgba(18,15,12,.94)}
 .distinto{padding:10svh 0 16svh;border-top:1px solid var(--linea)}
 .dist{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,6vw,100px);align-items:start}
 .distinto h2{font-size:clamp(56px,6.6vw,118px)}
+/* preguntas frecuentes */
+.preguntas{padding:10svh 0 14svh;border-top:1px solid var(--linea)}
+.preg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:start}
+.preg-chico{color:var(--ambar);margin-bottom:18px}
+.preguntas h2{font-size:clamp(48px,5.4vw,96px)}
+.preg-lista details{border-bottom:1px solid var(--linea)}
+.preg-lista summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding:22px 0;font-size:clamp(17px,1.45vw,21px);font-weight:600;line-height:1.3}
+.preg-lista summary::-webkit-details-marker{display:none}
+.preg-lista summary::after{content:"+";font-family:var(--sans,inherit);font-weight:300;font-size:30px;line-height:1;color:var(--ambar);transition:transform 200ms cubic-bezier(.23,1,.32,1)}
+.preg-lista details[open] summary::after{transform:rotate(45deg)}
+.preg-lista p{padding:0 0 24px;max-width:62ch;opacity:.86;font-size:16px;line-height:1.6}
+.preg-lista a{color:var(--ambar);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:760px){.preg{grid-template-columns:1fr;gap:24px}}
 .dist-izq p{font-size:clamp(18px,1.5vw,21px);margin-top:20px;max-width:30ch;opacity:.88}
 .dist-tel{margin-top:28px!important;font-size:12px!important;opacity:.7}
 .dist-tel a{color:var(--ambar)}
