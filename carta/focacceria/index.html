@@ -153,6 +153,9 @@
   .t-vardo .baldosa{background:var(--lima);color:#101110;padding:16px;border-radius:6px;-webkit-mask:url(img/vardo-grunge.png) 0 0/300px 300px;mask:url(img/vardo-grunge.png) 0 0/300px 300px}
   .t-vardo .baldosa .cifra{color:var(--violeta)}
   .t-vardo .baldosa b{font-size:clamp(30px,8.5vw,48px);font-stretch:62%;font-weight:900}
+  /* sticker "2x1": sale en cualquier producto con "2x1" en el Grupo (se saca borrándolo desde el panel) */
+  .promo-2x1{display:inline-flex;align-items:center;padding:4px 11px 2px;border-radius:3px;background:#8A2BE2;color:#fff;font-stretch:62%;font-weight:900;font-size:22px;line-height:1;letter-spacing:.01em;transform:rotate(3deg);align-self:center}
+  .t-vardo .promo-2x1{font-size:24px;box-shadow:3px 3px 0 #101110;-webkit-mask:url(img/vardo-grunge.png) 0 0/220px 220px;mask:url(img/vardo-grunge.png) 0 0/220px 220px}
   .ilustrativa{position:absolute;left:8px;bottom:8px;z-index:2;padding:3px 9px;border-radius:999px;background:rgba(18,19,17,.72);color:#F4F4EE;font-size:11.5px;font-weight:600}
   #promo .caja.t-vardo{background:#121311 url(img/vardo-papel.jpg) 0 0/420px 420px;color:#F4F4EE}
   #promo .caja.t-vardo h2{color:#9BCB4C;font-stretch:62%;font-weight:900}
@@ -710,6 +713,7 @@ function chipsPrecio(p){
   var h = '';
   if (hayPrecio(p.precio)) h += '<span class="precio num">' + (hayPrecio(p.precio_media) ? '<small>Entera</small>' : '') + fmt(p.precio) + '</span>';
   if (hayPrecio(p.precio_media)) h += '<span class="precio num"><small>Mitad</small>' + fmt(p.precio_media) + '</span>';
+  if (/2x1/i.test(p.grupo || '')) h += '<span class="promo-2x1" aria-label="Promo 2x1">2x1</span>';
   return h;
 }
 function listaSimple(platos, cfg){
