@@ -1,7 +1,8 @@
 /* ══ Fin de año · El Chiringuito ══
    1. Cotizador, formulario y marcador de días (andan siempre)
    2. Contador 000→365 como un loading (anda siempre, con o sin librerías)
-   3. Recorrido: frase → se prende el neón del bar → una nube de cuadraditos gira y se posa
+   3. Recorrido: frase → escena automática (unos 8 s, como un video, con "Saltar"):
+      se prende el neón del bar → una nube de cuadraditos gira y se posa
       sobre una copa 3D de alambre mientras las fotos giran en torbellino → entra el trago real →
       cae y estalla en cuadraditos →
       "Un menú. De la entrada al brindis." → propuestas que emergen de a una → barrido de franjas
@@ -597,6 +598,56 @@
     if (!activo) dibujar(0);
   }
 
+  /* ── la escena de la copa corre sola, por tiempo, como un video ──
+     Al llegar a la sección se frena el scroll, corre la escena (unos 8 s) y se libera.
+     Si se vuelve a subir y a entrar, se repite. Las propuestas siguen manejadas por el scroll. */
+  var saltarShow = $('#saltarShow'), seguir = $('#seguir');
+  var showHecho = false, showCorriendo = false, irDirecto = false, stNoche = null;
+  var tlShow = gsap.timeline({ paused: true, defaults: { ease: 'none' }, onUpdate: render, onComplete: finShow })
+    .to(S, { amb: 1, duration: 0.6 }, 0)
+    .to(S, { neon: 1, duration: 1.0 }, 0.2)
+    .to(S, { nube: 1, duration: 0.5 }, 0.3)
+    .to(S, { giro: 1, duration: 5.2 }, 0.3)
+    .to(S, { arma: 1, duration: 2.2, ease: 'power1.inOut' }, 0.7)
+    .to(S, { copa: 1, duration: 0.5 }, 2.75)
+    .to(S, { torb: 1, duration: 4.2 }, 1.0)
+    .to(S, { caida: 1, duration: 0.55, ease: 'power2.in' }, 5.3)
+    .to(S, { ambOut: 1, duration: 1.0 }, 5.5)
+    .to(S, { salp: 1, duration: 1.4 }, 5.85)
+    .to(S, { decl: 1, duration: 0.8, ease: 'power2.out' }, 6.9);
+  function mostrarSaltar(si) { gsap.to(saltarShow, { autoAlpha: si ? 0.7 : 0, duration: 0.3 }); }
+  function mostrarSeguir(si) { gsap.to(seguir, { opacity: si ? 0.8 : 0, duration: si ? 0.6 : 0.2 }); }
+  function finShow() {
+    showCorriendo = false; showHecho = true;
+    lenis.start();
+    mostrarSaltar(false);
+    mostrarSeguir(true);
+  }
+  function arrancarShow(st) {
+    if (showHecho || showCorriendo) return;
+    /* si se llegó de un salto (link a "Cotizá", recarga más abajo) no se frena a nadie */
+    if (irDirecto || st.scroll() - st.start > vh * 0.6) { tlShow.progress(1); showHecho = true; return; }
+    showCorriendo = true;
+    lenis.scrollTo(st.start, { immediate: true, force: true });
+    lenis.stop();
+    mostrarSaltar(true);
+    tlShow.restart();
+  }
+  function reiniciarShow() {
+    if (showCorriendo) lenis.start();
+    showCorriendo = false; showHecho = false;
+    tlShow.pause(0);
+    mostrarSaltar(false); mostrarSeguir(false);
+  }
+  saltarShow.addEventListener('click', function () { if (showCorriendo) tlShow.progress(1); });
+  /* los links internos (Cotizá, preguntas) saltan la escena en vez de frenarse en el medio */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    irDirecto = true;
+    setTimeout(function () { irDirecto = false; }, 2500);
+  });
+
   var tlNoche = null;
   function construir() {
     vw = window.innerWidth;
@@ -625,19 +676,9 @@
     var prog = tlNoche ? tlNoche.progress() : 0;
     if (tlNoche) tlNoche.kill();
     var D = Math.max(anchoPista - vw, vh);
-    var X0 = vh * 5.45;
-    tlNoche = gsap.timeline({ paused: true, defaults: { ease: 'none' }, onUpdate: render })
-      .to(S, { amb: 1, duration: vh * 0.45 }, 0)
-      .to(S, { neon: 1, duration: vh * 0.7 }, vh * 0.15)
-      .to(S, { nube: 1, duration: vh * 0.4 }, vh * 0.25)
-      .to(S, { giro: 1, duration: vh * 3.3 }, vh * 0.25)
-      .to(S, { arma: 1, duration: vh * 1.6 }, vh * 0.55)
-      .to(S, { copa: 1, duration: vh * 0.4 }, vh * 2.0)
-      .to(S, { torb: 1, duration: vh * 2.75 }, vh * 0.8)
-      .to(S, { caida: 1, duration: vh * 0.45, ease: 'power2.in' }, vh * 3.55)
-      .to(S, { ambOut: 1, duration: vh * 0.8 }, vh * 3.7)
-      .to(S, { salp: 1, duration: vh * 1.0 }, vh * 3.97)
-      .to(S, { decl: 1, duration: vh * 0.6 }, vh * 4.6)
+    /* el scroll ya no maneja la escena de la copa: solo el paso lateral de las propuestas */
+    var X0 = vh * 0.35;
+    tlNoche = gsap.timeline({ paused: true, defaults: { ease: 'none' }, onUpdate: function () { render(); if (S.x > 0.02) mostrarSeguir(false); } })
       .to(S, { x: 1, duration: D }, X0)
       .to(S, { pie: 1, duration: vh * 0.2 }, X0)
       .to(S, { franja: 1, duration: vh * 1.1 }, X0 + D + vh * 0.1)
@@ -646,12 +687,16 @@
     var total = tlNoche.duration();
     noche.style.height = (total + vh) + 'px';
     ScrollTrigger.getAll().forEach(function (st) { if (st.vars && st.vars.id === 'noche') st.kill(); });
-    ScrollTrigger.create({
+    stNoche = ScrollTrigger.create({
       id: 'noche', trigger: noche, start: 'top top', end: '+=' + total,
       onUpdate: function (st) { tlNoche.progress(st.progress); },
-      onToggle: function (st) { encender(st.isActive); }
+      onToggle: function (st) { encender(st.isActive); },
+      onEnter: function (st) { arrancarShow(st); },
+      onLeaveBack: function () { reiniciarShow(); }
     });
     tlNoche.progress(prog);
+    /* si la página arranca más abajo de la escena (recarga, link directo), queda terminada */
+    if (!showHecho && !showCorriendo && stNoche.scroll() > stNoche.start + vh * 0.6) { tlShow.progress(1); showHecho = true; }
     render();
   }
 

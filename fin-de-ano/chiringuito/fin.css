@@ -285,6 +285,12 @@ html:not(.motion) .barra{background:rgba(18,15,12,.94)}
 .motion .frase{position:absolute;left:var(--margen);right:var(--margen);top:50%;transform:translateY(-50%)}
 .motion .frase .pal{transform:translateY(135%)}
 .motion .saltar{display:block;position:absolute;right:var(--margen);bottom:calc(22px + env(safe-area-inset-bottom,0px));padding:10px 0;opacity:.7}
+/* escena automática de la copa: saltar mientras corre, y aviso para seguir bajando al terminar */
+.saltar-show,.seguir{display:none}
+.motion .saltar-show{display:block;z-index:9;opacity:0;visibility:hidden;left:var(--margen);right:auto}   /* a la izquierda: a la derecha está el contador de días */
+.motion .seguir{display:flex;align-items:center;gap:12px;position:absolute;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;margin:0;color:var(--hueso);opacity:0;pointer-events:none;white-space:nowrap}
+.motion .seguir i{display:block;width:1px;height:28px;background:var(--hueso);transform-origin:top;animation:linea 1.8s var(--salida) infinite}
+.quieto .seguir i{animation:none}
 .motion .bajar{
   display:flex;flex-direction:column;align-items:center;gap:10px;
   position:absolute;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);opacity:0;
