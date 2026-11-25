@@ -239,7 +239,7 @@
   var PALETA = ['rgb(246,236,214)', 'rgb(255,248,230)', 'rgb(234,205,146)', 'rgb(232,170,80)'];
   var ORO = 'rgb(246,214,138)';
   var P = { n: 0 }, PERFIL = { h: 0, r: null, c: null, acum: null, max: 1 };
-  var vw = 0, vh = 0, cx = 0, cy = 0, copaW = 0, copaH = 0, piso = 0, caidaMax = 0, giroMax = 14;
+  var vw = 0, vh = 0, cx = 0, cy = 0, copaW = 0, copaH = 0, piso = 0, caidaMax = 0, giroMax = 0;
   var FOCO = 900, TILT = -0.16, ct = Math.cos(TILT), st = Math.sin(TILT);
   var anchoPista = 0, offsets = [], cardW = 0;
   var S = { amb: 0, neon: 0, ambOut: 0, nube: 0, giro: 0, arma: 0, copa: 0, torb: 0, caida: 0, salp: 0, decl: 0, x: 0, pie: 0, franja: 0 };
@@ -461,27 +461,14 @@
       volcar(1);
     }
 
-    /* la copa cae y estalla en cuadraditos */
+    /* la copa cae y queda apoyada: solo un destello cálido y suave en el piso al tocar */
     if (S.salp > 0 && S.salp < 1) {
-      lotesNuevos();
-      var tt2 = S.salp * 1.25, g = vh * 2.9, ag = giroMax * Math.PI / 180, ca = Math.cos(ag), sa = Math.sin(ag);
-      var bx0 = cx, by0 = cy + caidaMax, alfa2 = 1 - ss(0.55, 1, S.salp);
-      for (i = 0; i < n; i++) {
-        if (P.libre[i]) continue;
-        var asx = P.st[i] + phi, hx0 = P.sc[i] + P.sr[i] * Math.cos(asx), hy0 = P.sy[i];
-        var hx = hx0 * ca - hy0 * sa, hy = hx0 * sa + hy0 * ca;
-        var x3 = bx0 + hx + P.vx[i] * tt2, y3 = by0 + hy + P.vy[i] * tt2 + 0.5 * g * tt2 * tt2;
-        if (y3 > piso) y3 = piso + (y3 - piso) * 0.05;          // las gotas se asientan en el piso
-        agregar(P.col[i], alfa2 * (P.tam[i] > 4 ? 1 : 0.8), x3, y3, P.tam[i] * (1 - 0.35 * S.salp));
-      }
-      /* destello en el piso al golpear */
-      var fl = clamp(1 - S.salp * 4, 0, 1);
+      var fl = clamp(1 - S.salp * 2.5, 0, 1);
       if (fl > 0) {
-        var gr = ctx.createRadialGradient(cx, piso, 0, cx, piso, vw * 0.32);
-        gr.addColorStop(0, 'rgba(246,214,138,' + 0.45 * fl + ')'); gr.addColorStop(1, 'rgba(246,214,138,0)');
+        var gr = ctx.createRadialGradient(cx, piso, 0, cx, piso, vw * 0.28);
+        gr.addColorStop(0, 'rgba(246,214,138,' + (0.32 * fl).toFixed(3) + ')'); gr.addColorStop(1, 'rgba(246,214,138,0)');
         ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = 1; ctx.fillStyle = gr; ctx.fillRect(0, 0, vw, vh);
       }
-      volcar(1);
     }
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'source-over';
@@ -524,9 +511,9 @@
     poner('b', 'opacity', ambBrillo, (nn * (1 - 0.5 * S.ambOut)).toFixed(3));
 
     /* copa */
-    var op = S.copa * (1 - ss(0.86, 1, S.caida));
+    var op = S.copa * (1 - 0.55 * S.decl) * (1 - ss(0, 0.12, S.x));
     poner('c', 'opacity', copa, op.toFixed(3));
-    poner('c', 'transform', copa, 'translate(-50%,-50%) translate3d(0,' + (S.caida * caidaMax).toFixed(1) + 'px,0) rotate(' + (S.caida * giroMax).toFixed(2) + 'deg)');
+    poner('c', 'transform', copa, 'translate(-50%,-50%) translate3d(0,' + (S.caida * caidaMax).toFixed(1) + 'px,0) scale(' + (1 - 0.03 * Math.sin(Math.PI * clamp(S.salp * 3, 0, 1))).toFixed(4) + ',' + (1 - 0.06 * Math.sin(Math.PI * clamp(S.salp * 3, 0, 1))).toFixed(4) + ')');
 
     /* torbellino: las fotos giran alrededor de la copa con el scroll, entran desde afuera
        y salen despedidas cuando cae el trago */
@@ -611,9 +598,9 @@
     .to(S, { arma: 1, duration: 2.2, ease: 'power1.inOut' }, 0.7)
     .to(S, { copa: 1, duration: 0.5 }, 2.75)
     .to(S, { torb: 1, duration: 4.2 }, 1.0)
-    .to(S, { caida: 1, duration: 0.55, ease: 'power2.in' }, 5.3)
+    .to(S, { caida: 1, duration: 0.6, ease: 'power2.in' }, 5.3)
     .to(S, { ambOut: 1, duration: 1.0 }, 5.5)
-    .to(S, { salp: 1, duration: 1.4 }, 5.85)
+    .to(S, { salp: 1, duration: 1.0, ease: 'power1.out' }, 5.9)
     .to(S, { decl: 1, duration: 0.8, ease: 'power2.out' }, 6.9);
   function mostrarSaltar(si) { gsap.to(saltarShow, { autoAlpha: si ? 0.7 : 0, duration: 0.3 }); }
   function mostrarSeguir(si) { gsap.to(seguir, { opacity: si ? 0.8 : 0, duration: si ? 0.6 : 0.2 }); }
@@ -666,8 +653,8 @@
     ambBrillo.style.width = bw.toFixed(1) + 'px'; ambBrillo.style.height = bh.toFixed(1) + 'px';
     ambBrillo.style.transform = 'translate3d(' + (ambL + ambW * (NEON.x0 + NEON.x1) / 2 - bw / 2).toFixed(1) + 'px,' + (ambT + ambH * (NEON.y0 + NEON.y1) / 2 - bh / 2).toFixed(1) + 'px,0)';
     sembrar();
-    piso = vh * 0.9;
-    caidaMax = piso - (cy + copaH / 2) + copaH * 0.32;
+    piso = vh * 0.94;
+    caidaMax = Math.max(0, piso - (cy + copaH / 2));   // la base de la copa apoya en el piso
     anchoPista = pista.scrollWidth;
     offsets = cards.map(function (c) { return c.offsetLeft; });
     cardW = cards[0] ? cards[0].offsetWidth : 300;
